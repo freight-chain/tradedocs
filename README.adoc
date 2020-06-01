@@ -1,0 +1,69 @@
+= Freight Trust & Clearing
+
+:toc:
+:toclevels: 3
+
+IMPORTANT: Stable Release planned for 2020/07
+
+== TradeDocs
+toc::[]
+TradeDocs.org `StandardDocument` (abbreviated as `StanDoc`)
+is a family of document models that forms the basis
+of Freight Trust's `TradeDoc`, which is used to represent our legal parity digital smart contracts. These documents are based off of ISO Standards and
+similarly structured standards.
+It itself is an instantiation of
+https://github.com/metanorma/basicdoc-models[`BasicDocument` (`BasicDoc`)]
+
+These are the principle `document structures` that form the basis for our `primitives`.
+
+`TradeDocs` itself is a document model can form the basis of multiple
+standard document types, including:
+
+* Bills of Lading  
+* Warehouse Receipts  
+* Letters of Credit  
+* Forward Contracts  
+* Advanced Manifests 
+* Bill of Materials 
+* and more... 
+
+The Relaton Bibliography UML models used within these models are located here:
+https://github.com/metanorma/relaton-models[Relaton BibModels]
+
+
+== TradeDocs UML Models
+toc::[]
+=== TradeDocs
+
+image::images/StandardDoc_StandardDocument.png[]
+
+=== Metadata
+
+image::images/StandardDoc_Metadata.png[]
+
+=== Sections
+
+image::images/StandardDoc_Sections.png[]
+
+=== Terms
+
+image::images/StandardDoc_Terms.png[]
+
+=== Blocks
+
+image::images/StandardDoc_Blocks.png[]
+
+=== Inline
+
+image::images/StandardDoc_Inline.png[]
+
+=== 
+toc::[]
+++++
+*TradeDoc* Serial
+<p>
+Use: Core Document Identifier and Modification Manifest
+<table border="1">
+<tr><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>X</td><td>Y</td><td>Z</td></tr>
+</table>
+++++
