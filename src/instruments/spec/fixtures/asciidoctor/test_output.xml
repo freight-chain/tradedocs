@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<generic-standard xmlns="%{document_namespace}">
+  <bibdata type="standard">
+    <title language="en" format="text/plain">Main Title</title>
+    <docidentifier type="Test">Test Corp. 1000 Working Draft</docidentifier>
+    <docnumber>1000</docnumber>
+    <contributor>
+      <role type="author"/>
+      <organization>
+        <name>%{organization_name_long}</name>
+      </organization>
+    </contributor>
+    <contributor>
+      <role type="publisher"/>
+      <organization>
+        <name>%{organization_name_long}</name>
+      </organization>
+    </contributor>
+    <edition>2</edition>
+    <version>
+      <revision-date>2000-01-01</revision-date>
+      <draft>3.4</draft>
+    </version>
+    <language>en</language>
+    <script>Latn</script>
+    <status>
+      <stage>working-draft</stage>
+      <iteration>3</iteration>
+    </status>
+    <copyright>
+      <from>2001</from>
+      <owner>
+        <organization>
+          <name>%{organization_name_long}</name>
+        </organization>
+      </owner>
+    </copyright>
+    <ext>
+      <doctype>elephant</doctype>
+      <editorialgroup>
+        <committee type="A">TC</committee>
+        <committee type="B">TC1</committee>
+      </editorialgroup>
+      %{metadata_extensions_out}
+    </ext>
+  </bibdata>
+    <sections>
+    <clause id='_' obligation='normative'>
+      <title>Scope</title>
+      <p id='_'>1</p>
+    </clause>
+    <terms id='_' obligation='normative'>
+      <title>Terms and definitions</title>
+      <p id='_'>No terms and definitions are listed in this document.</p>
+    </terms>
+    <definitions id='_'>
+      <title>JKL</title>
+      <p id='_'>4</p>
+    </definitions>
+    <clause id='_' obligation='normative'>
+      <title>Clause</title>
+      <p id='_'>5</p>
+    </clause>
+  </sections>
+  <annex id='_' obligation='normative'>
+    <title>AnnexA</title>
+    <p id='_'>6</p>
+  </annex>
+  <bibliography>
+    <references id='_' obligation='informative' normative="true">
+      <title>Normative References</title>
+      <p id='_'>There are no normative references in this document.</p>
+      <p id='_'>2</p>
+    </references>
+    <references id='_' obligation='informative' normative="false">
+      <title>Bibliography</title>
+      <p id='_'>7</p>
+    </references>
+  </bibliography>
+</generic-standard>
