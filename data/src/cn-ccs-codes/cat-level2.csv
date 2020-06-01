@@ -1,0 +1,226 @@
+﻿代码 / Code,名称 / Name,Name,类 / Category,注释 /Notes,Comment /Notes
+A00/09,标准化管理与一般规定,Standardized management and general regulations,A,,
+A10/19,经济、文化,"Economy, culture",A,,
+A20/39,基础标准,Basic standards,A,,
+A40/49,基础学科,Basic subjects,A,,
+A50/64,计量,Measurement,A,,
+A65/74,标准物质,Standard material,A,综合性标准样品入此，专业标准样品入各专业类。,"General standard samples should be entered here, and professional standard samples should be placed into each professional category."
+A75/79,测绘,Mapping,A,,
+A80/89,标志、包装、运输、贮存,"Signs, packaging, transportation, storage",A,,
+A90/94,社会公共安全,Social public safety,A,,
+B00/09,农业、林业综合,"General agriculture, forestry",B,用于生产、流通过程中保证符合文字标准要求的农业、林业标样分别入本类各有关类目。,The agricultural and forestry standards that are used to ensure compliance with the written standards during production and distribution are included in the relevant categories of this category.
+B10/14,土壤与肥料,Soil and fertilizer,B,,
+B15/19,植物保护,Plant protection,B,,
+B20/29,粮食与饲料作物,Food and feed crops,B,,
+B30/39,经济作物,Crops,B,,
+B40/49,畜牧,Livestock,B,,
+B50/59,水产、渔业,"Fisheries, fishery",B,,
+B60/79,林业,Forestry,B,,
+B90/99,农、林机械与设备,Agriculture and forestry machinery and equipment,B,拖拉机入T60/69。,Tractors should be entered into T60/69.
+C00/09,医药、卫生、劳动保护综合,"General medicine, health, labor protection",C,用于生产、流通过程保证符合文字标准要求的医药、卫生标样分别列入本类各有关类目。,The medicines and hygiene standards that are used in the production and distribution process to ensure compliance with the written standards are included in each category of this category.
+C10/29,医药,Medicine,C,兽用药及兽医入B42。放射性药品入F54。,Veterinary drugs and veterinary medicines are introduced in B42. Radioactive drugs should be placed into F54.
+C30/49,医疗器械,Medical instruments,C,兽用医疗器械入B42。,Veterinary medical devices should be placed into B42.
+C50/64,卫生,Health,C,,
+C65/74,劳动安全技术,Labor safety technology,C,,
+C75/79,劳动保护管理,Labor protection management,C,,
+C80/89,消防,Firefighting,C,,
+C90/99,制药、安全机械与设备,"Pharmaceuticals, safety machinery and equipment",C,,
+D00/09,矿业综合,General mining,D,用于生产、流通过程中保证符合文字标准要求的矿产品标样分别入本类各类目。矿山铁路入S类。,"For the production, distribution process to ensure that meet the text standard requirements of mineral product standards should be placed into this category of various purposes. Mine Railway enters Class S."
+D10/19,地质矿产勘察与开发,Geological mineral exploration and development,D,油气田勘察与开发入E10/19,Oil and gas exploration and development should be placed into E10/19
+D20/29,固体燃料矿,Solid fuel mine,D,品位、储量及其分析方法分别入各矿产品类。,"Grades, reserves, and their analytical methods were entered should be placed into each mineral product category."
+D30/39,黑色金属矿,Black metal mine,D,品位、储量及其分析方法分别入各矿产品类。烧结矿、球团矿入H31。,"Grades, reserves, and their analytical methods were entered should be placed into each mineral product category. Sintered ore pellets enter H31."
+D40/49,有色金属矿,Non-ferrous metal ore,D,品位、储量及其分析方法分别入各矿产品类。,"Grades, reserves, and their analytical methods were entered should be placed into each mineral product category."
+D50/59,非金属矿,Non-metallic minerals,D,品位、储量及其分析方法分别入各矿产品类。,"Grades, reserves, and their analytical methods were entered should be placed into each mineral product category."
+D80/89,地质勘探设备,Geological exploration equipment,D,通用仪器仪表入N91，凿岩机械入J84，通用运输、提升机械入J81。,"General instrumentation should be placed into N91, drilling machinery should be placed into J84, general transport, lifting machinery should be placed into J81."
+D90/99,矿山机械设备,Mining machinery and equipment,D,,
+E00/09,石油综合,Comprehensive oil,E,用于生产、流通过程中保证符合文字标准要求的石油产品标样分别入本类各有关类目。,The petroleum product standards used in the production and distribution process to ensure compliance with the written standard requirements are included in the relevant categories of this category respectively.
+E10/19,石油勘探、开发与集输,"Petroleum exploration, development and gathering",E,油气田地面建设、生产设施工程入P类。,The oil and gas field ground construction and production facility projects enter the P category.
+E20/29,石油 天然气,Petroleum gas,E,,
+E30/49,石油产品,Petroleum products,E,,
+E60/69,石油产品添加剂,Petroleum product additives,E,,
+E90/99,石油勘探、开发、集输设备,"Petroleum exploration, development, gathering and transportation equipment",E,石油炼制设备入G90/93。,Petroleum refining equipment should be placed into G90/93.
+F00/09,能源、核技术综合,General energy and nuclear technology,F,各种能源综合性标准入本类F00/09。常规能源：煤炭入D20/24，石油、天然气入E20/27，燃料油入E31，电工基础和产品标准（含电力）入K类。用于生产、流通过程中保证符合文字标准要求的核技术标样分别入本类各有关类目。综合性、系统性的电力标准入此。,"Various comprehensive energy standards are included in this category F00/09. Conventional energy: Coal enters D20/24, oil, natural gas enters E20/27, fuel oil enters E31, and electrical foundation and product standards (including electricity) enter the K class. The nuclear technology standards used to ensure compliance with the written standards during the production and distribution process are included in each category of this category. Comprehensive and systematic power standards are here."
+F10/19,能源,Energy,F,,
+F20/29,电力,Electricity,F,电站、输配电工程入P类。,"Power stations, transmission and distribution projects enter the P category."
+F40/49,核材料、核燃料,"Nuclear materials, nuclear fuel",F,,
+F50/59,同位素与放射源,Isotopes and radioactive sources,F,,
+F60/69,核反应堆,Nuclear reactor,F,,
+F70/79,辐射防护与监测,Radiation protection and monitoring,F,,
+F80/89,核仪器与核探测器,Nuclear and nuclear detectors,F,通用的仪器、仪表入N类。,General-purpose instruments and meters enter the N class.
+F90/99,低能加速器,Low energy accelerator,F,,
+G00/09,化工综合,General chemistry,G,造纸入Y30/39，皮革入Y45/49，食品发酵、酿造入X60/69，绝缘漆入K15，食品添加剂入X40/49，合成饲料添加剂入B46，建筑胶粘剂入Q27，胶鞋入Y78。用于生产、流通过程中保证符合文字标准要求的化工标样分别入本类各有关类目。,"Paper should be placed into Y30/39, leather should be placed into Y45/49, food fermentation, brewing should be placed into X60/69, insulation lacquer should be placed into K15, food additive should be placed into X40/49, synthetic feed additive should be placed into B46, construction adhesive should be placed into Q27, rubber shoes should be placed into Y78. The chemical standards that are used to ensure compliance with the written standards during production and distribution are included in the relevant categories of this category respectively."
+G10/14,无机化工原料,Inorganic chemical raw materials,G,,
+G15/19,有机化工原料,Organic chemical raw materials,G,,
+G20/29,化肥、农药,"Fertilizers, pesticides",G,,
+G30/39,合成材料,Synthetic material,G,合成树脂、塑料、橡胶及胶粘剂等。建筑用塑料制品入Q22，日用塑料制品入Y28，塑料鞋入Y75或Y78。,"Synthetic resins, plastics, rubber and adhesives, etc. Plastic products for construction enter Q22, plastic products for daily use enter Y28, and plastic shoes enter Y75 or Y78."
+G40/49,橡胶制品及其辅助材料,Rubber products and their auxiliary materials,G,胶鞋入Y78。,Rubber shoes should be placed into Y78.
+G50/59,涂料、颜料、染料,"Coatings, pigments, dyes",G,,
+G60/69,化学试剂,Chemical reagent,G,化学分析用标准物质入A65。,Chemical analysis standard substance should be placed into A65.
+G70/79,化学助剂、表面活性剂、催化剂、水处理剂,"Chemical auxiliaries, surfactants, catalysts, water treatment agents",G,,
+G80/84,信息用化学品,Information chemicals,G,,
+G85/89,其他化工产品,Other chemical products,G,,
+G90/99,化工机械与设备,Chemical machinery and equipment,G,石油炼制机械与设备入此。通用机械设备分别入各有关类。,Petroleum refining machinery and equipment are here. General machinery and equipment were put should be placed into various related categories.
+H00/09,冶金综合,General metallurgy,H,用于生产、流通过程中保证符合文字标准要求的冶金标样分别入本类各有关类目。冶金用原料矿入D类，耐火材料入Q40/49。,"The metallurgical standards used to ensure compliance with the written standards during production and distribution are included in the relevant categories of this category. Metallurgical raw material minerals enter class D, refractory materials should be placed into Q40/49."
+H10/19,金属化学分析方法,Metal chemistry analysis method,H,,
+H20/29,金属理化性能试验方法,Metal physical and chemical properties test methods,H,,
+H30/34,冶金原料与辅助材料,Metallurgical raw materials and auxiliary materials,H,石墨电极、炭电极入Q50/52，石灰入Q27。黑色、有色金属矿，非金属矿（如：石灰石、萤石）等矿产品入D30/59。,"Graphite electrode, carbon electrode enter Q50/52, lime should be placed into Q27. Black, non-ferrous metal ore, non-metallic minerals (such as: limestone, fluorite) and other minerals should be placed into D30/59."
+H40/59,钢铁产品,Steel products,H,,
+H60/69,有色金属及其合金产品,Non-ferrous metals and their alloy products,H,,
+H70/74,粉末冶金,Powder metallurgy,H,,
+H80/84,半金属与半导体材料,Semi-metal and semiconductor materials,H,,
+H90/99,冶金机械设备,Metallurgical machinery and equipment,H,起重、运输机械入J80/81，轨道车辆入S55/56。,"Lifting, transportation machinery should be placed into J80/81, rail vehicles should be placed into S55/56."
+J00/09,机械综合,General mechanical,J,通用机械入此，特使机械设备按照专业各入其类。本类各种机械设备制造工艺与工艺装备入各机械设备类。各种机械设备的维修标准按产品各入其类。,"General machinery enters here, special envoy machinery equipment according to the professional should be placed into its category. This category of mechanical equipment manufacturing process and technology equipment should be placed into various types of machinery and equipment. All kinds of mechanical equipment maintenance standards are classified should be placed into products."
+J10/29,通用零部件,Universal parts,J,,
+J30/39,加工工艺,Processing technology,J,粉末冶金工艺入H70/74。表面处理，表面防护入A29。,"Powder metallurgy process should be placed into H70/74. Surface treatment, surface protection should be placed into A29."
+J40/49,工艺装备,Process equipment,J,,
+J50/59,金属切削机床,Metal cutting machine tools,J,,
+J60/69,通用加工机械与设备,General-purpose processing machinery and equipment,J,,
+J70/89,通用机械与设备,General machinery and equipment,J,,
+J90/99,活塞式内燃机与其他动力设备,Piston type internal combustion engine and other power equipment,J,汽车专用发动机入T10/19。船舶专用发动机入U40/44。航天专用发动机入V30/34。铁路机车专用发动机入V72。动车专用发动机入S40/49。发电用动力设备入K50/59。,Automotive engine should be placed into T10/19. Ship-specific engines enter U40/44. Space dedicated engines should be placed into V30/34. Railway locomotive dedicated engine should be placed into V72. Motorized engine should be placed into S40/49. Power equipment for power generation enters K50/59.
+K00/09,电工综合,General electrical,K,综合性、系统性电力标准入F20/29。各种电力设备的运行、检修、试验规程按设备分别入类。火花塞、电热塞入T37。,"Comprehensive, systematic power standards are included in F20/29. The operation, maintenance and test procedures of various power equipments are classified should be placed into equipments according to their respective types. Spark plug, electric heat stuffing T37."
+K10/19,电工材料和通用零件,Electrical materials and general parts,K,,
+K20/29,旋转电机,Rotary motor,K,,
+K30/39,低压电器,Low-voltage electrical appliances,K,,
+K40/49,输变电设备,Power transmission and transformation equipment,K,,
+K50/59,发电用动力设备,Power equipment for power generation,K,热工术语、符号入A22。,"Thermal terms, symbols should be placed into A22."
+K60/69,电气设备与器具,Electrical equipment and appliances,K,火花塞、电热塞入T37。电焊设备入J64。家用电器入Y60/69。,"Spark plug, electric heat stuffing T37. Welding equipment should be placed into J64. Household appliances should be placed into Y60/69."
+K70/79,电气照明,Electric lighting,K,,
+K80/89,电源,Power supply,K,,
+K90/99,电工生产设备,Electrician production equipment,K,,
+L00/09,电子元器件与信息技术综合,Electronic components and information technology,L,,
+L10/34,电子元件,Electronic components,L,,
+L35/39,电真空器件,Electric vacuum devices,L,,
+L40/49,半导体分立器件,Semiconductor discrete devices,L,,
+L50/54,光电子器件,Optoelectronic devices,L,,
+L55/59,微电路,Microcircuits,L,,
+L60/69,计算机,Computers,L,,
+L70/84,信息处理技术,Information processing technology,L,,
+L85/89,电子测量与仪器,Electronic measurement and instruments,L,工频仪表入N20/29。,Power frequency instrument should be placed into N20/29.
+L90/94,电子设备与专用材料、零件、结构件,"Electronic equipment and special materials, parts, structural parts",L,,
+L95/99,电子工业生产设备,Electronic industry production equipment,L,生产工艺随产品入各有关类目。,The production process goes with the product should be placed into relevant categories.
+M00/09,通信、广播综合,General communication and broadcast,M,,
+M10/29,通信网,Communication networks,M,,
+M30/49,通信设备,Communication devices,M,,
+M50/59,雷达、导航、遥控、遥测、天线,"Radar, navigation, remote control, telemetry, antenna",M,,
+M60/69,广播、电视网,Radio and television networks,M,,
+M70/79,广播、电视设备,Radio and television equipment,M,,
+M80/89,邮政,Postal,M,,
+M90/99,通信 广播设备生产机械,Communication broadcast equipment production machinery,M,,
+N00/09,仪器、仪表综合,General instruments and instrumentation,N,,
+N10/19,工业自动化仪表与控制装置,Industrial automation instrumentation and control devices,N,,
+N20/29,电工仪器仪表,Electrical instrumentation,N,,
+N30/39,光学仪器,Optical instruments,N,,
+N40/49,电影、照相、缩微、复印设备,"Film, photography, microfilming, copying equipment",N,,
+N50/59,物质成份分析仪器与环境监测仪器,Material composition analysis instruments and environmental monitoring instruments,N,,
+N60/69,实验室仪器与真空仪器,Laboratory instruments and vacuum instruments,N,,
+N70/79,试验机与无损探伤仪器,Testing machine and nondestructive testing machine,N,金属无损伤检验方法入H26。,Metal damage-free inspection method should be placed into H26.
+N90/99,其他仪器仪表,Other instruments,N,,
+P00/09,工程建设综合,Comprehensive project construction,P,,
+P10/14,工程勘察与岩土工程,Engineering investigation and geotechnical engineering,P,,
+P15/19,工程抗震、工程防火、人防工程,"Engineering seismic, engineering fire protection, civil air defense engineering",P,,
+P20/29,工程结构,Engineering structure,P,,
+P30/39,工业与民用建筑工程,Industrial and civil construction engineering,P,,
+P40/44,给水、排水工程,Water supply and drainage,P,,
+P45/49,供热、供气、空调及制冷工程,"Heating, air supply, air conditioning and refrigeration engineering",P,,
+P50/54,城乡规划与市政工程,Urban and rural planning and municipal engineering,P,,
+P55/59,水利、水电工程,Water resources and hydropower engineering,P,工业与民用建筑部分入P30/39。,Industrial and civil construction should be placed in P30/39.
+P60/64,电力、核工业工程,"Electricity, nuclear industry engineering",P,工业与民用建筑部分入P30/39。,Industrial and civil construction should be placed in P30/39.
+P65/69,交通运输工程,Transport engineering,P,工业与民用建筑部分入P30/39。,Industrial and civil construction should be placed in P30/39.
+P70/79,原材料工业及通信、广播工程,"Raw materials industry and communication, broadcast engineering",P,工业与民用建筑部分入P30/39。,Industrial and civil construction should be placed in P30/39.
+P80/84,机电制造业工程,Electrical and mechanical manufacturing engineering,P,工业与民用建筑部分入P30/39。,Industrial and civil construction should be placed in P30/39.
+P85/89,农林业及轻纺工业工程,Agriculture and forestry and textile industry engineering,P,工业与民用建筑部分入P30/39。,Industrial and civil construction should be placed in P30/39.
+P90/94,工业设备安装工程,Industrial equipment installation project,P,,
+P95/99,施工机械设备,Construction machinery and equipment,P,,
+Q00/09,建材综合,Comprehensive building materials,Q,,
+Q10/29,建材产品,Building materials products,Q,金属材料入H类，木材入B68/71，竹材入B67。,"Metallic material for H class, the wooden material for B68/71, and bamboo material for B67."
+Q30/39,陶瓷、玻璃,"Ceramics, glass",Q,日用陶瓷、玻璃制品入Y20/24。,"Daily ceramics, glass products should be placed into Y20/24."
+Q40/49,耐火材料,Refractory material,Q,,
+Q50/59,炭素材料,Carbon material,Q,,
+Q60/69,其他非金属矿制品,Other non-metallic mineral products,Q,研磨材料入J43。,Abrasive material should be placed into J43.
+Q70/79,建筑构配件与设备,Construction parts and equipment,Q,,
+Q80/89,公用与市政建设器材设备,Public and municipal construction equipment,Q,,
+Q90/99,建材机械与设备,Building material machinery and equipment,Q,窑炉、熔炉入各有关建材设备类目。建筑塑料制品用机械入G95。,"Kilns, furnaces, and other related building materials equipment categories. Plastic products for construction use G95."
+R00/09,公路、水路运输综合,Comprehensive road and water transportation,R,,
+R10/19,公路运输,Road transport,R,,
+R20/29,水路运输,Waterway transportation,R,,
+R30/39,船舶维护与修理,Ship maintenance and repair,R,船舶维护与修理用工艺、工装分别入下列各有关类目。,The crafts and tooling used for ship maintenance and repair are listed in the following categories.
+R40/49,港口装卸,Port handling,R,,
+R50/59,救助打捞与潜水,Salvage and diving,R,,
+R60/69,航道与航标,Navigation and navigation,R,,
+R80/89,交通管理,Traffic management,R,,
+S00/09,铁路综合,Railway comprehensive,S,,
+S10/29,铁路建筑设备,Railway construction equipment,S,,
+S30/39,机车车辆通用标准,General standard for locomotives and vehicles,S,机车车辆通用的基础与方法标准，车钩与缓冲装置，制动系统，走行部分，牵引电气设备，机车车辆通用零部件，以及机车车辆制造、检修工艺与设备等。,"General standards and methods for locomotives and vehicles, couplers and buffers, braking systems, running parts, traction electrical equipment, general parts of locomotives and rolling stock, and manufacturing and overhauling processes and equipment for locomotives and vehicles."
+S40/49,机车,Locomotive,S,,
+S50/59,铁路车辆,Railway vehicles,S,,
+S60/69,铁路信号,Railway signal,S,,
+S70/79,铁路通信,Railway communication,S,,
+S80/84,牵引供电,Traction power supply,S,,
+S90/99,铁路运输,Rail transport,S,,
+T00/09,车辆综合,Comprehensive vehicle,T,,
+T10/19,汽车发动机,Car engine,T,内燃机通用的零部件及试验方法等入J90/96。,Common engine parts and test methods are included in J90/96.
+T20/29,汽车底盘与车身,Chassis and body,T,,
+T30/34,车辆通用零部件,General vehicle parts,T,,
+T35/39,车用电子、电气设备与仪表,"Automotive electronics, electrical equipment and instruments",T,,
+T40/49,汽车,Cars,T,,
+T50/59,专用汽车,Special cars,T,,
+T60/69,拖拉机,Tractor,T,,
+T70/79,挂车,Trailer,T,,
+T80/89,摩托车,Motorcycle,T,,
+T90/99,无轨电车与其他车辆,Trolley buses and other vehicles,T,,
+U00/09,船舶综合,General ships,U,,
+U10/19,船舶总体,Overall ship,U,,
+U20/29,舾装设备,Armored equipment,U,,
+U30/39,船舶专用装备,Ship special equipment,U,,
+U40/49,船用主辅机,Marine main auxiliary engine,U,,
+U50/59,船舶管路附件,Ship piping accessories,U,,
+U60/69,船舶电气、观通、导航设备,"Ship electrical, communication, navigation equipment",U,,
+U80/89,船舶制造工艺装备,Shipbuilding process equipment,U,,
+U90/99,造船专用工艺设备,Shipbuilding special process equipment,U,,
+V00/09,航空、航天综合,Aviation and aerospace complex,V,,
+V10/19,航空、航天材料与工艺,"Aerospace, aerospace materials and processes",V,通用金属材料入H类，通用非金属材料入G类和Q类各有关类目。,General metal materials are classified as category H and general non-metal materials are classified as categories G and Q.
+V20/29,航空器与航天器零部件,Aircraft and spacecraft components,V,通用机械零部件入J10/29，橡胶密封件入G43。,"General mechanical parts should be placed into J10/29, rubber seals should be placed into G43."
+V30/34,航空发动机及其附件,Aeroengine and its accessories,V,,
+V35/49,航空器及其附件,Aircraft and its accessories,V,,
+V50/59,航空运输与地面设备,Air transport and ground equipment,V,,
+V70/79,航天器及其附件,Spacecraft and its accessories,V,,
+V80/89,航天地面设备,Aerospace ground equipment,V,,
+V90/99,航空器与航天器制造用设备,Aircraft and spacecraft manufacturing equipment,V,通用工艺装备入J40/49。,General craft equipment is included in J40/49.
+W00/09,纺织综合,General textile,W,,
+W10/19,棉纺织,Cotton textile,W,,
+W20/29,毛纺织,Wool textile,W,,
+W30/39,麻纺织,Hemp textile,W,,
+W40/49,丝纺织,Silk textile,W,,
+W50/54,化学纤维,Chemical fiber,W,玻璃纤维入Q36。,Fiberglass should be placed into Q36.
+W55/59,纺织制品,Textile products,W,,
+W60/69,针织,Knitting,W,,
+W70/79,印染制品,Printing and dyeing products,W,,
+W90/99,纺织机械与器具,Textile machinery and appliances,W,,
+X00/09,食品综合,General food,X,,
+X10/29,食品加工与制品,Food processing and products,X,,
+X30/34,制糖与糖制品,Sugar and sugar products,X,,
+X35/39,制盐,Salt production,X,,
+X40/49,食品添加剂与食用香料,Food additives and edible spices,X,食品卫生入C53，食品添加剂卫生入C54。,"Food hygiene should be placed into C53, food additives sanitation should be placed into C54."
+X50/59,饮料,Drinks,X,,
+X60/69,食品发酵、酿造,"Food fermentation, brewing",X,,
+X70/79,罐头,Cans,X,,
+X80/84,特种食品,Special food,X,,
+X85/89,制烟,Making smoke,X,,
+X90/99,食品加工机械,Food processing machinery,X,,
+Y00/09,轻工、文化与生活用品综合,"Light industry, culture and lifestyle products",Y,,
+Y10/19,钟表、自行车、缝纫机,"Watches, bicycles, sewing machines",Y,,
+Y20/29,日用玻璃、陶瓷、搪瓷、塑料制品,"Daily glass, ceramics, enamel, plastic products",Y,,
+Y30/39,造纸,Papermaking,Y,,
+Y40/44,日用化工品,Daily chemicals,Y,,
+Y45/49,皮革加工与制品,Leather processing and products,Y,,
+Y50/59,文教、体育、娱乐用品,"Culture, education, sports, entertainment supplies",Y,,
+Y60/69,家用电器、日用机具,"Household appliances, daily-use equipment",Y,,
+Y70/74,五金制品,Hardware products,Y,,
+Y75/79,服装、鞋、帽与其他缝制品,"Clothing, shoes, caps and other sewing products",Y,劳动保护服装、鞋、帽、手套入C73。,"Labor protection clothing, shoes, caps, gloves should be placed into C73."
+Y80/84,家具,Furniture,Y,,
+Y85/89,工艺美术品与其他日用品,Art and other daily necessities,Y,,
+Y90/99,轻工机械,Light industry machinery,Y,,
+Z00/09,环境保护综合,Comprehensive environmental protection,Z,,
+Z10/39,环境保护采样、分析测试方法,"Environmental protection sampling, analysis and test methods",Z,,
+Z50/59,环境质量标准,Environmental quality standards,Z,环境卫生标准入G51。,Environmental hygiene standards belong to G51.
+Z60/79,污染物排放标准,Pollutant discharge standards,Z,,

@@ -1,0 +1,14 @@
+sudo: required
+language: ruby
+os:
+- linux
+- osx
+rvm:
+- 2.5
+cache: bundler
+before_install:
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo bash -c "apt-get update && curl -L https://raw.githubusercontent.com/metanorma/metanorma-linux-setup/master/ubuntu.sh | bash" ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install --HEAD https://raw.githubusercontent.com/metanorma/homebrew-metanorma/master/Formula/metanorma.rb ; fi
+script:
+  - plantuml -testdot
+  - make clean all publish

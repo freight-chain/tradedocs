@@ -1,0 +1,231 @@
+
+= Metanorma document setup sample: Automatic deploys to GitHub Pages using Travis CI
+
+== Introduction
+
+This repository demonstrates how to setup a Metanorma document
+repository to achieve:
+
+* continuous integration document building
+* automatic deployment to GitHub pages
+
+== Usage
+
+. Generate a public/private keypair using `ssh-keygen` (see <<>>)
+
+. Copy the necessary files from this repo to your own Metanorma document
+repository.
+
+** `.travis.yml`
+** `Makefile`
+** `deploy.sh`
+** `metanorma.env`
+
+
+== General structure
+
+. The `Makefile` file provides methods to:
+.. build the document (`make clean`, `make all`);
+.. setup and move artifacts into the `published/` directory for deployment (`make publish`); and
+.. performing deployment by triggering the `deploy.sh` script (`make deploy`)
+
+. The `.travis.yml` file provides the necessary steps for Travis CI to:
+.. build the document via `make`; and
+.. deploy the document using the `make deploy` target;
+
+. The `deploy.sh` executable script is used to upload published artifacts to GitHub pages automatically:
+.. decrypting the GitHub per-repository deploy key used to push the compiled output to the GitHub repository itself;
+.. pushing the "`published`" files (created in the `published/` directory created by `make`) to the GitHub repository's `gh-pages` branch.
+
+. The `metanorma.env` file is used to store variable information
+  useful for the building and deployment of the document,
+  and to decrypt the deploy key.
+
+== Detailed instructions
+
+=== Install necessary files into your repository
+
+Depending on your setup you may want to copy some or all of
+the files provided.
+
+* `Makefile` (copy without needing changes, unless you know
+  what you're doing)
+
+* `.travis.yml` (copy without needing changes, unless you know
+  what you're doing)
+
+* `deploy.sh` (copy without needing changes)
+
+* `metanorma.env` (You need to customize this)
+
+
+=== Create a GitHub per-repository deploy key
+
+. Generate a SSH keypair using `ssh-keygen` +
++
+[source,sh]
+----
+export DEPLOY_EMAIL=travis-ci@ribose.com
+ssh-keygen -t rsa -b 4096 -N '' -C "${DEPLOY_EMAIL}" -f ./deploy_key
+----
++
+The public key of the deploy key will be located at `./deploy_key.pub`
+
+. Go to your GitHub repository page, "`Settings`", then "`Deploy keys`".
+
+. Click "`Add deploy key`"
+
+.. Title: "`Travis deployment to gh-pages`"
+.. Key: copy and paste the content from `./deploy_key.pub`
+.. Tick "`Allow write access`" to allow this key to push to the `gh-pages` branch
+
+
+=== Make Travis CI encrypt the deploy key
+
+. Install the Travis CI gem (you must have Ruby installed):
++
+[source,sh]
+----
+gem install travis
+----
+
+. Login to Travis CI:
++
+[source,sh]
+----
+export GITHUB_TOKEN=foobar
+# You may need to add either `--com`, `--org` or `--pro` depending
+# on the location of your repository on Travis CI
+travis login --com --github-token $GITHUB_TOKEN
+----
+
+. (IMPORTANT) Manually go to Travis CI to "`Activate`" the repository. This must be done before all steps that follow.
+
+. Encrypt the private portion of the deploy key (`./deploy_key`):
++
+[source,sh]
+----
+# You may need to add either `--com`, `--org` or `--pro` depending
+# on the location of your repository on Travis CI
+travis encrypt-file deploy_key --com
+----
+
+** If the command gives output like `The repository at {github-org}/{repo} was not found`, you may have to manually adjust `.git/config`'s `[travis]` section to have `slug` point to the name of your repository's identifier on Travis CI.
+
+** Note: this ID is case-sensitive and also sensitive to trailing slashes!
+
+. A file called `./deploy_key.enc` will be created by Travis CI, and
+  you will see output like the following:
++
+[source,sh]
+----
+encrypting deploy_key for {github-org}/{repo}
+storing result as deploy_key.enc
+DANGER ZONE: Override existing deploy_key.enc? |no| yes
+storing secure env variables for decryption
+
+Please add the following to your build script (before_install stage in your .travis.yml, for instance):
+
+    openssl aes-256-cbc -K $encrypted_ee73481fab12_key -iv $encrypted_ee73481fab12_iv -in deploy_key.enc -out deploy_key -d
+
+Pro Tip: You can add it automatically by running with --add.
+
+Make sure to add deploy_key.enc to the git repository.
+Make sure not to add deploy_key to the git repository.
+Commit all changes to your .travis.yml.
+----
++
+We don't need to add this specific line because we will
+instead put `ee73481fab12` into a separate file.
++
+Now, make sure you check your Travis CI job page that
+these two variables (`encrypted_ee73481fab12_key` and `encrypted_ee73481fab12_iv`) are really added to the page.
+This can be seen on the `https://travis-ci.com/{gh-org}/{gh-reponame}/settings` page. If it isn't there, you might need to toy with the
+`--com` or `--org` flags for Travis when running `travis encrypt`.
+Running the `travis encrypt` command multiple times is acceptable
+as long as you upload the latest `deploy_key.enc` file.
+
+. Capture the `ee73481fab12` code from the output above (from `encrypted_ee73481fab12_key`) and keep it. This is called the
+"`encryption file ID`" that we will put in our `metanorma.env`
+to allow the `Makefile` to know what key to use to decrypt the
+encrypted deploy key.
+
+
+
+=== Upload the encrypted deploy key
+
+. Add the encrypted deploy key `deploy_key.enc` into the Git repo:
++
+[source,sh]
+----
+git add deploy_key.enc
+git commit -m 'Add encrypted deploy key'
+git push
+----
+
+
+=== Customize the Metanorma Environment file (`metanorma.env`)
+
+There are a few variables to set in the provided `metanorma.env`:
+
+. `METANORMA_DOCTYPE=foobar` this is the types of Metanorma document
+  to compile. See the official https://www.metanorma.com[Metanorma] page for the different types. (e.g. `iso`, `rfc`, `csd`, `csand`)
+
+. `METANORMA_FORMATS=xml pdf html doc` these are the formats
+to generate for the Metanorma document. Not all processors support
+all formats. See the processor's pages for more details.
+Formats not supported by the chosen document type will
+be silently ignored.
+
+. `ENCRYPTION_LABEL=FOOBAR` should be set to `ENCRYPTION_LABEL=ee73481fab12`,
+   where `ee73481fab12` is the "`encryption key ID`" captured from the step
+   when the deploy key was encrypted by Travis CI.
+
+. `COMMIT_AUTHOR_EMAIL=travis-ci@ribose.com` should be set to an
+  identifier that you want used for committing to the `gh-pages`
+  branch.
+
+This file is read by `Makefile` and must to be in `make` syntax.
+
+Here's an example from https://github.com/riboseinc/csand-devsecops-whitepaper[CSA's DevSecOps whitepaper]:
+
+[source,sh]
+----
+METANORMA_DOCTYPE=csand              # <= type of Metanorma document
+METANORMA_FORMATS=xml pdf html doc   # <= formats we want to generate
+ENCRYPTION_LABEL=bb73481fab12        # <= Travis encrypted file ID
+COMMIT_AUTHOR_EMAIL=travis-ci@ribose.com # <= email of committer to gh-pages
+----
+
+Remember to add the file to Git.
+
+[source,sh]
+----
+git add metanorma.env
+git commit -m 'Setup deploy variables for Travis'
+git push
+----
+
+
+=== Make sure the deploy private key is ignored by Git
+
+Add `deploy_key` to `.gitignore`.
+
+[source,sh]
+----
+echo "\ndeploy_key\n" >> .gitignore
+----
+
+
+=== Done and profit!
+
+Yay!
+
+
+== Credits
+
+The method of deployment using GitHub tokens is inspired by:
+
+* https://github.com/w3c/permissions/blob/master/.travis.yml
+
+Metanorma is a Ribose Open project.
