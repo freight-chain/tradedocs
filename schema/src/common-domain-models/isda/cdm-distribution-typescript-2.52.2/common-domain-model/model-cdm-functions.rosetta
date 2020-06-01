@@ -1,0 +1,542 @@
+namespace org.isda.cdm
+version "2.52.2"
+
+import cdm.base.math.*
+import cdm.base.datetime.*
+import cdm.base.staticdata.party.*
+
+annotation creation: <"Annotation to describe the intent of a function">
+    [prefix Create]
+    PrimitiveEvent PrimitiveEvent (0..1) <"A primitive event function should take as an input all of the types required to construct the event and produce a new PrimitiveEvent type.">
+    BusinessEvent BusinessEvent (0..1) <"A business event function should take as its inputs the after state of previous business event or in case where the is no before state, all of the inputs required to produce the outcome BusinessEvent.">
+
+func Create_Execution:
+	[creation BusinessEvent]
+	inputs:
+		product Product (1..1) <"The financial product to be executed and contract formed.">
+		quantityNotation QuantityNotation (1..*) <"Quantity of the product.">
+		priceNotation PriceNotation (0..*) <"Price of the product">
+		parties Party (2..2) <"The parties to that execution, for now assumed Principal-Principal, i.e. no Agent.">
+		partyRoles PartyRole (0..*) <"The role(s) that party(ies) may have in relation to the execution.">
+
+	output:
+		executionEvent BusinessEvent (1..1)
+
+	assign-output executionEvent -> primitives -> execution:
+		Create_ExecutionPrimitive(product, quantityNotation, priceNotation, parties, partyRoles)
+
+	assign-output executionEvent -> eventEffect -> execution:
+		executionEvent -> primitives -> execution -> after -> execution
+
+func Create_ExecutionPrimitive: <"Function specification to compose an execution based on a minimum required set of inputs: product, quantity, parties etc.">
+	[creation PrimitiveEvent]
+	inputs:
+		product Product (1..1) <"The financial product to be executed and contract formed.">
+		quantityNotation QuantityNotation (1..*) <"Quantity of the product.">
+		priceNotation PriceNotation (0..*) <"Price of the product">
+		parties Party (2..2) <"The parties to that execution, for now assumed Principal-Principal, i.e. no Agent.">
+		partyRoles PartyRole (0..*) <"The role(s) that party(ies) may have in relation to the execution.">
+
+	output:
+		executionPrimitive ExecutionPrimitive (1..1)
+
+	assign-output executionPrimitive -> after -> execution -> tradableProduct -> product:
+		product
+
+	assign-output executionPrimitive -> after -> execution -> tradableProduct -> priceNotation:
+		priceNotation
+
+	assign-output executionPrimitive -> after -> execution -> tradableProduct -> quantityNotation:
+		quantityNotation
+
+	assign-output executionPrimitive -> after -> execution -> party:
+		parties
+
+	assign-output executionPrimitive -> after -> execution -> partyRole:
+ 		partyRoles
+
+	post-condition: <"The execution will be the first event in any post-trade life cycle and therefore does not have a before state. Once pre-trade elements are brought into CDM, the 'before' will be used to refer to the last of the pre-trade event states.">
+		executionPrimitive -> before is absent
+
+func Create_ContractFormation: <"Function specification to create the fully-formed business event of entering into a new contract, as a combination of an execution primitive and a contract formation primitive, when there is no allocation involved and the contractual parties are the execution parties.">
+	[creation BusinessEvent]
+	inputs:
+		executionEvent BusinessEvent (1..1)
+		legalAgreement LegalAgreement (0..1)
+
+	output:
+		contractFormationEvent BusinessEvent (1..1)
+
+	alias execution:
+		executionEvent -> primitives -> execution -> after -> execution
+
+	condition : <"Input event must be an execution must be on a contractual product.">
+		execution exists and
+		execution -> tradableProduct -> product -> contractualProduct exists
+
+	condition : <"Ensures that parties to the Contract are defined in the Legal Agreement, if one is provided.">
+		if legalAgreement exists then legalAgreement -> contractualParty contains execution -> party
+
+	assign-output contractFormationEvent -> primitives -> contractFormation: <"Event must contain a contract formation primitive based on the execution primitive and an optional legal agreement.">
+		Create_ContractFormationPrimitive(executionEvent -> primitives only-element -> execution -> after -> execution, legalAgreement)
+
+	assign-output contractFormationEvent -> eventEffect -> contract:
+		contractFormationEvent -> primitives -> contractFormation -> after -> contract
+
+	assign-output contractFormationEvent -> eventEffect -> effectedExecution:
+		contractFormationEvent -> primitives -> contractFormation -> before -> execution
+	post-condition : <"Event effect must point to the new execution and contract, and exclude other effects.">
+		contractFormationEvent -> eventEffect -> effectedContract is absent
+		and contractFormationEvent -> eventEffect -> productIdentifier is absent
+		and contractFormationEvent -> eventEffect -> transfer is absent
+
+func Create_ContractFormationPrimitive: <"Function specification to create a fully-formed contract following execution on a contractual product. The contract can optionally reference a further legal agreement (such as a CSA or a Master Confirmation).">
+	[creation PrimitiveEvent]
+	inputs:
+		execution Execution (1..1)
+		legalAgreement LegalAgreement (0..1)
+
+	output:
+		contractFormation ContractFormationPrimitive (1..1)
+
+	alias contract:
+		contractFormation -> after -> contract
+
+	assign-output contractFormation -> before -> execution: <"Before state must be the execution, and the contractual product in the after state must be the underlying product of the contract being formed.">
+		execution
+
+	assign-output contract -> tradableProduct:
+		execution -> tradableProduct
+
+	assign-output contract -> contractIdentifier:
+		execution -> identifier
+
+	assign-output contract -> tradeDate -> date:
+		execution -> tradeDate
+
+	assign-output contract -> partyRole:
+		execution -> partyRole
+
+	assign-output contract -> party:
+		execution -> party
+
+	assign-output contract -> documentation -> legalAgreement: <"When an overlaying legal agreement exists, the contract must reference it.">
+		if legalAgreement exists then legalAgreement
+
+func Create_Reset:
+	[creation BusinessEvent]
+	inputs:
+		previousEvent BusinessEvent (1..1)
+		observationEvent BusinessEvent (1..1)
+		date date (1..1)
+
+	output:
+		resetEvent BusinessEvent (1..1)
+
+	alias contractState: <"Extract the Contract State from the Event.">
+		ExtractContractState(previousEvent)
+
+	alias contract:
+		contractState -> contract
+
+	alias observation:
+		observationEvent -> primitives  only-element -> observation
+
+	condition: <"ExtractContractState would result in nothing (empty), check we have something.">
+		contractState exists
+
+	condition: <"The observation primitive must be part of the observation event">
+		observation exists
+
+	assign-output resetEvent -> primitives -> reset:
+		Create_ResetPrimitive(contractState, observation, date)
+
+	assign-output resetEvent -> eventEffect -> effectedContract:
+		contract as-key
+
+	assign-output resetEvent -> eventEffect -> contract:
+		contract as-key
+
+	post-condition:
+		resetEvent -> eventEffect -> effectedExecution is absent
+		and resetEvent -> eventEffect -> execution is absent
+		and resetEvent -> eventEffect -> productIdentifier is absent
+
+func Create_ResetPrimitive: <"Specifies how a Reset Primitive should be constructed.">
+	[creation PrimitiveEvent]
+	inputs:
+		contractState ContractState (1..1)
+		observation ObservationPrimitive (1..1)
+		date date (1..1)
+
+	output:
+		resetPrimitive ResetPrimitive (1..1)
+
+	alias contract:
+		contractState -> contract
+
+	assign-output resetPrimitive -> before:
+		contractState
+
+	assign-output resetPrimitive -> after -> contract:
+		contractState -> contract
+
+	assign-output resetPrimitive -> after -> updatedContract: <"To handle the various ways Contracts can change over time, ">
+		ResolveUpdatedContract(contractState, observation, date)
+
+func ResolveUpdatedContract: <"The updated contract should be generated differently in different reset scenarios. This function handles how the contract should update according to which payouts are present within the Economic Terms.">
+	inputs:
+		contractState ContractState (1..1)
+		observation ObservationPrimitive (1..1)
+		date date (1..1)
+
+	output:
+		updatedContract Contract (1..1) <"An object that follows the structure of the Contract with only the updated values are set.">
+
+	alias payout:
+		contractState -> contract -> tradableProduct -> product -> contractualProduct -> economicTerms -> payout
+
+	assign-output updatedContract:
+		if payout -> equityPayout exists then ResolveEquityContract(contractState, observation, date)
+
+func Create_CashTransfer: <"Function specification to build a transfer event following a reset on a contract">
+	[creation BusinessEvent]
+	inputs:
+		resetEvent BusinessEvent (1..1)
+	output:
+		transferEvent BusinessEvent (1..1)
+
+	alias contractState:
+		resetEvent -> primitives -> reset -> after
+
+	condition: <"There must be a reset primitive on the event input, and the contract being referenced must be consistent between those events.">
+		resetEvent -> primitives -> reset exists
+
+	assign-output transferEvent -> primitives -> transfer:
+		Create_CashTransferPrimitive(contractState only-element , resetEvent -> eventDate)
+
+	post-condition: <"Event must contain a transfer primitive populated with the cashflow, and no other primitive.">
+		transferEvent -> primitives -> transfer only exists
+
+	post-condition: <"Event effect must include the contract generating the cashflow.">
+		transferEvent -> eventEffect -> effectedContract = contractState -> contract
+		and transferEvent -> eventEffect -> contract = contractState -> contract
+		and transferEvent -> eventEffect -> effectedExecution is absent
+		and transferEvent -> eventEffect -> execution is absent
+		and transferEvent -> eventEffect -> productIdentifier is absent
+
+func Create_CashTransferPrimitive: <"Function specification to generate a transfer primitive following a reset. The cashflow is being passed as an input, as currently the cashflow is meant to be part of the reset. At a later stage, we should pass the reset value while the cashflow calculation should be executed as part of this spec.">
+	[creation PrimitiveEvent]
+	inputs:
+		contractState ContractState (1..1)
+		date date (1..1)
+
+	output:
+		transfer TransferPrimitive (1..1)
+
+	alias cashflow:
+		ResolveCashflow(contractState, date)
+
+	assign-output transfer -> status:
+		TransferStatusEnum -> Instructed
+
+	assign-output transfer -> cashTransfer -> amount:
+		cashflow -> cashflowAmount
+
+	assign-output transfer -> cashTransfer -> payerReceiver:
+		cashflow -> payerReceiver
+
+	assign-output transfer -> settlementDate:
+		cashflow -> cashflowDate
+
+func ResolveCashflow: <"A product agnostic function that calculates the amount due to be transfered after a Reset Event.">
+	inputs:
+		contractState ContractState (1..1)
+		date date (1..1)
+
+	output:
+		cashflow Cashflow (1..1)
+
+	assign-output cashflow -> cashflowAmount:
+		if contractState -> contract -> tradableProduct -> product -> contractualProduct -> economicTerms -> payout -> equityPayout exists
+		then EquityCashSettlementAmount(contractState, date)
+
+	assign-output cashflow -> cashflowDate -> adjustedDate:
+		ResolveCashSettlementDate(contractState)
+
+func ResolveCashSettlementDate: <"A product agnostic function that resolves the settlement date of the payout for the period in question">
+	inputs: contractState ContractState (1..1)
+	output: date date (1..1)
+
+func Create_Allocation: <"Function specification to create the fully-formed business event of allocating an execution based on allocation instructions.">
+	[creation BusinessEvent]
+	inputs:
+		execution Execution (1..1) <"Block trade to be allocated.">
+		allocationInstruction AllocationInstruction (1..1) <"Allocation instructions to be applied.">
+	
+	output:
+		businessEvent BusinessEvent (1..1) <"Allocation event containing both the original block trade (with the status set to Allocated) and the set of allocated trades.">
+
+	alias splitPrimitive:
+		Create_SplitPrimitive( ExecutionAsTrade( execution ), allocationInstruction -> breakdowns -> quantity )
+
+//	assign-output businessEvent -> primitives -> split:
+//		splitPrimitive
+
+	/*
+	 * TODO: Requires DSL support so implemented in Java:
+	 *
+	 * Proposed syntax changes:  
+	 * Option 1 - loop through split executions to create contract formation primitive for each one:
+	 *  - for loop syntax support required to create contract formation primitive for each split execution
+	 *  - list append syntax support required to add each contract formation primitive to the list of primitives 
+	 *  Option 2 - create function that creates list of contract formation primitives 
+	 *  - syntax support for returning lists from functions
+	 *  - syntax support for list add all (to add function result to list of primitives)
+	 */
+//	add-output businessEvent -> primitives -> contractFormation for-each splitPrimitive -> after -> splitTrades -> execution:
+//		then Create_ContractFormationPrimitive( it, empty )
+
+	post-condition:  <"Both split and contract formation primitives should be created.">
+		businessEvent -> primitives -> split exists and businessEvent -> primitives -> contractFormation exists
+			
+	post-condition: <"The split outcome must result in execution state of 'Allocated' for an execution.">
+		if businessEvent -> primitives -> split -> after -> originalTrade -> execution exists
+		then businessEvent -> primitives -> split -> after -> originalTrade -> execution -> closedState -> state = ClosedStateEnum -> Allocated
+	
+	post-condition: <"The split outcome must result in a contract state of 'Allocated' for a contract.">
+		if businessEvent -> primitives -> split -> after -> originalTrade -> contract exists
+		then businessEvent -> primitives -> split -> after -> originalTrade -> contract -> closedState -> state = ClosedStateEnum -> Allocated
+
+func Create_SplitPrimitive: <"Function specification to create the Split primitive based by splitting the trade into separate trades with the qualities specified in the split instructions.">
+	[creation PrimitiveEvent]
+	inputs:
+		trade Trade (1..1) <"Block trade to be split.">
+		splitInstructions QuantityNotation (1..*) <"Split instructions to be applied.">
+
+	output:
+		primitive SplitPrimitive (1..1) <"Split primitive containing both the original block trade (with the status set to Split) and the set of split trades.">
+
+func Settle: <"Function specification to create the Transfer event based on an execution's settlement terms. Initial implementation only supports securities settled via delivery vs payment.">
+	// TODO Never referenced in CDM
+	inputs:
+		execution Execution (1..1) <"Execution to be settled.">
+		previousEvent WorkflowStep (1..1) <"Previous event for lineage purposes.">
+
+	output:
+		transferEvent WorkflowStep (1..1) <"Transfer event composed of cash and security components created from a security settled via delivery vs payment.">
+
+	condition:
+		execution -> tradableProduct -> product -> security exists
+
+	assign-output transferEvent -> businessEvent -> primitives -> transfer:
+		Create_TransferPrimitive(execution)
+
+	assign-output transferEvent -> lineage -> eventReference:
+		previousEvent as-key
+
+	assign-output transferEvent -> lineage -> executionReference:
+		execution as-key
+
+
+func Create_TransferPrimitive: <"Function specification to create the Transfer primitive based on an execution's settlement terms and instructions. Initial implementation only supports creating transfer primitives from securities settled via delivery vs payment.">
+	[creation PrimitiveEvent]
+	inputs:
+		execution Execution (1..1)
+
+	output:
+		transferPrimitive TransferPrimitive (1..1) <"Transfer primitive generated from execution.">
+
+	assign-output transferPrimitive -> status:
+		TransferStatusEnum -> Instructed
+
+	post-condition:
+		if execution -> tradableProduct -> product -> security exists and execution -> settlementTerms -> transferSettlementType = TransferSettlementEnum -> DeliveryVersusPayment
+		then transferPrimitive -> cashTransfer exists
+			and transferPrimitive -> securityTransfer exists
+			and transferPrimitive -> commodityTransfer is absent
+
+
+func Create_QuantityChangePrimitive: <"A specification of the inputs, outputs and constraints when calculating the after state of a Quantity Change Primitive Event">
+	[creation PrimitiveEvent]
+	inputs:
+		trade Trade (1..1)
+		currencyAmount number (0..1)
+		noOfUnits number (0..1)
+		
+	output:
+		quantityChangePrimitive QuantityChangePrimitive (1..1)
+
+	condition:
+		( currencyAmount or noOfUnits ) exists
+
+	assign-output quantityChangePrimitive -> before:
+		trade as-key
+	
+	post-condition: <"The input and output types need to be consistent, if we started with an Execution, we should end with an Execution, likewise with Contract.">
+		if quantityChangePrimitive -> before -> execution exists then quantityChangePrimitive -> after -> execution exists
+			and if quantityChangePrimitive -> before -> contract exists then quantityChangePrimitive -> after -> contract exists
+
+
+func Create_PriceChangePrimitive:
+	[creation PrimitiveEvent]
+	inputs:
+		trade Trade (1..1)
+		cashPrice number (1..1)
+
+	output:
+		termsChangePrimitive TermsChangePrimitive (1..1)
+
+
+func Create_TerminationQuantityChangePrimitive: <"A specification for terminating a contract. A QuantityChangePrimitive is created with the after set with quantity of 0, and the closed state to be Terminated.">
+	[creation PrimitiveEvent]
+	inputs:
+		contract Contract (1..1)
+
+	output:
+		quantityChangePrimitive QuantityChangePrimitive (1..1)
+
+	assign-output quantityChangePrimitive -> before -> contract: <"Correctly populate the before attributes on the Primitive Event">
+		contract
+
+	assign-output quantityChangePrimitive -> after -> contract: <"Correctly populate the after attributes on the Primitive Event">
+		TerminateContract(contract)
+
+func EvaluatePortfolioState: <"Function specification to evaluate a portfolio's aggregation parameters and return a new portfolio state containing aggregated positions.">
+	// TODO Never referenced in CDM
+	inputs:
+		portfolio Portfolio (1..1) <"Portfolio containing the aggregation parameters to be used to calculate the new portfolio state.">
+
+	output:
+		portfolioState PortfolioState (1..1) <"Portfolio state containing the aggregated positions based on the input aggregation parameters.">
+
+func TerminateContract:
+	inputs:
+		contract Contract (1..1)
+
+	output:
+		terminatedContract Contract (1..1)
+
+	assign-output terminatedContract -> contractIdentifier:
+		contract -> contractIdentifier
+	assign-output terminatedContract -> tradeDate:
+		contract -> tradeDate
+	assign-output terminatedContract -> clearedDate:
+		contract -> clearedDate
+	assign-output terminatedContract -> tradableProduct -> product:
+		contract -> tradableProduct -> product
+	assign-output terminatedContract -> tradableProduct -> priceNotation:
+		contract -> tradableProduct -> priceNotation
+	assign-output terminatedContract -> collateral:
+		contract -> collateral
+	assign-output terminatedContract -> documentation:
+		contract -> documentation
+	assign-output terminatedContract -> governingLaw:
+		contract -> governingLaw
+	assign-output terminatedContract -> party:
+		contract -> party
+	assign-output terminatedContract -> account:
+		contract -> account
+	assign-output terminatedContract -> partyRole:
+		contract -> partyRole
+	assign-output terminatedContract -> calculationAgent:
+		contract -> calculationAgent
+	assign-output terminatedContract -> partyContractInformation:
+		contract -> partyContractInformation
+
+	assign-output terminatedContract -> closedState -> state: <"Set the closed state on the terminatedContract">
+		ClosedStateEnum -> Terminated
+
+	assign-output terminatedContract -> tradableProduct -> quantityNotation -> quantity -> amount: <"Set the quantity amount to 0">
+        0.0
+
+func NewExecutionPrimitiveEvent:
+	inputs:
+		executionPrimitive ExecutionPrimitive (0..1)
+	output:
+		primitiveEvent PrimitiveEvent (0..1)
+
+	assign-output primitiveEvent -> execution:
+		executionPrimitive
+
+func NewContractFormationPrimitiveEvent:
+	inputs:
+		contractFormation ContractFormationPrimitive (0..1)
+	output:
+		primitiveEvent PrimitiveEvent (0..1)
+
+	assign-output primitiveEvent -> contractFormation:
+	contractFormation
+
+func NewQuantityChangePrimitiveEvent:
+	inputs:
+		quantityChangePrimitive QuantityChangePrimitive (0..1)
+	output:
+		primitiveEvent PrimitiveEvent (0..1)
+
+	assign-output primitiveEvent -> quantityChange:
+	quantityChangePrimitive
+
+type ClearingInstruction: <"All information required to perform the clear life cycle event">
+	clearingParty Party(1..1)
+	alphaContract Contract (1..1)
+		[metadata reference]
+
+func Create_Clear: <"Clear function that inputs the alpha contract and clearingInstruction, resulting in the cleared BusinessEvent">
+	[creation BusinessEvent]
+	inputs:
+		clearingInstruction ClearingInstruction(1..1) <"Clearing Instruction with all information to clear the trade including the alpha contract and the clearing party.">
+
+	output:
+		clearedEvent BusinessEvent (1..1) <"Business event qualified as a cleared trade">
+
+	alias alpha:
+		clearingInstruction -> alphaContract
+
+	alias party1: <"Executing entity">
+		PartyByRole(alpha -> partyRole, PartyRoleEnum -> ExecutingEntity)
+		
+	alias party2: <"Counter party">
+		PartyByRole(alpha -> partyRole, PartyRoleEnum -> Counterparty)
+
+	alias alphaTerminated: <"Terminated alpha quantity change event">
+		Create_TerminationQuantityChangePrimitive(alpha)
+	alias alphaTerminatedPrimitives: NewQuantityChangePrimitiveEvent(alphaTerminated)
+
+	alias clearerRole: <"ClearingOrganization role">
+		PartyRoleForParty(clearingInstruction -> clearingParty, PartyRoleEnum -> ClearingOrganization)
+
+	alias betaExecution: <"Beta execution">
+		Create_ExecutionPrimitive(alpha -> tradableProduct -> product, alpha -> tradableProduct -> quantityNotation, alpha -> tradableProduct -> priceNotation, [clearingInstruction -> clearingParty, party1], [clearerRole])
+	alias betaExecutionPrimitives: NewExecutionPrimitiveEvent(betaExecution)
+
+	alias betaContract: <"Beta contract">
+		Create_ContractFormationPrimitive(betaExecution -> after -> execution, empty)
+	alias betaContractPrimitives: NewContractFormationPrimitiveEvent(betaContract)
+
+	alias gammaExecution: <"Gamma execution">
+		Create_ExecutionPrimitive(alpha -> tradableProduct -> product, alpha -> tradableProduct -> quantityNotation, alpha -> tradableProduct -> priceNotation, [clearingInstruction -> clearingParty, party2], [clearerRole])
+	alias gammaExecutionPrimitives: NewExecutionPrimitiveEvent(gammaExecution)
+
+	alias gammaContract: <"Gamma contract">
+		Create_ContractFormationPrimitive(gammaExecution -> after -> execution, empty)
+	alias gammaContractPrimitives: NewContractFormationPrimitiveEvent(gammaContract)
+
+	assign-output clearedEvent -> primitives:
+		[
+			alphaTerminatedPrimitives,
+			betaExecutionPrimitives,
+			betaContractPrimitives,
+			gammaExecutionPrimitives,
+			gammaContractPrimitives
+		]
+
+func ExecutionAsTrade:
+	inputs:
+		execution Execution (0..1)
+	
+	output:
+		trade Trade (1..1)
+	
+	assign-output trade -> execution:
+		execution

@@ -1,0 +1,1280 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>The CDM Model &mdash; ISDA CDM 2.52.2 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Welcome to the ISDA CDM documentation!" href="index.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> ISDA CDM
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.52.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">The CDM Model</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#product-model">Product Model</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#tradableproduct">TradableProduct</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#quantitynotation">QuantityNotation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pricenotation">PriceNotation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#financial-product">Financial Product</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#contractual-product">Contractual Product</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#economic-terms">Economic Terms</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#payout">Payout</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#reusable-components">Reusable Components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#underlier">Underlier</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#identified-product">Identified Product</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#product-qualification">Product Qualification</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#event-model">Event Model</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#primitive-event">Primitive Event</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#baseline-event-features">Baseline Event Features</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#message-information">Message Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#timestamp">Timestamp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#event-identification">Event Identification</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#intent-qualification">Intent Qualification</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lineage-information">Lineage Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-call">Function Call</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#event-effect">Event Effect</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#post-execution-contract">Post-Execution: Contract</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#other-misc-information">Other Misc. Information</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#event-qualification">Event Qualification</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#legal-agreement">Legal Agreement</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#modelling-approach">Modelling Approach</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-elective-provisions">The Elective Provisions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#linking-legal-agreements-to-contracts-and-events">Linking Legal Agreements to Contracts and Events</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#process-model">Process Model</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#purpose">Purpose</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#why-a-process-model">Why a Process Model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#what-is-the-process-model">What Is the Process Model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#how-does-it-work">How Does It Work</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#scope">Scope</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#coverage">Coverage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#granularity">Granularity</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#validation-process">Validation Process</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#calculation-process">Calculation Process</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#fixed-amount-and-floating-amount-definitions">Fixed Amount and Floating Amount Definitions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#day-count-fraction">Day Count Fraction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#utility-function">Utility Function</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#equity-performance">Equity Performance</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#event-creation-process">Event Creation Process</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#reference-data-model">Reference Data Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mapping-synonym">Mapping (Synonym)</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ISDA CDM</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>The CDM Model</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/documentation.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="the-cdm-model">
+<h1>The CDM Model<a class="headerlink" href="#the-cdm-model" title="Permalink to this headline">¶</a></h1>
+<p><strong>There are six dimensions</strong> to the CDM model:</p>
+<ul class="simple">
+<li>Product</li>
+<li>Event</li>
+<li>Legal Agreement</li>
+<li>Process</li>
+<li>Reference Data</li>
+<li>Mapping (Synonym)</li>
+</ul>
+<p>The following sections define each of these dimensions.  Selected examples of data structures are used as illustrations to help explain each dimension.  The complete data structure, including descriptions and other details can be viewed in the <a class="reference external" href="https://portal.cdm.rosetta-technology.io/#/text-browser">Textual Browser</a> on the ISDA CDM Portal.</p>
+<div class="section" id="product-model">
+<h2>Product Model<a class="headerlink" href="#product-model" title="Permalink to this headline">¶</a></h2>
+<p>Where applicable, the CDM follows the data structure of the Financial Products Markup Language (FpML), which is widely used in the OTC Derivatives market.  For example, the CDM type <code class="docutils literal notranslate"><span class="pre">PayerReceiver</span></code> is equivalent to the FpML PayerReceiver.model. Both of these are data structures used frequently throughout each respective model. In other cases, the CDM data structure is more normalised, per requirements from the CDM Design Working Group.  For example, price and quantity are represented in a single type, <code class="docutils literal notranslate"><span class="pre">TradableProduct</span></code>, which is shared by all products. Another example is the use of a composable product model whereby:</p>
+<ul class="simple">
+<li><strong>Economic terms are specified by composition</strong>, For example, the <code class="docutils literal notranslate"><span class="pre">InterestRatePayout</span></code> type is a component used in the definition of any product with one or more interest rate legs (e.g. Interest Rate Swaps, Equity Swaps, and Credit Default Swaps).</li>
+<li><strong>Product qualification is inferred</strong> from those economic terms rather than explicitly naming the product type, whereas FpML qualifies the product explcitly through the <em>product</em> substitution group.</li>
+</ul>
+<p>Regardless of whether the data structure is the same or different from FpML, the CDM includes defined Synonyms that map to FpML (and other models) and can be used for transformation purposes. More details on Synonyms are provided in the Mapping (Synonym) section of this document.</p>
+<div class="section" id="tradableproduct">
+<h3>TradableProduct<a class="headerlink" href="#tradableproduct" title="Permalink to this headline">¶</a></h3>
+<p>A tradable product represents a financial product that is ready to be traded, meaning that there is an agreed financial product, price, quantity, and other details necessary to complete an execution of a security or a negotiated contract.  Tradable products are represented by the <code class="docutils literal notranslate"><span class="pre">TradableProduct</span></code> type.</p>
+<div class="highlight-haskell notranslate"><div class="highlight"><pre><span></span><span class="kr">type</span> <span class="kt">TradableProduct:</span> 
+    <span class="n">product</span> <span class="kt">Product</span> <span class="p">(</span><span class="mi">1</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">quantityNotation</span> <span class="kt">QuantityNotation</span> <span class="p">(</span><span class="mi">1</span><span class="o">..*</span><span class="p">)</span> 
+    <span class="n">priceNotation</span> <span class="kt">PriceNotation</span> <span class="p">(</span><span class="mi">1</span><span class="o">..*</span><span class="p">)</span>
+    <span class="n">adjustment</span> <span class="kt">NotionalAdjustmentEnum</span> <span class="p">(</span><span class="mi">0</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span> 
+    <span class="n">condition</span> <span class="kt">PriceQuantityTriangulation:</span>
+    <span class="kt">PriceQuantityTriangulation</span><span class="p">(</span> <span class="n">priceNotation</span><span class="p">,</span> <span class="n">quantityNotation</span> <span class="p">)</span> <span class="ow">=</span> <span class="kt">True</span>
+</pre></div>
+</div>
+<p>Quantity and price are represented in the <code class="docutils literal notranslate"><span class="pre">TradableProduct</span></code> type because they are attributes shared by all products. All of the other attributes required to describe a product are defined in distinct product types.</p>
+<div class="section" id="quantitynotation">
+<h4>QuantityNotation<a class="headerlink" href="#quantitynotation" title="Permalink to this headline">¶</a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">QuantityNotation</span></code> type supports the quantity (or notional) for any product.</p>
+<div class="highlight-Haskell notranslate"><div class="highlight"><pre><span></span><span class="kr">type</span> <span class="kt">QuantityNotation:</span>
+   <span class="n">quantity</span> <span class="kt">NonNegativeQuantity</span> <span class="p">(</span><span class="mi">1</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+   <span class="n">assetIdentifier</span> <span class="kt">AssetIdentifier</span> <span class="p">(</span><span class="mi">1</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">AssetIdentifier</span></code> type requires the specification of either a product, currency or a floating rate option. This choice constraint is supported by specifying a <code class="docutils literal notranslate"><span class="pre">one-of</span></code> condition, as described in the <a class="reference external" href="https://docs.rosetta-technology.io/dsl/documentation.html#special-syntax">Special Syntax Section</a> of the Rosetta DSL documentation.</p>
+<div class="highlight-Haskell notranslate"><div class="highlight"><pre><span></span><span class="kr">type</span> <span class="kt">AssetIdentifier:</span>
+   <span class="n">productIdentifier</span> <span class="kt">ProductIdentifier</span> <span class="p">(</span><span class="mi">0</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+   <span class="n">currency</span> <span class="n">string</span> <span class="p">(</span><span class="mi">0</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+      <span class="p">[</span><span class="n">metadata</span> <span class="n">scheme</span><span class="p">]</span>
+   <span class="n">rateOption</span> <span class="kt">FloatingRateOption</span> <span class="p">(</span><span class="mi">0</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+   <span class="n">condition</span><span class="kt">:</span> <span class="n">one</span><span class="o">-</span><span class="kr">of</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="pricenotation">
+<h4>PriceNotation<a class="headerlink" href="#pricenotation" title="Permalink to this headline">¶</a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">PriceNotation</span></code> type supports the price for any product.</p>
+<div class="highlight-Haskell notranslate"><div class="highlight"><pre><span></span><span class="kr">type</span> <span class="kt">PriceNotation:</span>
+   <span class="n">price</span> <span class="kt">Price</span> <span class="p">(</span><span class="mi">1</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+   <span class="n">assetIdentifier</span> <span class="kt">AssetIdentifier</span> <span class="p">(</span><span class="mi">1</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">price</span></code> attribute is of type <code class="docutils literal notranslate"><span class="pre">Price</span></code>, which requires the selection of one of the attributes that describe different types of prices. The set of attributes collectively support all products in the CDM.</p>
+<div class="highlight-Haskell notranslate"><div class="highlight"><pre><span></span><span class="kr">type</span> <span class="kt">Price:</span>
+   <span class="n">cashPrice</span> <span class="kt">CashPrice</span> <span class="p">(</span><span class="mi">0</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+   <span class="n">exchangeRate</span> <span class="kt">ExchangeRate</span> <span class="p">(</span><span class="mi">0</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+   <span class="n">fixedInterestRate</span> <span class="kt">FixedInterestRate</span> <span class="p">(</span><span class="mi">0</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+   <span class="o">//</span> <span class="kt">For</span> <span class="kt">IR</span> <span class="kt">Swaps</span><span class="p">,</span> <span class="kt">CDS</span><span class="p">,</span> <span class="kt">Repo</span><span class="p">,</span> <span class="n">and</span> <span class="kt">FRA</span>
+   <span class="n">floatingInterestRate</span> <span class="kt">FloatingInterestRate</span> <span class="p">(</span><span class="mi">0</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+   <span class="n">condition</span><span class="kt">:</span> <span class="n">one</span><span class="o">-</span><span class="kr">of</span>
+</pre></div>
+</div>
+<p>For example, <code class="docutils literal notranslate"><span class="pre">cashPrice</span></code> would be used to represent the reference price in an Equity Swap and <code class="docutils literal notranslate"><span class="pre">fixedInterestRate</span></code> would be used to represent the fixed rate on an Interest Rate Swap. <code class="docutils literal notranslate"><span class="pre">floatingInterestRate</span></code> would be used to represent a cap or floor, or could be used to represent the known initial reset rate of a floating leg in an Interest Rate Swap, if it is agreed between the parties as part of the trade.</p>
+</div>
+<div class="section" id="financial-product">
+<h4>Financial Product<a class="headerlink" href="#financial-product" title="Permalink to this headline">¶</a></h4>
+<p>A financial product is an instrument that is used to transfer financial risk between two parties. Financial products are represented in the <code class="docutils literal notranslate"><span class="pre">Product</span></code> type, which is also constrained by a <code class="docutils literal notranslate"><span class="pre">one-of</span></code> condition, meaning that for a single Tradable Product, there can only be one Product.</p>
+<div class="highlight-Haskell notranslate"><div class="highlight"><pre><span></span><span class="kr">type</span> <span class="kt">Product:</span>
+   <span class="p">[</span><span class="n">metadata</span> <span class="n">key</span><span class="p">]</span>
+   <span class="n">contractualProduct</span> <span class="kt">ContractualProduct</span> <span class="p">(</span><span class="mi">0</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+   <span class="n">index</span> <span class="kt">Index</span> <span class="p">(</span><span class="mi">0</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+   <span class="n">loan</span> <span class="kt">Loan</span> <span class="p">(</span><span class="mi">0</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+   <span class="n">foreignExchange</span> <span class="kt">ForeignExchange</span> <span class="p">(</span><span class="mi">0</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+   <span class="n">security</span> <span class="kt">Security</span> <span class="p">(</span><span class="mi">0</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+   <span class="n">condition</span><span class="kt">:</span> <span class="n">one</span><span class="o">-</span><span class="kr">of</span>
+</pre></div>
+</div>
+<p>The CDM allows any one of these products to included in a trade or used as an underlier for another product (see the <em>Underlier</em> section). One unlikely case for a direct trade is Index, which is primarily used as an underlier.</p>
+<p>Among this set of products, the contractual product is the most complicated and requires the largest data structure. In a contractual product, an exchange of financial risk is materialised by a unique bilateral contract that specifies the financial obligations of each party. The terms of the contract are specified at trade inception and apply throughout the life of the contract (which can last for decades for certain long-dated products), unless amended by mutual agreement. Contractual products are fungible (in other words, replaceable by other identical or similar contracts) only under specific terms: e.g.&nbsp;the existence of a close-out netting agreement between the parties.</p>
+<p>Given that each contractual product transaction is unique, all of the contract terms must be specified and stored in an easily accessible transaction lifecycle model so that each party can evaluate the financial and counterparty risks during the life of the agreement.</p>
+<p>Foreign Exchange (FX) spot and forward trades (including Non-Deliverable Forwards) and private loans also represent an exchange of financial risk represented by a form of bilateral agreements. FX forwards and private loans can have an extended term, and are generally not fungible. However, these products share few other commonalities with contractual products such as Interest Rate Swaps. Therefore, they are defined separately.</p>
+<p>By contrast, in the case of the execution of a security (e.g. a listed equity), the exchange of finanical risk is a one-time event that takes place on the settlement date, which is usually within a few business days of the agreement. The other significant distinction is that securities are fungible instruments for which the terms and security identifiers are publically available.  Therefore, the terms of the security do not have to be stored in a transaction lifecycle model, but can be referenced with public identifiers.</p>
+<p>An Index product is an exception because it’s not directly tradable, but is included here because it can be referenced as an underlier for a tradable product and can be identified by a public identifier.</p>
+</div>
+</div>
+<div class="section" id="contractual-product">
+<h3>Contractual Product<a class="headerlink" href="#contractual-product" title="Permalink to this headline">¶</a></h3>
+<p>The scope of contractual products in the current model are summarized below:</p>
+<ul class="simple">
+<li><strong>Interest rate derivatives</strong>:<ul>
+<li>Interest Rate Swaps (incl. cross-currency swaps, non-deliverable swaps, basis swaps, swaps with  non-regular periods, …)</li>
+<li>Swaptions</li>
+<li>Caps/floors</li>
+<li>FRAs</li>
+<li>OTC Options on Bonds</li>
+</ul>
+</li>
+<li><strong>Credit derivatives</strong>:<ul>
+<li>Credit Default Swaps (incl. baskets, tranche, swaps with mortgage and loans underlyers, …)</li>
+<li>Options on Credit Default Swaps</li>
+</ul>
+</li>
+<li><strong>Equity derivatives</strong>:<ul>
+<li>Equity Swaps (single name)</li>
+</ul>
+</li>
+<li><strong>Options</strong>:<ul>
+<li>Any other OTC Options (incl. FX Options)</li>
+</ul>
+</li>
+</ul>
+<p>In the CDM, contractual products are represented by the <code class="docutils literal notranslate"><span class="pre">ContractualProduct</span></code> type:</p>
+<div class="highlight-Haskell notranslate"><div class="highlight"><pre><span></span><span class="kr">type</span> <span class="kt">ContractualProduct:</span>
+   <span class="n">productIdentification</span> <span class="kt">ProductIdentification</span> <span class="p">(</span><span class="mi">0</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+   <span class="n">productTaxonomy</span> <span class="kt">ProductTaxonomy</span> <span class="p">(</span><span class="mi">0</span><span class="o">..*</span><span class="p">)</span>
+   <span class="n">economicTerms</span> <span class="kt">EconomicTerms</span> <span class="p">(</span><span class="mi">1</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note that price and quantity are defined in <code class="docutils literal notranslate"><span class="pre">TradableProduct</span></code> as these are attributes common to all products.  The remaining economic terms of the contractual product are defined in <code class="docutils literal notranslate"><span class="pre">EconomicTerms</span></code> which is an encapsulated type in <code class="docutils literal notranslate"><span class="pre">ContractualProduct</span></code> .</p>
+<div class="section" id="economic-terms">
+<h4>Economic Terms<a class="headerlink" href="#economic-terms" title="Permalink to this headline">¶</a></h4>
+<p>The CDM specifies the various sets of possible remaining economic terms using the <code class="docutils literal notranslate"><span class="pre">EconomicTerms</span></code> type.  This type includes contractual provisions that are not specific to the type of payout, but do impact the value of the contract, such as effective date, termination date, date adjustments, and early termination provisions.  A valid population of this type is constrained by a set of conditions which are not shown here in the interests of brevity.</p>
+<div class="highlight-Haskell notranslate"><div class="highlight"><pre><span></span><span class="kr">type</span> <span class="kt">EconomicTerms:</span>
+   <span class="p">[</span><span class="n">partialKey</span><span class="p">]</span>
+   <span class="n">effectiveDate</span> <span class="kt">AdjustableOrRelativeDate</span> <span class="p">(</span><span class="mi">0</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+   <span class="n">terminationDate</span> <span class="kt">AdjustableOrRelativeDate</span> <span class="p">(</span><span class="mi">0</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+   <span class="n">dateAdjustments</span> <span class="kt">BusinessDayAdjustments</span> <span class="p">(</span><span class="mi">0</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+   <span class="n">payout</span> <span class="kt">Payout</span> <span class="p">(</span><span class="mi">1</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span> <span class="p">;</span>
+   <span class="n">earlyTerminationProvision</span> <span class="kt">EarlyTerminationProvision</span> <span class="p">(</span><span class="mi">0</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+   <span class="n">optionProvision</span> <span class="kt">OptionProvision</span> <span class="p">(</span><span class="mi">0</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+   <span class="n">extraordinaryEvents</span> <span class="kt">ExtraordinaryEvents</span> <span class="p">(</span><span class="mi">0</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="payout">
+<h4>Payout<a class="headerlink" href="#payout" title="Permalink to this headline">¶</a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">Payout</span></code> type defines the composable payout types, each of which describes a set of terms and conditions for the financial responsibilities between the contractual parties. Payout types can be combined to compose a product.  For example, an Equity Swap can be composed by combining an <code class="docutils literal notranslate"><span class="pre">InterestRatePayout</span></code> and an <code class="docutils literal notranslate"><span class="pre">EquityPayout</span></code>.</p>
+<div class="highlight-Haskell notranslate"><div class="highlight"><pre><span></span><span class="kr">type</span> <span class="kt">Payout:</span>
+   <span class="n">interestRatePayout</span> <span class="kt">InterestRatePayout</span> <span class="p">(</span><span class="mi">0</span><span class="o">..*</span><span class="p">)</span>
+   <span class="n">creditDefaultPayout</span> <span class="kt">CreditDefaultPayout</span> <span class="p">(</span><span class="mi">0</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+   <span class="n">equityPayout</span> <span class="kt">EquityPayout</span> <span class="p">(</span><span class="mi">0</span><span class="o">..*</span><span class="p">)</span>
+   <span class="n">optionPayout</span> <span class="kt">OptionPayout</span> <span class="p">(</span><span class="mi">0</span><span class="o">..*</span><span class="p">)</span>
+   <span class="n">forwardPayout</span> <span class="kt">ForwardPayout</span> <span class="p">(</span><span class="mi">0</span><span class="o">..*</span><span class="p">)</span>
+   <span class="n">securityPayout</span> <span class="kt">SecurityPayout</span> <span class="p">(</span><span class="mi">0</span><span class="o">..*</span><span class="p">)</span>
+   <span class="n">cashflow</span> <span class="kt">Cashflow</span> <span class="p">(</span><span class="mi">0</span><span class="o">..*</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The relationship between one of the payout classes and a similar structure in FpML can be identified through the defined Synonyms, as explained in an earlier section.  For example, the <code class="docutils literal notranslate"><span class="pre">InterestRatePayout</span></code> is equivalent to the following complex types in FpML: <em>swapStream</em>, <em>feeLeg</em> <em>capFloorStream</em>, <em>fra</em>, and <em>interestLeg</em>.</p>
+<div class="highlight-Haskell notranslate"><div class="highlight"><pre><span></span><span class="kr">type</span> <span class="kt">InterestRatePayout</span> <span class="n">extends</span> <span class="kt">PayoutBase:</span>
+   <span class="p">[</span><span class="n">metadata</span> <span class="n">key</span><span class="p">]</span>
+   <span class="n">payerReceiver</span> <span class="kt">PayerReceiver</span> <span class="p">(</span><span class="mi">0</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+   <span class="n">dayCountFraction</span> <span class="kt">DayCountFractionEnum</span> <span class="p">(</span><span class="mi">0</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+   <span class="p">[</span><span class="n">metadata</span> <span class="n">scheme</span><span class="p">]</span>
+   <span class="n">calculationPeriodDates</span> <span class="kt">CalculationPeriodDates</span> <span class="p">(</span><span class="mi">0</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+   <span class="n">paymentDates</span> <span class="kt">PaymentDates</span> <span class="p">(</span><span class="mi">0</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+   <span class="n">paymentDate</span> <span class="kt">AdjustableDate</span> <span class="p">(</span><span class="mi">0</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+   <span class="n">paymentDelay</span> <span class="n">boolean</span> <span class="p">(</span><span class="mi">0</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+   <span class="n">resetDates</span> <span class="kt">ResetDates</span> <span class="p">(</span><span class="mi">0</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+   <span class="n">discountingMethod</span> <span class="kt">DiscountingMethod</span> <span class="p">(</span><span class="mi">0</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+   <span class="n">compoundingMethod</span> <span class="kt">CompoundingMethodEnum</span> <span class="p">(</span><span class="mi">0</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+   <span class="n">cashflowRepresentation</span> <span class="kt">CashflowRepresentation</span> <span class="p">(</span><span class="mi">0</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+   <span class="n">crossCurrencyTerms</span> <span class="kt">CrossCurrencyTerms</span> <span class="p">(</span><span class="mi">0</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+   <span class="n">stubPeriod</span> <span class="kt">StubPeriod</span> <span class="p">(</span><span class="mi">0</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+   <span class="n">bondReference</span> <span class="kt">BondReference</span> <span class="p">(</span><span class="mi">0</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+   <span class="n">fixedAmount</span> <span class="n">calculation</span> <span class="p">(</span><span class="mi">0</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+   <span class="n">floatingAmount</span> <span class="n">calculation</span> <span class="p">(</span><span class="mi">0</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>There are as set of conditions associated with this type which are not shown here in the interests of brevity.</p>
+</div>
+<div class="section" id="reusable-components">
+<h4>Reusable Components<a class="headerlink" href="#reusable-components" title="Permalink to this headline">¶</a></h4>
+<p>There are a number of components that are reusable across several payout types.  For example,  the <code class="docutils literal notranslate"><span class="pre">CalculationPeriodDates</span></code> class describes the inputs for the underlying schedule of a stream of payments.</p>
+<div class="highlight-Haskell notranslate"><div class="highlight"><pre><span></span><span class="kr">type</span> <span class="kt">CalculationPeriodDates</span>
+   <span class="p">[</span><span class="n">metadata</span> <span class="n">key</span><span class="p">]</span>
+   <span class="n">effectiveDate</span> <span class="kt">AdjustableOrRelativeDate</span> <span class="p">(</span><span class="mi">0</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+   <span class="n">terminationDate</span> <span class="kt">AdjustableOrRelativeDate</span> <span class="p">(</span><span class="mi">0</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+   <span class="n">calculationPeriodDatesAdjustments</span> <span class="kt">BusinessDayAdjustments</span> <span class="p">(</span><span class="mi">0</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+   <span class="n">firstPeriodStartDate</span> <span class="kt">AdjustableDate</span> <span class="p">(</span><span class="mi">0</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+   <span class="n">firstRegularPeriodStartDate</span> <span class="n">date</span> <span class="p">(</span><span class="mi">0</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+   <span class="n">firstCompoundingPeriodEndDate</span> <span class="n">date</span> <span class="p">(</span><span class="mi">0</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+   <span class="n">lastRegularPeriodEndDate</span> <span class="n">date</span> <span class="p">(</span><span class="mi">0</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+   <span class="n">stubPeriodType</span> <span class="kt">StubPeriodTypeEnum</span> <span class="p">(</span><span class="mi">0</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+   <span class="n">calculationPeriodFrequency</span> <span class="kt">CalculationPeriodFrequency</span> <span class="p">(</span><span class="mi">0</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="underlier">
+<h4>Underlier<a class="headerlink" href="#underlier" title="Permalink to this headline">¶</a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">Underlier</span></code> type allows for any product to be used as the underlier for a higher-level product such as an option, forward, or an equity swap.</p>
+<div class="highlight-Haskell notranslate"><div class="highlight"><pre><span></span><span class="kr">type</span> <span class="kt">Underlier:</span>
+   <span class="n">underlyingProduct</span> <span class="kt">Product</span> <span class="p">(</span><span class="mi">1</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This nesting of the product component is another example of a composable product model. One use case is an interest rate swaption for which the high-level product uses the <code class="docutils literal notranslate"><span class="pre">OptionPayout</span></code> type and underlier is an Interest Rate Swap composed of two <code class="docutils literal notranslate"><span class="pre">InterestRatePayout</span></code> types. Similiarly, the product underlying an Equity Swap composed of an <code class="docutils literal notranslate"><span class="pre">InterestRatePayout</span></code> and an <code class="docutils literal notranslate"><span class="pre">EquityPayout</span></code> would be a non-contractual product: an equity security.</p>
+</div>
+<div class="section" id="identified-product">
+<h4>Identified Product<a class="headerlink" href="#identified-product" title="Permalink to this headline">¶</a></h4>
+<p>For identified products the CDM approach is to exclude any attribute that can be abstracted through reference data. Specifying such information as part of the contract information would lead to a risk or contradictory information with the reference data.</p>
+<div class="highlight-Haskell notranslate"><div class="highlight"><pre><span></span><span class="kr">type</span> <span class="kt">IdentifiedProduct</span>
+   <span class="n">productIdentifier</span> <span class="kt">ProductIdentifier</span> <span class="p">(</span><span class="mi">1</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>As a result, the bond, equity, and other securities are defined as extensions of the product identifier without any additional attributes.</p>
+</div>
+</div>
+<div class="section" id="product-qualification">
+<h3>Product Qualification<a class="headerlink" href="#product-qualification" title="Permalink to this headline">¶</a></h3>
+<p><strong>Product qualification is inferred from the economic terms of the product</strong> instead of explicitly naming the product type.  The CDM uses a set of Product Qualification functions to achieve this purpose. These functions can be identified as those annotated with <code class="docutils literal notranslate"><span class="pre">[qualification</span> <span class="pre">Product]</span></code>.</p>
+<p>A Product Qualification function applies a taxonomy-specific business logic to identify if the product attribute values, as represented by the product’s economic terms, match the specified criteria for the product named in that taxonomy. For example, if a certain set of attributes are populated and others are absent, then that specific product type is inferred. The Product Qualification function name in the CDM begins with the word <code class="docutils literal notranslate"><span class="pre">Qualify</span></code> followed by an underscore <code class="docutils literal notranslate"><span class="pre">_</span></code> and then the product type from the applicable taxonomy  (also separated by underscores).</p>
+<p>The CDM implements the ISDA Product Taxonomy v2.0 to qualify contractual products, foreign exchange, and repurchase agreements. Given the prevalence of usage of the ISDA Product Taxonomy v1.0, the equivalent name from that taxonomy is also systematically indicated in the CDM, using a <code class="docutils literal notranslate"><span class="pre">synonym</span></code> annotation displayed under the function output. An example is provided below for the qualification of a Zero-Coupon Fixed-Float Inflation Swap:</p>
+<div class="highlight-Haskell notranslate"><div class="highlight"><pre><span></span><span class="nf">func</span> <span class="kt">Qualify_InterestRate_InflationSwap_FixedFloat_ZeroCoupon:</span>
+  <span class="p">[</span><span class="n">qualification</span> <span class="kt">Product</span><span class="p">]</span>
+  <span class="n">inputs</span><span class="kt">:</span> <span class="n">economicTerms</span> <span class="kt">EconomicTerms</span> <span class="p">(</span><span class="mi">1</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+  <span class="n">output</span><span class="kt">:</span> <span class="n">is_product</span> <span class="n">boolean</span> <span class="p">(</span><span class="mi">1</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+       <span class="p">[</span><span class="n">synonym</span> <span class="kt">ISDA_Taxonomy_v1</span> <span class="n">value</span> <span class="s">&quot;InterestRate_IRSwap_Inflation&quot;</span><span class="p">]</span>
+  <span class="n">assign</span><span class="o">-</span><span class="n">output</span> <span class="n">is_product</span><span class="kt">:</span>
+    <span class="n">economicTerms</span> <span class="ow">-&gt;</span> <span class="n">payout</span> <span class="ow">-&gt;</span> <span class="n">interestRatePayout</span> <span class="ow">-&gt;</span> <span class="n">rateSpecification</span> <span class="ow">-&gt;</span> <span class="n">fixedRate</span> <span class="n">count</span> <span class="ow">=</span> <span class="mi">1</span>
+    <span class="n">and</span> <span class="n">economicTerms</span> <span class="ow">-&gt;</span> <span class="n">payout</span> <span class="ow">-&gt;</span> <span class="n">interestRatePayout</span> <span class="ow">-&gt;</span> <span class="n">rateSpecification</span> <span class="ow">-&gt;</span> <span class="n">inflationRate</span> <span class="n">count</span> <span class="ow">=</span> <span class="mi">1</span>
+    <span class="n">and</span> <span class="n">economicTerms</span> <span class="ow">-&gt;</span> <span class="n">payout</span> <span class="ow">-&gt;</span> <span class="n">interestRatePayout</span> <span class="ow">-&gt;</span> <span class="n">rateSpecification</span> <span class="ow">-&gt;</span> <span class="n">floatingRate</span> <span class="n">is</span> <span class="n">absent</span>
+    <span class="n">and</span> <span class="n">economicTerms</span> <span class="ow">-&gt;</span> <span class="n">payout</span> <span class="ow">-&gt;</span> <span class="n">interestRatePayout</span> <span class="ow">-&gt;</span> <span class="n">crossCurrencyTerms</span> <span class="ow">-&gt;</span> <span class="n">principalExchanges</span> <span class="n">is</span> <span class="n">absent</span>
+    <span class="n">and</span> <span class="n">economicTerms</span> <span class="ow">-&gt;</span> <span class="n">payout</span> <span class="ow">-&gt;</span> <span class="n">optionPayout</span> <span class="n">is</span> <span class="n">absent</span>
+    <span class="n">and</span> <span class="n">economicTerms</span> <span class="ow">-&gt;</span> <span class="n">payout</span> <span class="ow">-&gt;</span> <span class="n">interestRatePayout</span> <span class="ow">-&gt;</span> <span class="n">paymentDates</span> <span class="ow">-&gt;</span> <span class="n">paymentFrequency</span> <span class="ow">-&gt;</span> <span class="n">periodMultiplier</span> <span class="ow">=</span> <span class="mi">1</span>
+    <span class="n">and</span> <span class="n">economicTerms</span> <span class="ow">-&gt;</span> <span class="n">payout</span> <span class="ow">-&gt;</span> <span class="n">interestRatePayout</span> <span class="ow">-&gt;</span> <span class="n">paymentDates</span> <span class="ow">-&gt;</span> <span class="n">paymentFrequency</span> <span class="ow">-&gt;</span> <span class="n">period</span> <span class="ow">=</span> <span class="kt">PeriodExtendedEnum</span> <span class="ow">-&gt;</span> <span class="kt">T</span>
+</pre></div>
+</div>
+<p>If all the statements above are true, then the function evaluates to True, and the product is determined to be qualified as the product type referenced by the function name.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">In a typical CDM model implementation, the full set of Product Qualification functions would be invoked against each instance of the product in order to determine the inferred product type. Given the product model composability, a single product instance may be qualified as more than one type: for example in an Interest Rate Swaption, both the Option and the underlying Interest Rate Swap would be qualified.</p>
+</div>
+<p>The CDM supports Product Qualification functions for Credit Derivatives, Interest Rate Derivatives, Equity Derivatives, Foreign Exchange, and Repurchase Agreements. The full scope for Interest Rate Products has been represented down to the full level of detail in the taxonomy. This is shown in the example above, where the <code class="docutils literal notranslate"><span class="pre">ZeroCoupon</span></code> qualifying suffix is part of the function name. Credit Default products are qualified, but not down to the full level of detail. The ISDA Product Taxonomy v2.0 references the FpML <em>transaction type</em> field instead of just the product features, whose possible values are not publicly available and hence not positioned as a CDM enumeration.</p>
+<p>The output of the qualification function is used to populate the <code class="docutils literal notranslate"><span class="pre">productQualifier</span></code> attribute of the <code class="docutils literal notranslate"><span class="pre">ProductIdentification</span></code> object, which is created when a <code class="docutils literal notranslate"><span class="pre">ContractualProduct</span></code> object is created. The product identification includes both the product qualification generated by the CDM and any additional product identification information which may come from the originating document, such as FpML. In this case, taxonomy schemes may be associated to such product identification information, which are also propagated in the <code class="docutils literal notranslate"><span class="pre">ProductIdentification</span></code> object.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">productIdentification</span></code> data structure and an instance of a CDM object (<a class="reference external" href="https://en.wikipedia.org/wiki/Serialization">serialised</a> into JSON) are shown below:</p>
+<div class="highlight-Haskell notranslate"><div class="highlight"><pre><span></span><span class="kr">type</span> <span class="kt">ProductIdentification:</span>
+  <span class="n">productQualifier</span> <span class="n">productType</span> <span class="p">(</span><span class="mi">0</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+  <span class="n">primaryAssetdata</span> <span class="kt">AssetClassEnum</span> <span class="p">(</span><span class="mi">0</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+    <span class="p">[</span><span class="n">metadata</span> <span class="n">scheme</span><span class="p">]</span>
+  <span class="n">secondaryAssetdata</span> <span class="kt">AssetClassEnum</span> <span class="p">(</span><span class="mi">0</span><span class="o">..*</span><span class="p">)</span>
+    <span class="p">[</span><span class="n">metadata</span> <span class="n">scheme</span><span class="p">]</span>
+  <span class="n">productType</span> <span class="n">string</span> <span class="p">(</span><span class="mi">0</span><span class="o">..*</span><span class="p">)</span>
+    <span class="p">[</span><span class="n">metadata</span> <span class="n">scheme</span><span class="p">]</span>
+  <span class="n">productId</span> <span class="n">string</span> <span class="p">(</span><span class="mi">0</span><span class="o">..*</span><span class="p">)</span>
+    <span class="p">[</span><span class="n">metadata</span> <span class="n">scheme</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="s">&quot;productIdentification&quot;</span> <span class="o">:</span> <span class="o">{</span>
+  <span class="s">&quot;primaryAssetdata&quot;</span> <span class="o">:</span> <span class="o">{</span>
+    <span class="s">&quot;value&quot;</span> <span class="o">:</span> <span class="s">&quot;INTEREST_RATE&quot;</span><span class="o">,</span>
+    <span class="s">&quot;meta&quot;</span> <span class="o">:</span> <span class="o">{</span>
+      <span class="s">&quot;scheme&quot;</span> <span class="o">:</span> <span class="s">&quot;http://www.fpml.org/coding-scheme/asset-class-simple&quot;</span>
+    <span class="o">}</span>
+  <span class="o">},</span>
+  <span class="s">&quot;productId&quot;</span> <span class="o">:</span> <span class="o">[</span> <span class="o">{</span>
+    <span class="s">&quot;value&quot;</span> <span class="o">:</span> <span class="s">&quot;InterestRate:IRSwap:FixedFloat&quot;</span><span class="o">,</span>
+    <span class="s">&quot;meta&quot;</span> <span class="o">:</span> <span class="o">{</span>
+      <span class="s">&quot;scheme&quot;</span> <span class="o">:</span> <span class="s">&quot;http://www.fpml.org/coding-scheme/product-taxonomy&quot;</span>
+    <span class="o">}</span>
+  <span class="o">}</span> <span class="o">],</span>
+  <span class="s">&quot;productQualifier&quot;</span> <span class="o">:</span> <span class="s">&quot;InterestRate_IRSwap_FixedFloat_PlainVanilla&quot;</span><span class="o">,</span>
+  <span class="s">&quot;productType&quot;</span> <span class="o">:</span> <span class="o">[</span> <span class="o">{</span>
+    <span class="s">&quot;value&quot;</span> <span class="o">:</span> <span class="s">&quot;InterestRate:IRSwap:FixedFloat&quot;</span><span class="o">,</span>
+    <span class="s">&quot;meta&quot;</span> <span class="o">:</span> <span class="o">{</span>
+      <span class="s">&quot;scheme&quot;</span> <span class="o">:</span> <span class="s">&quot;http://www.fpml.org/coding-scheme/product-taxonomy&quot;</span>
+    <span class="o">}</span>
+  <span class="o">}</span> <span class="o">]</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><code class="docutils literal notranslate"><span class="pre">productType</span></code> is a <em>meta-type</em> that indicates that its value is meant to be populated via a function. This mechanism is explained in the <a class="reference external" href="https://docs.rosetta-technology.io/dsl/documentation.html#qualified-type">Qualified Type Section</a> of the Rosetta DSL documentation. For a further understanding of the underlying qualification logic in the Product Qualification, see the explanation of the <em>object qualification</em> feature of the Rosetta DSL, as described in the <a class="reference external" href="https://docs.rosetta-technology.io/dsl/documentation.html#function-definition">Function Definition Section</a>.</p>
+</div>
+</div>
+</div>
+<div class="section" id="event-model">
+<h2>Event Model<a class="headerlink" href="#event-model" title="Permalink to this headline">¶</a></h2>
+<p>The CDM event model is based upon the same composition principle as the product model:</p>
+<ul class="simple">
+<li><strong>Business events are specified by composition</strong> of <em>primitive events</em>, which use a large set of the FpML event building blocks.</li>
+<li><strong>Event qualification is inferred</strong> from those primitive events and, in some relevant cases, from an <strong>intent</strong> qualifier.</li>
+</ul>
+<div class="section" id="primitive-event">
+<h3>Primitive Event<a class="headerlink" href="#primitive-event" title="Permalink to this headline">¶</a></h3>
+<p>CDM primitive events are the building block components used to specify business events. The current list of primitive events can be seen in the below snippet, as well as a few examples of such primitive events:</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">PrimitiveEvent</span>
+<span class="o">{</span>
+ <span class="n">inception</span> <span class="nf">Inception</span> <span class="o">(</span><span class="mf">0.</span><span class="o">.*);</span>
+ <span class="n">quantityChange</span> <span class="nf">QuantityChangePrimitive</span> <span class="o">(</span><span class="mf">0.</span><span class="o">.*);</span>
+ <span class="n">allocation</span> <span class="nf">AllocationPrimitive</span> <span class="o">(</span><span class="mf">0.</span><span class="o">.*);</span>
+ <span class="n">termsChange</span> <span class="nf">TermsChangePrimitive</span> <span class="o">(</span><span class="mf">0..1</span><span class="o">);</span>
+ <span class="n">exercise</span> <span class="nf">ExercisePrimitive</span> <span class="o">(</span><span class="mf">0..1</span><span class="o">);</span>
+ <span class="n">observation</span> <span class="nf">ObservationPrimitive</span> <span class="o">(</span><span class="mf">0.</span><span class="o">.*);</span>
+ <span class="n">reset</span> <span class="nf">ResetPrimitive</span> <span class="o">(</span><span class="mf">0.</span><span class="o">.*);</span>
+ <span class="n">transfer</span> <span class="nf">Transfer</span> <span class="o">(</span><span class="mf">0.</span><span class="o">.*);</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">Inception</span>
+<span class="o">{</span>
+ <span class="n">before</span> <span class="nf">ContractState</span> <span class="o">(</span><span class="mf">0..0</span><span class="o">);</span>
+ <span class="n">after</span> <span class="nf">PostInceptionState</span> <span class="o">(</span><span class="mf">1..1</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">ObservationPrimitive</span>
+<span class="o">{</span>
+ <span class="n">source</span> <span class="nf">ObservationSource</span> <span class="o">(</span><span class="mf">1..1</span><span class="o">);</span>
+ <span class="n">observation</span> <span class="nf">number</span> <span class="o">(</span><span class="mf">1..1</span><span class="o">)</span>
+ <span class="n">date</span> <span class="nf">date</span> <span class="o">(</span><span class="mf">1..1</span><span class="o">);</span>
+ <span class="n">time</span> <span class="nf">TimeZone</span> <span class="o">(</span><span class="mf">0..1</span><span class="o">);</span>
+ <span class="n">side</span> <span class="nf">QuotationSideEnum</span> <span class="o">(</span><span class="mf">0..1</span><span class="o">);</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>Primitive events can be thought of as mathematical operators on a state of a transaction lifecycle. Apart from the <code class="docutils literal notranslate"><span class="pre">ObservationPrimitive</span></code>, they each have a <code class="docutils literal notranslate"><span class="pre">before</span></code> and <code class="docutils literal notranslate"><span class="pre">after</span></code> attributes that define the state transition components. From an observation, which is independent from any transaction and is the equivalent of the <strong>market data oracle</strong> in a distributed ledger context, a <code class="docutils literal notranslate"><span class="pre">ResetPrimitive</span></code> can be built which does affect a particular transaction. A separate <code class="docutils literal notranslate"><span class="pre">Transfer</span></code> can be built in case that reset generates a cashflow.</p>
+<p><strong>Note 1</strong>: In the <code class="docutils literal notranslate"><span class="pre">Inception</span></code> primitive, which corresponds to the execution of a contract, the <code class="docutils literal notranslate"><span class="pre">before</span></code> state is a <code class="docutils literal notranslate"><span class="pre">ContractState</span></code> with 0 cardinality, as the CDM currently does not tackle any the pre-execution lifecycle.</p>
+<p><strong>Note 2</strong>: Not all primitive events are currently composed of a <code class="docutils literal notranslate"><span class="pre">before</span></code> and <code class="docutils literal notranslate"><span class="pre">after</span></code> state. This will need to be reviewed and potentially harmonised to establish a clean state-transition model in the CDM.</p>
+<p>As mathematical operators, primitive events reflect a many-to-one mapping with actual business events. An example composition of the primitive building blocks to represent a business event is the <strong>partial novation</strong> of a contract:</p>
+<ul class="simple">
+<li>an <code class="docutils literal notranslate"><span class="pre">Inception</span></code> primitive creates the contract with the novation party. The <code class="docutils literal notranslate"><span class="pre">tradeDate</span></code> on the novated portion of the contract should reflect the date of the novation event.</li>
+<li>a <code class="docutils literal notranslate"><span class="pre">QuantityChange</span></code> primitive applies to the original contract where the quantity after change is different from 0 (0 would represent the case of a full novation).</li>
+</ul>
+</div>
+<div class="section" id="baseline-event-features">
+<h3>Baseline Event Features<a class="headerlink" href="#baseline-event-features" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">Event</span></code> class that represents business events carries the following information:</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">Event</span> <span class="n">key</span>
+<span class="o">{</span>
+ <span class="n">messageInformation</span> <span class="nf">MessageInformation</span> <span class="o">(</span><span class="mf">0..1</span><span class="o">);</span>
+ <span class="n">timestamp</span> <span class="nf">EventTimestamp</span> <span class="o">(</span><span class="mf">1.</span><span class="o">.*);</span>
+ <span class="n">eventIdentifier</span> <span class="nf">Identifier</span> <span class="o">(</span><span class="mf">1.</span><span class="o">.*);</span>
+ <span class="n">eventQualifier</span> <span class="nf">eventType</span> <span class="o">(</span><span class="mf">0..1</span><span class="o">);</span>
+ <span class="n">eventDate</span> <span class="nf">date</span> <span class="o">(</span><span class="mf">1..1</span><span class="o">);</span>
+ <span class="n">effectiveDate</span> <span class="nf">date</span> <span class="o">(</span><span class="mf">0..1</span><span class="o">);</span>
+ <span class="n">action</span> <span class="nf">ActionEnum</span> <span class="o">(</span><span class="mf">1..1</span><span class="o">);</span>
+ <span class="n">intent</span> <span class="nf">IntentEnum</span> <span class="o">(</span><span class="mf">0..1</span><span class="o">);</span>
+ <span class="n">party</span> <span class="nf">Party</span> <span class="o">(</span><span class="mf">0.</span><span class="o">.*);</span>
+ <span class="n">account</span> <span class="nf">Account</span> <span class="o">(</span><span class="mf">0.</span><span class="o">.*);</span>
+ <span class="n">lineage</span> <span class="nf">Lineage</span> <span class="o">(</span><span class="mf">0..1</span><span class="o">);</span>
+ <span class="n">primitive</span> <span class="nf">PrimitiveEvent</span> <span class="o">(</span><span class="mf">1..1</span><span class="o">);</span>
+ <span class="n">functionCall</span> <span class="nf">string</span> <span class="o">(</span><span class="mf">0..1</span><span class="o">);</span>
+ <span class="n">eventEffect</span> <span class="nf">EventEffect</span> <span class="o">(</span><span class="mf">0..1</span><span class="o">);</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">primitive</span></code> attribute describing the mathematical set of operators for the business event is of cardinality 1, whereby the actual composition into possibly multiple primitive events happens in the <code class="docutils literal notranslate"><span class="pre">PrimitiveEvent</span></code> class.</p>
+<div class="section" id="message-information">
+<h4>Message Information<a class="headerlink" href="#message-information" title="Permalink to this headline">¶</a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">messageInformation</span></code> attribute corresponds to some of the components of the FpML <em>MessageHeader.model</em>.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">MessageInformation</span>
+<span class="o">{</span>
+ <span class="n">messageId</span> <span class="nf">string</span> <span class="o">(</span><span class="mf">1..1</span><span class="o">)</span> <span class="n">scheme</span><span class="o">;</span>
+ <span class="n">sentBy</span> <span class="nf">string</span> <span class="o">(</span><span class="mf">0..1</span><span class="o">)</span> <span class="n">scheme</span><span class="o">;</span>
+ <span class="n">sentTo</span> <span class="nf">string</span> <span class="o">(</span><span class="mf">0.</span><span class="o">.*)</span> <span class="n">scheme</span><span class="o">;</span>
+ <span class="n">copyTo</span> <span class="nf">string</span> <span class="o">(</span><span class="mf">0.</span><span class="o">.*)</span> <span class="n">scheme</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">sentBy</span></code>, <code class="docutils literal notranslate"><span class="pre">sentTo</span></code> and <code class="docutils literal notranslate"><span class="pre">copyTo</span></code> information is optional, as possibly not applicable in a distributed ledger context.</p>
+</div>
+<div class="section" id="timestamp">
+<h4>Timestamp<a class="headerlink" href="#timestamp" title="Permalink to this headline">¶</a></h4>
+<p>The CDM adopts a generic approach to represent timestamp information, consisting of a <code class="docutils literal notranslate"><span class="pre">dateTime</span></code> and a <code class="docutils literal notranslate"><span class="pre">qualification</span></code> attributes, with the latter specified through an enumeration value.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">EventTimestamp</span>
+<span class="o">{</span>
+ <span class="n">dateTime</span> <span class="nf">zonedDateTime</span> <span class="o">(</span><span class="mf">1..1</span><span class="o">)</span> <span class="o">;</span>
+ <span class="n">qualification</span> <span class="nf">EventTimeStampQualificationEnum</span> <span class="o">(</span><span class="mf">1..1</span><span class="o">);</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>The experience of mapping the CME clearing and the DTCC trade matching and cashflow confirmation transactions to the CDM did reveal a diverse set of timestamps. The expected benefits of the CDM generic approach are twofold:</p>
+<ul class="simple">
+<li>It allows for flexibility in a context where it would be challenging to mandate which points in the process should have associated timestamps.</li>
+<li>Gathering all of those in one place in the model allows for evaluation and rationalisation down the road.</li>
+</ul>
+<p>The CDM Group has expressed concerns with combining timestamps which are deemed ‘technical’ with ‘business’ ones. A further evaluation of this timestamp modelling approach will be required.</p>
+<p>Below is JSON representation instance of this approach.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="s">&quot;timestamp&quot;</span><span class="o">:</span> <span class="o">[</span>
+ <span class="o">{</span>
+    <span class="s">&quot;dateTime&quot;</span><span class="o">:</span> <span class="s">&quot;2007-10-31T18:08:40.335-05:00&quot;</span><span class="o">,</span>
+    <span class="s">&quot;qualification&quot;</span><span class="o">:</span> <span class="s">&quot;EVENT_SUBMITTED&quot;</span>
+ <span class="o">},</span>
+ <span class="o">{</span>
+    <span class="s">&quot;dateTime&quot;</span><span class="o">:</span> <span class="s">&quot;2007-10-31T18:08:40.335-05:00&quot;</span><span class="o">,</span>
+    <span class="s">&quot;qualification&quot;</span><span class="o">:</span> <span class="s">&quot;EVENT_CREATED&quot;</span>
+ <span class="o">}</span>
+<span class="o">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="event-identification">
+<h4>Event Identification<a class="headerlink" href="#event-identification" title="Permalink to this headline">¶</a></h4>
+<p>The event identification information comprises the <code class="docutils literal notranslate"><span class="pre">identifier</span></code> and an optional <code class="docutils literal notranslate"><span class="pre">version</span></code> and <code class="docutils literal notranslate"><span class="pre">issuer</span></code>. FpML also uses an event identifier construct: the <em>CorrelationId</em>, distinct from the identifier associated with the trade (which itself comes in different variations: <em>PartyTradeIdentifier</em>, with the <em>TradeId</em> and the <em>VersionedTradeId</em> as sub-components). As a departure from FpML, the CDM approach consists in using a common identifier component across products and events.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">Identifier</span> <span class="n">key</span>
+<span class="o">{</span>
+ <span class="n">issuerReference</span> <span class="nf">Party</span> <span class="o">(</span><span class="mf">0..1</span><span class="o">)</span> <span class="n">reference</span><span class="o">;</span>
+ <span class="n">issuer</span> <span class="nf">string</span> <span class="o">(</span><span class="mf">1..1</span><span class="o">)</span> <span class="n">scheme</span><span class="o">;</span>
+ <span class="n">assignedIdentifier</span> <span class="nf">AssignedIdentifier</span> <span class="o">(</span><span class="mf">1.</span><span class="o">.*);</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="intent-qualification">
+<h4>Intent Qualification<a class="headerlink" href="#intent-qualification" title="Permalink to this headline">¶</a></h4>
+<p>Intent qualification is an enumeration value such as <code class="docutils literal notranslate"><span class="pre">allocation</span></code>, <code class="docutils literal notranslate"><span class="pre">earlyTermination</span></code>, <code class="docutils literal notranslate"><span class="pre">partialTermination</span></code> etc. It is used as part of the event qualification logic, to disambiguate events which features are shared across lifecycle events. As an example, a reduction in a trade quantity/notional could apply to a correction event or a partial termination (although the timing of such event could also be used to qualify the proper event).</p>
+<p>Further evaluation of the appropriateness of this intent qualification is required.</p>
+</div>
+<div class="section" id="lineage-information">
+<h4>Lineage Information<a class="headerlink" href="#lineage-information" title="Permalink to this headline">¶</a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">Lineage</span></code> is a class that is used to reference an unbounded set of contracts, events and/or payout components, as shown by the below code snippet:</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">Lineage</span>
+<span class="o">{</span>
+ <span class="n">contractReference</span> <span class="nf">Contract</span> <span class="o">(</span><span class="mf">0.</span><span class="o">.*)</span> <span class="n">reference</span><span class="o">;</span>
+ <span class="n">eventReference</span> <span class="nf">Event</span> <span class="o">(</span><span class="mf">0.</span><span class="o">.*)</span> <span class="n">reference</span><span class="o">;</span>
+ <span class="n">transferReference</span> <span class="nf">Transfer</span> <span class="o">(</span><span class="mf">0.</span><span class="o">.*)</span> <span class="n">reference</span><span class="o">;</span>
+ <span class="n">creditDefaultPayoutReference</span> <span class="nf">CreditDefaultPayout</span> <span class="o">(</span><span class="mf">0.</span><span class="o">.*)</span> <span class="n">reference</span><span class="o">;</span>
+ <span class="n">interestRatePayoutReference</span> <span class="nf">InterestRatePayout</span> <span class="o">(</span><span class="mf">0.</span><span class="o">.*)</span> <span class="n">reference</span><span class="o">;</span>
+ <span class="n">optionPayoutReference</span> <span class="nf">OptionPayout</span> <span class="o">(</span><span class="mf">0.</span><span class="o">.*)</span> <span class="n">reference</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="function-call">
+<h4>Function Call<a class="headerlink" href="#function-call" title="Permalink to this headline">¶</a></h4>
+<p>An example of a function call is the interpolation function that would be associated with a <strong>derived observation</strong> event, which assembles two observed values (say, a 3 months and a 6 months rate observation) to provide a derived one (say, a 5 months observation).</p>
+<p>As part of the current CDM version this function call as been specified as a mere string element. It will be appropriately specified once such implementation is developed, some of which consisting in the machine executable implementation of the ISDA Definitions (see the <em>Calculation</em> section).</p>
+</div>
+<div class="section" id="event-effect">
+<h4>Event Effect<a class="headerlink" href="#event-effect" title="Permalink to this headline">¶</a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">eventEffect</span></code> attribute corresponds to the set of operational and positional effects associated with a lifecycle event. This information is generated by the CDM as a set of pointers to the relevant objects that are affected by the event. The candidate objects are classes that are referenceable with an associated <code class="docutils literal notranslate"><span class="pre">key</span></code>.</p>
+<p>Events such as observations do not have any event effect, hence the optional cardinality.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">EventEffect</span>
+<span class="o">{</span>
+ <span class="n">effectedContract</span> <span class="nf">Contract</span> <span class="o">(</span><span class="mf">0.</span><span class="o">.*)</span> <span class="n">reference</span><span class="o">;</span>
+ <span class="n">contract</span> <span class="nf">Contract</span> <span class="o">(</span><span class="mf">0.</span><span class="o">.*)</span> <span class="n">reference</span><span class="o">;</span>
+ <span class="n">effectedExecution</span> <span class="nf">Execution</span> <span class="o">(</span><span class="mf">0.</span><span class="o">.*)</span> <span class="n">reference</span><span class="o">;</span>
+ <span class="n">execution</span> <span class="nf">Execution</span> <span class="o">(</span><span class="mf">0.</span><span class="o">.*)</span> <span class="n">reference</span><span class="o">;</span>
+ <span class="n">productIdentifier</span> <span class="nf">ProductIdentifier</span> <span class="o">(</span><span class="mf">0.</span><span class="o">.*)</span> <span class="n">reference</span><span class="o">;</span>
+ <span class="n">transfer</span> <span class="nf">Transfer</span> <span class="o">(</span><span class="mf">0.</span><span class="o">.*)</span> <span class="n">reference</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>In the below JSON snippet of a quantity change event on a contract, we can see that the <code class="docutils literal notranslate"><span class="pre">eventEffect</span></code> contains a  number of hash value references:</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="s">&quot;action&quot;</span><span class="o">:</span> <span class="s">&quot;NEW&quot;</span><span class="o">,</span>
+<span class="s">&quot;effectiveDate&quot;</span><span class="o">:</span> <span class="s">&quot;2018-03-15&quot;</span><span class="o">,</span>
+<span class="s">&quot;eventDate&quot;</span><span class="o">:</span> <span class="s">&quot;2018-03-14&quot;</span><span class="o">,</span>
+<span class="s">&quot;eventEffect&quot;</span><span class="o">:</span> <span class="o">{</span>
+  <span class="s">&quot;contract&quot;</span><span class="o">:</span> <span class="o">[</span>
+    <span class="o">{</span>
+      <span class="s">&quot;globalReference&quot;</span><span class="o">:</span> <span class="s">&quot;600e4873&quot;</span>
+    <span class="o">}</span>
+  <span class="o">],</span>
+  <span class="s">&quot;effectedContract&quot;</span><span class="o">:</span> <span class="o">[</span>
+    <span class="o">{</span>
+      <span class="s">&quot;globalReference&quot;</span><span class="o">:</span> <span class="s">&quot;d36e1d72&quot;</span>
+    <span class="o">}</span>
+  <span class="o">],</span>
+  <span class="o">(...)</span>
+  <span class="s">&quot;transfer&quot;</span><span class="o">:</span> <span class="o">[</span>
+    <span class="o">{</span>
+      <span class="s">&quot;globalReference&quot;</span><span class="o">:</span> <span class="s">&quot;ee4f7520&quot;</span>
+    <span class="o">}</span>
+  <span class="o">]</span>
+<span class="o">},</span>
+<span class="o">(...)</span>
+<span class="s">&quot;primitive&quot;</span><span class="o">:</span> <span class="o">{</span>
+  <span class="s">&quot;quantityChange&quot;</span><span class="o">:</span> <span class="o">[</span>
+    <span class="o">{</span>
+      <span class="s">&quot;after&quot;</span><span class="o">:</span> <span class="o">{</span>
+        <span class="s">&quot;contract&quot;</span><span class="o">:</span> <span class="o">{</span>
+          <span class="o">(...)</span>
+          <span class="s">&quot;meta&quot;</span><span class="o">:</span> <span class="o">{</span>
+            <span class="s">&quot;globalKey&quot;</span><span class="o">:</span> <span class="s">&quot;600e4873&quot;</span>
+          <span class="o">}</span>
+          <span class="s">&quot;tradeDate&quot;</span><span class="o">:</span> <span class="o">{</span>
+            <span class="s">&quot;date&quot;</span><span class="o">:</span> <span class="s">&quot;2002-12-04&quot;</span><span class="o">,</span>
+            <span class="s">&quot;meta&quot;</span><span class="o">:</span> <span class="o">{</span>
+              <span class="s">&quot;globalKey&quot;</span><span class="o">:</span> <span class="s">&quot;793cd7c&quot;</span>
+            <span class="o">}</span>
+          <span class="o">}</span>
+        <span class="o">}</span>
+      <span class="o">},</span>
+      <span class="s">&quot;before&quot;</span><span class="o">:</span> <span class="o">{</span>
+        <span class="s">&quot;contract&quot;</span><span class="o">:</span> <span class="o">{</span>
+          <span class="o">(...)</span>
+          <span class="s">&quot;meta&quot;</span><span class="o">:</span> <span class="o">{</span>
+            <span class="s">&quot;globalKey&quot;</span><span class="o">:</span> <span class="s">&quot;d36e1d72&quot;</span>
+          <span class="o">},</span>
+          <span class="s">&quot;tradeDate&quot;</span><span class="o">:</span> <span class="o">{</span>
+            <span class="s">&quot;date&quot;</span><span class="o">:</span> <span class="s">&quot;2002-12-04&quot;</span><span class="o">,</span>
+            <span class="s">&quot;meta&quot;</span><span class="o">:</span> <span class="o">{</span>
+              <span class="s">&quot;globalKey&quot;</span><span class="o">:</span> <span class="s">&quot;793cd7c&quot;</span>
+            <span class="o">}</span>
+          <span class="o">}</span>
+        <span class="o">}</span>
+      <span class="o">}</span>
+    <span class="o">}</span>
+  <span class="o">],</span>
+  <span class="s">&quot;transfer&quot;</span><span class="o">:</span> <span class="o">[</span>
+    <span class="o">{</span>
+      <span class="s">&quot;cashTransfer&quot;</span><span class="o">:</span> <span class="o">[</span>
+        <span class="o">{</span>
+          <span class="s">&quot;amount&quot;</span><span class="o">:</span> <span class="o">{</span>
+            <span class="s">&quot;amount&quot;</span><span class="o">:</span> <span class="mf">45860.23</span><span class="o">,</span>
+            <span class="s">&quot;currency&quot;</span><span class="o">:</span> <span class="o">{</span>
+              <span class="s">&quot;value&quot;</span><span class="o">:</span> <span class="s">&quot;JPY&quot;</span>
+            <span class="o">},</span>
+            <span class="s">&quot;meta&quot;</span><span class="o">:</span> <span class="o">{</span>
+              <span class="s">&quot;globalKey&quot;</span><span class="o">:</span> <span class="s">&quot;66c5234f&quot;</span>
+            <span class="o">}</span>
+          <span class="o">},</span>
+          <span class="o">(...)</span>
+        <span class="o">}</span>
+      <span class="o">],</span>
+      <span class="s">&quot;meta&quot;</span><span class="o">:</span> <span class="o">{</span>
+        <span class="s">&quot;globalKey&quot;</span><span class="o">:</span> <span class="s">&quot;ee4f7520&quot;</span>
+      <span class="o">},</span>
+      <span class="s">&quot;settlementDate&quot;</span><span class="o">:</span> <span class="o">{</span>
+        <span class="s">&quot;adjustedDate&quot;</span><span class="o">:</span> <span class="o">{</span>
+          <span class="s">&quot;value&quot;</span><span class="o">:</span> <span class="s">&quot;2018-03-17&quot;</span>
+        <span class="o">}</span>
+      <span class="o">}</span>
+    <span class="o">}</span>
+  <span class="o">]</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>For the <code class="docutils literal notranslate"><span class="pre">effectedContract</span></code> effect: <code class="docutils literal notranslate"><span class="pre">d36e1d72</span></code> points to the original contract in the <code class="docutils literal notranslate"><span class="pre">before</span></code> state of the <code class="docutils literal notranslate"><span class="pre">quantityChange</span></code> primitive event.</li>
+<li>For the <code class="docutils literal notranslate"><span class="pre">contract</span></code> effect: <code class="docutils literal notranslate"><span class="pre">600e4873</span></code> points to the new contract in the <code class="docutils literal notranslate"><span class="pre">after</span></code> state of the <code class="docutils literal notranslate"><span class="pre">quantityChange</span></code> primitive event. Note how the new contract retains the initial <code class="docutils literal notranslate"><span class="pre">tradeDate</span></code> attribute of the original contract even after a quantity change.</li>
+<li>For the <code class="docutils literal notranslate"><span class="pre">transfer</span></code> effect: <code class="docutils literal notranslate"><span class="pre">ee4f7520</span></code> points to the <code class="docutils literal notranslate"><span class="pre">transfer</span></code> primitive event.</li>
+</ul>
+</div>
+<div class="section" id="post-execution-contract">
+<h4>Post-Execution: Contract<a class="headerlink" href="#post-execution-contract" title="Permalink to this headline">¶</a></h4>
+<p>For a contractual product, once a transaction has been agreed between the parties, a contract gets executed between the contractual legal entities for that transaction. In addition to the product economics captured by the <code class="docutils literal notranslate"><span class="pre">contractualProduct</span></code> attribute, a contract has a set of attributes which are only qualified at the execution and post-execution stage: trade date, calculation agent, documentation, governing law, etc.</p>
+<p>The current CDM scope is limited to the post-execution part of the transaction lifecycle.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="n">type</span> <span class="n">Contract</span><span class="o">:</span>
+  <span class="o">[</span><span class="n">metadata</span> <span class="n">key</span><span class="o">]</span>
+  <span class="o">[</span><span class="n">rootType</span><span class="o">]</span>
+  <span class="n">contractIdentifier</span> <span class="nf">Identifier</span> <span class="o">(</span><span class="mf">1.</span><span class="o">.*)</span>
+  <span class="n">tradeDate</span> <span class="nf">TradeDate</span> <span class="o">(</span><span class="mf">1..1</span><span class="o">)</span>
+  <span class="n">clearedDate</span> <span class="nf">date</span> <span class="o">(</span><span class="mf">0..1</span><span class="o">)</span>
+  <span class="n">tradableProduct</span> <span class="nf">TradableProduct</span> <span class="o">(</span><span class="mf">1..1</span><span class="o">)</span>
+  <span class="n">collateral</span> <span class="nf">Collateral</span> <span class="o">(</span><span class="mf">0..1</span><span class="o">)</span>
+  <span class="n">documentation</span> <span class="nf">RelatedAgreement</span> <span class="o">(</span><span class="mf">0..1</span><span class="o">)</span>
+  <span class="n">governingLaw</span> <span class="nf">GoverningLawEnum</span> <span class="o">(</span><span class="mf">0..1</span><span class="o">)</span>
+     <span class="o">[</span><span class="n">metadata</span> <span class="n">scheme</span><span class="o">]</span>
+  <span class="n">party</span> <span class="nf">Party</span> <span class="o">(</span><span class="mf">0.</span><span class="o">.*)</span>
+  <span class="n">account</span> <span class="nf">Account</span> <span class="o">(</span><span class="mf">0.</span><span class="o">.*)</span>
+  <span class="n">partyRole</span> <span class="nf">PartyRole</span> <span class="o">(</span><span class="mf">0.</span><span class="o">.*)</span>
+  <span class="n">calculationAgent</span> <span class="nf">CalculationAgent</span> <span class="o">(</span><span class="mf">0..1</span><span class="o">)</span>
+  <span class="n">partyContractInformation</span> <span class="nf">PartyContractInformation</span> <span class="o">(</span><span class="mf">0.</span><span class="o">.*)</span>
+  <span class="n">closedState</span> <span class="nf">ClosedState</span> <span class="o">(</span><span class="mf">0..1</span><span class="o">)</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">Contract</span></code> class incorporates all the elements that are part of the FpML <em>trade</em> confirmation view, with the exception of: <em>tradeSummary</em>, <em>originatingPackage</em>, <em>allocations</em> and <em>approvals</em>, whereas the <code class="docutils literal notranslate"><span class="pre">ContractualProduct</span></code> class corresponds to the pre-trade view of the FpML <em>trade</em>.</p>
+<p><strong>Note</strong>: The FpML <em>trade</em> term has not been used as part of the CDM because deemed ambiguous in this respect. Its use as part of the FpML standard is due to an exclusive focus on post-execution activity in the initial stages of its development. Later adjustments in this respect would have been made difficult as a result of backward compatibility considerations.</p>
+</div>
+<div class="section" id="other-misc-information">
+<h4>Other Misc. Information<a class="headerlink" href="#other-misc-information" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><strong>Date information</strong> is provided through the <code class="docutils literal notranslate"><span class="pre">eventDate</span></code> and <code class="docutils literal notranslate"><span class="pre">effectiveDate</span></code> attributes, the latter being optional as not applicable to certain events (e.g. observations).</li>
+<li><strong>Action qualification</strong> specifies whether the event is a new one or a correction or cancellation of a prior one.</li>
+<li><strong>Party information</strong> is optional because not applicable to certain events (e.g. most of the observation events).</li>
+<li><strong>Event qualifier</strong> is derived from the event features, as per the <em>Event Qualification</em> section.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="event-qualification">
+<h3>Event Qualification<a class="headerlink" href="#event-qualification" title="Permalink to this headline">¶</a></h3>
+<p>Similar to the product modelling approach, the CDM lifecycle events are qualified as a function of the combination of their primitive event features and, when specified, the <code class="docutils literal notranslate"><span class="pre">intent</span></code> attribute. The event qualification uses the <code class="docutils literal notranslate"><span class="pre">isEvent</span></code> syntax in Rosetta, which is specified as part of the <em>Object Qualification</em> in the <em>CDM Modelling Artefacts</em> section of the documentation.</p>
+<p>The CDM makes use of the ISDA taxonomy V2.0 leaf level to qualify the event.  The synonymity with the ISDA taxonomy V1.0 has been systematically indicated as part of the model upon request from CDM group participants, who pointed out that a number of them use it internally. 22 lifecycle events have currently been qualified as part of the CDM.</p>
+<p>One distinction with the product approach is that the <code class="docutils literal notranslate"><span class="pre">intent</span></code> qualification is also deemed necessary to complement the primitive event information in certain cases. To this effect, the Rosetta event qualification syntax allows to specify that the intent must have a specified value <em>when present</em>, as illustrated by the below snippet.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="n">isEvent</span> <span class="n">Termination</span>
+ <span class="n">Event</span> <span class="o">-&gt;</span> <span class="n">intent</span> <span class="n">when</span> <span class="n">present</span> <span class="o">=</span> <span class="n">IntentEnum</span><span class="o">.</span><span class="na">Termination</span>
+ <span class="n">and</span> <span class="n">Event</span> <span class="o">-&gt;</span> <span class="n">primitive</span> <span class="o">-&gt;</span> <span class="n">quantityChange</span> <span class="n">single</span> <span class="n">exists</span>
+ <span class="n">and</span> <span class="n">quantityAfterQuantityChange</span> <span class="o">=</span> <span class="mf">0.0</span>
+ <span class="n">and</span> <span class="n">Event</span> <span class="o">-&gt;</span> <span class="n">primitive</span> <span class="o">-&gt;</span> <span class="n">quantityChange</span> <span class="o">-&gt;</span> <span class="n">after</span> <span class="o">-&gt;</span> <span class="n">contract</span> <span class="o">-&gt;</span> <span class="n">closedState</span> <span class="o">-&gt;</span> <span class="n">state</span> <span class="o">=</span> <span class="n">ClosedStateEnum</span><span class="o">.</span><span class="na">Terminated</span>
+ <span class="n">and</span> <span class="n">Event</span> <span class="o">-&gt;</span> <span class="n">primitive</span> <span class="o">-&gt;</span> <span class="n">quantityChange</span> <span class="o">-&gt;</span> <span class="n">after</span> <span class="o">-&gt;</span> <span class="n">clearingStatus</span> <span class="n">is</span> <span class="n">absent</span>
+</pre></div>
+</div>
+<p>The event qualification is positioned as a the <code class="docutils literal notranslate"><span class="pre">eventQualifier</span></code> attribute of the <code class="docutils literal notranslate"><span class="pre">Event</span></code> class. Like the product qualifier, the event qualification is stamped onto the generated CDM objects and their JSON serialized representation, as illustrated by the below JSON lifecycle event snippet:</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="s">&quot;eventDate&quot;</span><span class="o">:</span> <span class="s">&quot;2018-03-20&quot;</span><span class="o">,</span>
+<span class="s">&quot;eventEffect&quot;</span><span class="o">:</span> <span class="o">{</span>
+ <span class="s">&quot;referenceEvent&quot;</span><span class="o">:</span> <span class="s">&quot;d4afb0aa&quot;</span>
+<span class="o">},</span>
+<span class="s">&quot;eventIdentifier&quot;</span><span class="o">:</span> <span class="o">{</span>
+ <span class="s">&quot;identifierValue&quot;</span><span class="o">:</span> <span class="o">{</span>
+   <span class="s">&quot;identifier&quot;</span><span class="o">:</span> <span class="s">&quot;789325456&quot;</span>
+ <span class="o">}</span>
+<span class="o">},</span>
+<span class="s">&quot;eventQualifier&quot;</span><span class="o">:</span> <span class="s">&quot;NewTradeEvent&quot;</span><span class="o">,</span>
+<span class="s">&quot;messageInformation&quot;</span><span class="o">:</span> <span class="o">{</span>
+ <span class="s">&quot;messageId&quot;</span><span class="o">:</span> <span class="s">&quot;1486297&quot;</span><span class="o">,</span>
+ <span class="s">&quot;messageIdScheme&quot;</span><span class="o">:</span> <span class="s">&quot;http://www.party1.com/message-id&quot;</span><span class="o">,</span>
+ <span class="s">&quot;sentBy&quot;</span><span class="o">:</span> <span class="s">&quot;894500DM8LVOSCMP9T34&quot;</span><span class="o">,</span>
+ <span class="s">&quot;sentTo&quot;</span><span class="o">:</span> <span class="s">&quot;49300JZDC6K840D7F79&quot;</span>
+<span class="o">},</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="legal-agreement">
+<h2>Legal Agreement<a class="headerlink" href="#legal-agreement" title="Permalink to this headline">¶</a></h2>
+<p>The CDM provides a digital representation of the legal agreements that govern financial contracts and workflows. The benefits are:</p>
+<ul class="simple">
+<li><strong>Supporting marketplace initiatives to streamline and standardise legal agreements</strong> with a comprehensive digital representation of such agreements. While the initial scope is focused on the ISDA legal agreements, it is not limited to those.  As an example, as a follow-up from work to represent secured funding contracts and associated lifecycle events, the CDM will look to represent the associated governing legal agreements (such as GMRA for repo).</li>
+<li><strong>Providing a comprehensive representation of the financial workflows</strong> by complementing the contract and lifecycle event representation. Collateral management is an example of the applicability of such approach, as most of the flows require reference to the associated legal agreements (such as the ISDA Initial Margin and Variation Margin Credit Support Annex).</li>
+</ul>
+<p>The current CDM scope comprises the following features:</p>
+<ul class="simple">
+<li><strong>Composable and normalised model representation</strong> of a number of legal agreements:<ul>
+<li>ISDA 2016 Credit Support Annex for Initial Margin, with the New York, Japanese and English governing laws</li>
+<li>ISDA 2016 Credit Support Annex for Variation Margin, New York governing law</li>
+</ul>
+</li>
+<li><strong>Mapping to existing marketplace representations</strong> for the following initiatives:<ul>
+<li><strong>ISDA Create Initial Margin</strong>: Ingestion of JSON sample files generated from the ISDA Create platform for the elections associated with the ISDA 2016 CSA for Initial Margin has been implemented, to demonstrate connectivity between the ISDA Create Initial Margin negotiation tool and the CDM. (The ISDA CSA Variation Margin is not yet represented in ISDA Create.) A specific set of synonyms associated to the <code class="docutils literal notranslate"><span class="pre">ISDA_Create_1_0</span></code> synonym source has been developed to enable this mapping (see <em>Mapping</em> section).</li>
+<li><strong>AcadiaSoft Agreement Manager</strong>: Initial work has been developed to map the CDM to the AcadiaSoft Agreement Manager, although only limited progress has been made so far.</li>
+</ul>
+</li>
+<li><strong>Linking of legal agreement into contract</strong> through the CDM referencing mechanism.</li>
+</ul>
+<div class="section" id="modelling-approach">
+<h3>Modelling Approach<a class="headerlink" href="#modelling-approach" title="Permalink to this headline">¶</a></h3>
+<p>The current CDM model leverages some prior and current work:</p>
+<ul class="simple">
+<li>The FpML Legal View, which was developed in 2013-14 to support the ISDA Standard CSA in a generic manner</li>
+<li>The ISDA Create solution, in its version 1.0.</li>
+</ul>
+<p>The intent is to also leverage the <strong>AcadiaSoft Agreement Manager</strong> solution as part of further iterations of the model, to enable integration with the collateral management workflow.</p>
+<p>The key modelling principles that have been adopted to represent legal agreements are:</p>
+<ul class="simple">
+<li><strong>Distinction between the agreement identification features and the content features</strong> (i.e. elections).<ul>
+<li>The agreement identification features: agreement name, publisher, identification, etc are represented by the <code class="docutils literal notranslate"><span class="pre">LegalAgreementBase</span></code> abstract class.</li>
+<li>The elections are represented through classes aligned with the legal agreement template which they represent. An example is the <code class="docutils literal notranslate"><span class="pre">CsaInitialMargin2016JapaneseLaw</span></code> class, which represents the ISDA 2016 Japanese Law CSA for Initial Margin.</li>
+</ul>
+</li>
+<li><strong>Composite model</strong>.<ul>
+<li>The <code class="docutils literal notranslate"><span class="pre">LegalAgreementBase</span></code> abstract class uses components that are also used as part of the CDM contract and lifecycle event components: e.g. <code class="docutils literal notranslate"><span class="pre">Party</span></code>, <code class="docutils literal notranslate"><span class="pre">Identifier</span></code>, <code class="docutils literal notranslate"><span class="pre">PartyRole</span></code>.</li>
+<li>As part of the election classes: the above mentioned <code class="docutils literal notranslate"><span class="pre">CsaInitialMargin2016JapaneseLaw</span></code> class extends the <code class="docutils literal notranslate"><span class="pre">CsaInitialMargin2016</span></code> abstract class which specifies the elections that are common among governing laws. The <code class="docutils literal notranslate"><span class="pre">CsaInitialMargin2016</span></code> in turn extends the <code class="docutils literal notranslate"><span class="pre">Csa2016</span></code> abstract class which specifies the elections that are common among the ISDA 2016 Initial Margin and Variation Margin CSA agreements.</li>
+</ul>
+</li>
+<li><strong>Representation of legal agreement elections as data</strong>, as opposed to their whole write-up. Similar to what has been done in ISDA Create, such approach still allows CDM users to wrap those normalised elections into the corresponding legal agreement template, in order to provide a complete legal agreement.</li>
+<li><strong>Normalisation of the data representation</strong> to be machine readable and executable. In practice, the use of elections expressed in a <code class="docutils literal notranslate"><span class="pre">string</span></code> format has been restricted whenever possible, as <code class="docutils literal notranslate"><span class="pre">string</span></code> requires language parsing and disassembling to be machine executable. The CDM leverages the ISDA Create data representation and extends it in some cases, leveraging some output of the FpML work to digitise the Standard CSA. Notable examples of such approach are:<ul>
+<li>The <code class="docutils literal notranslate"><span class="pre">EligibleCollateral</span></code> class comprehensively specifies the eligible collateral for initial and variation margin as directly machine readable, through the combination of an enumeration of eligible assets (based upon the 2003 ISDA Collateral Asset Definitions), normalised maturity bands and agency rating notations.</li>
+<li>The <code class="docutils literal notranslate"><span class="pre">EligibilityToHoldCollateral</span></code> class specifies the conditions under which a party and its custodian(s) are entitled to hold collateral under the ISDA CSA for Variation Margin, through the combination of party terms that are specified through an enumeration, normalised custodian terms (see below) and/or the enumeration of countries in which such collateral can be held.</li>
+<li>The <code class="docutils literal notranslate"><span class="pre">CustodianTerms</span></code> class specifies the requirements applicable to the custodian with respect to the holding of posted collateral, through the combination of minimal assets and minimal rating considerations or through the designation of a specific custodian.</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="the-elective-provisions">
+<h3>The Elective Provisions<a class="headerlink" href="#the-elective-provisions" title="Permalink to this headline">¶</a></h3>
+<p>The current CDM scope is limited to the ISDA 2016 CSA for Initial Margin and Variation Margin. In this context, the model components are organised around 3 levels, in this order of abstraction:</p>
+<ul class="simple">
+<li><strong>Vintage</strong>, such as CSA 2016</li>
+<li><strong>Margin Type</strong>, i.e. Initial or Variation Margin</li>
+<li><strong>Governing Law</strong>, such as New York or Japanese</li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">Csa2016</span></code> abstract class specifies the set of provisions that are common among governing laws and across Initial and Variation Margin templates. This abstract class will evolve as further vintages of the ISDA CSA are being modelled.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">Csa2016</span>
+<span class="o">{</span>
+ <span class="n">baseCurrency</span> <span class="nf">string</span> <span class="o">(</span><span class="mf">1..1</span><span class="o">)</span> <span class="n">scheme</span><span class="o">;</span>
+ <span class="n">additionalObligations</span> <span class="nf">string</span> <span class="o">(</span><span class="mf">0..1</span><span class="o">);</span>
+ <span class="n">conditionsPrecedent</span> <span class="nf">ConditionsPrecedent</span> <span class="o">(</span><span class="mf">1..1</span><span class="o">);</span>
+ <span class="n">substitution</span> <span class="nf">Substitution</span> <span class="o">(</span><span class="mf">1..1</span><span class="o">);</span>
+ <span class="n">disputeResolution</span> <span class="nf">DisputeResolution</span> <span class="o">(</span><span class="mf">1..1</span><span class="o">);</span>
+ <span class="n">additionalRepresentation</span> <span class="nf">AdditionalRepresentation</span> <span class="o">(</span><span class="mf">1..1</span><span class="o">);</span>
+ <span class="n">demandsAndNotices</span> <span class="nf">ContactElection</span> <span class="o">(</span><span class="mf">1..1</span><span class="o">);</span>
+ <span class="n">addressesForTransfer</span> <span class="nf">ContactElection</span> <span class="o">(</span><span class="mf">1..1</span><span class="o">);</span>
+ <span class="n">bespokeProvision</span> <span class="nf">string</span> <span class="o">(</span><span class="mf">0..1</span><span class="o">)</span> <span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">CsaInitialMargin2016</span></code> abstract class extends the <code class="docutils literal notranslate"><span class="pre">Csa2016</span></code> class to specify the provisions for the 2016 ISDA Credit Support Annex for Initial Margin that are common across the applicable governing laws.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">CsaInitialMargin2016</span> <span class="kd">extends</span> <span class="n">Csa2016</span>
+<span class="o">{</span>
+ <span class="n">regime</span> <span class="nf">Regime</span> <span class="o">(</span><span class="mf">1..1</span><span class="o">);</span>
+ <span class="n">oneWayProvisions</span> <span class="nf">OneWayProvisions</span> <span class="o">(</span><span class="mf">1..1</span><span class="o">);</span>
+ <span class="n">method</span> <span class="nf">Method</span> <span class="o">(</span><span class="mf">1..1</span><span class="o">);</span>
+ <span class="n">identifiedCrossCurrencySwap</span> <span class="nf">boolean</span> <span class="o">(</span><span class="mf">1..1</span><span class="o">);</span>
+ <span class="n">sensitivityToEquity</span> <span class="nf">SensitivityMethodology</span> <span class="o">(</span><span class="mf">1..1</span><span class="o">);</span>
+ <span class="n">sensitivityToCommodity</span> <span class="nf">SensitivityMethodology</span> <span class="o">(</span><span class="mf">1..1</span><span class="o">);</span>
+ <span class="n">fxHaircutCurrency</span> <span class="nf">FxHaircutCurrency</span> <span class="o">(</span><span class="mf">1..1</span><span class="o">);</span>
+ <span class="n">creditSupportObligations</span> <span class="nf">CreditSupportObligationsInitialMargin</span> <span class="o">(</span><span class="mf">1..1</span><span class="o">);</span>
+ <span class="n">calculationDateLocation</span> <span class="nf">CalculationDateLocation</span> <span class="o">(</span><span class="mf">1..1</span><span class="o">);</span>
+ <span class="n">notificationTime</span> <span class="nf">NotificationTime</span> <span class="o">(</span><span class="mf">1..1</span><span class="o">);</span>
+ <span class="n">terminationCurrency</span> <span class="nf">TerminationCurrencyAmendment</span> <span class="o">(</span><span class="mf">1..1</span><span class="o">)</span> <span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">CsaVariationMargin2016</span></code> abstract class extends the <code class="docutils literal notranslate"><span class="pre">Csa2016</span></code> class to specify the provisions for the 2016 ISDA Credit Support Annex for Variation Margin that are common across the applicable governing laws.  At this point its implementation has been undertaken without a thorough review of the Japanese and English governing laws as only a New York sample agreement was available. It might have to be adjusted to integrate those governing laws.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">abstract</span> <span class="kd">class</span> <span class="nc">CsaVariationMargin2016</span> <span class="kd">extends</span> <span class="n">Csa2016</span>
+<span class="o">{</span>
+ <span class="n">creditSupportObligations</span> <span class="nf">CreditSupportObligationsVariationMargin</span> <span class="o">(</span><span class="mf">1..1</span><span class="o">);</span>
+ <span class="n">valuationAgent</span> <span class="nf">Party</span> <span class="o">(</span><span class="mf">1..1</span><span class="o">)</span> <span class="n">reference</span><span class="o">;</span>
+ <span class="n">valuationDateLocation</span> <span class="nf">CalculationDateLocation</span> <span class="o">(</span><span class="mf">1..1</span><span class="o">);</span>
+ <span class="n">valuationTime</span> <span class="nf">BusinessCenterTime</span> <span class="o">(</span><span class="mf">1.</span><span class="o">.*);</span>
+ <span class="n">notificationTime</span> <span class="nf">int</span> <span class="o">(</span><span class="mf">1..1</span><span class="o">);</span>
+ <span class="n">holdingAndUsingPostedCollateral</span> <span class="nf">HoldingAndUsingPostedCollateral</span> <span class="o">(</span><span class="mf">1..1</span><span class="o">);</span>
+ <span class="n">creditSupportOffsets</span> <span class="nf">boolean</span> <span class="o">(</span><span class="mf">1..1</span><span class="o">);</span>
+ <span class="n">otherCsa</span> <span class="nf">RelatedAgreement</span> <span class="o">(</span><span class="mf">1..1</span><span class="o">);</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+<p>The (non-abstract) classes that represent the ISDA CSA elections extend the above abstract constructs:</p>
+<ul class="simple">
+<li>For Initial Margin: the <code class="docutils literal notranslate"><span class="pre">CsaInitialMargin2016JapaneseLaw</span></code>, <code class="docutils literal notranslate"><span class="pre">CsaInitialMargin2016NewYorkLaw</span></code> and <code class="docutils literal notranslate"><span class="pre">CsdInitialMargin2016EnglishLaw</span></code> classes extend the <code class="docutils literal notranslate"><span class="pre">CsaInitialMargin2016</span></code> abstract class to specify the Initial Margin elections that are specific to those governing laws.</li>
+<li>For Variation Margin: the <code class="docutils literal notranslate"><span class="pre">CsaVariationMargin2016NewYorkLaw</span></code> class extends the <code class="docutils literal notranslate"><span class="pre">CsaVariationMargin2016</span></code> abstract class to specify the Variation Margin elections that are specific to New York law.</li>
+</ul>
+</div>
+<div class="section" id="linking-legal-agreements-to-contracts-and-events">
+<h3>Linking Legal Agreements to Contracts and Events<a class="headerlink" href="#linking-legal-agreements-to-contracts-and-events" title="Permalink to this headline">¶</a></h3>
+<p>The CDM uses the key / referencing mechanism to tie a legal agreement with the relevant contract or event.</p>
+<p>This referencing mechanism has been implemented for the <code class="docutils literal notranslate"><span class="pre">Contract</span></code> but not yet for the <code class="docutils literal notranslate"><span class="pre">Event</span></code>, since no lifecycle event workflow has yet been specified that references legal agreement other than through the contract itself.</p>
+<p>Referencing the legal agreement from the <code class="docutils literal notranslate"><span class="pre">Contract</span></code> is done through the <code class="docutils literal notranslate"><span class="pre">documentation</span></code> attribute.  The associated <code class="docutils literal notranslate"><span class="pre">Documentation</span></code> class allows to:</p>
+<ul class="simple">
+<li>Identify some of the key terms of a governing legal agreement such as the agreement identifier, the publisher, the document vintage and the agreement date, as part of the <code class="docutils literal notranslate"><span class="pre">documentationIdentification</span></code> attribute</li>
+<li>Reference a legal agreement that is electronically represented in the CDM through the <code class="docutils literal notranslate"><span class="pre">legalAgreement</span></code> attribute, which has a reference key into the agreement instance</li>
+</ul>
+<p>The below snippet represents this <code class="docutils literal notranslate"><span class="pre">Documentation</span></code> class, which <code class="docutils literal notranslate"><span class="pre">legalAgreement</span></code> attribute carries the <code class="docutils literal notranslate"><span class="pre">reference</span></code> qualifier and where the <code class="docutils literal notranslate"><span class="pre">LegalAgreement</span></code> class carries associated <code class="docutils literal notranslate"><span class="pre">key</span></code> qualifier:</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">Documentation</span>
+<span class="o">{</span>
+ <span class="n">legalAgreement</span> <span class="nf">LegalAgreement</span> <span class="o">(</span><span class="mf">0.</span><span class="o">.*)</span> <span class="n">reference</span><span class="o">;</span>
+ <span class="n">documentationIdentification</span> <span class="nf">DocumentationIdentification</span> <span class="o">(</span><span class="mf">0..1</span><span class="o">);</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">LegalAgreement</span> <span class="kd">extends</span> <span class="n">LegalAgreementBase</span> <span class="n">key</span> <span class="n">one</span> <span class="n">of</span>
+<span class="o">{</span>
+ <span class="n">csdInitialMargin2016EnglishLaw</span> <span class="nf">CsdInitialMargin2016EnglishLaw</span> <span class="o">(</span><span class="mf">0..1</span><span class="o">);</span>
+ <span class="n">csaInitialMargin2016JapaneseLaw</span> <span class="nf">CsaInitialMargin2016JapaneseLaw</span> <span class="o">(</span><span class="mf">0..1</span><span class="o">);</span>
+ <span class="n">csaInitialMargin2016NewYorkLaw</span> <span class="nf">CsaInitialMargin2016NewYorkLaw</span> <span class="o">(</span><span class="mf">0..1</span><span class="o">);</span>
+ <span class="n">csaVariationMargin2016NewYorkLaw</span> <span class="nf">CsaVariationMargin2016NewYorkLaw</span> <span class="o">(</span><span class="mf">0..1</span><span class="o">);</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="process-model">
+<h2>Process Model<a class="headerlink" href="#process-model" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="purpose">
+<h3>Purpose<a class="headerlink" href="#purpose" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="why-a-process-model">
+<h4>Why a Process Model<a class="headerlink" href="#why-a-process-model" title="Permalink to this headline">¶</a></h4>
+<p><strong>The CDM lays the foundation for the standardisation, automation and inter-operability of industry processes</strong>. Industry processes represent events and actions that occur through the transaction’s lifecycle, from negotiating a legal agreement to allocating a block-trade or calculating settlement amounts.</p>
+<p>While ISDA defines the protocols for industry processes in its library of ISDA Documentation, differences in the implementation minutia may cause operational friction between market participants. Evidence shows that even when calculations are defined in mathematical notation (for example, day count fraction formulae which are used when calculating interest rate payments) can be a source of dispute between parties in a transaction.</p>
+</div>
+<div class="section" id="what-is-the-process-model">
+<h4>What Is the Process Model<a class="headerlink" href="#what-is-the-process-model" title="Permalink to this headline">¶</a></h4>
+<p><strong>The CDM Process Model has been designed to translate the technical standards that support those industry processes</strong> into a standardised machine-readable and machine-executable format.</p>
+<p>Machine readability and executability is crucial to eliminate implementation discrepancy between market participants and increase interoperability between technology solutions. It greatly minimises the cost of adoption and provides a blueprint on which industry utilities can be built.</p>
+</div>
+<div class="section" id="how-does-it-work">
+<h4>How Does It Work<a class="headerlink" href="#how-does-it-work" title="Permalink to this headline">¶</a></h4>
+<p>The process model is systematically translated into executable code for the Java representation of the CDM using purpose-built technology as described in the <a class="reference external" href="https://docs.rosetta-technology.io/dsl/codegen-readme.html">Code Generation Section</a>. The CDM data model and process model specifications can also be translated into a number of other modern, widely adopted and freely available programming languages:</p>
+<ul class="simple">
+<li>Scala</li>
+<li>DAML</li>
+<li>Typescript</li>
+</ul>
+<p>The CDM has the capability to add support for other languages as required by market participants. Executable code artefacts in all supported languages are systematically distributed with the CDM and freely available to download from the ISDA CDM <a class="reference external" href="https://portal.cdm.rosetta-technology.io">Portal</a>.</p>
+</div>
+</div>
+<div class="section" id="scope">
+<h3>Scope<a class="headerlink" href="#scope" title="Permalink to this headline">¶</a></h3>
+<p>The scope of the process model has two dimensions:</p>
+<ol class="arabic simple">
+<li><strong>Coverage</strong> - which industry processes should be covered.</li>
+<li><strong>Granularity</strong> - at which level of detail each process should be specified.</li>
+</ol>
+<div class="section" id="coverage">
+<h4>Coverage<a class="headerlink" href="#coverage" title="Permalink to this headline">¶</a></h4>
+<p><strong>The CDM process model currently covers the post-trade lifecycle of securities, contractual products, and foreign exchange</strong>. Generally, a process is in-scope when it is already covered in ISDA Documentation or other technical documents. For example, the following processes are all in scope:</p>
+<ul class="simple">
+<li>Trade execution and confirmation</li>
+<li>Clearing</li>
+<li>Allocation</li>
+<li>Settlement (including any future contingent cashflow payment)</li>
+<li>Exercise of options</li>
+<li>Margin calculation</li>
+<li>Regulatory reporting (although covered in a different documentation section)</li>
+</ul>
+</div>
+<div class="section" id="granularity">
+<h4>Granularity<a class="headerlink" href="#granularity" title="Permalink to this headline">¶</a></h4>
+<p><strong>It is important for implementors of the CDM to understand the scope of the model</strong> with regard to specifications and executable code for the above list of post-trade lifecycle processes.</p>
+<p>The CDM process model leverages the <em>function</em> component of the Rosetta DSL. As detailed in the <a class="reference external" href="https://docs.rosetta-technology.io/dsl/documentation.html#function-component">Function Component Section</a> of the documentation, a function receives a set of input values and applies logical instructions to return an output. The input and output are both CDM objects (including basic types). While a function specifies its inputs and output, its logic may be <em>fully defined</em> or only <em>partially defined</em> depending on how much of the output’s attribute values it builds. Unspecified parts of a process represent functionality that firms are expected to implement, either internally or through third-parties such as utilities.</p>
+<p>It is not always possible or practical to fully specify the business logic of a process from a model. Parts of processes or sub-processes may be omitted from the CDM for the following reasons:</p>
+<ul class="simple">
+<li>The sub-process is not needed to create a functional CDM output object.</li>
+<li>The sub-process has already been defined and its implementation is widely adopted by the industry.</li>
+<li>The sub-process is specific to a firm’s internal process and therefore cannot be specified in an industry standard.</li>
+</ul>
+<p>Given these reasons, the CDM process model focuses on the most critical data and processes required to create functional objects that satisfy the below criterion:</p>
+<ul class="simple">
+<li>All of the qualifiable constituents (such as <code class="docutils literal notranslate"><span class="pre">BusinessEvent</span></code> and <code class="docutils literal notranslate"><span class="pre">Product</span></code>) of a function’s output can be qualified, which means that they evaluate to True according to at least one of the applicable Qualification functions.</li>
+<li>Lineage and cross-referencing between objects is accurate for data integrity purposes.</li>
+</ul>
+<p>For any remaining data or processes, implementors can populate the remaining attribute values required for the output to be valid by extending the executable code generated by the process model or by creating their own functions.</p>
+<p>For the trade lifecycle processes that are in scope, the CDM process model covers the following sub-process components, which are each detailed in the next sections:</p>
+<ol class="arabic simple">
+<li>Validation process</li>
+<li>Calculation process</li>
+<li>Event creation process</li>
+</ol>
+</div>
+</div>
+<div class="section" id="validation-process">
+<h3>Validation Process<a class="headerlink" href="#validation-process" title="Permalink to this headline">¶</a></h3>
+<p>In many legacy models and technical standards, validation rules are generally specified in text-based documentation, which requires software engineers to evaluate and translate the logic into code. The frequently occuring result of this human interpretation process is inconsistent enforcement of the intended logic.</p>
+<p>By contrast, in the CDM, validation components are an integral part of the process model specifications and are distributed as executable code in the Java representation of the CDM. The CDM validation components leverage the validation components of the Rosetta DSL, as described in the <a class="reference external" href="https://docs.rosetta-technology.io/dsl/documentation.html#validation-component">Validation Component Section</a>.</p>
+<p>As an example, the <em>FpML ird validation rule #57</em>, states that if the calculation period frequency is expressed in units of month or year, then the roll convention cannot be a weekday. A machine readable and executable definition of that specification is provided in the CDM, as a <code class="docutils literal notranslate"><span class="pre">condition</span></code> attached to the <code class="docutils literal notranslate"><span class="pre">CalculationPeriodFrequency</span></code> type:</p>
+<div class="highlight-Haskell notranslate"><div class="highlight"><pre><span></span><span class="nf">condition</span> <span class="kt">FpML_ird_57:</span> <span class="o">&lt;</span><span class="s">&quot;FpML validation rule ird-57 - Context: CalculationPeriodFrequency. [period eq (&#39;M&#39;, &#39;Y&#39;)] not(rollConvention = (&#39;NONE&#39;, &#39;SFE&#39;, &#39;MON&#39;, &#39;TUE&#39;, &#39;WED&#39;, &#39;THU&#39;, &#39;FRI&#39;, &#39;SAT&#39;,&#39;SUN&#39;)).&quot;</span><span class="o">&gt;</span>
+  <span class="kr">if</span> <span class="n">period</span> <span class="ow">=</span> <span class="kt">PeriodExtendedEnum</span> <span class="ow">-&gt;</span> <span class="kt">M</span> <span class="n">or</span> <span class="n">period</span> <span class="ow">=</span> <span class="kt">PeriodExtendedEnum</span> <span class="ow">-&gt;</span> <span class="kt">Y</span>
+  <span class="kr">then</span> <span class="n">rollConvention</span> <span class="o">&lt;&gt;</span> <span class="kt">RollConventionEnum</span> <span class="ow">-&gt;</span> <span class="kt">NONE</span>
+    <span class="n">or</span> <span class="n">rollConvention</span> <span class="o">&lt;&gt;</span> <span class="kt">RollConventionEnum</span> <span class="ow">-&gt;</span> <span class="kt">SFE</span>
+    <span class="n">or</span> <span class="n">rollConvention</span> <span class="o">&lt;&gt;</span> <span class="kt">RollConventionEnum</span> <span class="ow">-&gt;</span> <span class="kt">MON</span>
+    <span class="n">or</span> <span class="n">rollConvention</span> <span class="o">&lt;&gt;</span> <span class="kt">RollConventionEnum</span> <span class="ow">-&gt;</span> <span class="kt">TUE</span>
+    <span class="n">or</span> <span class="n">rollConvention</span> <span class="o">&lt;&gt;</span> <span class="kt">RollConventionEnum</span> <span class="ow">-&gt;</span> <span class="kt">WED</span>
+    <span class="n">or</span> <span class="n">rollConvention</span> <span class="o">&lt;&gt;</span> <span class="kt">RollConventionEnum</span> <span class="ow">-&gt;</span> <span class="kt">THU</span>
+    <span class="n">or</span> <span class="n">rollConvention</span> <span class="o">&lt;&gt;</span> <span class="kt">RollConventionEnum</span> <span class="ow">-&gt;</span> <span class="kt">FRI</span>
+    <span class="n">or</span> <span class="n">rollConvention</span> <span class="o">&lt;&gt;</span> <span class="kt">RollConventionEnum</span> <span class="ow">-&gt;</span> <span class="kt">SAT</span>
+    <span class="n">or</span> <span class="n">rollConvention</span> <span class="o">&lt;&gt;</span> <span class="kt">RollConventionEnum</span> <span class="ow">-&gt;</span> <span class="kt">SUN</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="calculation-process">
+<h3>Calculation Process<a class="headerlink" href="#calculation-process" title="Permalink to this headline">¶</a></h3>
+<p>The CDM provides certain ISDA Definitions as machine executable formulas to standardise the industry calculation processes that depend on those definitions.  Examples include the ISDA 2006 definitions of <em>Fixed Amount</em> and <em>Floating Amount</em> , the ISDA 2006 definitions of Day Count Fraction rules, and performance calculations for Equity Swaps. The CDM also specifies related utility functions.</p>
+<p>These calculation processes leverage the <em>calculation function</em> component of the Rosetta DSL, as detailed in the <a class="reference external" href="https://docs.rosetta-technology.io/dsl/documentation.html#function-definition">Function Definition Section</a>, and accordingly are associated to a <code class="docutils literal notranslate"><span class="pre">calculation</span></code> annotation.</p>
+<p>Explanations of these processes are provided in the following sections.</p>
+<div class="section" id="fixed-amount-and-floating-amount-definitions">
+<h4>Fixed Amount and Floating Amount Definitions<a class="headerlink" href="#fixed-amount-and-floating-amount-definitions" title="Permalink to this headline">¶</a></h4>
+<p>The CDM expressions of <code class="docutils literal notranslate"><span class="pre">FixedAmount</span></code> and <code class="docutils literal notranslate"><span class="pre">FloatingAmount</span></code> are similar in structure: a calculation formula that reflects the terms of the ISDA 2006 Definitions and the arguments associated with the formula.</p>
+<div class="highlight-Haskell notranslate"><div class="highlight"><pre><span></span><span class="nf">func</span> <span class="kt">FloatingAmount:</span>
+  <span class="p">[</span><span class="n">calculation</span><span class="p">]</span>
+  <span class="n">inputs</span><span class="kt">:</span>
+    <span class="n">interestRatePayout</span> <span class="kt">InterestRatePayout</span> <span class="p">(</span><span class="mi">1</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">rate</span> <span class="kt">FloatingInterestRate</span> <span class="p">(</span><span class="mi">1</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">quantity</span> <span class="kt">NonNegativeQuantity</span> <span class="p">(</span><span class="mi">1</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">date</span> <span class="n">date</span> <span class="p">(</span><span class="mi">1</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+  <span class="n">output</span><span class="kt">:</span> <span class="n">floatingAmount</span> <span class="n">number</span> <span class="p">(</span><span class="mi">1</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+
+  <span class="n">alias</span> <span class="n">calculationAmount</span><span class="kt">:</span> <span class="n">quantity</span> <span class="ow">-&gt;</span> <span class="n">amount</span>
+  <span class="n">alias</span> <span class="n">floatingRate</span><span class="kt">:</span> <span class="kt">ResolveRateIndex</span><span class="p">(</span> <span class="n">interestRatePayout</span> <span class="ow">-&gt;</span> <span class="n">rateSpecification</span> <span class="ow">-&gt;</span> <span class="n">floatingRate</span> <span class="ow">-&gt;</span> <span class="n">assetIdentifier</span> <span class="ow">-&gt;</span> <span class="n">rateOption</span> <span class="ow">-&gt;</span> <span class="n">floatingRateIndex</span> <span class="p">)</span>
+  <span class="n">alias</span> <span class="n">spreadRate</span><span class="kt">:</span> <span class="n">rate</span> <span class="ow">-&gt;</span> <span class="n">spread</span>
+  <span class="n">alias</span> <span class="n">dayCountFraction</span><span class="kt">:</span> <span class="kt">DayCountFraction</span><span class="p">(</span><span class="n">interestRatePayout</span><span class="p">,</span> <span class="n">interestRatePayout</span> <span class="ow">-&gt;</span> <span class="n">dayCountFraction</span><span class="p">,</span> <span class="n">date</span><span class="p">)</span>
+
+  <span class="n">assign</span><span class="o">-</span><span class="n">output</span> <span class="n">floatingAmount</span><span class="kt">:</span> <span class="n">calculationAmount</span> <span class="o">*</span> <span class="p">(</span><span class="n">floatingRate</span> <span class="o">+</span> <span class="n">spreadRate</span><span class="p">)</span> <span class="o">*</span> <span class="n">dayCountFraction</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="day-count-fraction">
+<h4>Day Count Fraction<a class="headerlink" href="#day-count-fraction" title="Permalink to this headline">¶</a></h4>
+<p>The CDM process model incorporates calculations that represent the set of day count fraction rules specified as part of the ISDA 2006 Definitions, e.g. the <em>ACT/365.FIXED</em> and the <em>30E/360</em> day count fraction rules. Although these rules are widely accepted in international markets, many of them have complex nuances which can lead to inconsistent implementations and potentially mismatched settlements.</p>
+<p>For example, there are three distinct rule sets in which the length of each month is generally assumed to be 30 days for accrual purposes (and each year is assumed to be 360 days). However there are nuances in the rule sets that distinquish the resulting calculations under different circumstances, such as when the last day of the period is the last day of February. These distinct rule sets are defined by ISDA as 30/360 (also known as 30/360 US), 30E/360 (formerly known as 30/360 ICMA or 30/360 Eurobond), and the 30E/360.ISDA.</p>
+<p>The CDM process model eliminates the need for implementators to interpret the logic and write unique code for these rules. Instead, it provides a machine-readable expression that generates executable code, such as the example below:</p>
+<div class="highlight-Haskell notranslate"><div class="highlight"><pre><span></span><span class="nf">func</span> <span class="kt">DayCountFraction</span><span class="p">(</span><span class="n">dayCountFractionEnum</span><span class="kt">:</span> <span class="kt">DayCountFractionEnum</span> <span class="ow">-&gt;</span> <span class="n">_30E_360</span><span class="p">)</span><span class="kt">:</span>
+  <span class="p">[</span><span class="n">calculation</span><span class="p">]</span>
+
+  <span class="n">alias</span> <span class="n">calculationPeriod</span><span class="kt">:</span> <span class="kt">CalculationPeriod</span><span class="p">(</span><span class="n">interestRatePayout</span> <span class="ow">-&gt;</span> <span class="n">calculationPeriodDates</span><span class="p">,</span> <span class="n">date</span><span class="p">)</span>
+  <span class="n">alias</span> <span class="n">startYear</span><span class="kt">:</span> <span class="n">calculationPeriod</span> <span class="ow">-&gt;</span> <span class="n">startDate</span> <span class="ow">-&gt;</span> <span class="n">year</span>
+  <span class="n">alias</span> <span class="n">endYear</span><span class="kt">:</span> <span class="n">calculationPeriod</span> <span class="ow">-&gt;</span> <span class="n">endDate</span> <span class="ow">-&gt;</span> <span class="n">year</span>
+  <span class="n">alias</span> <span class="n">startMonth</span><span class="kt">:</span> <span class="n">calculationPeriod</span> <span class="ow">-&gt;</span> <span class="n">startDate</span> <span class="ow">-&gt;</span> <span class="n">month</span>
+  <span class="n">alias</span> <span class="n">endMonth</span><span class="kt">:</span> <span class="n">calculationPeriod</span> <span class="ow">-&gt;</span> <span class="n">endDate</span> <span class="ow">-&gt;</span> <span class="n">month</span>
+  <span class="n">alias</span> <span class="n">endDay</span><span class="kt">:</span> <span class="kt">Min</span><span class="p">(</span><span class="n">calculationPeriod</span> <span class="ow">-&gt;</span> <span class="n">endDate</span> <span class="ow">-&gt;</span> <span class="n">day</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+  <span class="n">alias</span> <span class="n">startDay</span><span class="kt">:</span> <span class="kt">Min</span><span class="p">(</span><span class="n">calculationPeriod</span> <span class="ow">-&gt;</span> <span class="n">startDate</span> <span class="ow">-&gt;</span> <span class="n">day</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+
+  <span class="n">assign</span><span class="o">-</span><span class="n">output</span> <span class="n">result</span><span class="kt">:</span>
+    <span class="p">(</span><span class="mi">360</span> <span class="o">*</span> <span class="p">(</span><span class="n">endYear</span> <span class="o">-</span> <span class="n">startYear</span><span class="p">)</span> <span class="o">+</span> <span class="mi">30</span> <span class="o">*</span> <span class="p">(</span><span class="n">endMonth</span> <span class="o">-</span> <span class="n">startMonth</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">endDay</span> <span class="o">-</span> <span class="n">startDay</span><span class="p">))</span> <span class="o">/</span> <span class="mi">360</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="utility-function">
+<h4>Utility Function<a class="headerlink" href="#utility-function" title="Permalink to this headline">¶</a></h4>
+<p>CDM elements often need to be transformed by a function to construct the arguments for a formula in a calculation. A typical example is the requirement to identify a period start date, end date, and other date-related attributes required to compute a cashflow amount in accordance with a schedule (as illustrated in the day count fraction calculation shown above). The CDM has two main types to address this requirement:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">CalculationPeriodDates</span></code> specifies the inputs required to construct a calculation period schedule</li>
+<li><code class="docutils literal notranslate"><span class="pre">CalculationPeriodData</span></code> specifies actual attribute values of a calculation period such as start date, end date, etc.</li>
+</ul>
+<p>The CalculationPeriod functon receives the <code class="docutils literal notranslate"><span class="pre">CalculationPeriodDates</span></code> and the current date as the inputs and produces the <a href="#id1"><span class="problematic" id="id2">``</span></a>CalculationPeriodData` as the output, as shown below:</p>
+<div class="highlight-Haskell notranslate"><div class="highlight"><pre><span></span><span class="nf">func</span> <span class="kt">CalculationPeriod:</span>
+  <span class="n">inputs</span><span class="kt">:</span>
+    <span class="n">calculationPeriodDates</span> <span class="kt">CalculationPeriodDates</span> <span class="p">(</span><span class="mi">1</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">date</span> <span class="n">date</span> <span class="p">(</span><span class="mi">1</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+  <span class="n">output</span><span class="kt">:</span> <span class="n">result</span> <span class="kt">CalculationPeriodData</span> <span class="p">(</span><span class="mi">1</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="equity-performance">
+<h4>Equity Performance<a class="headerlink" href="#equity-performance" title="Permalink to this headline">¶</a></h4>
+<p>The CDM process model includes calculations to support the equity performance concepts applied to reset and pay cashflows on Equity Swaps. Those calculations follow the definitions as normalised in the new <em>2018 ISDA CDM Equity Confirmation for Security Equity Swap</em> (although this is a new template that is not yet in use across the industry).</p>
+<p>Some of those calculations are presented below:</p>
+<div class="highlight-Haskell notranslate"><div class="highlight"><pre><span></span><span class="nf">func</span> <span class="kt">EquityCashSettlementAmount:</span> <span class="o">&lt;</span><span class="s">&quot;Part 1 Section 12 of the 2018 ISDA CDM Equity Confirmation for Security Equity Swap, Para 72. &#39;Equity Cash Settlement Amount&#39; means, in respect of an Equity Cash Settlement Date, an amount in the Settlement Currency determined by the Calculation Agent as of the Equity Valuation Date to which the Equity Cash Settlement Amount relates, pursuant to the following formula: Equity Cash Settlement Amount = ABS(Rate Of Return) × Equity Notional Amount.&quot;</span><span class="o">&gt;</span>
+  <span class="n">inputs</span><span class="kt">:</span>
+    <span class="n">contractState</span> <span class="kt">ContractState</span> <span class="p">(</span><span class="mi">1</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">date</span> <span class="n">date</span> <span class="p">(</span><span class="mi">1</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+  <span class="n">output</span><span class="kt">:</span>
+    <span class="n">equityCashSettlementAmount</span> <span class="kt">Money</span> <span class="p">(</span><span class="mi">1</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+
+  <span class="n">alias</span> <span class="n">equityPayout</span><span class="kt">:</span> <span class="n">contractState</span> <span class="ow">-&gt;</span> <span class="n">contract</span> <span class="ow">-&gt;</span> <span class="n">tradableProduct</span> <span class="ow">-&gt;</span> <span class="n">product</span> <span class="ow">-&gt;</span> <span class="n">contractualProduct</span> <span class="ow">-&gt;</span> <span class="n">economicTerms</span> <span class="ow">-&gt;</span> <span class="n">payout</span> <span class="ow">-&gt;</span> <span class="n">equityPayout</span>
+
+  <span class="n">condition</span><span class="kt">:</span> <span class="n">equityPayout</span> <span class="ow">-&gt;</span> <span class="n">payoutQuantity</span> <span class="ow">-&gt;</span> <span class="n">assetIdentifier</span> <span class="ow">-&gt;</span> <span class="n">productIdentifier</span> <span class="ow">=</span> <span class="n">equityPayout</span> <span class="ow">-&gt;</span> <span class="n">underlier</span> <span class="ow">-&gt;</span> <span class="n">underlyingProduct</span> <span class="ow">-&gt;</span> <span class="n">security</span> <span class="ow">-&gt;</span> <span class="n">equity</span> <span class="ow">-&gt;</span> <span class="n">productIdentifier</span>
+
+  <span class="n">assign</span><span class="o">-</span><span class="n">output</span> <span class="n">equityCashSettlementAmount</span> <span class="ow">-&gt;</span> <span class="n">amount</span><span class="kt">:</span>
+    <span class="kt">Abs</span><span class="p">(</span><span class="n">contractState</span> <span class="ow">-&gt;</span> <span class="n">updatedContract</span> <span class="ow">-&gt;</span> <span class="n">tradableProduct</span> <span class="ow">-&gt;</span> <span class="n">product</span> <span class="ow">-&gt;</span> <span class="n">contractualProduct</span> <span class="ow">-&gt;</span> <span class="n">economicTerms</span> <span class="ow">-&gt;</span> <span class="n">payout</span> <span class="ow">-&gt;</span> <span class="n">equityPayout</span> <span class="n">only</span><span class="o">-</span><span class="n">element</span> <span class="ow">-&gt;</span> <span class="n">performance</span><span class="p">)</span>
+  <span class="n">assign</span><span class="o">-</span><span class="n">output</span> <span class="n">equityCashSettlementAmount</span> <span class="ow">-&gt;</span> <span class="n">currency</span><span class="kt">:</span>
+    <span class="kt">ResolveEquityInitialPrice</span><span class="p">(</span> <span class="n">equityPayout</span> <span class="n">only</span><span class="o">-</span><span class="n">element</span> <span class="ow">-&gt;</span> <span class="n">underlier</span><span class="p">,</span> <span class="n">contractState</span> <span class="ow">-&gt;</span> <span class="n">contract</span> <span class="ow">-&gt;</span> <span class="n">tradableProduct</span> <span class="ow">-&gt;</span> <span class="n">priceNotation</span> <span class="p">)</span> <span class="ow">-&gt;</span> <span class="n">netPrice</span> <span class="ow">-&gt;</span> <span class="n">currency</span>
+</pre></div>
+</div>
+<div class="highlight-Haskell notranslate"><div class="highlight"><pre><span></span><span class="nf">func</span> <span class="kt">RateOfReturn:</span> <span class="o">&lt;</span><span class="s">&quot;Part 1 Section 12 of the 2018 ISDA CDM Equity Confirmation for Security Equity Swap, Para 139. &#39;Rate Of Return&#39; means, in respect of any Equity Valuation Date, the amount determined pursuant to the following formula: Rate Of Return = (Final Price - Initial Price) / Initial Price.&quot;</span><span class="o">&gt;</span>
+  <span class="n">inputs</span><span class="kt">:</span>
+    <span class="n">initialPrice</span> <span class="n">number</span> <span class="p">(</span><span class="mi">1</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">finalPrice</span> <span class="n">number</span> <span class="p">(</span><span class="mi">1</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+  <span class="n">output</span><span class="kt">:</span>
+    <span class="n">rateOfReturn</span> <span class="n">number</span> <span class="p">(</span><span class="mi">1</span><span class="o">..</span><span class="mi">1</span><span class="p">)</span>
+
+  <span class="n">assign</span><span class="o">-</span><span class="n">output</span> <span class="n">rateOfReturn</span><span class="kt">:</span>
+    <span class="p">(</span><span class="n">finalPrice</span> <span class="o">-</span> <span class="n">initialPrice</span><span class="p">)</span> <span class="o">/</span> <span class="n">initialPrice</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="event-creation-process">
+<h3>Event Creation Process<a class="headerlink" href="#event-creation-process" title="Permalink to this headline">¶</a></h3>
+<p>(<em>Coming soon</em>)</p>
+</div>
+</div>
+<div class="section" id="reference-data-model">
+<h2>Reference Data Model<a class="headerlink" href="#reference-data-model" title="Permalink to this headline">¶</a></h2>
+<p>The CDM only integrates the reference data components that are specifically needed to model the in-scope products, events, legal agreements and function components.</p>
+<p>This translates into the representation of the <strong>party</strong>, with two alternate representations, modelled as attributes: the <strong>legal entity</strong> and the <strong>natural person</strong>.  The reason for making use of the class inheritance model, with Party as a the base type that would be extended by LegalEntity and NaturalPerson, is that the Rosetta model doesn’t support downcasting, which was causing issues in some scenarios. This will be further assess at some future point.</p>
+<div class="highlight-Java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">Party</span>
+<span class="o">{</span>
+ <span class="n">id</span> <span class="o">(</span><span class="mf">0..1</span><span class="o">);</span>
+ <span class="n">partyId</span> <span class="nf">string</span> <span class="o">(</span><span class="mf">1.</span><span class="o">.*)</span> <span class="n">scheme</span> <span class="o">;</span>
+ <span class="n">legalEntity</span> <span class="nf">LegalEntity</span> <span class="o">(</span><span class="mf">0..1</span><span class="o">);</span>
+ <span class="n">naturalPerson</span> <span class="nf">NaturalPerson</span> <span class="o">(</span><span class="mf">0.</span><span class="o">.*);</span>
+<span class="o">}</span>
+
+<span class="n">choice</span> <span class="n">rule</span> <span class="n">Party_choice</span> <span class="o">&lt;</span><span class="s">&quot;A party is either a legal entity or a natural person.&quot;</span><span class="o">&gt;</span>
+ <span class="k">for</span> <span class="n">Party</span> <span class="n">optional</span> <span class="n">choice</span> <span class="n">between</span>
+ <span class="n">legalEntity</span> <span class="n">and</span> <span class="n">naturalPerson</span>
+
+<span class="kd">class</span> <span class="nc">LegalEntity</span>
+<span class="o">{</span>
+ <span class="n">id</span> <span class="o">(</span><span class="mf">0..1</span><span class="o">);</span>
+ <span class="n">entityId</span> <span class="nf">string</span> <span class="o">(</span><span class="mf">0.</span><span class="o">.*)</span> <span class="n">scheme</span> <span class="o">;</span>
+ <span class="n">name</span> <span class="nf">string</span> <span class="o">(</span><span class="mf">1..1</span><span class="o">)</span> <span class="n">scheme</span> <span class="o">;</span>
+<span class="o">}</span>
+
+<span class="kd">class</span> <span class="nc">NaturalPerson</span>
+<span class="o">{</span>
+ <span class="n">id</span> <span class="o">(</span><span class="mf">0..1</span><span class="o">);</span>
+ <span class="n">honorific</span> <span class="nf">string</span> <span class="o">(</span><span class="mf">0..1</span><span class="o">)</span> <span class="o">;</span>
+ <span class="n">firstName</span> <span class="nf">string</span> <span class="o">(</span><span class="mf">1..1</span><span class="o">)</span> <span class="o">;</span>
+ <span class="n">middleName</span> <span class="nf">string</span> <span class="o">(</span><span class="mf">0.</span><span class="o">.*);</span>
+ <span class="n">initial</span> <span class="nf">string</span> <span class="o">(</span><span class="mf">0.</span><span class="o">.*);</span>
+ <span class="n">surname</span> <span class="nf">string</span> <span class="o">(</span><span class="mf">1..1</span><span class="o">)</span> <span class="o">;</span>
+ <span class="n">suffix</span> <span class="nf">string</span> <span class="o">(</span><span class="mf">0..1</span><span class="o">)</span> <span class="o">;</span>
+ <span class="n">dateOfBirth</span> <span class="nf">date</span> <span class="o">(</span><span class="mf">0..1</span><span class="o">)</span> <span class="o">;</span>
+<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="mapping-synonym">
+<h2>Mapping (Synonym)<a class="headerlink" href="#mapping-synonym" title="Permalink to this headline">¶</a></h2>
+<p>In order to facilitate the translation of existing industry messages (based on open standards or proprietary ones) into CDM, the CDM is mapped to a set of those alternative data representations using the Rosetta DSL <em>synonym</em> feature, as described in the <a class="reference external" href="https://docs.rosetta-technology.io/dsl/documentation.html#mapping-component">Mapping Component Section</a>.</p>
+<p>The following set of synonym sources are currently in place for the CDM:</p>
+<ul class="simple">
+<li><strong>FpML standard</strong> (synonym source: <code class="docutils literal notranslate"><span class="pre">FpML_5_10</span></code>): synonyms to the version 5.10 of the FpML standard</li>
+<li><strong>FIX standard</strong> (synonym source: <code class="docutils literal notranslate"><span class="pre">FIX_5_0_SP2</span></code>): synonyms to the version 5.0 SP2 of the FIX protocol</li>
+<li><strong>ISO 20022 standard</strong> (synonym source: <code class="docutils literal notranslate"><span class="pre">ISO_20022</span></code>): synonyms to the ISO 20022 reporting standard, with no version reference at present</li>
+<li><strong>Workflow event</strong> (synonym source: <code class="docutils literal notranslate"><span class="pre">Workflow_Event</span></code>): synonyms to the <em>event.xsd</em> schema used internally in Rosetta to ingest sample lifecycle events</li>
+<li><strong>DTCC</strong> (synonym sources: <code class="docutils literal notranslate"><span class="pre">DTCC_11_0</span></code> and <code class="docutils literal notranslate"><span class="pre">DTCC_9_0</span></code>): synonyms to the <em>OTC_Matching_11-0.xsd</em> schema used for trade matching confirmations, and to the <em>OTC_Matching_9-0.xsd</em> schema used for payment notifications, both including the imported FpML schema version 4.9.</li>
+<li><strong>CME</strong> (synonym sources: <code class="docutils literal notranslate"><span class="pre">CME_ClearedConfirm_1_17</span></code> and <code class="docutils literal notranslate"><span class="pre">CME_SubmissionIRS_1_0</span></code>): synonyms to the <em>cme-conf-ext-1-17.xsd</em> schema (including the imported FpML schema version 5.0) used for clearing confirmation, and to the <em>bloombergTradeFixml</em> schema (including the imported FpML schema version 4.6) used for clearing submission</li>
+<li><strong>AcadiaSoft</strong> (synonym source: <code class="docutils literal notranslate"><span class="pre">AcadiaSoft_AM_1_0</span></code>): synonyms to version 1.0 of AcadiaSoft Agreement Manager</li>
+<li><strong>ISDA Create</strong> (synonym source: <code class="docutils literal notranslate"><span class="pre">ISDA_Create_1_0</span></code>): synonyms to version 1.0 of the ISDA Create tool for Initial Margin negotiation</li>
+</ul>
+<p>Those synonym sources are listed as part of a configuration file in the CDM using a special <code class="docutils literal notranslate"><span class="pre">synonym</span> <span class="pre">source</span></code> enumeration, so that the synonym source value can be controlled when editing synonyms.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Welcome to the ISDA CDM documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018-2020, ISDA.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'2.52.2',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          
+          SphinxRtdTheme.Navigation.enableSticky();
+          
+      });
+  </script> 
+
+</body>
+</html>
