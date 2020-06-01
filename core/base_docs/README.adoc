@@ -1,24 +1,13 @@
-= Metanorma StandardDocument Models
+= TradeDocs StandardDocument Models
 
-image:https://github.com/metanorma/metanorma-model-standoc/workflows/ubuntu/badge.svg["Ubuntu Build Status", link="https://github.com/metanorma/metanorma-model-standoc/actions?query=workflow%3Aubuntu"]
-image:https://github.com/metanorma/metanorma-model-standoc/workflows/macos/badge.svg["OSX Build Status", link="https://github.com/metanorma/metanorma-model-standoc/actions?query=workflow%3Amacos"]
-image:https://github.com/metanorma/metanorma-model-standoc/workflows/windows/badge.svg["Windows Build Status", link="https://github.com/metanorma/metanorma-model-standoc/actions?query=workflow%3Awindows"]
 
-Metanorma `StandardDocument` (abbreviated as `StanDoc`)
+
+TradeDocs `StandardDocument` (abbreviated as `StanDoc`)
 is a family of document models that forms the basis
-of Metanorma `IsoDoc`, which is used to represent ISO Standards and
+of TradeDocs `IsoDoc`, which is used to represent ISO Standards and
 similarly structured standards.
 It itself is an instantiation of
 https://github.com/metanorma/basicdoc-models[`BasicDocument` (`BasicDoc`)]
-
-It is one of the document models that Selagraph operates on.
-
-Metanorma StandardDocument itself is a document model can form the basis of multiple
-standard document types, including:
-
-* https://github.com/metanorma/metanorma-model-iso[ISO Standards]
-* https://github.com/metanorma/metanorma-model-csd[CSD Standards]
-* https://github.com/metanorma/metanorma-model-gb[Chinese Standards (GB and family)]
 
 The Relaton Bibliography UML models used within these models are located here:
 https://github.com/metanorma/relaton-models[Relaton BibModels]
