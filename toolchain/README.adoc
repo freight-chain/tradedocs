@@ -1,0 +1,14 @@
+= Toolchain
+
+== Overview
+
+- Gradle
+- Scripts
+- Parser
+
+
+== Copyright and License 
+
+Copyright (C) 2020 FreightTrust and Clearing Corporation
+Free use of this software is granted under the terms of the MIT License.
+Specific Documents are licensed under CC-NC-ND:2.5

@@ -1,0 +1,52 @@
+name: macos
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    paths-ignore:
+      - .github/workflows/docker.yml
+      - .github/workflows/ubuntu.yml
+      - .github/workflows/windows.yml
+
+jobs:
+  test-macos:
+    name: Test on macOS
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Checkout submodules
+        shell: bash
+        run: |
+          auth_header="$(git config --local --get http.https://github.com/.extraheader)"
+          git submodule sync --recursive
+          git -c "http.extraheader=$auth_header" -c protocol.version=2 submodule update --init --force --recursive --depth=1
+      - name: Cache xml2rfc
+        id: cache-xml2rfc
+        uses: actions/cache@v1
+        with:
+          path: ~/.cache/xml2rfc
+          key: xml2rfc
+          restore-key: xml2rfc
+      - name: Use Metanorma
+        run: |
+          brew update
+          brew install yq
+          brew install https://raw.githubusercontent.com/metanorma/homebrew-metanorma/master/Formula/metanorma.rb
+          metanorma version
+      - name: Setup Fonts
+        run: |
+          brew install cabextract gettext
+          brew link --force gettext
+          export RENAME_FONTS=false
+          curl -Ls https://raw.githubusercontent.com/metanorma/vista-fonts-installer/master/vista-fonts-installer.sh | bash
+      - name: Install bundler
+        run: |
+          sudo gem install bundler
+      - name: Metanorma compile
+        env:
+          JAVA_OPTS: "java.awt.headless=true"
+        run: |
+          export NODE_PATH=$(brew --prefix metanorma)/libexec/lib/node_modules
+          source $(brew --prefix metanorma)/libexec/venv/bin/activate
+          make clean all
