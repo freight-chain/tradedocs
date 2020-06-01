@@ -1,0 +1,68 @@
+# Currently we inherit from a namespaced grammar, isostandard. Until we inherit from isodoc,
+# we cannot have a new default namespace: we will end up with a grammar with two different
+# namespaces, one for isostandard and one for csand additions. And we do not want that.
+
+include "isodoc.rnc" {
+
+start = nist-standard
+
+DocumentType =
+        "standard" 
+
+# TitleType = ( "alternative" | "original" | "unofficial" | "subtitle" | "main" )
+
+preface =
+  element preface {
+    preface_abstract?, foreword?, (clause | errata_clause)*, reviewernote?, executivesummary?
+}
+
+editorialgroup = element editorialgroup {
+      committee+
+    }
+
+BibDataExtensionType =
+    doctype?, editorialgroup?, ics*, commentperiod?
+
+}
+
+DocRelationType |= "obsoletedBy" | "supersedes" | "supersededBy"
+
+BibliographicDateType |= "abandoned" | "superseded"
+
+commentperiod = element commentperiod {
+element from { ISO8601Date },
+element to { ISO8601Date }?,
+element extended { ISO8601Date }?
+}
+
+reviewernote = element reviewernote { Basic-Section }
+executivesummary = element executivesummary { Basic-Section }
+
+committee = element committee {
+  text
+}
+
+errata = element errata { erratarow+ }
+
+erratarow = element row {
+  element date { ISO8601Date },
+  element type { text },
+  element change { TextElement+ },
+  element pages { text }
+}
+
+errata_clause = element clause {
+ attribute id { xsd:ID }?,
+    attribute language { text }?,
+    attribute script { text }?,
+    attribute obligation { "normative" | "informative" }?,
+    section-title?,
+    (BasicBlock*, note*),
+    errata 
+}
+
+nist-standard =
+  element nist-standard {
+    bibdata, termdocsource*, boilerplate?, preface, sections+, annex*, bibliography?
+ }
+

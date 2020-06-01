@@ -1,0 +1,64 @@
+@startuml StandardDoc_Metadata
+/'
+Diagram:        StandardDoc_Metadata
+DateCreate:     22/08/2018
+Description:    Metanorma StandardDocument ("StanDoc") is a family of document models that forms the basis of Metanorma IsoDoc, which is used to represent
+                ISO Standards and similarly structured standards. It itself is an instantiation of BasicDocument (BasicDoc)
+                It is one of the document models that Selagraph operates on.
+                Metanorma StandardDocument itself is a document model can form the basis of multiple standard document types, including:
+
+                - ISO Standards
+                - CSD Standards
+                - Chinese Standards (GB and family)
+
+                The Relaton Bibliography UML models used within these models are located here: Relaton BibModels
+
+Hystory of changes:
+> DD/MM/YYYY
+    -
+    -
+'/
+
+'******* CONFIGURATION ************************************************
+!include style.uml.inc
+
+'******* CLASS DEFINITION *********************************************
+class BibDataExtensionType <<BasicDocument>> {
+}
+
+class BibData <<BasicDocument>> {
+}
+
+class StandardBibData {
+    +ext: StandardBibDataExtensionType
+}
+
+class StandardBibDataExtensionType {
+    +doctype: String
+    +structuredidentifier[0..*]: StructuredIdentifierType
+}
+
+class StructuredIdentifierType {
+    +type: String[0..1]
+    +agency: String[1..*]
+    +class: String[0..1]
+    +docnumber: String
+    +partnumber: String[0..1]
+    +edition: String[0..1]
+    +version: String[0..1]
+    +supplementtype: String[0..1]
+    +supplementnumber: String[0..1]
+    +year: String[0..1]
+    +language: String[0..1]
+}
+
+
+'******* NOTES ********************************************************
+
+'******* CLASS RELATIONS **********************************************
+BibData <|-- StandardBibData
+BibDataExtensionType <|-- StandardBibDataExtensionType
+StandardBibData <-- StandardBibDataExtensionType
+StandardBibDataExtensionType <-- StructuredIdentifierType
+
+@enduml
