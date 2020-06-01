@@ -1,0 +1,20 @@
+language: ruby
+dist: bionic
+cache: bundler
+
+os:
+  - linux
+  
+rvm:
+  - "2.6"
+
+jobs:
+  include:
+      os: linux
+      rvm: "2.6"
+      deploy:
+        provider: rubygems
+        
+script:
+  - bundle exec rake
+  - gem build edi.gemspec
