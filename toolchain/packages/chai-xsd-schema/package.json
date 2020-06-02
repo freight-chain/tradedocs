@@ -1,0 +1,50 @@
+{
+  "name": "chai-xsd-schema",
+  "version": "2.0.0",
+  "description": "Chai plugin for using libxml-xsd schema validation",
+  "main": "build/index.js",
+  "scripts": {
+    "prepublish": "npm run clean && npm run build",
+    "clean": "rm -Rf build",
+    "test": "mocha --compilers js:babel-core/register --require babel-polyfill --recursive --timeout 15000 test",
+    "lint": "eslint index.js lib/**/**/*.js",
+    "build": "babel index.js --out-dir build --copy-files"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/freight-chain/chai-xsd-schema.git"
+  },
+  "keywords": [
+    "mocha",
+    "chai",
+    "libxml-xsd",
+    "xml",
+    "xsd",
+    "validation"
+  ],
+  "author": "Abilio Henrique <admin@zyrorl.com> & sam bacha <sam@freighttrust.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/freight-chain/chai-xsd-schema/issues"
+  },
+  "homepage": "https://github.com/freight-chain/chai-xsd-schema#readme",
+  "dependencies": {
+    "bluebird": "^3.7.2",
+    "libxml-xsd": "^0.5.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.9.1",
+    "babel-eslint": "^10.1.0",
+    "babel-plugin-add-module-exports": "^1.0.2",
+    "babel-plugin-transform-async-to-module-method": "^6.8.0",
+    "babel-preset-es2017": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "babel-runtime": "^6.26.0",
+    "chai": "^4.2.0",
+    "eslint": "^7.1.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-import": "^2.20.2",
+    "mocha": "^7.2.0"
+  }
+}
