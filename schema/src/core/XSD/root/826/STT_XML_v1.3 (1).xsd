@@ -1,0 +1,821 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<!-- Complex Types -->
+	<xs:simpleType name="T_Gender">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Male"/>
+			<xs:enumeration value="Female"/>
+			<xs:enumeration value="Indeterminate"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_DocumentType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Passport"/>
+			<xs:enumeration value="IdentityCard"/>
+			<xs:enumeration value="Other"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_TelephoneNumberType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Mobile"/>
+			<xs:enumeration value="Office"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_RepairedOrModified">
+		<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	<xs:simpleType name="T_ReasonForVisit">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Based"/>
+			<xs:enumeration value="Maintainance"/>
+			<xs:enumeration value="PermanentImport"/>
+			<xs:enumeration value="Repair"/>
+			<xs:enumeration value="ShortTermVisit"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_PurposeOfVisit">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Business"/>
+			<xs:enumeration value="Pleasure"/>
+			<xs:enumeration value="Visiting Relatives"/>
+			<xs:enumeration value="Contract Crew"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_IsVisaHolder">
+		<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	<xs:simpleType name="T_HireOrCharter">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Charter"/>
+			<xs:enumeration value="Hire"/>
+			<xs:enumeration value="None"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_GoodsExist">
+		<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	<xs:simpleType name="T_GoodsDetails">
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="T_Goods">
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="T_FreeCirculationInEU">
+		<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	<xs:simpleType name="T_FirstTimeInEU">
+		<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	<xs:simpleType name="T_DurationOfStayInUK">
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="T_AircraftLessThan8000kg">
+		<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	<xs:simpleType name="AT_1">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="n.m"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- Complex Types -->
+	<xs:complexType name="T_eBorders_STTDocument">
+		<xs:sequence>
+			<xs:element ref="CommonSegment" minOccurs="1" maxOccurs="1"/>
+			<xs:choice>
+				<xs:element ref="GenericAviation" minOccurs="0" maxOccurs="1"/>
+				<xs:element ref="GenericMaritime" minOccurs="0" maxOccurs="1"/>
+			</xs:choice>
+		</xs:sequence>
+		<xs:attribute name="SchemaVersion" type="AT_1" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="T_VisitingAddress">
+		<xs:sequence>
+			<xs:element ref="AddressField" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="AddressPostCode" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="AddressCountry" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="T_VisitedPorts">
+		<xs:choice>
+			<xs:element ref="IATA" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="ICAO" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="UNLOCODE" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="LatLongPair" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="FullAddress" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="Description" minOccurs="0" maxOccurs="1"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="T_TravelDocument">
+		<xs:sequence>
+			<xs:element ref="DocumentType" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="DocumentNumber" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="IssuingAuthority" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="ExpirationDate" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="PlaceOfIssue" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="T_RestrictedGoods">
+		<xs:sequence>
+			<xs:element ref="GoodsExist" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="GoodsDetails" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="T_ProhibitedGoods">
+		<xs:sequence>
+			<xs:element ref="GoodsExist"/>
+			<xs:element ref="GoodsDetails"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="T_PortOfRegistry">
+		<xs:choice>
+			<xs:element ref="IATA" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="ICAO" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="UNLOCODE" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="LatLongPair" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="FullAddress" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="Description" minOccurs="0" maxOccurs="1"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="T_PortOfCallDeparture">
+		<xs:choice>
+			<xs:element ref="IATA" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="ICAO" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="UNLOCODE" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="LatLongPair" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="FullAddress" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="Description" minOccurs="0" maxOccurs="1"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="T_PortOfCallArrival">
+		<xs:choice>
+			<xs:element ref="IATA" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="ICAO" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="UNLOCODE" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="LatLongPair" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="FullAddress" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="Description" minOccurs="0" maxOccurs="1"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="T_PortOfEmbarkation">
+		<xs:choice>
+			<xs:element ref="IATA" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="ICAO" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="UNLOCODE" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="LatLongPair" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="FullAddress" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="Description" minOccurs="0" maxOccurs="1"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="T_PortOfDissembarkation">
+		<xs:choice>
+			<xs:element ref="IATA" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="ICAO" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="UNLOCODE" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="LatLongPair" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="FullAddress" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="Description" minOccurs="0" maxOccurs="1"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="T_Person">
+		<xs:sequence>
+			<xs:element ref="GivenName" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="Surname" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="IsCrew" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="Nationality" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="TravelDocument" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="Gender" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="PlaceOfBirth" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="DateOfbirth" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="TransitPassenger" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="RankRating" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="CrewAllowances" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="HomeAddress" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="VisitingAddress" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="PurposeOfVisit" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="DurationOfStayInUK" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="IsVisaHolder" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="ContactNumber" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="PortOfEmbarkation" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="PortOfDissembarkation" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="Cabin" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="T_OwnerAddress">
+		<xs:sequence>
+			<xs:element ref="AddressField" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="AddressPostCode" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="AddressCountry" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="T_CaptainAddress">
+		<xs:sequence>
+			<xs:element ref="AddressField" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="AddressPostCode" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="AddressCountry" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="T_Moorings">
+		<xs:choice>
+			<xs:element ref="IATA" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="ICAO" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="UNLOCODE" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="LatLongPair" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="FullAddress" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="Description" minOccurs="0" maxOccurs="1"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="T_LatLongPair">
+		<xs:sequence>
+			<xs:element ref="Lat" minOccurs="1" maxOccurs="1"/>
+			<xs:element ref="Long" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="T_IMOPort">
+		<xs:choice>
+			<xs:element ref="IATA" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="ICAO" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="UNLOCODE" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="LatLongPair" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="FullAddress" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="Description" minOccurs="0" maxOccurs="1"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="T_IMO">
+		<xs:sequence>
+			<xs:element ref="IMOPort" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="IMONumber" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="IMODate" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="T_IATA">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="13"/>
+		</xs:restriction>			
+	</xs:simpleType>
+	<xs:complexType name="T_HomeAddress">
+		<xs:sequence>
+			<xs:element ref="AddressField" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="AddressPostCode" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="AddressCountry" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="T_GenericMaritime">
+		<xs:sequence>
+			<xs:element ref="SeacraftName" minOccurs="1" maxOccurs="1"/>
+			<xs:element ref="isPowered" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="Make" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="Model" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="Type" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="FlagStatus" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="YearBuilt" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="RegistrationNumber" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="PortOfRegistry" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="IMO" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="MMSINumber" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="RegistrationCountry" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="CallSign" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="SailMarkings" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="HullColour" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="MetersmaxLength" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="Tonnage" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="Moorings" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="HireOrCharter" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="Nationality" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="HireCharterDetails" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="BuildLocation" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="WasteRequirements" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="CargoDescription" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="CargoDischarged" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="CargoRemarks" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="ISPSLevel" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="FirstTimeInEU" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="RepairedOrModified" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="VisitedPorts" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="UKVATPaid" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="T_GenericAviation">
+		<xs:sequence>
+			<xs:element ref="AircraftRegistrationNumber" minOccurs="1" maxOccurs="1"/>
+			<xs:element ref="CountryOfRegistration" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="AircraftType" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="AircraftMake" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="AircraftModel" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="BasedAt" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="CrewPhoneContact" minOccurs="0" maxOccurs="3"/>
+			<xs:element ref="ReasonForVisit" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="FreeCirculationInEU" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="AircraftLessThan8000kg" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="T_FullAddress">
+		<xs:sequence>
+			<xs:element ref="AddressField" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="AddressPostCode" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="AddressCountry" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="T_ExcessGoods">
+		<xs:sequence>
+			<xs:element ref="GoodsExist" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="GoodsDetails" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="T_DutyFreeGoods">
+		<xs:sequence>
+			<xs:element ref="GoodsExist" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="GoodsDetails" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="T_CrewPhoneContact">
+		<xs:sequence>
+			<xs:element ref="TelephoneNumber" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="TelephoneNumberType" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="T_CrewAllowances">
+		<xs:sequence>
+			<xs:element ref="Goods" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="GoodsDetails" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="T_ContactNumber">
+		<xs:sequence>
+			<xs:element ref="TelephoneNumber" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="TelephoneNumberType" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="T_CommonSegment">
+		<xs:sequence>
+			<xs:element ref="PortOfCallArrival" minOccurs="1" maxOccurs="1"/>
+			<xs:element ref="PortOfCallDeparture" minOccurs="1" maxOccurs="1"/>
+			<xs:element ref="OwnerOrganisation" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="OwnerSurname" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="OwnerGivenName" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="OwnerAddress" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="CaptainSurname" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="CaptainGivenName" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="CaptainAddress" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="ProhibitedGoods" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="RestrictedGoods" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="DutyFreeGoods" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="ExcessGoods" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="VesselExport" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="VesselExportPlaceOfDepartureAtUK" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="Person" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="DepartureDate" minOccurs="1" maxOccurs="1"/>
+			<xs:element ref="DepartureTime" minOccurs="1" maxOccurs="1"/>
+			<xs:element ref="ArrivalDate" minOccurs="1" maxOccurs="1"/>
+			<xs:element ref="ArrivalTime" minOccurs="1" maxOccurs="1"/>
+			<xs:element ref="ManifestType" minOccurs="1" maxOccurs="unbounded"/>
+			<xs:element ref="ManifestNo" minOccurs="1" maxOccurs="1"/>
+			<xs:element ref="ManifestDate" minOccurs="1" maxOccurs="1"/>
+			<xs:element ref="ManifestTime" minOccurs="1" maxOccurs="1"/>
+			<xs:element ref="AggregatorName" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="Cancellation" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="T_BuildLocation">
+		<xs:choice>
+			<xs:element ref="IATA" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="ICAO" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="UNLOCODE" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="LatLongPair" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="FullAddress" minOccurs="0" maxOccurs="1"/>
+			<xs:element ref="Description" minOccurs="0" maxOccurs="1"/>
+		</xs:choice>
+	</xs:complexType>
+	<!-- Simple Types -->
+	<xs:simpleType name="T_YearBuilt">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_WasteRequirements">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="1000"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_VesselExportPlaceOfDepartureAtUK">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="13"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_UNLOCODE">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="13"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_UKVATPaid">
+		<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	<xs:simpleType name="T_Type">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="35"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_TransitPassenger">
+		<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	<xs:simpleType name="T_Tonnage">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="35"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_TelephoneNumber">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="35"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_Surname">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="35"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_SeacraftName">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="35"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_SailMarkings">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="250"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_RegistrationNumber">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_RegistrationCountry">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_RankRating">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="35"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_Cabin">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="35"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_PlaceOfIssue">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="35"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_PlaceOfBirth">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="35"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_OwnerSurname">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="35"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_OwnerGivenName">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="35"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_CaptainSurname">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="35"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_CaptainGivenName">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="35"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_OwnerOrganisation">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="35"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_Nationality">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_Model">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="35"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_MetersmaxLength">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="35"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_Make">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="35"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_MMSINumber">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_Long">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="6"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_Lat">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="6"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_IssuingAuthority">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="35"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_IsCrew">
+		<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	<xs:simpleType name="T_ISPSLevel">
+		<xs:restriction base="xs:integer"/>
+	</xs:simpleType>
+	<xs:simpleType name="T_IMONumber">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_IMODate">
+		<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	<xs:simpleType name="T_ICAO">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="13"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_HullColour">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="35"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_FlagStatus">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="35"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_ExpirationDate">
+		<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	<xs:simpleType name="T_HireCharterDetails">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="200"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_GivenName">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="35"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_DocumentNumber">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="44"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_Description">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="200"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_DepartureTime">
+		<xs:restriction base="xs:time"/>
+	</xs:simpleType>
+	<xs:simpleType name="T_DepartureDate">
+		<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	<xs:simpleType name="T_DateOfbirth">
+		<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	<xs:simpleType name="T_CountryOfRegistration">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="35"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_CargoRemarks">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="1000"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_CargoDischarged">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="35"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_CargoDescription">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="1000"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_CallSign">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="35"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_BasedAt">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="200"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_ArrivalTime">
+		<xs:restriction base="xs:time"/>
+	</xs:simpleType>
+	<xs:simpleType name="T_ArrivalDate">
+		<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	<xs:simpleType name="T_AircraftType">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="35"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_AircraftRegistrationNumber">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_AircraftModel">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="35"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_AircraftMake">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="35"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_AggregatorName">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="35"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_AddressPostCode">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="13"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_AddressField">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="35"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_AddressCountry">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="35"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_isPowered">
+		<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	<xs:simpleType name="T_VesselExport">
+		<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	<xs:simpleType name="T_UK_VAT_Paid">
+		<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	<xs:simpleType name="T_ManifestType">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="35"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="T_ManifestNo">
+		<xs:restriction base="xs:integer"/>
+	</xs:simpleType>
+	<xs:simpleType name="T_ManifestDate">
+		<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	<xs:simpleType name="T_ManifestTime">
+		<xs:restriction base="xs:time"/>
+	</xs:simpleType>
+	<xs:simpleType name="T_Cancellation">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="35"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!-- Elements mappping -->
+	<xs:element name="isPowered" type="T_isPowered"/>
+	<xs:element name="eBorders_STTDocument" type="T_eBorders_STTDocument"/>
+	<xs:element name="YearBuilt" type="T_YearBuilt"/>
+	<xs:element name="WasteRequirements" type="T_WasteRequirements"/>
+	<xs:element name="VisitingAddress" type="T_VisitingAddress"/>
+	<xs:element name="VisitedPorts" type="T_VisitedPorts"/>
+	<xs:element name="VesselExportPlaceOfDepartureAtUK" type="T_VesselExportPlaceOfDepartureAtUK"/>
+	<xs:element name="VesselExport" type="T_VesselExport"/>
+	<xs:element name="UNLOCODE" type="T_UNLOCODE"/>
+	<xs:element name="UK_VAT_Paid" type="T_UK_VAT_Paid"/>
+	<xs:element name="UKVATPaid" type="T_UKVATPaid"/>
+	<xs:element name="Type" type="T_Type"/>
+	<xs:element name="TravelDocument" type="T_TravelDocument"/>
+	<xs:element name="TransitPassenger" type="T_TransitPassenger"/>
+	<xs:element name="Tonnage" type="T_Tonnage"/>
+	<xs:element name="TelephoneNumberType" type="T_TelephoneNumberType"/>
+	<xs:element name="TelephoneNumber" type="T_TelephoneNumber"/>
+	<xs:element name="Surname" type="T_Surname"/>
+	<xs:element name="SeacraftName" type="T_SeacraftName"/>
+	<xs:element name="SailMarkings" type="T_SailMarkings"/>
+	<xs:element name="RestrictedGoods" type="T_RestrictedGoods"/>
+	<xs:element name="RepairedOrModified" type="T_RepairedOrModified"/>
+	<xs:element name="RegistrationNumber" type="T_RegistrationNumber"/>
+	<xs:element name="RegistrationCountry" type="T_RegistrationCountry"/>
+	<xs:element name="ReasonForVisit" type="T_ReasonForVisit"/>
+	<xs:element name="RankRating" type="T_RankRating"/>
+	<xs:element name="PurposeOfVisit" type="T_PurposeOfVisit"/>
+	<xs:element name="ProhibitedGoods" type="T_ProhibitedGoods"/>
+	<xs:element name="PortOfRegistry" type="T_PortOfRegistry"/>
+	<xs:element name="PortOfEmbarkation" type="T_PortOfEmbarkation"/>
+	<xs:element name="PortOfDissembarkation" type="T_PortOfDissembarkation"/>
+	<xs:element name="PortOfCallDeparture" type="T_PortOfCallDeparture"/>
+	<xs:element name="PortOfCallArrival" type="T_PortOfCallArrival"/>
+	<xs:element name="PlaceOfIssue" type="T_PlaceOfIssue"/>
+	<xs:element name="PlaceOfBirth" type="T_PlaceOfBirth"/>
+	<xs:element name="Person" type="T_Person"/>
+	<xs:element name="OwnerSurname" type="T_OwnerSurname"/>
+	<xs:element name="OwnerGivenName" type="T_OwnerGivenName"/>
+	<xs:element name="OwnerAddress" type="T_OwnerAddress"/>
+	<xs:element name="CaptainSurname" type="T_CaptainSurname"/>
+	<xs:element name="CaptainGivenName" type="T_CaptainGivenName"/>
+	<xs:element name="CaptainAddress" type="T_CaptainAddress"/>
+	<xs:element name="OwnerOrganisation" type="T_OwnerOrganisation"/>
+	<xs:element name="Nationality" type="T_Nationality"/>
+	<xs:element name="Moorings" type="T_Moorings"/>
+	<xs:element name="Model" type="T_Model"/>
+	<xs:element name="MetersmaxLength" type="T_MetersmaxLength"/>
+	<xs:element name="Make" type="T_Make"/>
+	<xs:element name="MMSINumber" type="T_MMSINumber"/>
+	<xs:element name="Long" type="T_Long"/>
+	<xs:element name="LatLongPair" type="T_LatLongPair"/>
+	<xs:element name="Lat" type="T_Lat"/>
+	<xs:element name="IssuingAuthority" type="T_IssuingAuthority"/>
+	<xs:element name="IsVisaHolder" type="T_IsVisaHolder"/>
+	<xs:element name="IsCrew" type="T_IsCrew"/>
+	<xs:element name="ISPSLevel" type="T_ISPSLevel"/>
+	<xs:element name="IMOPort" type="T_IMOPort"/>
+	<xs:element name="IMONumber" type="T_IMONumber"/>
+	<xs:element name="IMODate" type="T_IMODate"/>
+	<xs:element name="IMO" type="T_IMO"/>
+	<xs:element name="ICAO" type="T_ICAO"/>
+	<xs:element name="IATA" type="T_IATA"/>
+	<xs:element name="HullColour" type="T_HullColour"/>
+	<xs:element name="HomeAddress" type="T_HomeAddress"/>
+	<xs:element name="HireOrCharter" type="T_HireOrCharter"/>
+	<xs:element name="HireCharterDetails" type="T_HireCharterDetails"/>
+	<xs:element name="GoodsExist" type="T_GoodsExist"/>
+	<xs:element name="GoodsDetails" type="T_GoodsDetails"/>
+	<xs:element name="Goods" type="T_Goods"/>
+	<xs:element name="GivenName" type="T_GivenName"/>
+	<xs:element name="GenericMaritime" type="T_GenericMaritime"/>
+	<xs:element name="GenericAviation" type="T_GenericAviation"/>
+	<xs:element name="Gender" type="T_Gender"/>
+	<xs:element name="FullAddress" type="T_FullAddress"/>
+	<xs:element name="FreeCirculationInEU" type="T_FreeCirculationInEU"/>
+	<xs:element name="FlagStatus" type="T_FlagStatus"/>
+	<xs:element name="FirstTimeInEU" type="T_FirstTimeInEU"/>
+	<xs:element name="ExpirationDate" type="T_ExpirationDate"/>
+	<xs:element name="ExcessGoods" type="T_ExcessGoods"/>
+	<xs:element name="DutyFreeGoods" type="T_DutyFreeGoods"/>
+	<xs:element name="DurationOfStayInUK" type="T_DurationOfStayInUK"/>
+	<xs:element name="DocumentType" type="T_DocumentType"/>
+	<xs:element name="DocumentNumber" type="T_DocumentNumber"/>
+	<xs:element name="Description" type="T_Description"/>
+	<xs:element name="DepartureTime" type="T_DepartureTime"/>
+	<xs:element name="DepartureDate" type="T_DepartureDate"/>
+	<xs:element name="DateOfbirth" type="T_DateOfbirth"/>
+	<xs:element name="CrewPhoneContact" type="T_CrewPhoneContact"/>
+	<xs:element name="CrewAllowances" type="T_CrewAllowances"/>
+	<xs:element name="CountryOfRegistration" type="T_CountryOfRegistration"/>
+	<xs:element name="ContactNumber" type="T_ContactNumber"/>
+	<xs:element name="CommonSegment" type="T_CommonSegment"/>
+	<xs:element name="CargoRemarks" type="T_CargoRemarks"/>
+	<xs:element name="CargoDischarged" type="T_CargoDischarged"/>
+	<xs:element name="CargoDescription" type="T_CargoDescription"/>
+	<xs:element name="CallSign" type="T_CallSign"/>
+	<xs:element name="BuildLocation" type="T_BuildLocation"/>
+	<xs:element name="BasedAt" type="T_BasedAt"/>
+	<xs:element name="ArrivalTime" type="T_ArrivalTime"/>
+	<xs:element name="ArrivalDate" type="T_ArrivalDate"/>
+	<xs:element name="AircraftType" type="T_AircraftType"/>
+	<xs:element name="AircraftRegistrationNumber" type="T_AircraftRegistrationNumber"/>
+	<xs:element name="AircraftModel" type="T_AircraftModel"/>
+	<xs:element name="AircraftMake" type="T_AircraftMake"/>
+	<xs:element name="AircraftLessThan8000kg" type="T_AircraftLessThan8000kg"/>
+	<xs:element name="AggregatorName" type="T_AggregatorName"/>
+	<xs:element name="AddressPostCode" type="T_AddressPostCode"/>
+	<xs:element name="AddressField" type="T_AddressField"/>
+	<xs:element name="AddressCountry" type="T_AddressCountry"/>
+	<xs:element name="Cabin" type="T_Cabin"/>
+	<xs:element name="ManifestType" type="T_ManifestType"/>
+	<xs:element name="ManifestNo" type="T_ManifestNo"/>
+	<xs:element name="ManifestDate" type="T_ManifestDate"/>
+	<xs:element name="ManifestTime" type="T_ManifestTime"/>
+	<xs:element name="Cancellation" type="T_Cancellation"/>
+</xs:schema>
