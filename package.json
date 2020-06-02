@@ -1,6 +1,6 @@
 {
-  "name": "@tradedocs/monorepo",
-  "version": "0.0.8",
+  "name": "@tradedocs/core",
+  "version": "0.1.4",
   "scripts": {
     "lint:text": "textlint '**/*.md'",
     "prettier": "prettier --write '**/*.md'",
@@ -30,10 +30,6 @@
     "textlint-rule-write-good": "^1.6.2"
   },
   "dependencies": {
-    "@mdx-js/mdx": "^1.6.5",
-    "@mdx-js/react": "^1.6.5",
     "data-cli": "^0.9.6",
-    "gatsby-plugin-feed-mdx": "^1.0.1",
-    "gatsby-plugin-mdx": "^1.2.13"
   }
 }
