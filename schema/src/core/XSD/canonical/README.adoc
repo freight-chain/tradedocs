@@ -1,0 +1,7 @@
+MOST ENUMERATED VALUES HAVE DELIBERATELY BEEN DEFINED AS XS:STRING TO AVOID CHANGE IMPACT. 
+        ENUMERATIONS (i.e. LIST OF POSSIBLE VALUES) ARE INSTEAD SPECIFIED IN THE DIS IMPLEMENTATION GUIDE.
+
+         NOTE: Please see the DIS Implementation guide published on CBP.GOV for supporting documentation regarding this XSD.
+        specifically, please use the guide to identify all enumerated values for elements in this XSD and for the list of documents supported by DIS at any given time.
+
+NOTE: CBP recommends that XSD validation not be performed on XML instances in order to accomodate multiple versions of code running between several different trade partners. i.e. typically CBP only adds elements to the XSD and does not remove or change element names, thus allowing parsers to extract information of interest to them and ignore what they do not need. exceptions to this are highlighted in this change log.
