@@ -1,0 +1,220 @@
+{
+  "datahub": {
+    "created": "2017-11-09T01:28:47.015126",
+    "findability": "published",
+    "flowid": "core/country-list/11",
+    "hash": "7b65bd46f99f8694a22fbcaddfef477f",
+    "modified": "2018-07-21T12:25:56.154211",
+    "owner": "core",
+    "ownerid": "core",
+    "stats": {
+      "bytes": 27566,
+      "rowcount": 249
+    }
+  },
+  "id": "core/country-list",
+  "licenses": [
+    {
+      "name": "ODC-PDDL-1.0",
+      "path": "http://opendatacommons.org/licenses/pddl/",
+      "title": "Open Data Commons Public Domain Dedication and License v1.0"
+    }
+  ],
+  "name": "country-list",
+  "readme": "ISO 3166-1-alpha-2 English country names and code elements. This list states\nthe country names (official short names in English) in alphabetical order as\ngiven in [ISO 3166-1][] and the corresponding ISO 3166-1-alpha-2 code elements.\n\n[ISO 3166-1]: http://www.iso.org/iso/home/standards/country_codes.htm\n\nThis list is updated whenever a change to the official code list in ISO 3166-1\nis effected by the ISO 3166/MA.\n\nIt lists 250 official short names and code elements as of Dec 2012.\n\n## License\n\nThis material is licensed by its maintainers under the Public Domain Dedication\nand License.\n\nNevertheless, it should be noted that this material is ultimately sourced from\nISO and their rights and licensing policy is somewhat unclear. As this is a\nshort, simple database of facts there is a strong argument that no rights can\nsubsist in this collection. However, ISO state on [their\nsite](http://www.iso.org/iso/home/standards/country_codes.htm): \n\n> ISO makes the list of alpha-2 country codes available for internal use and\n> non-commercial purposes free of charge. \n\nThis carries the implication (though not spelled out) that other uses are not\npermitted and that, therefore, there may be rights preventing further general\nuse and reuse.\n\n",
+  "related": [
+    {
+      "formats": [
+        "CSV",
+        "JSON"
+      ],
+      "path": "/core/country-codes",
+      "publisher": "core",
+      "title": "Country codes"
+    },
+    {
+      "formats": [
+        "CSV",
+        "JSON"
+      ],
+      "path": "/core/continent-codes",
+      "publisher": "core",
+      "title": "Continent codes"
+    },
+    {
+      "formats": [
+        "CSV",
+        "JSON"
+      ],
+      "path": "/core/airport-codes",
+      "publisher": "core",
+      "title": "Airport codes"
+    },
+    {
+      "formats": [
+        "CSV",
+        "JSON"
+      ],
+      "path": "/core/language-codes",
+      "publisher": "core",
+      "title": "Language codes"
+    }
+  ],
+  "resources": [
+    {
+      "bytes": 424,
+      "datahub": {
+        "type": "derived/report"
+      },
+      "description": "Validation report for tabular data",
+      "dpp:streamedFrom": "validation_report.json",
+      "format": "json",
+      "hash": "3c8e572a2770aa07680b3d1aca5e740b",
+      "name": "validation_report",
+      "path": "https://pkgstore.datahub.io/core/country-list/validation_report/data/3c8e572a2770aa07680b3d1aca5e740b/validation_report.json",
+      "profile": "data-resource"
+    },
+    {
+      "bytes": 4120,
+      "datahub": {
+        "derivedFrom": [
+          "data"
+        ],
+        "type": "derived/csv"
+      },
+      "dialect": {
+        "delimiter": ",",
+        "doubleQuote": true,
+        "lineTerminator": "\r\n",
+        "quoteChar": "\"",
+        "skipInitialSpace": false
+      },
+      "dpp:streamedFrom": "https://s3.amazonaws.com/rawstore.datahub.io/d7c9d7cfb42cb69f4422dec222dbbaa8.csv",
+      "encoding": "utf-8",
+      "format": "csv",
+      "hash": "d7c9d7cfb42cb69f4422dec222dbbaa8",
+      "mediatype": "text/csv",
+      "name": "data_csv",
+      "path": "https://pkgstore.datahub.io/core/country-list/data_csv/data/d7c9d7cfb42cb69f4422dec222dbbaa8/data_csv.csv",
+      "pathType": "local",
+      "primaryKey": "Code",
+      "profile": "data-resource",
+      "rowcount": 249,
+      "schema": {
+        "fields": [
+          {
+            "description": "Country Name",
+            "name": "Name",
+            "type": "string"
+          },
+          {
+            "description": "ISO 2-digit code from ISO 3166-alpha-2",
+            "name": "Code",
+            "type": "string"
+          }
+        ]
+      },
+      "signed": true
+    },
+    {
+      "bytes": 9576,
+      "datahub": {
+        "derivedFrom": [
+          "data"
+        ],
+        "type": "derived/json"
+      },
+      "dpp:streamedFrom": "https://s3.amazonaws.com/rawstore.datahub.io/d7c9d7cfb42cb69f4422dec222dbbaa8.csv",
+      "encoding": "utf-8",
+      "format": "json",
+      "hash": "8c458f2d15d9f2119654b29ede6e45b8",
+      "mediatype": "text/csv",
+      "name": "data_json",
+      "path": "https://pkgstore.datahub.io/core/country-list/data_json/data/8c458f2d15d9f2119654b29ede6e45b8/data_json.json",
+      "pathType": "local",
+      "primaryKey": "Code",
+      "profile": "data-resource",
+      "rowcount": 249,
+      "schema": {
+        "fields": [
+          {
+            "description": "Country Name",
+            "name": "Name",
+            "type": "string"
+          },
+          {
+            "description": "ISO 2-digit code from ISO 3166-alpha-2",
+            "name": "Code",
+            "type": "string"
+          }
+        ]
+      },
+      "signed": true
+    },
+    {
+      "bytes": 9576,
+      "datahub": {
+        "type": "derived/zip"
+      },
+      "description": "Compressed versions of dataset. Includes normalized CSV and JSON data with original data and datapackage.json.",
+      "dpp:streamedFrom": "/tmp/930.country-list.zip",
+      "format": "zip",
+      "name": "country-list_zip",
+      "path": "https://pkgstore.datahub.io/core/country-list/country-list_zip/data/b20e2b6d1027cc2ae47659fc37200283/country-list_zip.zip",
+      "profile": "data-resource"
+    },
+    {
+      "bytes": 3870,
+      "datahub": {
+        "type": "source/tabular"
+      },
+      "dpp:streamedFrom": "https://s3.amazonaws.com/rawstore.datahub.io/d7c9d7cfb42cb69f4422dec222dbbaa8.csv",
+      "encoding": "UTF-8",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "name": "data",
+      "path": "https://pkgstore.datahub.io/core/country-list/data/archive/d7c9d7cfb42cb69f4422dec222dbbaa8/data.csv",
+      "pathType": "local",
+      "primaryKey": "Code",
+      "profile": "data-resource",
+      "schema": {
+        "fields": [
+          {
+            "description": "Country Name",
+            "name": "Name",
+            "type": "string"
+          },
+          {
+            "description": "ISO 2-digit code from ISO 3166-alpha-2",
+            "name": "Code",
+            "type": "string"
+          }
+        ]
+      },
+      "signed": true
+    }
+  ],
+  "sources": [
+    {
+      "name": "ISO",
+      "path": "http://www.iso.org/iso/home/standards/country_codes.htm",
+      "title": "ISO"
+    }
+  ],
+  "title": "List of all countries with their 2 digit codes (ISO 3166-1)",
+  "views": [
+    {
+      "datahub": {
+        "type": "preview"
+      },
+      "name": "datahub-preview-data_csv_preview",
+      "resources": [
+        "data"
+      ],
+      "specType": "table",
+      "transform": {
+        "limit": 2000
+      }
+    }
+  ]
+}
