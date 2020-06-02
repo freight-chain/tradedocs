@@ -1,0 +1,370 @@
+{
+  "datahub": {
+    "created": "2017-11-09T01:16:54.479096",
+    "findability": "published",
+    "flowid": "core/iso-container-codes/9",
+    "hash": "f87264b7d0cf04913770cd9675eccefc",
+    "modified": "2018-04-17T09:27:34.646711",
+    "owner": "core",
+    "ownerid": "core",
+    "stats": {
+      "bytes": 134852,
+      "rowcount": 744
+    }
+  },
+  "description": "List of ISO 6346 Container Type Codes",
+  "id": "core/iso-container-codes",
+  "licenses": [
+    {
+      "name": "ODC-PDDL-1.0",
+      "path": "http://opendatacommons.org/licenses/pddl/",
+      "title": "Open Data Commons Public Domain Dedication and License v1.0"
+    }
+  ],
+  "name": "iso-container-codes",
+  "readme": "Coded list of ISO 6346 shipping containers, used in international trade and electronic shipping messages.\n\n## Data\n\nSource of information is from Container Container website (http://www.containercontainer.com/ISO6346.aspx) but multiple other sources of information exist on the web:\n* https://en.wikipedia.org/wiki/ISO_6346\n* http://www.shippingcontainers24.com/general/iso-6346-codes/\n* http://www.iso.org/iso/catalogue_detail?csnumber=20453 (Paid For)\n\n## License\n\nThis Data Package is licensed by its maintainers under the [Public Domain Dedication and License (PDDL)](http://opendatacommons.org/licenses/pddl/1.0/).",
+  "resources": [
+    {
+      "bytes": 929,
+      "datahub": {
+        "type": "derived/report"
+      },
+      "description": "Validation report for tabular data",
+      "dpp:streamedFrom": "validation_report.json",
+      "format": "json",
+      "hash": "9bd957edfaa8232599f1c9fc08b072ba",
+      "name": "validation_report",
+      "path": "https://pkgstore.datahub.io/core/iso-container-codes/validation_report/data/9bd957edfaa8232599f1c9fc08b072ba/validation_report.json",
+      "profile": "data-resource"
+    },
+    {
+      "bytes": 22768,
+      "datahub": {
+        "derivedFrom": [
+          "iso-container-codes"
+        ],
+        "type": "derived/csv"
+      },
+      "dialect": {
+        "delimiter": ",",
+        "doubleQuote": true,
+        "lineTerminator": "\r\n",
+        "quoteChar": "\"",
+        "skipInitialSpace": false
+      },
+      "dpp:streamedFrom": "https://s3.amazonaws.com/rawstore.datahub.io/3d5f65b5e0b5d4950ea2cb28f7f2ffb9.csv",
+      "encoding": "utf-8",
+      "format": "csv",
+      "hash": "7790141925ba4b3ebb2ad780006ee174",
+      "mediatype": "text/csv",
+      "name": "iso-container-codes_csv",
+      "path": "https://pkgstore.datahub.io/core/iso-container-codes/iso-container-codes_csv/data/7790141925ba4b3ebb2ad780006ee174/iso-container-codes_csv.csv",
+      "pathType": "local",
+      "profile": "data-resource",
+      "rowcount": 716,
+      "schema": {
+        "fields": [
+          {
+            "description": "A 4 digit Alpha Numeric Code uniquely describing the container as defined by ISO 6346",
+            "name": "code",
+            "pattern": "[A-Z0-9]{4}",
+            "type": "string"
+          },
+          {
+            "description": "Description of the Container Type",
+            "name": "description",
+            "pattern": "[A-Z]{50}",
+            "type": "string"
+          },
+          {
+            "decimalChar": ".",
+            "description": "External length in feet of the container",
+            "groupChar": "",
+            "name": "length",
+            "pattern": "[0-9]{2}",
+            "type": "number"
+          },
+          {
+            "decimalChar": ".",
+            "description": "External height of container in feet",
+            "groupChar": "",
+            "name": "height",
+            "type": "number"
+          },
+          {
+            "description": "4 Digit ISO 6346 describing the group the codes belong to, more regularly used when sending electronic shipping messages",
+            "name": "group",
+            "pattern": "[A-Z0-9]{4}",
+            "type": "string"
+          }
+        ]
+      },
+      "signed": true
+    },
+    {
+      "bytes": 767,
+      "datahub": {
+        "derivedFrom": [
+          "iso-container-groups"
+        ],
+        "type": "derived/csv"
+      },
+      "dialect": {
+        "delimiter": ",",
+        "doubleQuote": true,
+        "lineTerminator": "\r\n",
+        "quoteChar": "\"",
+        "skipInitialSpace": false
+      },
+      "dpp:streamedFrom": "https://s3.amazonaws.com/rawstore.datahub.io/8894276d7939856e1600f1ec7b4d3736.csv",
+      "encoding": "utf-8",
+      "format": "csv",
+      "hash": "035c70dcb7e4af9530b62594e7ff5186",
+      "mediatype": "text/csv",
+      "name": "iso-container-groups_csv",
+      "path": "https://pkgstore.datahub.io/core/iso-container-codes/iso-container-groups_csv/data/035c70dcb7e4af9530b62594e7ff5186/iso-container-groups_csv.csv",
+      "pathType": "local",
+      "profile": "data-resource",
+      "rowcount": 28,
+      "schema": {
+        "fields": [
+          {
+            "description": "A 4 digit Alpha Numeric Code uniquely describing the container/group as defined by ISO 6346",
+            "name": "code",
+            "pattern": "[A-Z0-9]{4}",
+            "type": "string"
+          },
+          {
+            "description": "Description of the Container",
+            "name": "description",
+            "pattern": "[A-Z]{50}",
+            "type": "string"
+          }
+        ]
+      },
+      "signed": true
+    },
+    {
+      "bytes": 69887,
+      "datahub": {
+        "derivedFrom": [
+          "iso-container-codes"
+        ],
+        "type": "derived/json"
+      },
+      "dpp:streamedFrom": "https://s3.amazonaws.com/rawstore.datahub.io/3d5f65b5e0b5d4950ea2cb28f7f2ffb9.csv",
+      "encoding": "utf-8",
+      "format": "json",
+      "hash": "7e295180204aca68b0f94a64013b640b",
+      "mediatype": "text/csv",
+      "name": "iso-container-codes_json",
+      "path": "https://pkgstore.datahub.io/core/iso-container-codes/iso-container-codes_json/data/7e295180204aca68b0f94a64013b640b/iso-container-codes_json.json",
+      "pathType": "local",
+      "profile": "data-resource",
+      "rowcount": 716,
+      "schema": {
+        "fields": [
+          {
+            "description": "A 4 digit Alpha Numeric Code uniquely describing the container as defined by ISO 6346",
+            "name": "code",
+            "pattern": "[A-Z0-9]{4}",
+            "type": "string"
+          },
+          {
+            "description": "Description of the Container Type",
+            "name": "description",
+            "pattern": "[A-Z]{50}",
+            "type": "string"
+          },
+          {
+            "description": "External length in feet of the container",
+            "name": "length",
+            "pattern": "[0-9]{2}",
+            "type": "number"
+          },
+          {
+            "description": "External height of container in feet",
+            "name": "height",
+            "type": "number"
+          },
+          {
+            "description": "4 Digit ISO 6346 describing the group the codes belong to, more regularly used when sending electronic shipping messages",
+            "name": "group",
+            "pattern": "[A-Z0-9]{4}",
+            "type": "string"
+          }
+        ]
+      },
+      "signed": true
+    },
+    {
+      "bytes": 1562,
+      "datahub": {
+        "derivedFrom": [
+          "iso-container-groups"
+        ],
+        "type": "derived/json"
+      },
+      "dpp:streamedFrom": "https://s3.amazonaws.com/rawstore.datahub.io/8894276d7939856e1600f1ec7b4d3736.csv",
+      "encoding": "utf-8",
+      "format": "json",
+      "hash": "878e70c3a1857648d05df09c15105191",
+      "mediatype": "text/csv",
+      "name": "iso-container-groups_json",
+      "path": "https://pkgstore.datahub.io/core/iso-container-codes/iso-container-groups_json/data/878e70c3a1857648d05df09c15105191/iso-container-groups_json.json",
+      "pathType": "local",
+      "profile": "data-resource",
+      "rowcount": 28,
+      "schema": {
+        "fields": [
+          {
+            "description": "A 4 digit Alpha Numeric Code uniquely describing the container/group as defined by ISO 6346",
+            "name": "code",
+            "pattern": "[A-Z0-9]{4}",
+            "type": "string"
+          },
+          {
+            "description": "Description of the Container",
+            "name": "description",
+            "pattern": "[A-Z]{50}",
+            "type": "string"
+          }
+        ]
+      },
+      "signed": true
+    },
+    {
+      "bytes": 15405,
+      "datahub": {
+        "type": "derived/zip"
+      },
+      "description": "Compressed versions of dataset. Includes normalized CSV and JSON data with original data and datapackage.json.",
+      "dpp:streamedFrom": "/tmp/860.iso-container-codes.zip",
+      "format": "zip",
+      "name": "iso-container-codes_zip",
+      "path": "https://pkgstore.datahub.io/core/iso-container-codes/iso-container-codes_zip/data/2f6790de5af7ed49df6771d7380551fc/iso-container-codes_zip.zip",
+      "profile": "data-resource"
+    },
+    {
+      "bytes": 22768,
+      "datahub": {
+        "type": "source/tabular"
+      },
+      "dpp:streamedFrom": "https://s3.amazonaws.com/rawstore.datahub.io/3d5f65b5e0b5d4950ea2cb28f7f2ffb9.csv",
+      "encoding": "ISO-8859-1",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "name": "iso-container-codes",
+      "path": "https://pkgstore.datahub.io/core/iso-container-codes/iso-container-codes/archive/3d5f65b5e0b5d4950ea2cb28f7f2ffb9/iso-container-codes.csv",
+      "pathType": "local",
+      "profile": "data-resource",
+      "schema": {
+        "fields": [
+          {
+            "description": "A 4 digit Alpha Numeric Code uniquely describing the container as defined by ISO 6346",
+            "name": "code",
+            "pattern": "[A-Z0-9]{4}",
+            "type": "string"
+          },
+          {
+            "description": "Description of the Container Type",
+            "name": "description",
+            "pattern": "[A-Z]{50}",
+            "type": "string"
+          },
+          {
+            "description": "External length in feet of the container",
+            "name": "length",
+            "pattern": "[0-9]{2}",
+            "type": "number"
+          },
+          {
+            "description": "External height of container in feet",
+            "name": "height",
+            "type": "number"
+          },
+          {
+            "description": "4 Digit ISO 6346 describing the group the codes belong to, more regularly used when sending electronic shipping messages",
+            "name": "group",
+            "pattern": "[A-Z0-9]{4}",
+            "type": "string"
+          }
+        ]
+      },
+      "signed": true
+    },
+    {
+      "bytes": 766,
+      "datahub": {
+        "type": "source/tabular"
+      },
+      "dpp:streamedFrom": "https://s3.amazonaws.com/rawstore.datahub.io/8894276d7939856e1600f1ec7b4d3736.csv",
+      "encoding": "ISO-8859-1",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "name": "iso-container-groups",
+      "path": "https://pkgstore.datahub.io/core/iso-container-codes/iso-container-groups/archive/8894276d7939856e1600f1ec7b4d3736/iso-container-groups.csv",
+      "pathType": "local",
+      "profile": "data-resource",
+      "schema": {
+        "fields": [
+          {
+            "description": "A 4 digit Alpha Numeric Code uniquely describing the container/group as defined by ISO 6346",
+            "name": "code",
+            "pattern": "[A-Z0-9]{4}",
+            "type": "string"
+          },
+          {
+            "description": "Description of the Container",
+            "name": "description",
+            "pattern": "[A-Z]{50}",
+            "type": "string"
+          }
+        ]
+      },
+      "signed": true
+    }
+  ],
+  "sources": [
+    {
+      "name": "Container Container",
+      "path": "http://www.containercontainer.com/ISO6346.aspx",
+      "title": "Container Container"
+    },
+    {
+      "name": "Wikipedia",
+      "path": "https://en.wikipedia.org/wiki/ISO_6346",
+      "title": "Wikipediad"
+    }
+  ],
+  "title": "ISO 6346 Container Type Codes",
+  "version": "1.0.0",
+  "views": [
+    {
+      "datahub": {
+        "type": "preview"
+      },
+      "name": "datahub-preview-iso-container-codes_csv_preview",
+      "resources": [
+        "iso-container-codes"
+      ],
+      "specType": "table",
+      "transform": {
+        "limit": 2000
+      }
+    },
+    {
+      "datahub": {
+        "type": "preview"
+      },
+      "name": "datahub-preview-iso-container-groups_csv_preview",
+      "resources": [
+        "iso-container-groups"
+      ],
+      "specType": "table",
+      "transform": {
+        "limit": 2000
+      }
+    }
+  ]
+}
