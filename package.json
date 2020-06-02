@@ -30,6 +30,13 @@
     "textlint-rule-write-good": "^1.6.2"
   },
   "dependencies": {
+    "@wikipathways/cxsd": "^0.2.10",
+    "chai": "^4.2.0",
     "data-cli": "^0.9.6",
+    "mocha": "^7.2.0",
+    "moddle": "^5.0.1",
+    "moddle-xml": "^9.0.2",
+    "typescript": "^3.9.3",
+    "xsd2jsonschema": "^0.3.4"
   }
 }
