@@ -30,6 +30,6 @@
     "textlint-rule-write-good": "^1.6.2"
   },
   "dependencies": {
-    "data-cli": "^0.9.6",
+    "data-cli": "^0.9.6"
   }
 }
