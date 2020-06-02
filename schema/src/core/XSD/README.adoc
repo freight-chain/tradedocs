@@ -1,0 +1,68 @@
+# TradeDocs XSD Schema 
+
+<pre>
+status: draft
+author: Freight Trust
+format: XSD
+encoding: Ascii-7
+function: core schema
+</pre>
+
+
+## XSD Schema & Rules
+
+XSD Schema are derived from components created through the application of CCTS and
+UN/CEFACT Modelling Methodology (UMM) process modelling and data analysis. UN/CEFACT XSD
+Schema contain XML syntax specific constructs that follow the naming and design rules in this
+specification. 
+
+> A CCT is defined as a `xsd:complexType`. Supplementary components are declared as attributes for the CCT `xsd:complexType`. CCTs are contained in the Core Component Type Schema Module which is considered the normative XSD expression of CCTS Core Component Type
+
+The XML fully qualified XPath ties the information to its standardized semantics as described in the underlying CCTS construct and CCTS dictionary entry name, while the XML element or attribute name is a truncation that reflects the hierarchy inherent in the XML construct. 
+
+
+[R2]  MUST be based on the W3C XML Schema
+Recommendations: XML Schema Part 1: Structures and XML Schema Part 2: Data Types
+
+[R3] All XSD Schema and conformant XML instance documents MUST be based on the W3C suite of technical specifications holding recommendation status.
+
+#### Fully Qualified XPath
+[R5] Each element or attribute XML name MUST have one and only one fully qualified XPath
+(FQXP).
+
+```markdown
+Address/Coordinate/LatitudeMeasure
+Organisation/Location/Name
+```
+
+[R6]  Element, attribute and type names MUST be composed of words in the English language,
+using the primary English spellings provided in the Oxford English Dictionary. 
+
+
+[R7] Lower camel case (LCC) MUST be used for naming attributes. 
+
+
+[R8] Upper camel case (UCC) MUST be used for naming elements and types.
+
+#### Attribute 
+```xml
+<xsd:attribute name="unitCode" .../> 
+```
+#### Element
+```xml
+<xsd:complexType name="DespatchAdviceCodeType"> 
+```
+
+### Type
+```xml
+<xsd:complexType name="DespatchAdviceCodeType"> 
+```
+
+[R9] Element, attribute and type names MUST be in singular form unless the concept itself is
+plural. 
+
+[R10] Element, attribute and type names MUST be drawn from the following character set `a-z` and `A-Z`
+
+
+
+
