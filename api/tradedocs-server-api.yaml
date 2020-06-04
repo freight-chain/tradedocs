@@ -1,16 +1,16 @@
-swagger: '2.0'
+swagger: "2.0"
 info:
   version: 2.3.0
   title: TradeDocs Server API
   description: Describes the basic methods for managing the Business Workflow Engine processes that is used by TradeDocs
-  termsOfService: 'freighttrust.com'
+  termsOfService: "freighttrust.com"
   contact:
     name: Freight Trust
     email: admin@freighttrust.com
-    url: 'https://tradedocs.org'
+    url: "https://tradedocs.org"
 
 host: localhost:8077
-basePath: '/workflowapi'
+basePath: "/workflowapi"
 schemes:
   - http
 consumes:
@@ -18,7 +18,7 @@ consumes:
 produces:
   - application/json
 paths:
-  '/createinstance/{processId}':
+  "/createinstance/{processId}":
     get:
       summary: >-
         Creates the instance of the process. Use GET verb if you don't want to
@@ -59,10 +59,10 @@ paths:
           description: Tenant Id
           type: string
       responses:
-        '200':
+        "200":
           description: Operation result
           schema:
-            $ref: '#/definitions/OperationResult'
+            $ref: "#/definitions/OperationResult"
     post:
       summary: >-
         Creates the instance of the process. Use POST verb if you want to
@@ -97,15 +97,15 @@ paths:
             Parameters for creating a scheme. Must be a valid JSON serialized
             object.
           type: string
-        - name: 'ProcessParameters'
+        - name: "ProcessParameters"
           in: body
           required: false
           schema:
-             $ref: '#/definitions/ProcessParameters'
+            $ref: "#/definitions/ProcessParameters"
         - name: tenantId
           in: query
           required: false
-          description: Tenant Id 
+          description: Tenant Id
           type: string
         - name: persist
           in: query
@@ -113,11 +113,11 @@ paths:
           description: names of persistence parameters. Comma-separated string.
           type: string
       responses:
-        '200':
+        "200":
           description: Operation result
           schema:
-            $ref: '#/definitions/OperationResult'
-  '/getinstanceinfo/{processId}':
+            $ref: "#/definitions/OperationResult"
+  "/getinstanceinfo/{processId}":
     get:
       summary: >-
         Creates the instance of the process. Use GET verb if you don't want to
@@ -134,13 +134,13 @@ paths:
           in: query
           required: false
           description: Tenant Id (for assert processId)
-          type: string          
+          type: string
       responses:
-        '200':
+        "200":
           description: Operation result
           schema:
-            $ref: '#/definitions/ProcessInfoOperationResult'
-  '/getavailablecommands/{processId}':
+            $ref: "#/definitions/ProcessInfoOperationResult"
+  "/getavailablecommands/{processId}":
     get:
       summary: >-
         Returns a list of available commands for the current state of the
@@ -167,13 +167,13 @@ paths:
           in: query
           required: false
           description: Tenant Id (for assert processId)
-          type: string          
+          type: string
       responses:
-        '200':
+        "200":
           description: Operation result
           schema:
-            $ref: '#/definitions/GetCommandsOperationResult'
-  '/executecommand/{processId}':
+            $ref: "#/definitions/GetCommandsOperationResult"
+  "/executecommand/{processId}":
     get:
       summary: >-
         Execute the command. Use GET verb if you don't want to transfer a
@@ -205,12 +205,12 @@ paths:
           in: query
           required: false
           description: Tenant Id (for assert processId)
-          type: string          
+          type: string
       responses:
-        '200':
+        "200":
           description: Operation result
           schema:
-            $ref: '#/definitions/ExecuteCommandResult'
+            $ref: "#/definitions/ExecuteCommandResult"
     post:
       summary: >-
         Execute the command. Use POST verb if you want to transfer a parameters
@@ -238,11 +238,11 @@ paths:
           required: false
           description: Deputy's identifier
           type: string
-        - name: 'ProcessParameters'
+        - name: "ProcessParameters"
           in: body
           required: false
           schema:
-             $ref: '#/definitions/ProcessParameters'
+            $ref: "#/definitions/ProcessParameters"
         - name: tenantId
           in: query
           required: false
@@ -252,13 +252,13 @@ paths:
           in: query
           required: false
           description: names of persistence parameters. Comma-separated string.
-          type: string  
+          type: string
       responses:
-        '200':
+        "200":
           description: Operation result
           schema:
-            $ref: '#/definitions/ExecuteCommandResult'
-  '/getavailablestatetoset/{processId}':
+            $ref: "#/definitions/ExecuteCommandResult"
+  "/getavailablestatetoset/{processId}":
     get:
       summary: >-
         Returns the list of available states, that can be set through the
@@ -275,13 +275,13 @@ paths:
           in: query
           required: false
           description: Tenant Id (for assert processId)
-          type: string          
+          type: string
       responses:
-        '200':
+        "200":
           description: Operation result
           schema:
-            $ref: '#/definitions/GetStatesOperationResult'
-  '/setstate/{processId}':
+            $ref: "#/definitions/GetStatesOperationResult"
+  "/setstate/{processId}":
     get:
       summary: >-
         Sets the new state to the process. Use GET verb if you don't want to
@@ -313,12 +313,12 @@ paths:
           in: query
           required: false
           description: Tenant Id (for assert processId)
-          type: string          
+          type: string
       responses:
-        '200':
+        "200":
           description: Operation result
           schema:
-            $ref: '#/definitions/OperationResult'
+            $ref: "#/definitions/OperationResult"
     post:
       summary: >-
         Sets the new state to the process. Use POST verb if you want to transfer
@@ -346,22 +346,22 @@ paths:
           required: false
           description: Deputy's identifier
           type: string
-        - name: 'ProcessParameters'
+        - name: "ProcessParameters"
           in: body
           required: false
           schema:
-             $ref: '#/definitions/ProcessParameters'
+            $ref: "#/definitions/ProcessParameters"
         - name: tenantId
           in: query
           required: false
           description: Tenant Id (for assert processId)
-          type: string                
+          type: string
       responses:
-        '200':
+        "200":
           description: Operation result
           schema:
-            $ref: '#/definitions/OperationResult'
-  '/isexistprocess/{processId}':
+            $ref: "#/definitions/OperationResult"
+  "/isexistprocess/{processId}":
     get:
       summary: Check if the process exists
       operationId: IsExistProcess
@@ -376,13 +376,13 @@ paths:
           in: query
           required: false
           description: Tenant Id (for assert processId)
-          type: string          
+          type: string
       responses:
-        '200':
+        "200":
           description: Operation result
           schema:
-            $ref: '#/definitions/IsExistOperationResult'
-  '/deleteinstance/{processId}':
+            $ref: "#/definitions/IsExistOperationResult"
+  "/deleteinstance/{processId}":
     post:
       summary: Deletes the instance of the process.
       operationId: DeleteInstance
@@ -397,33 +397,33 @@ paths:
           in: query
           required: false
           description: Tenant Id (for assert processId)
-          type: string          
+          type: string
       responses:
-        '200':
+        "200":
           description: Operation result
           schema:
-            $ref: '#/definitions/OperationResult'
-  '/deleteinstances/':
+            $ref: "#/definitions/OperationResult"
+  "/deleteinstances/":
     post:
       summary: Deletes the instances of the processes.
       operationId: DeleteInstances
       parameters:
-        - name: 'ProcessIds'
+        - name: "ProcessIds"
           in: body
           required: false
           schema:
-             $ref: '#/definitions/ProcessIds'
+            $ref: "#/definitions/ProcessIds"
         - name: tenantId
           in: query
           required: false
           description: Tenant Id (for assert ALL processIds)
-          type: string        
+          type: string
       responses:
-        '200':
+        "200":
           description: Operation result
           schema:
-            $ref: '#/definitions/OperationResult'
-  '/inbox':
+            $ref: "#/definitions/OperationResult"
+  "/inbox":
     get:
       summary: Return a list of inbox items
       operationId: GetInbox
@@ -440,11 +440,11 @@ paths:
           description: User's identifier
           type: string
       responses:
-        '200':
+        "200":
           description: Operation result
           schema:
-            $ref: '#/definitions/InboxResult'
-  '/outbox':
+            $ref: "#/definitions/InboxResult"
+  "/outbox":
     get:
       summary: Return a list of outbox items
       operationId: GetOutbox
@@ -464,28 +464,28 @@ paths:
           in: query
           required: false
           description: Tenant Id (for assert processId)
-          type: string 
+          type: string
       responses:
-        '200':
+        "200":
           description: Operation result
           schema:
-            $ref: '#/definitions/OutboxResult'
-  '/inboxrecalc':
+            $ref: "#/definitions/OutboxResult"
+  "/inboxrecalc":
     post:
       summary: Recalc inbox and outbox for specific processes.
       operationId: InboxRecalc
       parameters:
-        - name: 'ProcessIds'
+        - name: "ProcessIds"
           in: body
           required: false
           schema:
-             $ref: '#/definitions/ProcessIds'
+            $ref: "#/definitions/ProcessIds"
       responses:
-        '200':
+        "200":
           description: Operation result
           schema:
-            $ref: '#/definitions/OperationResult'
-  '/getformbyflow/{name}':
+            $ref: "#/definitions/OperationResult"
+  "/getformbyflow/{name}":
     get:
       summary: Return a form according to a businessflow and a state of tradedocs
       operationId: GetFormByFlow
@@ -510,13 +510,13 @@ paths:
           in: query
           required: false
           description: Tenant Id (for assert processId)
-          type: string           
+          type: string
       responses:
-        '200':
+        "200":
           description: Operation result
           schema:
-            $ref: '#/definitions/BusinessFlowResult'
-  '/getschemelist':
+            $ref: "#/definitions/BusinessFlowResult"
+  "/getschemelist":
     get:
       summary: Return a list of scheme codes
       operationId: GetSchemeList
@@ -527,11 +527,11 @@ paths:
           description: tags separated by commas
           type: string
       responses:
-        '200':
+        "200":
           description: Operation result
           schema:
-            $ref: '#/definitions/GetSchemeListResult'
-  '/loginfo':
+            $ref: "#/definitions/GetSchemeListResult"
+  "/loginfo":
     post:
       summary: Write message to the info log
       operationId: LogInfo
@@ -542,11 +542,11 @@ paths:
           description: Message to write
           type: string
       responses:
-        '200':
+        "200":
           description: Operation result
           schema:
-            $ref: '#/definitions/OperationResult'
-  '/logerror':
+            $ref: "#/definitions/OperationResult"
+  "/logerror":
     post:
       summary: Write message to the error log
       operationId: LogError
@@ -557,11 +557,11 @@ paths:
           description: Message to write
           type: string
       responses:
-        '200':
+        "200":
           description: Operation result
           schema:
-            $ref: '#/definitions/OperationResult'
-  '/logdebug':
+            $ref: "#/definitions/OperationResult"
+  "/logdebug":
     post:
       summary: Write message to the debug log
       operationId: LogDebug
@@ -572,333 +572,333 @@ paths:
           description: Message to write
           type: string
       responses:
-        '200':
+        "200":
           description: Operation result
           schema:
-            $ref: '#/definitions/OperationResult'
+            $ref: "#/definitions/OperationResult"
 definitions:
-    OperationResult:
-      type: object
-      required:
-        - success
-      properties:
-        success:
-          description: Indicates whether the operation was successful or not
-          type: boolean
-        error:
-          description: The short description of the error
-          type: string
-        message:
-          description: The details of the error
-          type: string
-    ProcessInfoOperationResult:
-      allOf:
-        - $ref: '#/definitions/OperationResult'
-        - type: object
-          properties:
-            data:
-              $ref: '#/definitions/ProcessInfo'
-    GetCommandsOperationResult:
-      allOf:
-        - $ref: '#/definitions/OperationResult'
-        - type: object
-          properties:
-            data:
-              type: array
-              items:
-                $ref: '#/definitions/Command'
-    GetStatesOperationResult:
-      allOf:
-        - $ref: '#/definitions/OperationResult'
-        - type: object
-          properties:
-            data:
-              type: array
-              items:
-                $ref: '#/definitions/State'
-    IsExistOperationResult:
-      allOf:
-        - $ref: '#/definitions/OperationResult'
-        - type: object
-          properties:
-            data:
-              type: boolean
-    ExecuteCommandResult:
-      allOf:
-        - $ref: '#/definitions/OperationResult'
-        - type: object
-          properties:
-            data:
-              $ref: '#/definitions/ExecuteCommandInfo'
-    InboxResult:
-      allOf:
-        - $ref: '#/definitions/OperationResult'
-        - type: object
-          properties:
-            data:
-              type: array
-              items:
-                $ref: '#/definitions/InboxItem'
-    OutboxResult:
-      allOf:
-        - $ref: '#/definitions/OperationResult'
-        - type: object
-          properties:
-            data:
-              type: array
-              items:
-                $ref: '#/definitions/OutboxItem'
-    BusinessFlowResult:
-      allOf:
-        - $ref: '#/definitions/OperationResult'
-        - type: object
-          properties:
-            data:
-              $ref: '#/definitions/Form'
-    ExecuteCommandInfo:
-      type: object
-      required:
-        - WasExecuted
-        - ProcessInstance
-      properties:
-        WasExecuted:
-          type: boolean
-        ProcessInstance: 
-          $ref: '#/definitions/ProcessInstance'
-    Form:
-      type: object
-      required:
-        - Name
-      properties:
-        Name:
-          type: string
-        Source:
-          type: string
-    InboxItem:
-      type: object
-      properties:
-        ProcessId:
-          type: string
-          format: uuid
-        IdentityId:
-          type: string
-    OutboxItem:
-      type: object
-      properties:
-        ProcessId:
-          type: string
-          format: uuid
-        ExecutorIdentityId:
-          type: string
-    ProcessInstance:
-      type: object
-      required:
-        - Id
-        - ActivityName
-        - SchemeCode
-      properties:
-        Id:
-          type: string
-          format: uuid
-        StateName:
-          type: string
-        ActivityName:
-          type: string
-        SchemeId:
-          type: string
-          format: uuid
-        SchemeCode:
-          type: string
-        PreviousState:
-          type: string
-        PreviousStateForDirect:
-          type: string
-        PreviousStateForReverse:
-          type: string
-        PreviousActivity:
-          type: string
-        PreviousActivityForDirect:
-          type: string
-        PreviousActivityForReverse:
-          type: string
-        ParentProcessId:
-          type: string
-          format: uuid
-        RootProcessId:
-          type: string
-          format: uuid
-        ProcessParameters:
-          $ref: '#/definitions/ProcessParameters'
-    ProcessInfo:
-      allOf:
-        - $ref: '#/definitions/ProcessInstance'
-        - type: object
-          required:
+  OperationResult:
+    type: object
+    required:
+      - success
+    properties:
+      success:
+        description: Indicates whether the operation was successful or not
+        type: boolean
+      error:
+        description: The short description of the error
+        type: string
+      message:
+        description: The details of the error
+        type: string
+  ProcessInfoOperationResult:
+    allOf:
+      - $ref: "#/definitions/OperationResult"
+      - type: object
+        properties:
+          data:
+            $ref: "#/definitions/ProcessInfo"
+  GetCommandsOperationResult:
+    allOf:
+      - $ref: "#/definitions/OperationResult"
+      - type: object
+        properties:
+          data:
+            type: array
+            items:
+              $ref: "#/definitions/Command"
+  GetStatesOperationResult:
+    allOf:
+      - $ref: "#/definitions/OperationResult"
+      - type: object
+        properties:
+          data:
+            type: array
+            items:
+              $ref: "#/definitions/State"
+  IsExistOperationResult:
+    allOf:
+      - $ref: "#/definitions/OperationResult"
+      - type: object
+        properties:
+          data:
+            type: boolean
+  ExecuteCommandResult:
+    allOf:
+      - $ref: "#/definitions/OperationResult"
+      - type: object
+        properties:
+          data:
+            $ref: "#/definitions/ExecuteCommandInfo"
+  InboxResult:
+    allOf:
+      - $ref: "#/definitions/OperationResult"
+      - type: object
+        properties:
+          data:
+            type: array
+            items:
+              $ref: "#/definitions/InboxItem"
+  OutboxResult:
+    allOf:
+      - $ref: "#/definitions/OperationResult"
+      - type: object
+        properties:
+          data:
+            type: array
+            items:
+              $ref: "#/definitions/OutboxItem"
+  BusinessFlowResult:
+    allOf:
+      - $ref: "#/definitions/OperationResult"
+      - type: object
+        properties:
+          data:
+            $ref: "#/definitions/Form"
+  ExecuteCommandInfo:
+    type: object
+    required:
+      - WasExecuted
+      - ProcessInstance
+    properties:
+      WasExecuted:
+        type: boolean
+      ProcessInstance:
+        $ref: "#/definitions/ProcessInstance"
+  Form:
+    type: object
+    required:
+      - Name
+    properties:
+      Name:
+        type: string
+      Source:
+        type: string
+  InboxItem:
+    type: object
+    properties:
+      ProcessId:
+        type: string
+        format: uuid
+      IdentityId:
+        type: string
+  OutboxItem:
+    type: object
+    properties:
+      ProcessId:
+        type: string
+        format: uuid
+      ExecutorIdentityId:
+        type: string
+  ProcessInstance:
+    type: object
+    required:
+      - Id
+      - ActivityName
+      - SchemeCode
+    properties:
+      Id:
+        type: string
+        format: uuid
+      StateName:
+        type: string
+      ActivityName:
+        type: string
+      SchemeId:
+        type: string
+        format: uuid
+      SchemeCode:
+        type: string
+      PreviousState:
+        type: string
+      PreviousStateForDirect:
+        type: string
+      PreviousStateForReverse:
+        type: string
+      PreviousActivity:
+        type: string
+      PreviousActivityForDirect:
+        type: string
+      PreviousActivityForReverse:
+        type: string
+      ParentProcessId:
+        type: string
+        format: uuid
+      RootProcessId:
+        type: string
+        format: uuid
+      ProcessParameters:
+        $ref: "#/definitions/ProcessParameters"
+  ProcessInfo:
+    allOf:
+      - $ref: "#/definitions/ProcessInstance"
+      - type: object
+        required:
           - Id
           - ActivityName
           - SchemeCode
           - InstanceStatus
-          properties:
-            InstanceStatus:
-              type: integer
-            Transitions:
-              type: array
-              items:
-                $ref: '#/definitions/Transition'
-            History:
-              type: array
-              items:
-                $ref: '#/definitions/HistoryItem'
-    Transition:
-      type: object
-      required:
-        - ProcessId
-        - FromActivityName
-        - ToActivityName
-        - TransitionClassifier
-        - TransitionTime
-      properties:
-        ProcessId:
+        properties:
+          InstanceStatus:
+            type: integer
+          Transitions:
+            type: array
+            items:
+              $ref: "#/definitions/Transition"
+          History:
+            type: array
+            items:
+              $ref: "#/definitions/HistoryItem"
+  Transition:
+    type: object
+    required:
+      - ProcessId
+      - FromActivityName
+      - ToActivityName
+      - TransitionClassifier
+      - TransitionTime
+    properties:
+      ProcessId:
+        type: string
+        format: uuid
+      ActorIdentityId:
+        type: string
+      ExecutorIdentityId:
+        type: string
+      FromActivityName:
+        type: string
+      FromStateName:
+        type: string
+      IsFinalised:
+        type: boolean
+      ToActivityName:
+        type: string
+      ToStateName:
+        type: string
+      TransitionClassifier:
+        type: string
+        enum:
+          - "NotSpecified"
+          - "Direct"
+          - "Reverse"
+      TransitionTime:
+        type: string
+        format: date-time
+      TriggerName:
+        type: string
+  HistoryItem:
+    type: object
+    required:
+      - Id
+      - ProcessId
+      - InitialState
+      - DestinationState
+      - Order
+    properties:
+      Id:
+        type: string
+        format: uuid
+      ProcessId:
+        type: string
+        format: uuid
+      IdentityId:
+        type: string
+      AllowedToEmployeeNames:
+        type: string
+      TransitionTime:
+        type: string
+        format: date-time
+      Order:
+        type: integer
+      InitialState:
+        type: string
+      DestinationState:
+        type: string
+      Command:
+        type: string
+  Command:
+    type: object
+    required:
+      - CommandName
+      - Classifier
+      - ValidForActivityName
+      - ProcessId
+    properties:
+      CommandName:
+        type: string
+      LocalizedName:
+        type: string
+      Classifier:
+        type: string
+        enum:
+          - NotSpecified
+          - Direct
+          - Reverse
+      IsForSubprocess:
+        type: boolean
+      ValidForStateName:
+        type: string
+      ValidForActivityName:
+        type: string
+      ProcessId:
+        type: string
+        format: uuid
+      Identities:
+        type: array
+        items:
+          type: string
+      Parameters:
+        type: array
+        items:
+          $ref: "#/definitions/CommandParameter"
+  State:
+    type: object
+    required:
+      - Name
+      - SchemeCode
+    properties:
+      Name:
+        type: string
+      VisibleName:
+        type: string
+      SchemeCode:
+        type: string
+  CommandParameter:
+    type: object
+    required:
+      - ParameterName
+      - IsRequired
+      - ValidForActivityName
+      - ProcessId
+    properties:
+      ParameterName:
+        type: string
+      LocalizedName:
+        type: string
+      TypeName:
+        type: string
+      IsRequired:
+        type: boolean
+      DefaultValue:
+        type: string
+  ProcessIds:
+    type: object
+    required:
+      - processids
+    properties:
+      processids:
+        type: array
+        items:
           type: string
           format: uuid
-        ActorIdentityId:
-          type: string
-        ExecutorIdentityId:
-          type: string
-        FromActivityName:
-          type: string
-        FromStateName:
-          type: string
-        IsFinalised:
-          type: boolean
-        ToActivityName:
-          type: string
-        ToStateName:
-          type: string
-        TransitionClassifier:
-          type: string
-          enum:
-            - "NotSpecified"
-            - "Direct"
-            - "Reverse"
-        TransitionTime:
-          type: string
-          format: date-time
-        TriggerName:
-          type: string
-    HistoryItem:
-      type: object
-      required:
-        - Id
-        - ProcessId
-        - InitialState
-        - DestinationState
-        - Order
-      properties:
-        Id:
-          type: string
-          format: uuid
-        ProcessId:
-          type: string
-          format: uuid
-        IdentityId:
-          type: string
-        AllowedToEmployeeNames:
-          type: string
-        TransitionTime:
-          type: string
-          format: date-time
-        Order:
-          type: integer
-        InitialState:
-          type: string
-        DestinationState:
-          type: string
-        Command:
-          type: string
-    Command:
-      type: object
-      required:
-        - CommandName
-        - Classifier
-        - ValidForActivityName
-        - ProcessId
-      properties:
-        CommandName:
-          type: string
-        LocalizedName:
-          type: string
-        Classifier:
-          type: string
-          enum:
-            - NotSpecified
-            - Direct
-            - Reverse
-        IsForSubprocess:
-          type: boolean
-        ValidForStateName:
-          type: string
-        ValidForActivityName:
-          type: string
-        ProcessId:
-          type: string
-          format: uuid
-        Identities:
-          type: array
-          items:
-            type: string
-        Parameters:
-          type: array
-          items:
-            $ref: '#/definitions/CommandParameter'
-    State:
-      type: object
-      required:
-        - Name
-        - SchemeCode
-      properties:
-        Name:
-          type: string
-        VisibleName:
-          type: string
-        SchemeCode:
-          type: string
-    CommandParameter:
-      type: object
-      required:
-        - ParameterName
-        - IsRequired
-        - ValidForActivityName
-        - ProcessId
-      properties:
-        ParameterName:
-          type: string
-        LocalizedName:
-          type: string
-        TypeName:
-          type: string
-        IsRequired:
-          type: boolean
-        DefaultValue:
-          type: string
-    ProcessIds:
-      type: object
-      required:
-        - processids
-      properties:
-        processids:
-          type: array
-          items:
-            type: string
-            format: uuid
-    ProcessParameters:
-      type: object
-    GetSchemeListResult:
-      allOf:
-        - $ref: '#/definitions/OperationResult'
-        - type: object
-          properties:
-            data:
-              type: array
-              items:
-                type: string
+  ProcessParameters:
+    type: object
+  GetSchemeListResult:
+    allOf:
+      - $ref: "#/definitions/OperationResult"
+      - type: object
+        properties:
+          data:
+            type: array
+            items:
+              type: string
