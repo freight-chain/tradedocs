@@ -1,0 +1,687 @@
+   "/x12/ack": {
+      "post": {
+        "tags": ["X12"],
+        "summary": "Generates functional/implementation and/or technical acknowledment(s) for the requested X12Interchange.",
+        "parameters": [
+          {
+            "name": "basicSyntax",
+            "in": "query",
+            "description": "All data elements with alpha (A) or alphanumeric (AN) data types are validated against a syntax set of allowed characters. The default syntax set is the Extended, hence the default for this parameter is false. By setting this to true, validation will use the Basic syntax set.",
+            "schema": {
+              "type": "boolean",
+              "description": "All data elements with alpha (A) or alphanumeric (AN) data types are validated against a syntax set of allowed characters. The default syntax set is the Extended, hence the default for this parameter is false. By setting this to true, validation will use the Basic syntax set.",
+              "default": false
+            }
+          },
+          {
+            "name": "syntaxSet",
+            "in": "query",
+            "description": "In case you need to validate against a syntax set, different than Basic and Extended, populate this filed with all of the allowed symbols, url-escaped.",
+            "schema": {
+              "type": "string",
+              "description": "In case you need to validate against a syntax set, different than Basic and Extended, populate this filed with all of the allowed symbols, url-escaped.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "detectDuplicates",
+            "in": "query",
+            "description": "If you need to detect duplicates as in functional groups or transactions with the same reference number, set this flag to true. The default is false.",
+            "schema": {
+              "type": "boolean",
+              "description": "If you need to detect duplicates as in functional groups or transactions with the same reference number, set this flag to true. The default is false.",
+              "default": false
+            }
+          },
+          {
+            "name": "tranRefNumber",
+            "in": "query",
+            "description": "The default is 1. Set this to whatever the 997 or 999 X12Interchange.ST.TransactionSetControlNumber_02 needs to be. In case there are multiple acknowledgments (for multiple functional groups), this will be starting reference number and every subsequent acknowledgment will have the previous reference number incremented with 1.",
+            "schema": {
+              "type": "integer",
+              "description": "The default is 1. Set this to whatever the 997 or 999 X12Interchange.ST.TransactionSetControlNumber_02 needs to be. In case there are multiple acknowledgments (for multiple functional groups), this will be starting reference number and every subsequent acknowledgment will have the previous reference number incremented with 1.",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "interchangeRefNumber",
+            "in": "query",
+            "description": "The default is 1. Set this to whatever the 997 or 999 X12Interchange.ISA.InterchangeControlNumber_13 needs to be.",
+            "schema": {
+              "type": "integer",
+              "description": "The default is 1. Set this to whatever the 997 or 999 X12Interchange.ISA.InterchangeControlNumber_13 needs to be.",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "ackForValidTrans",
+            "in": "query",
+            "description": "The default is false. Set this to true if you need AK2 loops included for all valid transaction as well. By default AK2 loops are generated only for invalid transactions.",
+            "schema": {
+              "type": "boolean",
+              "description": "The default is false. Set this to true if you need AK2 loops included for all valid transaction as well. By default AK2 loops are generated only for invalid transactions.",
+              "default": false
+            }
+          },
+          {
+            "name": "batchAcks",
+            "in": "query",
+            "description": "The default is true. Set this to false if you need to generate separate X12Interchange for each acknowledgment. By default all acknowledgments are batched in the same X12Interchange.",
+            "schema": {
+              "type": "boolean",
+              "description": "The default is true. Set this to false if you need to generate separate X12Interchange for each acknowledgment. By default all acknowledgments are batched in the same X12Interchange.",
+              "default": true
+            }
+          },
+          {
+            "name": "technicalAck",
+            "in": "query",
+            "description": "The default technical acknowledgment TA1 is generated according to X12Interchange.ISA.AcknowledgementRequested_14. You can either enforce it to always generate TA1s or supress it to never generate any TA1s. This will override the flag in X12Interchange.ISA.AcknowledgementRequested_14.\r\n            The available values are: default, enforce, suppress.",
+            "schema": {
+              "type": "string",
+              "description": "The default technical acknowledgment TA1 is generated according to X12Interchange.ISA.AcknowledgementRequested_14. You can either enforce it to always generate TA1s or supress it to never generate any TA1s. This will override the flag in X12Interchange.ISA.AcknowledgementRequested_14.\r\n            The available values are: default, enforce, suppress.",
+              "nullable": true
+            }
+          },
+          {
+            "name": "ack",
+            "in": "query",
+            "description": "The default value is 997. The type of acknowledgment being generated. Set this to 999 if you need to generate an implementation instead of functional acknowledgment. The available values are: 997, 999.",
+            "schema": {
+              "type": "string",
+              "description": "The default value is 997. The type of acknowledgment being generated. Set this to 999 if you need to generate an implementation instead of functional acknowledgment. The available values are: 997, 999.",
+              "default": "997",
+              "nullable": true
+            }
+          },
+          {
+            "name": "ak901isP",
+            "in": "query",
+            "description": "The value of the AK9's first element. By default it is \"E\". Set this to true if you want this value to be \"P\" instead.",
+            "schema": {
+              "type": "boolean",
+              "description": "The value of the AK9's first element. By default it is \"E\". Set this to true if you want this value to be \"P\" instead.",
+              "default": false
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The X12Interchange object to acknowledge.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "required": [
+                  "DataElementDelimiter",
+                  "Groups",
+                  "ISA",
+                  "SegmentDelimiter"
+                ],
+                "type": "object",
+                "properties": {
+                  "SegmentDelimiter": {
+                    "type": "string"
+                  },
+                  "DataElementDelimiter": {
+                    "type": "string"
+                  },
+                  "ISA": {
+                    "type": "object",
+                    "properties": {
+                      "AuthorizationInformationQualifier_1": {
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "AuthorizationInformation_2": {
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "SecurityInformationQualifier_3": {
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "SecurityInformation_4": {
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "SenderIDQualifier_5": {
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "InterchangeSenderID_6": {
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "ReceiverIDQualifier_7": {
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "InterchangeReceiverID_8": {
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "InterchangeDate_9": {
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "InterchangeTime_10": {
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "InterchangeControlStandardsIdentifier_11": {
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "InterchangeControlVersionNumber_12": {
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "InterchangeControlNumber_13": {
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "AcknowledgementRequested_14": {
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "UsageIndicator_15": {
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "ComponentElementSeparator_16": {
+                        "type": "string",
+                        "nullable": true
+                      }
+                    }
+                  },
+                  "TA1": {
+                    "type": "object",
+                    "properties": {
+                      "InterchangeControlNumber_1": {
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "InterchangeDate_2": {
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "InterchangeTime_3": {
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "InterchangeAcknowledgmentCode_4": {
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "InterchangeNoteCode_5": {
+                        "type": "string",
+                        "nullable": true
+                      }
+                    }
+                  },
+                  "Groups": {
+                    "type": "array",
+                    "items": {
+                      "required": ["GS", "Transactions"],
+                      "type": "object",
+                      "properties": {
+                        "GS": {
+                          "type": "object",
+                          "properties": {
+                            "CodeIdentifyingInformationType_1": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "SenderIDCode_2": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "ReceiverIDCode_3": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "Date_4": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "Time_5": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "GroupControlNumber_6": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "TransactionTypeCode_7": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "VersionAndRelease_8": {
+                              "type": "string",
+                              "nullable": true
+                            }
+                          }
+                        },
+                        "Transactions": {
+                          "type": "array",
+                          "items": {
+                            "type": "object"
+                          },
+                          "nullable": true
+                        },
+                        "GETrailers": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "NumberOfIncludedSets_1": {
+                                "type": "string",
+                                "nullable": true
+                              },
+                              "GroupControlNumber_2": {
+                                "type": "string",
+                                "nullable": true
+                              }
+                            }
+                          },
+                          "nullable": true
+                        }
+                      }
+                    },
+                    "nullable": true
+                  },
+                  "IEATrailers": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "NumberOfIncludedGroups_1": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "InterchangeControlNumber_2": {
+                          "type": "string",
+                          "nullable": true
+                        }
+                      }
+                    },
+                    "nullable": true
+                  },
+                  "Result": {
+                    "type": "object",
+                    "properties": {
+                      "LastIndex": {
+                        "type": "integer",
+                        "format": "int32"
+                      },
+                      "Details": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "Index": {
+                              "type": "integer",
+                              "format": "int32"
+                            },
+                            "TransactionIndex": {
+                              "type": "integer",
+                              "format": "int32"
+                            },
+                            "TransactionRef": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "SegmentId": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "DataElementIndex": {
+                              "type": "integer",
+                              "format": "int32"
+                            },
+                            "Value": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "Message": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "Status": {
+                              "type": "string",
+                              "nullable": true
+                            }
+                          }
+                        },
+                        "nullable": true,
+                        "readOnly": true
+                      },
+                      "Status": {
+                        "type": "string",
+                        "nullable": true,
+                        "readOnly": true
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "required": [
+                      "DataElementDelimiter",
+                      "Groups",
+                      "ISA",
+                      "SegmentDelimiter"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "SegmentDelimiter": {
+                        "type": "string"
+                      },
+                      "DataElementDelimiter": {
+                        "type": "string"
+                      },
+                      "ISA": {
+                        "type": "object",
+                        "properties": {
+                          "AuthorizationInformationQualifier_1": {
+                            "type": "string",
+                            "nullable": true
+                          },
+                          "AuthorizationInformation_2": {
+                            "type": "string",
+                            "nullable": true
+                          },
+                          "SecurityInformationQualifier_3": {
+                            "type": "string",
+                            "nullable": true
+                          },
+                          "SecurityInformation_4": {
+                            "type": "string",
+                            "nullable": true
+                          },
+                          "SenderIDQualifier_5": {
+                            "type": "string",
+                            "nullable": true
+                          },
+                          "InterchangeSenderID_6": {
+                            "type": "string",
+                            "nullable": true
+                          },
+                          "ReceiverIDQualifier_7": {
+                            "type": "string",
+                            "nullable": true
+                          },
+                          "InterchangeReceiverID_8": {
+                            "type": "string",
+                            "nullable": true
+                          },
+                          "InterchangeDate_9": {
+                            "type": "string",
+                            "nullable": true
+                          },
+                          "InterchangeTime_10": {
+                            "type": "string",
+                            "nullable": true
+                          },
+                          "InterchangeControlStandardsIdentifier_11": {
+                            "type": "string",
+                            "nullable": true
+                          },
+                          "InterchangeControlVersionNumber_12": {
+                            "type": "string",
+                            "nullable": true
+                          },
+                          "InterchangeControlNumber_13": {
+                            "type": "string",
+                            "nullable": true
+                          },
+                          "AcknowledgementRequested_14": {
+                            "type": "string",
+                            "nullable": true
+                          },
+                          "UsageIndicator_15": {
+                            "type": "string",
+                            "nullable": true
+                          },
+                          "ComponentElementSeparator_16": {
+                            "type": "string",
+                            "nullable": true
+                          }
+                        }
+                      },
+                      "TA1": {
+                        "type": "object",
+                        "properties": {
+                          "InterchangeControlNumber_1": {
+                            "type": "string",
+                            "nullable": true
+                          },
+                          "InterchangeDate_2": {
+                            "type": "string",
+                            "nullable": true
+                          },
+                          "InterchangeTime_3": {
+                            "type": "string",
+                            "nullable": true
+                          },
+                          "InterchangeAcknowledgmentCode_4": {
+                            "type": "string",
+                            "nullable": true
+                          },
+                          "InterchangeNoteCode_5": {
+                            "type": "string",
+                            "nullable": true
+                          }
+                        }
+                      },
+                      "Groups": {
+                        "type": "array",
+                        "items": {
+                          "required": ["GS", "Transactions"],
+                          "type": "object",
+                          "properties": {
+                            "GS": {
+                              "type": "object",
+                              "properties": {
+                                "CodeIdentifyingInformationType_1": {
+                                  "type": "string",
+                                  "nullable": true
+                                },
+                                "SenderIDCode_2": {
+                                  "type": "string",
+                                  "nullable": true
+                                },
+                                "ReceiverIDCode_3": {
+                                  "type": "string",
+                                  "nullable": true
+                                },
+                                "Date_4": {
+                                  "type": "string",
+                                  "nullable": true
+                                },
+                                "Time_5": {
+                                  "type": "string",
+                                  "nullable": true
+                                },
+                                "GroupControlNumber_6": {
+                                  "type": "string",
+                                  "nullable": true
+                                },
+                                "TransactionTypeCode_7": {
+                                  "type": "string",
+                                  "nullable": true
+                                },
+                                "VersionAndRelease_8": {
+                                  "type": "string",
+                                  "nullable": true
+                                }
+                              }
+                            },
+                            "Transactions": {
+                              "type": "array",
+                              "items": {
+                                "type": "object"
+                              },
+                              "nullable": true
+                            },
+                            "GETrailers": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "NumberOfIncludedSets_1": {
+                                    "type": "string",
+                                    "nullable": true
+                                  },
+                                  "GroupControlNumber_2": {
+                                    "type": "string",
+                                    "nullable": true
+                                  }
+                                }
+                              },
+                              "nullable": true
+                            }
+                          }
+                        },
+                        "nullable": true
+                      },
+                      "IEATrailers": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "NumberOfIncludedGroups_1": {
+                              "type": "string",
+                              "nullable": true
+                            },
+                            "InterchangeControlNumber_2": {
+                              "type": "string",
+                              "nullable": true
+                            }
+                          }
+                        },
+                        "nullable": true
+                      },
+                      "Result": {
+                        "type": "object",
+                        "properties": {
+                          "LastIndex": {
+                            "type": "integer",
+                            "format": "int32"
+                          },
+                          "Details": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "Index": {
+                                  "type": "integer",
+                                  "format": "int32"
+                                },
+                                "TransactionIndex": {
+                                  "type": "integer",
+                                  "format": "int32"
+                                },
+                                "TransactionRef": {
+                                  "type": "string",
+                                  "nullable": true
+                                },
+                                "SegmentId": {
+                                  "type": "string",
+                                  "nullable": true
+                                },
+                                "DataElementIndex": {
+                                  "type": "integer",
+                                  "format": "int32"
+                                },
+                                "Value": {
+                                  "type": "string",
+                                  "nullable": true
+                                },
+                                "Message": {
+                                  "type": "string",
+                                  "nullable": true
+                                },
+                                "Status": {
+                                  "type": "string",
+                                  "nullable": true
+                                }
+                              }
+                            },
+                            "nullable": true,
+                            "readOnly": true
+                          },
+                          "Status": {
+                            "type": "string",
+                            "nullable": true,
+                            "readOnly": true
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "Code": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "Details": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "nullable": true
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "Code": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "Details": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "nullable": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
