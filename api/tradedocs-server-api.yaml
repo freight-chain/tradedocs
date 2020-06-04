@@ -893,13 +893,6 @@ definitions:
             format: uuid
     ProcessParameters:
       type: object
-        properties:
-         IntParameter:
-            type: integer
-          StringParameter:
-            type: string
-          BooleanParameter:
-            type: boolean
     GetSchemeListResult:
       allOf:
         - $ref: '#/definitions/OperationResult'
