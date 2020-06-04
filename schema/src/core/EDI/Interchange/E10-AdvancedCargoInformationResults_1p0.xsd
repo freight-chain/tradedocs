@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns="urn:wco:datamodel:WCO:E10-AdvancedCargoInformationResults:1"
+    xmlns:ds="urn:unece:datamodel:eTIR:DS:1"
+    targetNamespace="urn:wco:datamodel:WCO:E10-AdvancedCargoInformationResults:1">
+  <xs:import namespace="urn:unece:datamodel:eTIR:DS:1" schemaLocation="eTIRDataTypes.xsd"/>
+  <xs:element name="Response">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="FunctionalReferenceID" type="ds:ResponseFunctionalReferenceIDType"/>
+        <xs:element name="OverallDeclaration">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Declaration">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="ID" type="ds:DeclarationIdentificationIDType"/>
+                    <xs:element name="TypeCode" type="ds:DeclarationTypeCodeType"/>
+                    <xs:element name="AcceptanceDateTime" type="ds:DeclarationAcceptanceDateTimeType" minOccurs="0"/>
+                    <xs:element name="FunctionCode" type="ds:DeclarationFunctionCodeType"/>
+                    <xs:element name="RejectionDateTime" type="ds:DeclarationRejectionDateTimeType" minOccurs="0"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Error" minOccurs="0" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ValidationCode" type="ds:ErrorValidationCodeType"/>
+              <xs:element name="Pointer" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="SequenceNumeric" type="ds:PointerSequenceNumericType"/>
+                    <xs:element name="DocumentSectionCode" type="ds:PointerDocumentSectionCodeType"/>
+                    <xs:element name="TagID" type="ds:PointerTagIDType"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

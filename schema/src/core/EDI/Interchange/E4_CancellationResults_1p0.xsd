@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns="urn:unece:datamodel:eTIR:E4_CancellationResults:1"
+    xmlns:ds="urn:unece:datamodel:eTIR:DS:1"
+    targetNamespace="urn:unece:datamodel:eTIR:E4_CancellationResults:1">
+  <xs:import namespace="urn:unece:datamodel:eTIR:DS:1" schemaLocation="eTIRDataTypes.xsd"/>
+  <xs:element name="Message">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="TypeCode" type="ds:MessageTypeCodeType"/>
+        <xs:element name="ReferenceNumberID" type="ds:MessageReferenceNumberIDType"/>
+        <xs:element name="FunctionCode" type="ds:MessageFunctionCodeType"/>
+        <xs:element name="FunctionalReferenceID" type="ds:MessageFunctionalReferenceIDType"/>
+        <xs:element name="Guarantee">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ReferenceID" type="ds:GuaranteeReferenceIDType"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Error" minOccurs="0" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ValidationCode" type="ds:ErrorValidationCodeType"/>
+              <xs:element name="Pointer" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="SequenceNumeric" type="ds:PointerSequenceNumericType"/>
+                    <xs:element name="DocumentSectionCode" type="ds:PointerDocumentSectionCodeType"/>
+                    <xs:element name="TagID" type="ds:PointerTagIDType"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

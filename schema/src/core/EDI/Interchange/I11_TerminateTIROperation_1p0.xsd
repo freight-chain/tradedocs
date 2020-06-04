@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns="urn:unece:datamodel:eTIR:I11_TerminateTIROperation:1"
+    xmlns:ds="urn:unece:datamodel:eTIR:DS:1"
+    targetNamespace="urn:unece:datamodel:eTIR:I11_TerminateTIROperation:1">
+  <xs:import namespace="urn:unece:datamodel:eTIR:DS:1" schemaLocation="eTIRDataTypes.xsd"/>
+  <xs:element name="Message">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="TypeCode" type="ds:MessageTypeCodeType"/>
+        <xs:element name="ReferenceNumberID" type="ds:MessageReferenceNumberIDType"/>
+        <xs:element name="FunctionCode" type="ds:MessageFunctionCodeType"/>
+        <xs:element name="Guarantee">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ReferenceID" type="ds:GuaranteeReferenceIDType"/>
+              <xs:element name="LPCOExpirationDateTime" type="ds:GuaranteeLPCOExpirationDateTimeType"/>
+              <xs:element name="SecurityDetailsCode" type="ds:GuaranteeSecurityDetailsCodeType"/>
+              <xs:element name="Surety">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="ID" type="ds:SuretyIdentificationIDType"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="TIROperation">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="SequenceNumeric" type="ds:TIROperationSequenceNumericType"/>
+                    <xs:element name="RegistrationNumberID" type="ds:TIROperationRegistrationNumberIDType"/>
+                    <xs:element name="Termination">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="DateDateTime" type="ds:TerminationDateDateTimeType"/>
+                          <xs:element name="NumberOfPackagesQuantity" type="ds:TerminationNumberOfPackagesQuantityType"/>
+                          <xs:element name="Reservations" type="ds:TerminationReservationsTextType" minOccurs="0"/>
+                          <xs:element name="CustomsOffice">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="ID" type="ds:CustomsOfficeIdentificationIDType"/>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="ControlResult" maxOccurs="unbounded">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="ResultCodeCode" type="ds:ControlResultResultCodeCodeType"/>
+                                <xs:element name="ControlType">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="ID" type="ds:ControlTypeIdentificationCodeType"/>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="Consignment" minOccurs="0" maxOccurs="unbounded">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="SequenceNumeric" type="ds:ConsignmentSequenceNumericType"/>
+                                <xs:element name="TransportEquipment" maxOccurs="unbounded">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="ID" type="ds:TransportEquipmentIdentificationIDType"/>
+                                      <xs:element name="Seal" maxOccurs="unbounded">
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element name="SequenceNumeric" type="ds:SealSequenceNumericType"/>
+                                            <xs:element name="ID" type="ds:SealIdentificationIDType"/>
+                                            <xs:element name="TypeCode" type="ds:SealTypeCodeType" minOccurs="0"/>
+                                          </xs:sequence>
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="TransitPrincipal">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="ID" type="ds:TransitPrincipalIdentificationIDType"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

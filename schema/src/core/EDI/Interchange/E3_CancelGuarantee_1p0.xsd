@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns="urn:unece:datamodel:eTIR:E3_CancelGuarantee:1"
+    xmlns:ds="urn:unece:datamodel:eTIR:DS:1"
+    targetNamespace="urn:unece:datamodel:eTIR:E3_CancelGuarantee:1">
+  <xs:import namespace="urn:unece:datamodel:eTIR:DS:1" schemaLocation="eTIRDataTypes.xsd"/>
+  <xs:element name="Message">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="TypeCode" type="ds:MessageTypeCodeType"/>
+        <xs:element name="ReferenceNumberID" type="ds:MessageReferenceNumberIDType"/>
+        <xs:element name="FunctionCode" type="ds:MessageFunctionCodeType"/>
+        <xs:element name="Guarantee">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ReferenceID" type="ds:GuaranteeReferenceIDType"/>
+              <xs:element name="SecurityDetailsCode" type="ds:GuaranteeSecurityDetailsCodeType"/>
+              <xs:element name="CancellationDateTime" type="ds:GuaranteeCancellationDateTimeType"/>
+              <xs:element name="Surety">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="ID" type="ds:SuretyIdentificationIDType"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="TransitPrincipal">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="ID" type="ds:TransitPrincipalIdentificationIDType"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

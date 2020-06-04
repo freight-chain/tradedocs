@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns="urn:unece:datamodel:eTIR:I12_TerminationResults:1"
+    xmlns:ds="urn:unece:datamodel:eTIR:DS:1"
+    targetNamespace="urn:unece:datamodel:eTIR:I12_TerminationResults:1">
+  <xs:import namespace="urn:unece:datamodel:eTIR:DS:1" schemaLocation="eTIRDataTypes.xsd"/>
+  <xs:element name="Message">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="TypeCode" type="ds:MessageTypeCodeType"/>
+        <xs:element name="ReferenceNumberID" type="ds:MessageReferenceNumberIDType"/>
+        <xs:element name="FunctionCode" type="ds:MessageFunctionCodeType"/>
+        <xs:element name="FunctionalReferenceID" type="ds:MessageFunctionalReferenceIDType"/>
+        <xs:element name="Guarantee">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ReferenceID" type="ds:GuaranteeReferenceIDType"/>
+              <xs:element name="SecurityDetailsCode" type="ds:GuaranteeSecurityDetailsCodeType"/>
+              <xs:element name="GuaranteeStatusCode" type="ds:GuaranteeGuaranteeStatusCodeType"/>
+              <xs:element name="Surety">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="ID" type="ds:SuretyIdentificationIDType"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="TIROperation">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="SequenceNumeric" type="ds:TIROperationSequenceNumericType"/>
+                    <xs:element name="RegistrationNumberID" type="ds:TIROperationRegistrationNumberIDType"/>
+                    <xs:element name="Termination">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="DateDateTime" type="ds:TerminationDateDateTimeType"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="TransitPrincipal">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="ID" type="ds:TransitPrincipalIdentificationIDType"/>
+                    <xs:element name="CurrentStatusCode" type="ds:TransitPrincipalCurrentStatusCodeType"/>
+                    <xs:element name="ActiveWithdrawal" minOccurs="0">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="StartDateTime" type="ds:ActiveWithdrawalStartDateTimeType"/>
+                          <xs:element name="EndDateTime" type="ds:ActiveWithdrawalEndDateTimeType" minOccurs="0"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="ActiveExclusion" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="StartDateTime" type="ds:ActiveExclusionStartDateTimeType"/>
+                          <xs:element name="EndDateTime" type="ds:ActiveExclusionEndDateTimeType" minOccurs="0"/>
+                          <xs:element name="CountryCode" type="ds:ActiveExclusionCountryCodeType"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Error" minOccurs="0" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ValidationCode" type="ds:ErrorValidationCodeType"/>
+              <xs:element name="Pointer" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="SequenceNumeric" type="ds:PointerSequenceNumericType"/>
+                    <xs:element name="DocumentSectionCode" type="ds:PointerDocumentSectionCodeType"/>
+                    <xs:element name="TagID" type="ds:PointerTagIDType"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns="urn:unece:datamodel:eTIR:I3_GetHolderInformation:1"
+    xmlns:ds="urn:unece:datamodel:eTIR:DS:1"
+    targetNamespace="urn:unece:datamodel:eTIR:I3_GetHolderInformation:1">
+  <xs:import namespace="urn:unece:datamodel:eTIR:DS:1" schemaLocation="eTIRDataTypes.xsd"/>
+  <xs:element name="Message">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="TypeCode" type="ds:MessageTypeCodeType"/>
+        <xs:element name="ReferenceNumberID" type="ds:MessageReferenceNumberIDType"/>
+        <xs:element name="FunctionCode" type="ds:MessageFunctionCodeType"/>
+        <xs:element name="Holder">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ID" type="ds:HolderIdentificationIDType"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
