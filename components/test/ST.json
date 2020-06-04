@@ -1,0 +1,26 @@
+[
+    {   "id": "ST", "type": "segment",
+        "name": "Transaction Set Header",
+        "req": "M",
+        "max_uses": 1,
+        "notes": "",
+        "elements": [
+            {   "id": "ST01", "type": "element",
+                "name": "Transaction Set Identifier Code",
+                "req": "M",
+                "data_type": "ID",
+                "data_type_ids": {"810": "Invoice"},
+                "length": {"min": 3, "max": 3},
+                "notes": ""
+            },
+            {   "id": "ST02", "type": "element",
+                "name": "Transaction Set Control Number",
+                "req": "M",
+                "data_type": "AN",
+                "data_type_ids": null,
+                "length": {"min": 4, "max": 9},
+                "notes": "This should be a unique control # for each transaction set functional group"
+            }
+        ]
+    }
+]

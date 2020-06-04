@@ -1,0 +1,942 @@
+"components": {
+    "schemas": {
+      "UNA": {
+        "type": "object",
+        "properties": {
+          "ComponentDataElement": {
+            "type": "string"
+          },
+          "DataElement": {
+            "type": "string"
+          },
+          "DecimalNotation": {
+            "type": "string"
+          },
+          "ReleaseIndicator": {
+            "type": "string"
+          },
+          "Reserved": {
+            "type": "string"
+          },
+          "Segment": {
+            "type": "string"
+          }
+        }
+      },
+      "S001": {
+        "type": "object",
+        "properties": {
+          "SyntaxIdentifier_1": {
+            "type": "string",
+            "nullable": true
+          },
+          "SyntaxVersionNumber_2": {
+            "type": "string",
+            "nullable": true
+          },
+          "ServiceCodeListDirectoryVersionNumber_3": {
+            "type": "string",
+            "nullable": true
+          },
+          "CharacterEncoding_4": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "S002": {
+        "type": "object",
+        "properties": {
+          "InterchangeSenderIdentification_1": {
+            "type": "string",
+            "nullable": true
+          },
+          "IdentificationCodeQualifier_2": {
+            "type": "string",
+            "nullable": true
+          },
+          "InterchangeSenderInternalIdentification_3": {
+            "type": "string",
+            "nullable": true
+          },
+          "InterchangeSenderInternalSubIdentification_4": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "S003": {
+        "type": "object",
+        "properties": {
+          "InterchangeRecipientIdentification_1": {
+            "type": "string",
+            "nullable": true
+          },
+          "IdentificationCodeQualifier_2": {
+            "type": "string",
+            "nullable": true
+          },
+          "InterchangeRecipientInternalIdentification_3": {
+            "type": "string",
+            "nullable": true
+          },
+          "InterchangeRecipientInternalSubIdentification_4": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "S004": {
+        "type": "object",
+        "properties": {
+          "Date_1": {
+            "type": "string",
+            "nullable": true
+          },
+          "Time_2": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "S005": {
+        "type": "object",
+        "properties": {
+          "RecipientReferencePassword_1": {
+            "type": "string",
+            "nullable": true
+          },
+          "RecipientReferencePasswordQualifier_2": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "UNB": {
+        "type": "object",
+        "properties": {
+          "SYNTAXIDENTIFIER_1": {
+            "type": "object",
+            "properties": {
+              "SyntaxIdentifier_1": {
+                "type": "string",
+                "nullable": true
+              },
+              "SyntaxVersionNumber_2": {
+                "type": "string",
+                "nullable": true
+              },
+              "ServiceCodeListDirectoryVersionNumber_3": {
+                "type": "string",
+                "nullable": true
+              },
+              "CharacterEncoding_4": {
+                "type": "string",
+                "nullable": true
+              }
+            }
+          },
+          "INTERCHANGESENDER_2": {
+            "type": "object",
+            "properties": {
+              "InterchangeSenderIdentification_1": {
+                "type": "string",
+                "nullable": true
+              },
+              "IdentificationCodeQualifier_2": {
+                "type": "string",
+                "nullable": true
+              },
+              "InterchangeSenderInternalIdentification_3": {
+                "type": "string",
+                "nullable": true
+              },
+              "InterchangeSenderInternalSubIdentification_4": {
+                "type": "string",
+                "nullable": true
+              }
+            }
+          },
+          "INTERCHANGERECIPIENT_3": {
+            "type": "object",
+            "properties": {
+              "InterchangeRecipientIdentification_1": {
+                "type": "string",
+                "nullable": true
+              },
+              "IdentificationCodeQualifier_2": {
+                "type": "string",
+                "nullable": true
+              },
+              "InterchangeRecipientInternalIdentification_3": {
+                "type": "string",
+                "nullable": true
+              },
+              "InterchangeRecipientInternalSubIdentification_4": {
+                "type": "string",
+                "nullable": true
+              }
+            }
+          },
+          "DATEANDTIMEOFPREPARATION_4": {
+            "type": "object",
+            "properties": {
+              "Date_1": {
+                "type": "string",
+                "nullable": true
+              },
+              "Time_2": {
+                "type": "string",
+                "nullable": true
+              }
+            }
+          },
+          "InterchangeControlReference_5": {
+            "type": "string",
+            "nullable": true
+          },
+          "RECIPIENTSREFERENCEPASSWORDDETAILS_6": {
+            "type": "object",
+            "properties": {
+              "RecipientReferencePassword_1": {
+                "type": "string",
+                "nullable": true
+              },
+              "RecipientReferencePasswordQualifier_2": {
+                "type": "string",
+                "nullable": true
+              }
+            }
+          },
+          "ApplicationReference_7": {
+            "type": "string",
+            "nullable": true
+          },
+          "ProcessingPriorityCode_8": {
+            "type": "string",
+            "nullable": true
+          },
+          "AcknowledgementRequest_9": {
+            "type": "string",
+            "nullable": true
+          },
+          "InterchangeAgreementIdentifier_10": {
+            "type": "string",
+            "nullable": true
+          },
+          "TestIndicator_11": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "S006": {
+        "type": "object",
+        "properties": {
+          "ApplicationSenderIdentification_1": {
+            "type": "string",
+            "nullable": true
+          },
+          "IdentificationCodeQualifier_2": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "S007": {
+        "type": "object",
+        "properties": {
+          "ApplicationRecipientIdentification_1": {
+            "type": "string",
+            "nullable": true
+          },
+          "IdentificationCodeQualifier_2": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "S008": {
+        "type": "object",
+        "properties": {
+          "MessageVersionNumber_1": {
+            "type": "string",
+            "nullable": true
+          },
+          "MessageReleaseNumber_2": {
+            "type": "string",
+            "nullable": true
+          },
+          "AssociationAssignedCode_3": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "UNG": {
+        "type": "object",
+        "properties": {
+          "MessageGroupIdentification_1": {
+            "type": "string",
+            "nullable": true
+          },
+          "APPLICATIONSENDERIDENTIFICATION_2": {
+            "type": "object",
+            "properties": {
+              "ApplicationSenderIdentification_1": {
+                "type": "string",
+                "nullable": true
+              },
+              "IdentificationCodeQualifier_2": {
+                "type": "string",
+                "nullable": true
+              }
+            }
+          },
+          "APPLICATIONRECIPIENTIDENTIFICATION_3": {
+            "type": "object",
+            "properties": {
+              "ApplicationRecipientIdentification_1": {
+                "type": "string",
+                "nullable": true
+              },
+              "IdentificationCodeQualifier_2": {
+                "type": "string",
+                "nullable": true
+              }
+            }
+          },
+          "DATEANDTIMEOFPREPARATION_4": {
+            "type": "object",
+            "properties": {
+              "Date_1": {
+                "type": "string",
+                "nullable": true
+              },
+              "Time_2": {
+                "type": "string",
+                "nullable": true
+              }
+            }
+          },
+          "GroupReferenceNumber_5": {
+            "type": "string",
+            "nullable": true
+          },
+          "ControllingAgency_6": {
+            "type": "string",
+            "nullable": true
+          },
+          "MESSAGEVERSION_7": {
+            "type": "object",
+            "properties": {
+              "MessageVersionNumber_1": {
+                "type": "string",
+                "nullable": true
+              },
+              "MessageReleaseNumber_2": {
+                "type": "string",
+                "nullable": true
+              },
+              "AssociationAssignedCode_3": {
+                "type": "string",
+                "nullable": true
+              }
+            }
+          },
+          "ApplicationPassword_8": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "UNE": {
+        "type": "object",
+        "properties": {
+          "GroupControlCount_1": {
+            "type": "string",
+            "nullable": true
+          },
+          "GroupReferenceNumber_2": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "EdifactGroup": {
+        "required": ["Transactions"],
+        "type": "object",
+        "properties": {
+          "UNG": {
+            "type": "object",
+            "properties": {
+              "MessageGroupIdentification_1": {
+                "type": "string",
+                "nullable": true
+              },
+              "APPLICATIONSENDERIDENTIFICATION_2": {
+                "type": "object",
+                "properties": {
+                  "ApplicationSenderIdentification_1": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "IdentificationCodeQualifier_2": {
+                    "type": "string",
+                    "nullable": true
+                  }
+                }
+              },
+              "APPLICATIONRECIPIENTIDENTIFICATION_3": {
+                "type": "object",
+                "properties": {
+                  "ApplicationRecipientIdentification_1": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "IdentificationCodeQualifier_2": {
+                    "type": "string",
+                    "nullable": true
+                  }
+                }
+              },
+              "DATEANDTIMEOFPREPARATION_4": {
+                "type": "object",
+                "properties": {
+                  "Date_1": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "Time_2": {
+                    "type": "string",
+                    "nullable": true
+                  }
+                }
+              },
+              "GroupReferenceNumber_5": {
+                "type": "string",
+                "nullable": true
+              },
+              "ControllingAgency_6": {
+                "type": "string",
+                "nullable": true
+              },
+              "MESSAGEVERSION_7": {
+                "type": "object",
+                "properties": {
+                  "MessageVersionNumber_1": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "MessageReleaseNumber_2": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "AssociationAssignedCode_3": {
+                    "type": "string",
+                    "nullable": true
+                  }
+                }
+              },
+              "ApplicationPassword_8": {
+                "type": "string",
+                "nullable": true
+              }
+            }
+          },
+          "Transactions": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "nullable": true
+          },
+          "UNETrailers": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "GroupControlCount_1": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "GroupReferenceNumber_2": {
+                  "type": "string",
+                  "nullable": true
+                }
+              }
+            },
+            "nullable": true
+          }
+        }
+      },
+      "UNZ": {
+        "type": "object",
+        "properties": {
+          "InterchangeControlCount_1": {
+            "type": "string",
+            "nullable": true
+          },
+          "InterchangeControlReference_2": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "OperationDetail": {
+        "type": "object",
+        "properties": {
+          "Index": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "TransactionIndex": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "TransactionRef": {
+            "type": "string",
+            "nullable": true
+          },
+          "SegmentId": {
+            "type": "string",
+            "nullable": true
+          },
+          "DataElementIndex": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "Value": {
+            "type": "string",
+            "nullable": true
+          },
+          "Message": {
+            "type": "string",
+            "nullable": true
+          },
+          "Status": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "OperationResult": {
+        "type": "object",
+        "properties": {
+          "LastIndex": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "Details": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "Index": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "TransactionIndex": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "TransactionRef": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "SegmentId": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "DataElementIndex": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "Value": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "Message": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "Status": {
+                  "type": "string",
+                  "nullable": true
+                }
+              }
+            },
+            "nullable": true,
+            "readOnly": true
+          },
+          "Status": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          }
+        }
+      },
+      "EdifactInterchange": {
+        "required": ["Groups", "UNB"],
+        "type": "object",
+        "properties": {
+          "UNA": {
+            "type": "object",
+            "properties": {
+              "ComponentDataElement": {
+                "type": "string"
+              },
+              "DataElement": {
+                "type": "string"
+              },
+              "DecimalNotation": {
+                "type": "string"
+              },
+              "ReleaseIndicator": {
+                "type": "string"
+              },
+              "Reserved": {
+                "type": "string"
+              },
+              "Segment": {
+                "type": "string"
+              }
+            }
+          },
+          "UNB": {
+            "type": "object",
+            "properties": {
+              "SYNTAXIDENTIFIER_1": {
+                "type": "object",
+                "properties": {
+                  "SyntaxIdentifier_1": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "SyntaxVersionNumber_2": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "ServiceCodeListDirectoryVersionNumber_3": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "CharacterEncoding_4": {
+                    "type": "string",
+                    "nullable": true
+                  }
+                }
+              },
+              "INTERCHANGESENDER_2": {
+                "type": "object",
+                "properties": {
+                  "InterchangeSenderIdentification_1": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "IdentificationCodeQualifier_2": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "InterchangeSenderInternalIdentification_3": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "InterchangeSenderInternalSubIdentification_4": {
+                    "type": "string",
+                    "nullable": true
+                  }
+                }
+              },
+              "INTERCHANGERECIPIENT_3": {
+                "type": "object",
+                "properties": {
+                  "InterchangeRecipientIdentification_1": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "IdentificationCodeQualifier_2": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "InterchangeRecipientInternalIdentification_3": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "InterchangeRecipientInternalSubIdentification_4": {
+                    "type": "string",
+                    "nullable": true
+                  }
+                }
+              },
+              "DATEANDTIMEOFPREPARATION_4": {
+                "type": "object",
+                "properties": {
+                  "Date_1": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "Time_2": {
+                    "type": "string",
+                    "nullable": true
+                  }
+                }
+              },
+              "InterchangeControlReference_5": {
+                "type": "string",
+                "nullable": true
+              },
+              "RECIPIENTSREFERENCEPASSWORDDETAILS_6": {
+                "type": "object",
+                "properties": {
+                  "RecipientReferencePassword_1": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "RecipientReferencePasswordQualifier_2": {
+                    "type": "string",
+                    "nullable": true
+                  }
+                }
+              },
+              "ApplicationReference_7": {
+                "type": "string",
+                "nullable": true
+              },
+              "ProcessingPriorityCode_8": {
+                "type": "string",
+                "nullable": true
+              },
+              "AcknowledgementRequest_9": {
+                "type": "string",
+                "nullable": true
+              },
+              "InterchangeAgreementIdentifier_10": {
+                "type": "string",
+                "nullable": true
+              },
+              "TestIndicator_11": {
+                "type": "string",
+                "nullable": true
+              }
+            }
+          },
+          "Groups": {
+            "type": "array",
+            "items": {
+              "required": ["Transactions"],
+              "type": "object",
+              "properties": {
+                "UNG": {
+                  "type": "object",
+                  "properties": {
+                    "MessageGroupIdentification_1": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "APPLICATIONSENDERIDENTIFICATION_2": {
+                      "type": "object",
+                      "properties": {
+                        "ApplicationSenderIdentification_1": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "IdentificationCodeQualifier_2": {
+                          "type": "string",
+                          "nullable": true
+                        }
+                      }
+                    },
+                    "APPLICATIONRECIPIENTIDENTIFICATION_3": {
+                      "type": "object",
+                      "properties": {
+                        "ApplicationRecipientIdentification_1": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "IdentificationCodeQualifier_2": {
+                          "type": "string",
+                          "nullable": true
+                        }
+                      }
+                    },
+                    "DATEANDTIMEOFPREPARATION_4": {
+                      "type": "object",
+                      "properties": {
+                        "Date_1": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "Time_2": {
+                          "type": "string",
+                          "nullable": true
+                        }
+                      }
+                    },
+                    "GroupReferenceNumber_5": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "ControllingAgency_6": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "MESSAGEVERSION_7": {
+                      "type": "object",
+                      "properties": {
+                        "MessageVersionNumber_1": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "MessageReleaseNumber_2": {
+                          "type": "string",
+                          "nullable": true
+                        },
+                        "AssociationAssignedCode_3": {
+                          "type": "string",
+                          "nullable": true
+                        }
+                      }
+                    },
+                    "ApplicationPassword_8": {
+                      "type": "string",
+                      "nullable": true
+                    }
+                  }
+                },
+                "Transactions": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  },
+                  "nullable": true
+                },
+                "UNETrailers": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "GroupControlCount_1": {
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "GroupReferenceNumber_2": {
+                        "type": "string",
+                        "nullable": true
+                      }
+                    }
+                  },
+                  "nullable": true
+                }
+              }
+            },
+            "nullable": true
+          },
+          "UNZTrailers": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "InterchangeControlCount_1": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "InterchangeControlReference_2": {
+                  "type": "string",
+                  "nullable": true
+                }
+              }
+            },
+            "nullable": true
+          },
+          "Result": {
+            "type": "object",
+            "properties": {
+              "LastIndex": {
+                "type": "integer",
+                "format": "int32"
+              },
+              "Details": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "Index": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "TransactionIndex": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "TransactionRef": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "SegmentId": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "DataElementIndex": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "Value": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "Message": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "Status": {
+                      "type": "string",
+                      "nullable": true
+                    }
+                  }
+                },
+                "nullable": true,
+                "readOnly": true
+              },
+              "Status": {
+                "type": "string",
+                "nullable": true,
+                "readOnly": true
+              }
+            }
+          }
+        }
+      },
+      "ErrorDetails": {
+        "type": "object",
+        "properties": {
+          "Code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "Details": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        }
+      },
+      "Link": {
+        "type": "object",
+        "properties": {
+          "Rel": {
+            "type": "string",
+            "nullable": true
+          },
+          "Href": {
+            "type": "string",
+            "nullable": true
+          },
+          "Action": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },

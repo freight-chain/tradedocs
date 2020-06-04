@@ -1,0 +1,4000 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v0.1.0.564",
+    "title": "Coyote API",
+    "description": "# Introduction\r\n\r\nWelcome to Coyote's API Documentation. You can access our API endpoints, such as Tracking Updates for shipment details,\r\nor Spot Quotes to get rates for high volume shippers who need to quote in bulk. If you have immediate questions or need\r\nmore info, please reach out to your Coyote sales rep or\r\nemail us at apimanagement@coyote.com.\r\n\r\nIf you're an existing Coyote customer and want to utilize the API suite, you can request an API key through your Coyote\r\nsales rep.\r\n\r\nBy accessing or using the Coyote APIs or the API Technical Documentation for the Coyote APIs, you are agreeing to the [Coyote API Terms of Use](https://www.coyote.com/terms-privacy/#api).\r\n\r\n## Authentication\r\n\r\nOnce you've received your API key, you can now access the sandbox environment where you can begin to work with the endpoints.\r\n\r\nTo retrieve a token, POST to api.coyote.com/connect/token, specifying the following token request parameters:\r\n\r\nclient_id (provided by integrations team)\r\nclient_secret (provided by integrations team)\r\nscope (ExternalApi)\r\ngrant_type (client_credentials)\r\n\r\nExample:\r\n\r\n```\r\nPOST /connect/token\r\n\r\n    client_id=client1&\r\n    client_secret=api_key&\r\n    grant_type=client_credentials&\r\n    scope=ExternalApi\r\n```\r\n\r\nPass your token as a bearer token in an Authorization header.\r\n\r\nOf note:\r\nThe API is organized around REST. All requests should be made over SSL. All API request and response bodies are encoded in JSON. Token requests must be form-urlencoded.\r\n\r\nTo test your requests and responses, use api-sandbox.coyote.com with your sandbox API key.\r\n",
+    "contact": {
+      "name": "API Management",
+      "email": "apimanagement@coyote.com"
+    },
+    "x-logo": {
+      "url": "https://coyote.com/wp-content/uploads/2020/02/APILogo-transparent.png",
+      "altText": "Coyote"
+    }
+  },
+  "paths": {
+    "/api/v1/AvailableLoads/{loadId}": {
+      "get": {
+        "tags": ["AvailableLoads"],
+        "summary": "Gets available load details",
+        "description": "Retrieves all of the current details for given load, assuming the provided load are still available.",
+        "operationId": "GetAvailableLoadById",
+        "consumes": [],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "loadId",
+            "in": "path",
+            "description": "The requested load id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Load successfully retrieved and returned",
+            "schema": {
+              "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.AvailableLoads.AvailableLoad"
+            },
+            "examples": {
+              "application/json": {
+                "loadId": 194536334,
+                "loadDetails": {
+                  "rate": { "value": 654.0, "currencyType": "USD" },
+                  "mode": "TL",
+                  "equipment": {
+                    "equipmentHeight": { "value": 0.0, "unit": "Feet" },
+                    "equipmentLength": { "value": 53.0, "unit": "Feet" },
+                    "equipmentType": "V",
+                    "equipmentWidth": { "value": 20.0, "unit": "Feet" }
+                  },
+                  "loadDistance": { "value": 1500.0, "unit": "Miles" },
+                  "weight": { "value": 1800.0, "unit": "Pounds" },
+                  "temperatureSettings": {
+                    "preCoolTemperature": null,
+                    "maximumTemperature": {
+                      "value": 12.0,
+                      "unit": "Fahrenheit"
+                    },
+                    "minimumTemperature": {
+                      "value": 20.0,
+                      "unit": "Fahrenheit"
+                    }
+                  },
+                  "loadAttributes": {
+                    "airRide": false,
+                    "blind": false,
+                    "bondedCarrier": false,
+                    "borderCrossingByCoyote": false,
+                    "borderCrossingByCustomer": false,
+                    "coyoteGo": false,
+                    "crossBorderMexico": false,
+                    "ctpat": false,
+                    "disasterRelief": false,
+                    "doubleBlind": false,
+                    "doubleTrailer": false,
+                    "drayage": false,
+                    "duraplate": false,
+                    "englishSpeaking": false,
+                    "exitPass": false,
+                    "fast": false,
+                    "fdaClearanceRequired": false,
+                    "floodRelief": false,
+                    "govt": false,
+                    "guaranteed": false,
+                    "haccp": false,
+                    "hazmatEndorsement": false,
+                    "hvhr": false,
+                    "hvhrPlus": false,
+                    "intraMexico": false,
+                    "liquor": false,
+                    "neec": false,
+                    "noCameraPhonePhotosOfPaperwork": false,
+                    "overDimension": false,
+                    "palletJack": false,
+                    "partialLoad": false,
+                    "pipOrPep": false,
+                    "powerOnly": false,
+                    "ppe": false,
+                    "protectFromFreeze": false,
+                    "repairReceiptRequiredForBreakdowns": false,
+                    "seal": true,
+                    "secondaryBorderInspection": false,
+                    "tankerEndorsement": false,
+                    "tcr": false,
+                    "team": false,
+                    "techTrackingRequired": false,
+                    "tradeShow": false,
+                    "trailerControl": false,
+                    "transloadByCoyote": false,
+                    "transloadByCustomer": false,
+                    "tripleTrailer": false,
+                    "twic": false,
+                    "uiia": false
+                  }
+                },
+                "stops": [
+                  {
+                    "sequence": 1,
+                    "stopType": "Pickup",
+                    "facility": {
+                      "name": null,
+                      "address": {
+                        "line1": "16005 WAHRMAN ST",
+                        "line2": null,
+                        "line3": null,
+                        "postalCode": "48174-9725",
+                        "cityName": "Romulus",
+                        "stateProvinceCode": "OH",
+                        "countryCode": "US"
+                      },
+                      "geoCoordinates": {
+                        "latitude": 40.246281,
+                        "longitude": -82.868742
+                      }
+                    },
+                    "appointment": {
+                      "facilityOpenDateTimeUtc": null,
+                      "facilityCloseDateTimeUtc": null,
+                      "appointmentStartDateTimeUtc": "2020-06-04T19:07:01.4762473Z",
+                      "appointmentEndDateTimeUtc": "2020-06-04T19:07:01.476249Z"
+                    },
+                    "stopDetails": null
+                  },
+                  {
+                    "sequence": 2,
+                    "stopType": "Delivery",
+                    "facility": {
+                      "name": null,
+                      "address": {
+                        "line1": "131 State Route 3",
+                        "line2": null,
+                        "line3": null,
+                        "postalCode": "43074",
+                        "cityName": "Sunbury",
+                        "stateProvinceCode": "OH",
+                        "countryCode": "US"
+                      },
+                      "geoCoordinates": {
+                        "latitude": 41.246281,
+                        "longitude": -81.868742
+                      }
+                    },
+                    "appointment": {
+                      "facilityOpenDateTimeUtc": null,
+                      "facilityCloseDateTimeUtc": null,
+                      "appointmentStartDateTimeUtc": "2020-06-04T19:07:01.4762502Z",
+                      "appointmentEndDateTimeUtc": "2020-06-04T19:07:01.4762509Z"
+                    },
+                    "stopDetails": null
+                  }
+                ]
+              }
+            }
+          },
+          "201": {
+            "description": "Load do not exist or are not available anymore"
+          },
+          "400": { "description": "Invalid request" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" }
+        }
+      }
+    },
+    "/api/v1/AvailableLoads/search": {
+      "post": {
+        "tags": ["AvailableLoads"],
+        "summary": "Search available loads",
+        "description": "Given a set of query inputs, Coyote will return the list of all available loads that match the inputs provided in the request.",
+        "operationId": "GetAvailableLoads",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json",
+          "application/bson"
+        ],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "loadRequest",
+            "in": "body",
+            "description": "Load request query object",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.AvailableLoads.AvailableLoadsRequest"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Requested page",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Requested page size",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Loads successfully retrieved and returned",
+            "schema": {
+              "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.AvailableLoads.PagedAvailableLoads"
+            },
+            "examples": {
+              "application/json": {
+                "loads": [
+                  {
+                    "loadId": 194536334,
+                    "loadDetails": {
+                      "rate": { "value": 654.0, "currencyType": "USD" },
+                      "mode": "TL",
+                      "equipment": {
+                        "equipmentHeight": { "value": 0.0, "unit": "Feet" },
+                        "equipmentLength": { "value": 53.0, "unit": "Feet" },
+                        "equipmentType": "V",
+                        "equipmentWidth": { "value": 20.0, "unit": "Feet" }
+                      },
+                      "loadDistance": { "value": 1500.0, "unit": "Miles" },
+                      "weight": { "value": 1800.0, "unit": "Pounds" },
+                      "temperatureSettings": {
+                        "preCoolTemperature": null,
+                        "maximumTemperature": {
+                          "value": 12.0,
+                          "unit": "Fahrenheit"
+                        },
+                        "minimumTemperature": {
+                          "value": 20.0,
+                          "unit": "Fahrenheit"
+                        }
+                      },
+                      "loadAttributes": {
+                        "airRide": false,
+                        "blind": false,
+                        "bondedCarrier": false,
+                        "borderCrossingByCoyote": false,
+                        "borderCrossingByCustomer": false,
+                        "coyoteGo": false,
+                        "crossBorderMexico": false,
+                        "ctpat": false,
+                        "disasterRelief": false,
+                        "doubleBlind": false,
+                        "doubleTrailer": false,
+                        "drayage": false,
+                        "duraplate": false,
+                        "englishSpeaking": false,
+                        "exitPass": false,
+                        "fast": false,
+                        "fdaClearanceRequired": false,
+                        "floodRelief": false,
+                        "govt": false,
+                        "guaranteed": false,
+                        "haccp": false,
+                        "hazmatEndorsement": false,
+                        "hvhr": false,
+                        "hvhrPlus": false,
+                        "intraMexico": false,
+                        "liquor": false,
+                        "neec": false,
+                        "noCameraPhonePhotosOfPaperwork": false,
+                        "overDimension": false,
+                        "palletJack": false,
+                        "partialLoad": false,
+                        "pipOrPep": false,
+                        "powerOnly": false,
+                        "ppe": false,
+                        "protectFromFreeze": false,
+                        "repairReceiptRequiredForBreakdowns": false,
+                        "seal": true,
+                        "secondaryBorderInspection": false,
+                        "tankerEndorsement": false,
+                        "tcr": false,
+                        "team": false,
+                        "techTrackingRequired": false,
+                        "tradeShow": false,
+                        "trailerControl": false,
+                        "transloadByCoyote": false,
+                        "transloadByCustomer": false,
+                        "tripleTrailer": false,
+                        "twic": false,
+                        "uiia": false
+                      }
+                    },
+                    "stops": [
+                      {
+                        "sequence": 1,
+                        "stopType": "Pickup",
+                        "facility": {
+                          "name": null,
+                          "address": {
+                            "line1": "16005 WAHRMAN ST",
+                            "line2": null,
+                            "line3": null,
+                            "postalCode": "48174-9725",
+                            "cityName": "Romulus",
+                            "stateProvinceCode": "OH",
+                            "countryCode": "US"
+                          },
+                          "geoCoordinates": {
+                            "latitude": 40.246281,
+                            "longitude": -82.868742
+                          }
+                        },
+                        "appointment": {
+                          "facilityOpenDateTimeUtc": null,
+                          "facilityCloseDateTimeUtc": null,
+                          "appointmentStartDateTimeUtc": "2020-06-04T19:07:01.4794621Z",
+                          "appointmentEndDateTimeUtc": "2020-06-04T19:07:01.4794633Z"
+                        },
+                        "stopDetails": null
+                      },
+                      {
+                        "sequence": 2,
+                        "stopType": "Delivery",
+                        "facility": {
+                          "name": null,
+                          "address": {
+                            "line1": "131 State Route 3",
+                            "line2": null,
+                            "line3": null,
+                            "postalCode": "43074",
+                            "cityName": "Sunbury",
+                            "stateProvinceCode": "OH",
+                            "countryCode": "US"
+                          },
+                          "geoCoordinates": {
+                            "latitude": 41.246281,
+                            "longitude": -81.868742
+                          }
+                        },
+                        "appointment": {
+                          "facilityOpenDateTimeUtc": null,
+                          "facilityCloseDateTimeUtc": null,
+                          "appointmentStartDateTimeUtc": "2020-06-04T19:07:01.4794642Z",
+                          "appointmentEndDateTimeUtc": "2020-06-04T19:07:01.479465Z"
+                        },
+                        "stopDetails": null
+                      }
+                    ]
+                  }
+                ],
+                "pagination": { "limit": 1, "offset": 1, "totalCount": 1 }
+              }
+            }
+          },
+          "201": {
+            "description": "Loads do not exist or are not available anymore"
+          },
+          "400": { "description": "Invalid request" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" }
+        }
+      }
+    },
+    "/api/v1/Documents/{loadId}/{documentType}": {
+      "get": {
+        "tags": ["Documents"],
+        "summary": "Gets an associated document with a load",
+        "description": "Allows Coyote’s partners to retrieve one or more PDF documents in a zipped format for a given Load ID they’re associated to.",
+        "operationId": "RetrieveDocument",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "loadId",
+            "in": "path",
+            "description": "The requested load ID",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "documentType",
+            "in": "path",
+            "description": "The document type requested",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Undefined",
+              "VendorInvoice",
+              "BillOfLading",
+              "ProofOfDelivery",
+              "LumperTicket",
+              "ScaleTicket",
+              "InGateTicket",
+              "OutGateTicket",
+              "Miscellaneous",
+              "AccessorialAgreement",
+              "RateConfirmation",
+              "LoadTender",
+              "Invoice",
+              "CustomsDocuments",
+              "InvoiceWithPaperwork",
+              "DetentionLoading",
+              "DetentionUnloading",
+              "PalletReceipt",
+              "SpotApproval",
+              "EquipmentOrderedNotUsed",
+              "CMR",
+              "DemurrageLoading",
+              "DemurrageUnloading",
+              "ExitPass",
+              "BalanceDue",
+              "BalanceDueWithPaperwork",
+              "PackingList"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The document successfully retrieved and returned",
+            "schema": {
+              "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.Documents.DocumentRequest"
+            },
+            "examples": {
+              "application/json": {
+                "loadId": 17513654,
+                "document": "__SAMPLE__",
+                "documentType": "BillOfLading",
+                "extensionType": "Zip"
+              }
+            }
+          },
+          "400": { "description": "Invalid request" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "The load or the document does not exist" }
+        }
+      }
+    },
+    "/api/v1/Documents": {
+      "post": {
+        "tags": ["Documents"],
+        "summary": "Submit a document to be associated with a load",
+        "description": "Allows Coyote’s partners to post one or more documents that will be saved to a given Load ID that they are associated to. Only files up to 20 MB and with specific extensions are allowed. Zips are currently not supported.",
+        "operationId": "SubmitDocument",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "documentRequest",
+            "in": "body",
+            "description": "",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.Documents.DocumentRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was accepted and queued up for saving",
+            "schema": { "type": "boolean" }
+          },
+          "400": { "description": "Invalid request" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "The load or the document does not exist" }
+        }
+      }
+    },
+    "/api/v1/Loads": {
+      "post": {
+        "tags": ["Loads"],
+        "summary": "Submit a load request",
+        "description": "Allows Coyote’s partners to submit load requests with relevant load information.",
+        "operationId": "Post",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "loadRequest",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.LoadBuilding.Load"
+            }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Load build request was accepted" },
+          "400": { "description": "Invalid request" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" }
+        }
+      }
+    },
+    "/api/v1/Loads/{loadId}": {
+      "delete": {
+        "tags": ["Loads"],
+        "summary": "Cancel a load",
+        "description": "Cancel a load that was previously submitted.",
+        "operationId": "Delete",
+        "consumes": [],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "loadId",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": { "description": "The load was successfully cancelled" },
+          "400": { "description": "Invalid request" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" }
+        }
+      }
+    },
+    "/api/v1/Loads/{loadRequestId}/buildstatus": {
+      "get": {
+        "tags": ["Loads"],
+        "summary": "Get load build status",
+        "description": "Retrieve the load build status for a previously submitted request.",
+        "operationId": "Status",
+        "consumes": [],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "loadRequestId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The load build status was successfully retrieved",
+            "schema": {
+              "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.LoadBuilding.LoadRequestStatus"
+            }
+          },
+          "400": { "description": "Invalid request" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" }
+        }
+      }
+    },
+    "/api/v1/LocationStatuses/{loadId}": {
+      "get": {
+        "tags": ["LocationStatuses"],
+        "summary": "Gets all tracking updates for a given load",
+        "description": "Retrieves all tracking updates for a given load, including the dates and last locations tracked or updated by the driver.",
+        "operationId": "Get",
+        "consumes": [],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "loadId",
+            "in": "path",
+            "description": "The requested load ID.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The tracking updates were successfully retrieved",
+            "schema": {
+              "uniqueItems": false,
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.Tracking.LocationStatus"
+              }
+            },
+            "examples": {
+              "application/json": [
+                {
+                  "loadId": 12345,
+                  "address": {
+                    "line1": "2545 W Diversey Ave",
+                    "line2": null,
+                    "city": "Chicago",
+                    "postalCode": "60647",
+                    "state": "IL",
+                    "countryCode": "USA"
+                  },
+                  "geoCoordinates": {
+                    "latitude": 41.9316,
+                    "longitude": -87.6921
+                  },
+                  "timestamp": "2020-06-03T19:07:01.5034492Z"
+                },
+                {
+                  "loadId": 12345,
+                  "address": {
+                    "line1": "1515 Wazee St",
+                    "line2": null,
+                    "city": "Denver",
+                    "postalCode": "80202",
+                    "state": "CO",
+                    "countryCode": "USA"
+                  },
+                  "geoCoordinates": {
+                    "latitude": 39.734,
+                    "longitude": -104.935
+                  },
+                  "timestamp": "2020-06-01T19:07:01.5034505Z"
+                }
+              ]
+            }
+          },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "The tracking updates do not exist" }
+        },
+        "x-code-samples": [
+          {
+            "lang": "curl",
+            "source": "curl -X GET \\\r\nhttps://api-sandbox.coyote.com/api/v1/LocationStatuses/{loadId} \\\r\n-H 'Authorization: Bearer TOKEN' \\ \r\n-H 'Content-Type: application/json'"
+          },
+          {
+            "lang": "C#",
+            "source": "var client = new RestClient(\"https://api-sandbox.coyote.com/api/v1/LocationStatuses/{loadId}\");\r\nvar request = new RestRequest(Method.GET);\r\nrequest.AddHeader(\"Authorization\", \"Bearer TOKEN\");\r\nrequest.AddHeader(\"content-type\", \"application/json\");\r\nIRestResponse response = client.Execute(request);"
+          },
+          {
+            "lang": "Java",
+            "source": "HttpResponse response = Unirest.post(\"https://api-sandbox.coyote.com/api/v1/LocationStatuses/{loadId}\")\r\n.header(\"content-type\", \"application/json\")\r\n.header(\"Authorization\", \"Bearer TOKEN\")\r\n.asString();"
+          }
+        ]
+      }
+    },
+    "/api/v1/LocationStatuses/{loadId}/latest": {
+      "get": {
+        "tags": ["LocationStatuses"],
+        "summary": "Gets the latest tracking update for a given load",
+        "description": "Retrieves the last tracking update for a given load, including the date and last location tracked or updated by the driver.",
+        "operationId": "GetLatest",
+        "consumes": [],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "loadId",
+            "in": "path",
+            "description": "The requested load ID.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The tracking update was successfully retrieved",
+            "schema": {
+              "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.Tracking.LocationStatus"
+            },
+            "examples": {
+              "application/json": {
+                "loadId": 12345,
+                "address": {
+                  "line1": "2545 W Diversey Ave",
+                  "line2": null,
+                  "city": "Chicago",
+                  "postalCode": "60647",
+                  "state": "IL",
+                  "countryCode": "USA"
+                },
+                "geoCoordinates": {
+                  "latitude": 41.9316,
+                  "longitude": -87.6921
+                },
+                "timestamp": "2020-06-03T19:07:01.5040029Z"
+              }
+            }
+          },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "The tracking update does not exist" }
+        },
+        "x-code-samples": [
+          {
+            "lang": "curl",
+            "source": "curl -X GET \\\r\nhttps://api-sandbox.coyote.com/api/v1/LocationStatuses/{loadId}/latest \\\r\n-H 'Authorization: Bearer TOKEN' \\ \r\n-H 'Content-Type: application/json'"
+          },
+          {
+            "lang": "C#",
+            "source": "var client = new RestClient(\"https://api-sandbox.coyote.com/api/v1/LocationStatuses/{loadId}/latest\");\r\nvar request = new RestRequest(Method.GET);\r\nrequest.AddHeader(\"Authorization\", \"Bearer TOKEN\");\r\nrequest.AddHeader(\"content-type\", \"application/json\");\r\nIRestResponse response = client.Execute(request);"
+          },
+          {
+            "lang": "Java",
+            "source": "HttpResponse response = Unirest.post(\"https://api-sandbox.coyote.com/api/v1/LocationStatuses/{loadId}/latest\")\r\n.header(\"content-type\", \"application/json\")\r\n.header(\"Authorization\", \"Bearer TOKEN\")\r\n.asString();"
+          }
+        ]
+      }
+    },
+    "/api/v1/SpotQuotes": {
+      "post": {
+        "tags": ["SpotQuotes"],
+        "summary": "Gets a TL Spot Quote",
+        "description": "Given a set of shipment attributes as input, Coyote will send back a shipment quote with a spot quote ID (“spotQuoteId”). This \r\nquote includes fuel and will be valid for 5 hours. If you want to proceed with the quote and book a shipment, contact your Coyote rep via phone\r\nor email and refer to the Quote ID.",
+        "operationId": "PostTL",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "request",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.Spot.SpotQuoteRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The spot quote was successfully retrieved",
+            "schema": {
+              "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.Spot.SpotQuote"
+            },
+            "examples": {
+              "application/json": {
+                "spotQuoteId": 342354,
+                "customerShipmentId": "CUST1234",
+                "origin": {
+                  "cityName": "Chicago",
+                  "stateCode": "IL",
+                  "countryCode": "US",
+                  "postalCode": "60647"
+                },
+                "destination": {
+                  "cityName": "Madison",
+                  "stateCode": "WI",
+                  "countryCode": "US",
+                  "postalCode": "50515"
+                },
+                "equipmentTypeId": 1,
+                "pickUpDateUTC": "2020-06-09T14:07:01.5117988-05:00",
+                "validUntilUtc": "2020-06-03T19:07:01.511803-05:00",
+                "totalRate": 837.5,
+                "rateLineItems": [
+                  {
+                    "rateCode": "FR",
+                    "description": "Flat Rate",
+                    "unitRate": 650.0,
+                    "units": 1.0,
+                    "totalRate": 650.0,
+                    "currency": "USD"
+                  },
+                  {
+                    "rateCode": "405",
+                    "description": "Fuel Surcharge",
+                    "unitRate": 1.25,
+                    "units": 150.0,
+                    "totalRate": 187.5,
+                    "currency": "USD"
+                  }
+                ]
+              }
+            }
+          },
+          "400": { "description": "Invalid request" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" }
+        },
+        "x-code-samples": [
+          {
+            "lang": "curl",
+            "source": "curl -k -H 'Content-Type: application/json'\\\r\n-H 'Authorization: Bearer TOKEN'\\\r\n-X POST -d '{\r\n  \"EquipmentTypeId\": \"V\",\r\n  \"Origin\": {\r\n    \"CityName\": \"Chicago\",\r\n    \"StateCode\": \"IL\",\r\n    \"CountryCode\": \"US\",\r\n    \"PostalCode\": \"60647\"\r\n  },\r\n  \"Destination\": {\r\n    \"CityName\": \"Madison\",\r\n    \"StateCode\": \"WI\",\r\n    \"CountryCode\": \"US\",\r\n    \"PostalCode\": \"53703\"\r\n  },\r\n  \"PickUpDateUTC\": \"2020-06-08T19:07:01.5291744Z\",\r\n  \"MinTemperature\": null,\r\n  \"MaxTemperature\": null,\r\n  \"Weight\": 100.0,\r\n  \"Commodity\": \"Sample Commodity\",\r\n  \"EquipmentLength\": 53.0,\r\n  \"IsHazmat\": false,\r\n  \"IsDropTrailer\": false,\r\n  \"CustomerShipmentId\": \"CUST1234\"\r\n}' 'https://api-sandbox.coyote.com/api/v1/SpotQuotes'"
+          },
+          {
+            "lang": "C#",
+            "source": "var client = new RestClient(\"https://api-sandbox.coyote.com/api/v1/SpotQuotes\");var request = new RestRequest(Method.POST);\r\nrequest.AddHeader(\"Authorization\", \"Bearer TOKEN\");\r\nrequest.AddHeader(\"content-type\", \"application/json\");\r\nrequest.AddParameter(\"application/json\", @\"{\r\n  \"EquipmentTypeId\": \"V\",\r\n  \"Origin\": {\r\n    \"CityName\": \"Chicago\",\r\n    \"StateCode\": \"IL\",\r\n    \"CountryCode\": \"US\",\r\n    \"PostalCode\": \"60647\"\r\n  },\r\n  \"Destination\": {\r\n    \"CityName\": \"Madison\",\r\n    \"StateCode\": \"WI\",\r\n    \"CountryCode\": \"US\",\r\n    \"PostalCode\": \"53703\"\r\n  },\r\n  \"PickUpDateUTC\": \"2020-06-08T19:07:01.5291744Z\",\r\n  \"MinTemperature\": null,\r\n  \"MaxTemperature\": null,\r\n  \"Weight\": 100.0,\r\n  \"Commodity\": \"Sample Commodity\",\r\n  \"EquipmentLength\": 53.0,\r\n  \"IsHazmat\": false,\r\n  \"IsDropTrailer\": false,\r\n  \"CustomerShipmentId\": \"CUST1234\"\r\n}\", ParameterType.RequestBody);\r\nIRestResponse response = client.Execute(request);"
+          },
+          {
+            "lang": "Java",
+            "source": "HttpResponse response = Unirest.post(\"https://api-sandbox.coyote.com/api/v1/SpotQuotes\")\r\n.header(\"content-type\", \"application/json\")\r\n.header(\"Authorization\", \"Bearer TOKEN\")\r\n.body(\"{\r\n  \"EquipmentTypeId\": \"V\",\r\n  \"Origin\": {\r\n    \"CityName\": \"Chicago\",\r\n    \"StateCode\": \"IL\",\r\n    \"CountryCode\": \"US\",\r\n    \"PostalCode\": \"60647\"\r\n  },\r\n  \"Destination\": {\r\n    \"CityName\": \"Madison\",\r\n    \"StateCode\": \"WI\",\r\n    \"CountryCode\": \"US\",\r\n    \"PostalCode\": \"53703\"\r\n  },\r\n  \"PickUpDateUTC\": \"2020-06-08T19:07:01.5291744Z\",\r\n  \"MinTemperature\": null,\r\n  \"MaxTemperature\": null,\r\n  \"Weight\": 100.0,\r\n  \"Commodity\": \"Sample Commodity\",\r\n  \"EquipmentLength\": 53.0,\r\n  \"IsHazmat\": false,\r\n  \"IsDropTrailer\": false,\r\n  \"CustomerShipmentId\": \"CUST1234\"\r\n}\")\r\n.asString();"
+          }
+        ]
+      }
+    },
+    "/api/v1/LTLSpotQuotes": {
+      "post": {
+        "tags": ["SpotQuotes"],
+        "summary": "Gets an LTL Spot Quote",
+        "description": "Given a set of shipment attributes as input, Coyote will send back an LTL shipment quote with an LTL spot quote ID (“ltlSpotQuoteId”). This \r\nquote includes the list of carriers and their respective quotes and is valid for 7 days. If you want to proceed with the specific quote and book a shipment, contact your Coyote rep via phone\r\nor email and refer to the LTL Spot Quote ID along with the Carrier Quote ID.",
+        "operationId": "PostLTL",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "request",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.Spot.LTLSpotQuoteRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved LTL Rates",
+            "schema": {
+              "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.Spot.LTLSpotQuote"
+            },
+            "examples": {
+              "application/json": {
+                "ltlSpotQuoteId": "3decae4d-d4a4-4490-93e6-7d74613ca5bb",
+                "carrierQuotes": [
+                  {
+                    "quoteID": "CAR12334",
+                    "carrierName": "Carrier XYZ",
+                    "totalRate": 150.0,
+                    "currencyType": "USD",
+                    "transitTime": 1,
+                    "interline": "Direct",
+                    "deliveryDate": "2020-06-05T14:07:01.5212427-05:00"
+                  },
+                  {
+                    "quoteID": "CAR34556",
+                    "carrierName": "Carrier ABC",
+                    "totalRate": 100.0,
+                    "currencyType": "USD",
+                    "transitTime": 2,
+                    "interline": "Indirect",
+                    "deliveryDate": "2020-06-06T14:07:01.5212454-05:00"
+                  }
+                ]
+              }
+            }
+          },
+          "204": {
+            "description": "No rates found for the origin and destination"
+          },
+          "400": { "description": "Bad request" },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "500": { "description": "Internal server error" }
+        }
+      }
+    },
+    "/api/v1/Trackings/{loadId}/stopdetails": {
+      "get": {
+        "tags": ["Trackings"],
+        "summary": "Gets all load stop details",
+        "description": "Retrieves all load stop details for a given load,\r\n           including facility information, as well as appointment and tracking milestones.",
+        "operationId": "GetStopDetailAsync",
+        "consumes": [],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "loadId",
+            "in": "path",
+            "description": "The requested load Id.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved",
+            "schema": {
+              "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.Tracking.StopDetail"
+            },
+            "examples": {
+              "application/json": {
+                "loadStops": [
+                  {
+                    "sequence": 1,
+                    "stopType": "Pickup",
+                    "facility": {
+                      "name": "Coyote Logistics",
+                      "address": {
+                        "line1": "2545 W Diversey Ave",
+                        "line2": null,
+                        "line3": null,
+                        "postalCode": "60647",
+                        "cityName": "Chicago",
+                        "stateProvinceCode": "IL",
+                        "countryCode": "USA"
+                      },
+                      "geoCoordinates": {
+                        "latitude": 41.931674,
+                        "longitude": -87.691939
+                      }
+                    },
+                    "appointment": {
+                      "facilityOpenDateTimeUtc": "2020-06-04T19:07:01.5252362Z",
+                      "facilityCloseDateTimeUtc": "2020-06-04T19:07:01.5252355Z",
+                      "appointmentStartDateTimeUtc": "2020-06-03T19:12:01.5252334Z",
+                      "appointmentEndDateTimeUtc": "2020-06-03T19:47:01.5252348Z"
+                    },
+                    "milestone": {
+                      "driverArrivalDateTimeUtc": "2020-06-03T19:12:01.5252376Z",
+                      "trailerArriveDateTimeUtc": "2020-06-03T19:12:01.5252369Z",
+                      "trailerLoadedDateTimeUtc": "2020-06-03T19:12:01.5252397Z",
+                      "trailerEmptyDateTimeUtc": "2020-06-03T19:12:01.525239Z",
+                      "driverDepartureDateTimeUtc": "2020-06-03T19:12:01.5252383Z"
+                    }
+                  },
+                  {
+                    "sequence": 2,
+                    "stopType": "Delivery",
+                    "facility": {
+                      "name": "Coyote Logistics",
+                      "address": {
+                        "line1": "1515 Wazee St",
+                        "line2": null,
+                        "line3": null,
+                        "postalCode": "80202",
+                        "cityName": "Denver",
+                        "stateProvinceCode": "CO",
+                        "countryCode": "USA"
+                      },
+                      "geoCoordinates": {
+                        "latitude": 41.931674,
+                        "longitude": -87.691939
+                      }
+                    },
+                    "appointment": {
+                      "facilityOpenDateTimeUtc": "2020-06-04T19:07:01.5252429Z",
+                      "facilityCloseDateTimeUtc": "2020-06-04T19:07:01.5252423Z",
+                      "appointmentStartDateTimeUtc": "2020-06-04T19:07:01.5252409Z",
+                      "appointmentEndDateTimeUtc": "2020-06-04T19:07:01.5252416Z"
+                    },
+                    "milestone": {
+                      "driverArrivalDateTimeUtc": "2020-06-04T19:07:01.5252444Z",
+                      "trailerArriveDateTimeUtc": "2020-06-04T19:07:01.5252437Z",
+                      "trailerLoadedDateTimeUtc": "2020-06-04T19:07:01.5252464Z",
+                      "trailerEmptyDateTimeUtc": "2020-06-04T19:07:01.5252457Z",
+                      "driverDepartureDateTimeUtc": "2020-06-04T19:07:01.525245Z"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not found" },
+          "503": { "description": "Temporarily unavailable" }
+        }
+      }
+    },
+    "/api/v1/Trackings/{loadId}/summaries": {
+      "get": {
+        "tags": ["Trackings"],
+        "summary": "Gets load tracking summary",
+        "description": "Retrieves a tracking summary view for a given load, including the latest location update,\r\n           next stop details, and estimated arrival.",
+        "operationId": "GetSummaryAsync",
+        "consumes": [],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "loadId",
+            "in": "path",
+            "description": "The requested load Id.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved",
+            "schema": {
+              "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.Tracking.Summary"
+            },
+            "examples": {
+              "application/json": {
+                "latestLocationStatus": {
+                  "address": {
+                    "line1": "2545 W Diversey Ave",
+                    "line2": null,
+                    "line3": null,
+                    "postalCode": "60647",
+                    "cityName": "Chicago",
+                    "stateProvinceCode": "IL",
+                    "countryCode": "USA"
+                  },
+                  "timestampUtc": "2020-06-03T19:07:01.5289919Z",
+                  "geoCoordinates": {
+                    "latitude": 41.931674,
+                    "longitude": -87.691939
+                  }
+                },
+                "nextStop": {
+                  "sequence": 2,
+                  "stopType": "Delivery",
+                  "facility": {
+                    "name": "Coyote Logistics",
+                    "address": {
+                      "line1": "2545 W Diversey Ave",
+                      "line2": null,
+                      "line3": null,
+                      "postalCode": "60647",
+                      "cityName": "Chicago",
+                      "stateProvinceCode": "IL",
+                      "countryCode": "USA"
+                    },
+                    "geoCoordinates": {
+                      "latitude": 41.931674,
+                      "longitude": -87.691939
+                    }
+                  },
+                  "appointment": {
+                    "facilityOpenDateTimeUtc": "2020-06-04T19:07:01.5289947Z",
+                    "facilityCloseDateTimeUtc": "2020-06-04T19:07:01.528994Z",
+                    "appointmentStartDateTimeUtc": "2020-06-03T19:12:01.5289926Z",
+                    "appointmentEndDateTimeUtc": "2020-06-03T19:47:01.5289933Z"
+                  }
+                },
+                "estimatedArrivalDateTimeUtc": "2020-06-03T19:17:01.5289904Z",
+                "nextStopDistance": { "value": 10.0, "unit": "Miles" }
+              }
+            }
+          },
+          "401": { "description": "Unauthorized" },
+          "403": { "description": "Forbidden" },
+          "404": { "description": "Not found" },
+          "503": { "description": "Temporarily unavailable" }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Coyote.Systems.ExternalApi.Contracts.Models.AvailableLoads.AvailableLoad": {
+      "description": "Available load information",
+      "required": ["loadId", "loadDetails", "stops"],
+      "type": "object",
+      "properties": {
+        "loadId": {
+          "format": "int32",
+          "description": "Available load ID",
+          "type": "integer"
+        },
+        "loadDetails": {
+          "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.AvailableLoads.LoadDetails",
+          "description": "Available load details"
+        },
+        "stops": {
+          "description": "Load stops information",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.AvailableLoads.LoadStop"
+          }
+        }
+      }
+    },
+    "Coyote.Systems.ExternalApi.Contracts.Models.AvailableLoads.LoadDetails": {
+      "description": "Load details",
+      "required": [
+        "rate",
+        "mode",
+        "equipment",
+        "loadDistance",
+        "weight",
+        "temperatureSettings",
+        "loadAttributes"
+      ],
+      "type": "object",
+      "properties": {
+        "rate": {
+          "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.AvailableLoads.Rate",
+          "description": "Load rate"
+        },
+        "mode": {
+          "description": "Load mode",
+          "enum": ["TL", "LTL", "IMDL"],
+          "type": "string"
+        },
+        "equipment": {
+          "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.AvailableLoads.EquipmentDetails",
+          "description": "Equipment details"
+        },
+        "loadDistance": {
+          "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.AvailableLoads.Distance",
+          "description": "Load distance"
+        },
+        "weight": {
+          "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.AvailableLoads.Weight",
+          "description": "Load weight"
+        },
+        "temperatureSettings": {
+          "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.AvailableLoads.TemperatureSettings",
+          "description": "Load temperature details"
+        },
+        "loadAttributes": {
+          "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.AvailableLoads.LoadAttributes",
+          "description": "Load attributes"
+        }
+      }
+    },
+    "Coyote.Systems.ExternalApi.Contracts.Models.AvailableLoads.LoadStop": {
+      "description": "Defines the load stop",
+      "required": [
+        "sequence",
+        "stopType",
+        "facility",
+        "appointment",
+        "stopDetails"
+      ],
+      "type": "object",
+      "properties": {
+        "sequence": {
+          "format": "int32",
+          "description": "Stop sequence",
+          "type": "integer"
+        },
+        "stopType": {
+          "description": "Type of stop",
+          "enum": [
+            "None",
+            "Pickup",
+            "Delivery",
+            "ContainerDepotOrigin",
+            "ContainerDepotTermination",
+            "OriginRamp",
+            "DestinationRamp",
+            "OriginPort",
+            "DestinationPort",
+            "OriginAirport",
+            "DestinationAirport",
+            "CrossDock"
+          ],
+          "type": "string"
+        },
+        "facility": {
+          "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.AvailableLoads.Facility",
+          "description": "Facility details"
+        },
+        "appointment": {
+          "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.AvailableLoads.Appointment",
+          "description": "Stop appointment details"
+        },
+        "stopDetails": {
+          "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.AvailableLoads.StopDetails",
+          "description": "Stop details"
+        }
+      }
+    },
+    "Coyote.Systems.ExternalApi.Contracts.Models.AvailableLoads.Rate": {
+      "description": "Defines the load rate",
+      "required": ["value", "currencyType"],
+      "type": "object",
+      "properties": {
+        "value": {
+          "format": "double",
+          "description": "Load rate",
+          "type": "number"
+        },
+        "currencyType": {
+          "description": "Rate currency",
+          "enum": [
+            "Undefined",
+            "USD",
+            "CAD",
+            "MXN",
+            "ARS",
+            "BRL",
+            "CLP",
+            "COP",
+            "VEF",
+            "EUR",
+            "GBP",
+            "HUF",
+            "PLN"
+          ],
+          "type": "string"
+        }
+      }
+    },
+    "Coyote.Systems.ExternalApi.Contracts.Models.AvailableLoads.EquipmentDetails": {
+      "description": "Equipment details",
+      "required": [
+        "equipmentHeight",
+        "equipmentLength",
+        "equipmentType",
+        "equipmentWidth"
+      ],
+      "type": "object",
+      "properties": {
+        "equipmentHeight": {
+          "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.AvailableLoads.Dimension",
+          "description": "Equipment height"
+        },
+        "equipmentLength": {
+          "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.AvailableLoads.Dimension",
+          "description": "Equipment length"
+        },
+        "equipmentType": { "description": "Equipment type", "type": "string" },
+        "equipmentWidth": {
+          "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.AvailableLoads.Dimension",
+          "description": "Equipment width"
+        }
+      }
+    },
+    "Coyote.Systems.ExternalApi.Contracts.Models.AvailableLoads.Distance": {
+      "description": "Distance to Next Stop __(currently unsupported)__",
+      "required": ["value", "unit"],
+      "type": "object",
+      "properties": {
+        "value": {
+          "format": "double",
+          "description": "Value",
+          "type": "number"
+        },
+        "unit": {
+          "description": "Unit",
+          "enum": ["Miles", "Kilometers"],
+          "type": "string"
+        }
+      }
+    },
+    "Coyote.Systems.ExternalApi.Contracts.Models.AvailableLoads.Weight": {
+      "description": "Defines the weight",
+      "required": ["value", "unit"],
+      "type": "object",
+      "properties": {
+        "value": {
+          "format": "double",
+          "description": "Weight value",
+          "type": "number"
+        },
+        "unit": {
+          "description": "Weight unit",
+          "enum": ["Undefined", "Pounds", "Kilograms", "Tons", "MetricTons"],
+          "type": "string"
+        }
+      }
+    },
+    "Coyote.Systems.ExternalApi.Contracts.Models.AvailableLoads.TemperatureSettings": {
+      "description": "Defines the temperature settings of load",
+      "type": "object",
+      "properties": {
+        "preCoolTemperature": {
+          "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.AvailableLoads.Temperature",
+          "description": "Pre cool temperature"
+        },
+        "maximumTemperature": {
+          "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.AvailableLoads.Temperature",
+          "description": "Maximum temperature"
+        },
+        "minimumTemperature": {
+          "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.AvailableLoads.Temperature",
+          "description": "Minimum temperature"
+        }
+      }
+    },
+    "Coyote.Systems.ExternalApi.Contracts.Models.AvailableLoads.LoadAttributes": {
+      "description": "Load attributes",
+      "required": [
+        "airRide",
+        "blind",
+        "bondedCarrier",
+        "borderCrossingByCoyote",
+        "borderCrossingByCustomer",
+        "coyoteGo",
+        "crossBorderMexico",
+        "ctpat",
+        "disasterRelief",
+        "doubleBlind",
+        "doubleTrailer",
+        "drayage",
+        "duraplate",
+        "englishSpeaking",
+        "exitPass",
+        "fast",
+        "fdaClearanceRequired",
+        "floodRelief",
+        "govt",
+        "guaranteed",
+        "haccp",
+        "hazmatEndorsement",
+        "hvhr",
+        "hvhrPlus",
+        "intraMexico",
+        "liquor",
+        "neec",
+        "noCameraPhonePhotosOfPaperwork",
+        "overDimension",
+        "palletJack",
+        "partialLoad",
+        "pipOrPep",
+        "powerOnly",
+        "ppe",
+        "protectFromFreeze",
+        "repairReceiptRequiredForBreakdowns",
+        "seal",
+        "secondaryBorderInspection",
+        "tankerEndorsement",
+        "tcr",
+        "team",
+        "techTrackingRequired",
+        "tradeShow",
+        "trailerControl",
+        "transloadByCoyote",
+        "transloadByCustomer",
+        "tripleTrailer",
+        "twic",
+        "uiia"
+      ],
+      "type": "object",
+      "properties": {
+        "airRide": { "description": "Is load airride", "type": "boolean" },
+        "blind": { "description": "Is load blind", "type": "boolean" },
+        "bondedCarrier": {
+          "description": "Is bonded carrier",
+          "type": "boolean"
+        },
+        "borderCrossingByCoyote": {
+          "description": "Is border crossing by coyote",
+          "type": "boolean"
+        },
+        "borderCrossingByCustomer": {
+          "description": "Is border crossing by customer",
+          "type": "boolean"
+        },
+        "coyoteGo": { "description": "Is CoyoteGo", "type": "boolean" },
+        "crossBorderMexico": {
+          "description": "Is cross border Mexico",
+          "type": "boolean"
+        },
+        "ctpat": { "description": "Is CTPAT", "type": "boolean" },
+        "disasterRelief": {
+          "description": "Is disaster relief",
+          "type": "boolean"
+        },
+        "doubleBlind": { "description": "Is double blind", "type": "boolean" },
+        "doubleTrailer": {
+          "description": "Is double trailer load",
+          "type": "boolean"
+        },
+        "drayage": { "description": "Is drayage", "type": "boolean" },
+        "duraplate": { "description": "Is duraplate", "type": "boolean" },
+        "englishSpeaking": {
+          "description": "Is English speaking",
+          "type": "boolean"
+        },
+        "exitPass": { "description": "Is exit pass", "type": "boolean" },
+        "fast": { "description": "Fast", "type": "boolean" },
+        "fdaClearanceRequired": {
+          "description": "Is FDA clearance required",
+          "type": "boolean"
+        },
+        "floodRelief": { "description": "Is flood relief", "type": "boolean" },
+        "govt": { "description": "Govt", "type": "boolean" },
+        "guaranteed": { "description": "Guaranteed", "type": "boolean" },
+        "haccp": { "description": "HACCP", "type": "boolean" },
+        "hazmatEndorsement": {
+          "description": "Hazmat Endorsement",
+          "type": "boolean"
+        },
+        "hvhr": { "description": "Is HVHR", "type": "boolean" },
+        "hvhrPlus": { "description": "HVHR plus", "type": "boolean" },
+        "intraMexico": { "description": "Is Intra Mexico", "type": "boolean" },
+        "liquor": { "description": "Is liquor", "type": "boolean" },
+        "neec": { "description": "Is NEEC", "type": "boolean" },
+        "noCameraPhonePhotosOfPaperwork": {
+          "description": "No camera phone photos of paperwork",
+          "type": "boolean"
+        },
+        "overDimension": {
+          "description": "Is over dimension",
+          "type": "boolean"
+        },
+        "palletJack": { "description": "Is pallet jack", "type": "boolean" },
+        "partialLoad": { "description": "Is partial Load", "type": "boolean" },
+        "pipOrPep": { "description": "Is PIP or PEP", "type": "boolean" },
+        "powerOnly": { "description": "Is power only load", "type": "boolean" },
+        "ppe": { "description": "Is PPE", "type": "boolean" },
+        "protectFromFreeze": {
+          "description": "Whether protect from freeze",
+          "type": "boolean"
+        },
+        "repairReceiptRequiredForBreakdowns": {
+          "description": "Whether repair receipt required for breakdowns",
+          "type": "boolean"
+        },
+        "seal": { "description": "Is seal", "type": "boolean" },
+        "secondaryBorderInspection": {
+          "description": "Is secondary border inspection",
+          "type": "boolean"
+        },
+        "tankerEndorsement": {
+          "description": "Is tanker endorsement",
+          "type": "boolean"
+        },
+        "tcr": { "description": "Is TCR", "type": "boolean" },
+        "team": { "description": "Is team", "type": "boolean" },
+        "techTrackingRequired": {
+          "description": "Whether tech tracking required",
+          "type": "boolean"
+        },
+        "tradeShow": { "description": "Is trade show", "type": "boolean" },
+        "trailerControl": {
+          "description": "Is trailer control",
+          "type": "boolean"
+        },
+        "transloadByCoyote": {
+          "description": "Is transload by coyote",
+          "type": "boolean"
+        },
+        "transloadByCustomer": {
+          "description": "Is transload by customer",
+          "type": "boolean"
+        },
+        "tripleTrailer": {
+          "description": "Is triple trailer",
+          "type": "boolean"
+        },
+        "twic": { "description": "Is TWIC", "type": "boolean" },
+        "uiia": { "description": "Is UIIA", "type": "boolean" }
+      }
+    },
+    "Coyote.Systems.ExternalApi.Contracts.Models.AvailableLoads.Facility": {
+      "description": "Facility",
+      "required": ["name", "address", "geoCoordinates"],
+      "type": "object",
+      "properties": {
+        "name": { "description": "Name", "type": "string" },
+        "address": {
+          "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.AvailableLoads.TrackingAddress",
+          "description": "Address"
+        },
+        "geoCoordinates": {
+          "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.AvailableLoads.GeoCoordinates",
+          "description": "GeoCoordinates"
+        }
+      }
+    },
+    "Coyote.Systems.ExternalApi.Contracts.Models.AvailableLoads.Appointment": {
+      "description": "Appointment",
+      "type": "object",
+      "properties": {
+        "facilityOpenDateTimeUtc": {
+          "format": "date-time",
+          "description": "Facility Open DateTime in Utc",
+          "type": "string"
+        },
+        "facilityCloseDateTimeUtc": {
+          "format": "date-time",
+          "description": "Facility Close DateTime in Utc",
+          "type": "string"
+        },
+        "appointmentStartDateTimeUtc": {
+          "format": "date-time",
+          "description": "Appointment Start DateTime in Utc",
+          "type": "string"
+        },
+        "appointmentEndDateTimeUtc": {
+          "format": "date-time",
+          "description": "Appointment End DateTime in Utc",
+          "type": "string"
+        }
+      }
+    },
+    "Coyote.Systems.ExternalApi.Contracts.Models.AvailableLoads.StopDetails": {
+      "description": "Load stop details",
+      "required": ["commodities"],
+      "type": "object",
+      "properties": {
+        "commodities": {
+          "description": "List of stop commodities",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.AvailableLoads.LoadCommodity"
+          }
+        },
+        "stopAttributes": {
+          "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.AvailableLoads.LoadStopAttributes",
+          "description": "Stop attributes"
+        },
+        "stopNotes": { "description": "Stop notes", "type": "string" }
+      }
+    },
+    "Coyote.Systems.ExternalApi.Contracts.Models.AvailableLoads.Dimension": {
+      "description": "Defines the Dimension",
+      "required": ["value", "unit"],
+      "type": "object",
+      "properties": {
+        "value": {
+          "format": "double",
+          "description": "Dimension value",
+          "type": "number"
+        },
+        "unit": {
+          "description": "Dimension unit",
+          "enum": [
+            "Undefined",
+            "Inches",
+            "Meters",
+            "Centimeters",
+            "Millimeters",
+            "Feet"
+          ],
+          "type": "string"
+        }
+      }
+    },
+    "Coyote.Systems.ExternalApi.Contracts.Models.AvailableLoads.Temperature": {
+      "description": "Defines the temperature details",
+      "required": ["value", "unit"],
+      "type": "object",
+      "properties": {
+        "value": {
+          "format": "double",
+          "description": "Temperature value.",
+          "type": "number"
+        },
+        "unit": {
+          "description": "Unit of temperature.",
+          "enum": ["Fahrenheit", "Celsius"],
+          "type": "string"
+        }
+      }
+    },
+    "Coyote.Systems.ExternalApi.Contracts.Models.AvailableLoads.TrackingAddress": {
+      "description": "Address",
+      "required": [
+        "line1",
+        "postalCode",
+        "cityName",
+        "stateProvinceCode",
+        "countryCode"
+      ],
+      "type": "object",
+      "properties": {
+        "line1": { "description": "Line 1", "type": "string" },
+        "line2": { "description": "Line 2", "type": "string" },
+        "line3": { "description": "Line 3", "type": "string" },
+        "postalCode": { "description": "Postal Code", "type": "string" },
+        "cityName": { "description": "City Name", "type": "string" },
+        "stateProvinceCode": {
+          "description": "State or Province Code",
+          "type": "string"
+        },
+        "countryCode": { "description": "Country Code", "type": "string" }
+      }
+    },
+    "Coyote.Systems.ExternalApi.Contracts.Models.AvailableLoads.GeoCoordinates": {
+      "description": "GeoCoordinates",
+      "required": ["latitude", "longitude"],
+      "type": "object",
+      "properties": {
+        "latitude": {
+          "format": "double",
+          "description": "Latitude",
+          "type": "number"
+        },
+        "longitude": {
+          "format": "double",
+          "description": "Longitude",
+          "type": "number"
+        }
+      }
+    },
+    "Coyote.Systems.ExternalApi.Contracts.Models.AvailableLoads.LoadCommodity": {
+      "description": "Defines the load commodity",
+      "required": ["description", "weight"],
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "Description of load commodity",
+          "type": "string"
+        },
+        "weight": {
+          "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.AvailableLoads.Weight",
+          "description": "Weight of load commodity"
+        }
+      }
+    },
+    "Coyote.Systems.ExternalApi.Contracts.Models.AvailableLoads.LoadStopAttributes": {
+      "description": "Defines the Coyote.Systems.ExternalApi.Contracts.Models.AvailableLoads.LoadStopAttributes.",
+      "type": "object",
+      "properties": {
+        "blind": { "description": "Is blind", "type": "boolean" },
+        "closedToeShoes": {
+          "description": "Is closed toe shoes",
+          "type": "boolean"
+        },
+        "detentionAuthFormRequired": {
+          "description": "Is detention auth form required",
+          "type": "boolean"
+        },
+        "driverAssist": {
+          "description": "Whether driver assist",
+          "type": "boolean"
+        },
+        "dropAndHook": { "description": "Is drop and hook", "type": "boolean" },
+        "dropTrailerAllowXHoursToUnload": {
+          "format": "int32",
+          "description": "Allow hours to unload",
+          "type": "integer"
+        },
+        "dropTrailerRequired": {
+          "description": "Is drop trailer required",
+          "type": "boolean"
+        },
+        "earPlugs": { "description": "Ear plugs", "type": "boolean" },
+        "englishSpeaking": {
+          "description": "Is English speaking",
+          "type": "boolean"
+        },
+        "escortOrTwicRequired": {
+          "description": "Whether escort or twic Required",
+          "type": "boolean"
+        },
+        "exitPass": { "description": "Exit pass", "type": "boolean" },
+        "government": { "description": "Is government", "type": "boolean" },
+        "hardHat": { "description": "Is hard hat", "type": "boolean" },
+        "inOutTimesWSignature": {
+          "description": "Are in out times with signature",
+          "type": "boolean"
+        },
+        "insideDelivery": {
+          "description": "Is inside delivery",
+          "type": "boolean"
+        },
+        "insidePickup": {
+          "description": "Is inside pickup",
+          "type": "boolean"
+        },
+        "legalScaleOnSite": {
+          "description": "Is legal scale on site",
+          "type": "boolean"
+        },
+        "liftgateDelivery": {
+          "description": "Is liftgate delivery",
+          "type": "boolean"
+        },
+        "liftgatePickup": {
+          "description": "Is liftgate pickup",
+          "type": "boolean"
+        },
+        "limitedAccessDeliveryAirport": {
+          "description": "Is limited access delivery airport",
+          "type": "boolean"
+        },
+        "limitedAccessDeliveryChurch": {
+          "description": "Is limited access delivery church",
+          "type": "boolean"
+        },
+        "limitedAccessDeliveryConstructionSite": {
+          "description": "Is limited access delivery construction site",
+          "type": "boolean"
+        },
+        "limitedAccessDeliveryFarm": {
+          "description": "Is limited access delivery farm",
+          "type": "boolean"
+        },
+        "limitedAccessDeliveryMilitaryBase": {
+          "description": "Is limited access delivery military base",
+          "type": "boolean"
+        },
+        "limitedAccessDeliveryMineSite": {
+          "description": "Is limited access delivery mine site",
+          "type": "boolean"
+        },
+        "limitedAccessDeliveryMiniStorage": {
+          "description": "Is limited access delivery mini storage",
+          "type": "boolean"
+        },
+        "limitedAccessDeliveryOther": {
+          "description": "Is limited access delivery other",
+          "type": "boolean"
+        },
+        "limitedAccessDeliveryPrison": {
+          "description": "Is limited access delivery prison",
+          "type": "boolean"
+        },
+        "limitedAccessDeliveryRemoteGovt": {
+          "description": "Is limited access delivery remote govt",
+          "type": "boolean"
+        },
+        "limitedAccessDeliverySchool": {
+          "description": "Is limited access delivery school",
+          "type": "boolean"
+        },
+        "limitedAccessPickupAirport": {
+          "description": "Is limited access pickup airport",
+          "type": "boolean"
+        },
+        "limitedAccessPickupChurch": {
+          "description": "Is limited access pickup church",
+          "type": "boolean"
+        },
+        "limitedAccessPickupConstructionSite": {
+          "description": "Is limited access pickup construction site",
+          "type": "boolean"
+        },
+        "limitedAccessPickupFarm": {
+          "description": "Is limited access pickup farm",
+          "type": "boolean"
+        },
+        "limitedAccessPickupMilitaryBase": {
+          "description": "Is limited access pickup military base",
+          "type": "boolean"
+        },
+        "limitedAccessPickupMineSite": {
+          "description": "Is limited access pickup mine site",
+          "type": "boolean"
+        },
+        "limitedAccessPickupMiniStorage": {
+          "description": "Is limited access pickup mini storage",
+          "type": "boolean"
+        },
+        "limitedAccessPickupOther": {
+          "description": "Is limited access pickup other",
+          "type": "boolean"
+        },
+        "limitedAccessPickupPrison": {
+          "description": "Is limited access pickup prison",
+          "type": "boolean"
+        },
+        "limitedAccessPickupRemoteGovt": {
+          "description": "Is limited access pickup remote govt",
+          "type": "boolean"
+        },
+        "limitedAccessPickupSchool": {
+          "description": "Is limited access pickup school",
+          "type": "boolean"
+        },
+        "liquorPermit": {
+          "description": "Is liquor permit",
+          "type": "boolean"
+        },
+        "loadedToLegalWeight": {
+          "description": "Is loaded to legal weight",
+          "type": "boolean"
+        },
+        "longPants": { "description": "Is long pants", "type": "boolean" },
+        "longSleeves": { "description": "Is long sleeves", "type": "boolean" },
+        "lumperReceiptRequired": {
+          "description": "Whether lumper receipt required",
+          "type": "boolean"
+        },
+        "mustCheckInAsCoyote": {
+          "description": "Must check in as Coyote",
+          "type": "boolean"
+        },
+        "mustProvideAndApplySeal": {
+          "description": "Whether must provide and apply seal",
+          "type": "boolean"
+        },
+        "mustSecureLoad": {
+          "description": "Whether must secure load",
+          "type": "boolean"
+        },
+        "needCoyoteApprovalToUseLumperService": {
+          "description": "Is Coyote approval needed to use lumper service",
+          "type": "boolean"
+        },
+        "noAnimals": { "description": "Is no animals", "type": "boolean" },
+        "noDetention": { "description": "Is no detention", "type": "boolean" },
+        "noEarlyDeliveries": {
+          "description": "Whether no early deliveries",
+          "type": "boolean"
+        },
+        "noLoadLocksOrStraps": {
+          "description": "Is no load locks or straps",
+          "type": "boolean"
+        },
+        "noSameDayReschedules": {
+          "description": "Is no same day reschedules",
+          "type": "boolean"
+        },
+        "notAllowedOnDock": {
+          "description": "Is not allowed on dock",
+          "type": "boolean"
+        },
+        "noTankTops": { "description": "Is no tank tops", "type": "boolean" },
+        "noTrailerDetentionOrLayover": {
+          "description": "Is no trailer detention or layover",
+          "type": "boolean"
+        },
+        "noWorkIns": { "description": "Is no work ins", "type": "boolean" },
+        "onSiteParkingAvailable": {
+          "description": "Whether on site parking available",
+          "type": "boolean"
+        },
+        "overnightParkingAvailable": {
+          "description": "Is overnight parking available",
+          "type": "boolean"
+        },
+        "payLumperWCashTCheck": {
+          "description": "PayLumperWCashTCheck",
+          "type": "boolean"
+        },
+        "preLoadDropTrailerXHoursInAdvance": {
+          "format": "int32",
+          "description": "Pre load drop trailer in advance",
+          "type": "integer"
+        },
+        "prePaidLumperService": {
+          "description": "Is prepaid lumper service",
+          "type": "boolean"
+        },
+        "residentialDelivery": {
+          "description": "Is residential delivery",
+          "type": "boolean"
+        },
+        "residentialPickup": {
+          "description": "Is residential pickup",
+          "type": "boolean"
+        },
+        "safetyGlasses": {
+          "description": "Is safety glasses",
+          "type": "boolean"
+        },
+        "safetyVest": { "description": "Is safety vest", "type": "boolean" },
+        "scaleEmpty": { "description": "Is scale empty", "type": "boolean" },
+        "scaleHeavy": { "description": "Is scale heavy", "type": "boolean" },
+        "secureYard": { "description": "Is secure yard", "type": "boolean" },
+        "sortAndSegregateDelivery": {
+          "description": "Whether to sort and segregate delivery",
+          "type": "boolean"
+        },
+        "sortAndSegregatePickup": {
+          "description": "Whether to sort and segregate pickup",
+          "type": "boolean"
+        },
+        "spanishSpeaking": {
+          "description": "Is Spanish speaking",
+          "type": "boolean"
+        },
+        "steelToeShoes": {
+          "description": "Is steel toe shoes",
+          "type": "boolean"
+        },
+        "strictAppt": { "description": "Is strict appt", "type": "boolean" },
+        "tradeshowDelivery": {
+          "description": "Is trade show delivery",
+          "type": "boolean"
+        },
+        "tradeshowPickup": {
+          "description": "Is trade show pickup",
+          "type": "boolean"
+        },
+        "trailerInspectionFormRequired": {
+          "description": "Whether trailer inspection form required",
+          "type": "boolean"
+        },
+        "twic": { "description": "Is TWIC", "type": "boolean" },
+        "twicRequiredNoEscorts": {
+          "description": "Is TWIC required no escorts",
+          "type": "boolean"
+        },
+        "uiia": { "description": "Is UIIA", "type": "boolean" },
+        "unpackDetrash": {
+          "description": "Is unpack detrash",
+          "type": "boolean"
+        },
+        "usCitizen": { "description": "Is US citizen", "type": "boolean" },
+        "validUSCommercialDriversLicenseHardcopy": {
+          "description": "Is valid US commercial drivers license hardcopy",
+          "type": "boolean"
+        },
+        "xTankOfFuelAtShipper": {
+          "format": "int32",
+          "description": "Number of tank of fuel at shipper",
+          "type": "integer"
+        }
+      }
+    },
+    "Coyote.Systems.ExternalApi.Contracts.Models.AvailableLoads.AvailableLoadsRequest": {
+      "description": "Request object to fetch available loads",
+      "required": ["origin", "equipmentType", "mode"],
+      "type": "object",
+      "properties": {
+        "origin": {
+          "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.AvailableLoads.LoadStopLocationInfo",
+          "description": "Origin to search available load"
+        },
+        "destination": {
+          "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.AvailableLoads.LoadStopLocationInfo",
+          "description": "Destination to search available load"
+        },
+        "equipmentType": {
+          "description": "Equipement type",
+          "enum": [
+            "V",
+            "R",
+            "F",
+            "VR",
+            "C",
+            "SD",
+            "DF",
+            "DD",
+            "SS",
+            "FT",
+            "E",
+            "T",
+            "B",
+            "Z",
+            "M",
+            "Q",
+            "P",
+            "CNRU",
+            "CPPU",
+            "CSXU",
+            "EMHU",
+            "EMPU",
+            "EMWU",
+            "EPTY",
+            "PACU",
+            "W",
+            "G",
+            "K",
+            "DR",
+            "H",
+            "FWS",
+            "BT",
+            "ZS",
+            "XM",
+            "MV",
+            "MF",
+            "FM",
+            "DV",
+            "LALL",
+            "SDL",
+            "A",
+            "BL",
+            "RC",
+            "HS",
+            "GM",
+            "GS",
+            "FS",
+            "SDS",
+            "RTC",
+            "RTB",
+            "WFB",
+            "PO",
+            "DDT",
+            "DDB",
+            "DDF",
+            "SFB",
+            "SFC",
+            "RBC",
+            "FB",
+            "FBT",
+            "FBX",
+            "SKC",
+            "LL",
+            "LLS",
+            "LLX",
+            "TKC",
+            "TKF",
+            "IM",
+            "IMF"
+          ],
+          "type": "string"
+        },
+        "mode": {
+          "description": "Load mode",
+          "enum": ["TL_LTL", "TL", "LTL"],
+          "type": "string"
+        }
+      },
+      "example": {
+        "origin": {
+          "location": { "latitude": 41.9316, "longitude": -87.6921 },
+          "deadheadRadius": { "value": 120.0, "unit": "Miles" },
+          "appointment": {
+            "appointmentEndDateTime": "2020-06-03T12:00:00-05:00",
+            "appointmentStartDateTime": "2020-06-02T14:00:00-05:00"
+          }
+        },
+        "destination": {
+          "location": { "latitude": 42.9316, "longitude": -88.6921 },
+          "deadheadRadius": { "value": 120.0, "unit": "Miles" },
+          "appointment": {
+            "appointmentEndDateTime": "2020-06-03T12:00:00-05:00",
+            "appointmentStartDateTime": "2020-06-02T18:00:00-05:00"
+          }
+        },
+        "equipmentType": "V",
+        "mode": 0
+      }
+    },
+    "Coyote.Systems.ExternalApi.Contracts.Models.AvailableLoads.LoadStopLocationInfo": {
+      "description": "Defines the load stop location details for request",
+      "type": "object",
+      "properties": {
+        "location": {
+          "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.AvailableLoads.GeoLocation",
+          "description": "Stop location"
+        },
+        "deadheadRadius": {
+          "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.AvailableLoads.Radius",
+          "description": "Stop deadhead radius"
+        },
+        "appointment": {
+          "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.AvailableLoads.AppointmentDate",
+          "description": "Stop appointment date"
+        }
+      }
+    },
+    "Coyote.Systems.ExternalApi.Contracts.Models.AvailableLoads.GeoLocation": {
+      "description": "Geo location",
+      "type": "object",
+      "properties": {
+        "latitude": {
+          "format": "double",
+          "description": "Latitude",
+          "type": "number"
+        },
+        "longitude": {
+          "format": "double",
+          "description": "Longitude",
+          "type": "number"
+        }
+      }
+    },
+    "Coyote.Systems.ExternalApi.Contracts.Models.AvailableLoads.Radius": {
+      "description": "Defines radius",
+      "type": "object",
+      "properties": {
+        "value": {
+          "format": "double",
+          "description": "Value",
+          "type": "number"
+        },
+        "unit": {
+          "description": "Unit",
+          "enum": ["Miles", "Kilometers"],
+          "type": "string"
+        }
+      }
+    },
+    "Coyote.Systems.ExternalApi.Contracts.Models.AvailableLoads.AppointmentDate": {
+      "description": "Appointment date of stop",
+      "type": "object",
+      "properties": {
+        "appointmentEndDateTime": {
+          "format": "date-time",
+          "description": "Appointment end date and time",
+          "type": "string"
+        },
+        "appointmentStartDateTime": {
+          "format": "date-time",
+          "description": "Appointment start date and time",
+          "type": "string"
+        }
+      }
+    },
+    "Coyote.Systems.ExternalApi.Contracts.Models.AvailableLoads.PagedAvailableLoads": {
+      "description": "Defines the paged available loads",
+      "type": "object",
+      "properties": {
+        "loads": {
+          "description": "List of available loads",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.AvailableLoads.AvailableLoad"
+          }
+        },
+        "pagination": {
+          "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.AvailableLoads.Pagination",
+          "description": "Pagination information"
+        }
+      }
+    },
+    "Coyote.Systems.ExternalApi.Contracts.Models.AvailableLoads.Pagination": {
+      "description": "Pagination information",
+      "type": "object",
+      "properties": {
+        "limit": {
+          "format": "int32",
+          "description": "Limit",
+          "type": "integer"
+        },
+        "offset": {
+          "format": "int32",
+          "description": "Offset",
+          "type": "integer"
+        },
+        "totalCount": {
+          "format": "int32",
+          "description": "Total loads found",
+          "type": "integer"
+        }
+      }
+    },
+    "Coyote.Systems.ExternalApi.Contracts.Models.Documents.DocumentRequest": {
+      "description": "Document Request",
+      "required": ["loadId", "document", "documentType", "extensionType"],
+      "type": "object",
+      "properties": {
+        "loadId": {
+          "format": "int32",
+          "description": "The requested load ID.",
+          "type": "integer"
+        },
+        "document": {
+          "format": "byte",
+          "description": "Document byte array",
+          "type": "string"
+        },
+        "documentType": {
+          "description": "Document Type",
+          "enum": [
+            "Undefined",
+            "VendorInvoice",
+            "BillOfLading",
+            "ProofOfDelivery",
+            "LumperTicket",
+            "ScaleTicket",
+            "InGateTicket",
+            "OutGateTicket",
+            "Miscellaneous",
+            "AccessorialAgreement",
+            "RateConfirmation",
+            "LoadTender",
+            "Invoice",
+            "CustomsDocuments",
+            "InvoiceWithPaperwork",
+            "DetentionLoading",
+            "DetentionUnloading",
+            "PalletReceipt",
+            "SpotApproval",
+            "EquipmentOrderedNotUsed",
+            "CMR",
+            "DemurrageLoading",
+            "DemurrageUnloading",
+            "ExitPass",
+            "BalanceDue",
+            "BalanceDueWithPaperwork",
+            "PackingList"
+          ],
+          "type": "string"
+        },
+        "extensionType": {
+          "description": "Document Extension Type",
+          "enum": [
+            "Undefined",
+            "Pdf",
+            "Txt",
+            "Tif",
+            "Tiff",
+            "Bmp",
+            "Dib",
+            "Gif",
+            "Jpeg",
+            "Jpg",
+            "Jpe",
+            "Jfif",
+            "Png",
+            "Doc",
+            "Docx",
+            "Rtf",
+            "Mht",
+            "Htm",
+            "Html",
+            "Xml",
+            "Zip"
+          ],
+          "type": "string"
+        }
+      },
+      "example": {
+        "loadId": 17513654,
+        "document": "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",
+        "documentType": "BillOfLading",
+        "extensionType": "Zip"
+      }
+    },
+    "Coyote.Systems.ExternalApi.Contracts.Models.LoadBuilding.Load": {
+      "description": "Load information",
+      "required": ["loadDetail"],
+      "type": "object",
+      "properties": {
+        "customer": {
+          "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.LoadBuilding.Customer",
+          "description": "Customer information"
+        },
+        "loadDetail": {
+          "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.LoadBuilding.LoadDetail",
+          "description": "Details of the load being submitted"
+        }
+      },
+      "example": {
+        "customer": {
+          "referenceNumbers": [
+            {
+              "referenceNumberType": "ShipmentNumber",
+              "referenceNumberValue": "123456"
+            }
+          ]
+        },
+        "loadDetail": {
+          "mode": "TL",
+          "equipmentType": "V",
+          "equipmentLength": 53,
+          "requirements": [
+            { "requirementType": "Guaranteed", "requirementValue": "true" }
+          ],
+          "equipmentRequirements": [
+            { "requirementType": "LiftGate", "requirementValue": "true" },
+            { "requirementType": "XLoadBars", "requirementValue": "6" }
+          ],
+          "stops": [
+            {
+              "sequence": 1,
+              "stopType": "Pickup",
+              "facility": {
+                "name": "Pick Up Facility",
+                "address": {
+                  "line1": "123 Main St.",
+                  "line2": null,
+                  "line3": null,
+                  "postalCode": "60647",
+                  "cityName": "Chicago",
+                  "stateProvinceCode": "IL",
+                  "countryCode": "US"
+                },
+                "geoCoordinates": null
+              },
+              "stopRequirements": [
+                {
+                  "requirementType": "DropTrailerAllowXHoursToUnload",
+                  "requirementValue": "5"
+                },
+                { "requirementType": "Inside", "requirementValue": "true" }
+              ],
+              "openDateTimeUtc": "2020-06-03T08:00:00Z",
+              "closeDateTimeUtc": "2020-06-03T18:00:00Z",
+              "appointmentStartDateTimeUtc": "2020-06-03T10:00:00Z",
+              "appointmentEndDateTimeUtc": "2020-06-03T12:00:00Z",
+              "referenceNumbers": ["ABC1234", "123467", "ABCXYZ"],
+              "stopNotes": "Sample instructions"
+            },
+            {
+              "sequence": 2,
+              "stopType": "Delivery",
+              "facility": {
+                "name": "Drop Off Facility",
+                "address": {
+                  "line1": "123 Downers St.",
+                  "line2": null,
+                  "line3": null,
+                  "postalCode": "50313",
+                  "cityName": "Madison",
+                  "stateProvinceCode": "WI",
+                  "countryCode": "US"
+                },
+                "geoCoordinates": null
+              },
+              "stopRequirements": [
+                {
+                  "requirementType": "DropTrailerAllowXHoursToUnload",
+                  "requirementValue": "5"
+                },
+                { "requirementType": "Inside", "requirementValue": "true" }
+              ],
+              "openDateTimeUtc": "2020-06-05T08:00:00Z",
+              "closeDateTimeUtc": "2020-06-05T18:00:00Z",
+              "appointmentStartDateTimeUtc": "2020-06-05T10:00:00Z",
+              "appointmentEndDateTimeUtc": "2020-06-05T12:00:00Z",
+              "referenceNumbers": null,
+              "stopNotes": null
+            }
+          ],
+          "commodities": [
+            {
+              "description": "Packages",
+              "poNumber": null,
+              "packagingType": "Pallet",
+              "quantity": 100,
+              "palletCount": 5,
+              "weightUnit": "Pounds",
+              "weight": 500.0,
+              "lengthUnit": "Inches",
+              "length": 100.0,
+              "height": 50.0,
+              "width": 100.0,
+              "freightClass": null,
+              "nmfcNumber": null,
+              "nmfcSubNumber": null,
+              "cargoValue": 1000.0,
+              "stackable": false,
+              "temperatureUnit": null,
+              "temperatureSetting": null,
+              "preCoolTemperature": 0,
+              "minimumTemperature": 0,
+              "maximumTemperature": 0,
+              "pickUpStopNumber": 1,
+              "deliveryStopNumber": 2
+            }
+          ]
+        }
+      }
+    },
+    "Coyote.Systems.ExternalApi.Contracts.Models.LoadBuilding.Customer": {
+      "description": "Customer information",
+      "type": "object",
+      "properties": {
+        "referenceNumbers": {
+          "description": "List of reference numbers",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.LoadBuilding.ReferenceNumber"
+          }
+        }
+      }
+    },
+    "Coyote.Systems.ExternalApi.Contracts.Models.LoadBuilding.LoadDetail": {
+      "description": "Load Details",
+      "required": [
+        "mode",
+        "equipmentType",
+        "equipmentLength",
+        "stops",
+        "commodities"
+      ],
+      "type": "object",
+      "properties": {
+        "mode": {
+          "description": "Mode",
+          "enum": ["TL", "LTL", "IMDL"],
+          "type": "string"
+        },
+        "equipmentType": {
+          "description": "Equipment Type",
+          "enum": [
+            "V",
+            "R",
+            "F",
+            "VR",
+            "C",
+            "SD",
+            "DF",
+            "DD",
+            "SS",
+            "FT",
+            "E",
+            "T",
+            "B",
+            "Z",
+            "M",
+            "Q",
+            "P",
+            "CNRU",
+            "CPPU",
+            "CSXU",
+            "EMHU",
+            "EMPU",
+            "EMWU",
+            "EPTY",
+            "PACU",
+            "W",
+            "G",
+            "K",
+            "DR",
+            "H",
+            "FWS",
+            "BT",
+            "ZS",
+            "XM",
+            "MV",
+            "MF",
+            "FM",
+            "DV",
+            "LALL",
+            "SDL",
+            "A",
+            "BL",
+            "RC",
+            "HS",
+            "GM",
+            "GS",
+            "FS",
+            "SDS",
+            "RTC",
+            "RTB",
+            "WFB",
+            "PO",
+            "DDT",
+            "DDB",
+            "DDF",
+            "SFB",
+            "SFC",
+            "RBC",
+            "FB",
+            "FBT",
+            "FBX",
+            "SKC",
+            "LL",
+            "LLS",
+            "LLX",
+            "TKC",
+            "TKF",
+            "IM",
+            "IMF"
+          ],
+          "type": "string"
+        },
+        "equipmentLength": {
+          "format": "int32",
+          "description": "Equipment length",
+          "type": "integer"
+        },
+        "requirements": {
+          "description": "Load requirements",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.LoadBuilding.LoadRequirement"
+          }
+        },
+        "equipmentRequirements": {
+          "description": "Load equipment requirements",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.LoadBuilding.LoadEquipmentRequirement"
+          }
+        },
+        "stops": {
+          "description": "List of load stops",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.LoadBuilding.LoadStop"
+          }
+        },
+        "commodities": {
+          "description": "List of commodities",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.LoadBuilding.LoadCommodity"
+          }
+        }
+      }
+    },
+    "Coyote.Systems.ExternalApi.Contracts.Models.LoadBuilding.ReferenceNumber": {
+      "description": "Reference Numbers",
+      "type": "object",
+      "properties": {
+        "referenceNumberType": {
+          "description": "Reference number type",
+          "enum": [
+            "Reference",
+            "OrderNumber",
+            "BillOfLading",
+            "CommercialInvoice",
+            "MasterBOLNumber",
+            "PoNumber",
+            "ShipmentNumber"
+          ],
+          "type": "string"
+        },
+        "referenceNumberValue": {
+          "description": "Reference number value. Can be alphanumeric (50 characters limit)",
+          "type": "string"
+        }
+      }
+    },
+    "Coyote.Systems.ExternalApi.Contracts.Models.LoadBuilding.LoadRequirement": {
+      "description": "",
+      "type": "object",
+      "properties": {
+        "requirementType": {
+          "description": "Load requirement type",
+          "enum": [
+            "Guaranteed",
+            "Team",
+            "HazmatEndorsement",
+            "TankerEndorsement",
+            "Hvhr",
+            "HvhrPlus",
+            "ProtectFromFreeze",
+            "PartialLoad",
+            "DoubleBlind",
+            "DisasterRelief",
+            "TechTrackingRequired",
+            "PipOrPep",
+            "Neec",
+            "OverDimension",
+            "CrossBorderMexico",
+            "BorderCrossingByCoyote",
+            "TransloadByCustomer",
+            "SecondaryBorderInspection",
+            "Haccp",
+            "NoCameraPhonePhotosOfPaperwork"
+          ],
+          "type": "string"
+        },
+        "requirementValue": {
+          "description": "Requirement value",
+          "type": "string"
+        }
+      }
+    },
+    "Coyote.Systems.ExternalApi.Contracts.Models.LoadBuilding.LoadEquipmentRequirement": {
+      "description": "Load equipment requirement",
+      "type": "object",
+      "properties": {
+        "requirementType": {
+          "description": "Equipment requirement type",
+          "enum": [
+            "FoodGrade",
+            "PaperGrade",
+            "LiftGate",
+            "PalletJack",
+            "AirRide",
+            "TrailerXYearsOrNewer",
+            "XLoadLocks",
+            "XLoadBars",
+            "XLoadStraps",
+            "ETrack",
+            "Chains",
+            "NoRollDoor",
+            "NoReefer",
+            "NoLiftGate",
+            "DoubleTrailer",
+            "TripleTrailer",
+            "LoadOutTrailer",
+            "TowAway",
+            "LightweightEquipment",
+            "ScaleUpToXAmount",
+            "TandemSlide",
+            "DownloadableReefer",
+            "SpaceSaverReefer",
+            "TranslucentTop",
+            "Duraplate",
+            "VentedVan",
+            "FunctionalAirChute"
+          ],
+          "type": "string"
+        },
+        "requirementValue": {
+          "description": "Requirement value",
+          "type": "string"
+        }
+      }
+    },
+    "Coyote.Systems.ExternalApi.Contracts.Models.LoadBuilding.LoadStop": {
+      "description": "Load stop",
+      "required": ["sequence", "stopType", "facility"],
+      "type": "object",
+      "properties": {
+        "sequence": {
+          "format": "int32",
+          "description": "Stop sequence",
+          "type": "integer"
+        },
+        "stopType": {
+          "description": "Stop type",
+          "enum": [
+            "None",
+            "Pickup",
+            "Delivery",
+            "ContainerDepotOrigin",
+            "ContainerDepotTermination",
+            "OriginRamp",
+            "DestinationRamp",
+            "OriginPort",
+            "DestinationPort",
+            "OriginAirport",
+            "DestinationAirport",
+            "CrossDock"
+          ],
+          "type": "string"
+        },
+        "facility": {
+          "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.Tracking.Facility",
+          "description": "Name of the facility"
+        },
+        "stopRequirements": {
+          "description": "Stop requirements",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.LoadBuilding.LoadStopRequirement"
+          }
+        },
+        "openDateTimeUtc": {
+          "format": "date-time",
+          "description": "Facility open date/time in UTC",
+          "type": "string"
+        },
+        "closeDateTimeUtc": {
+          "format": "date-time",
+          "description": "Facility close date/time in UTC",
+          "type": "string"
+        },
+        "appointmentStartDateTimeUtc": {
+          "format": "date-time",
+          "description": "Appointment open date/time in UTC",
+          "type": "string"
+        },
+        "appointmentEndDateTimeUtc": {
+          "format": "date-time",
+          "description": "Appointment close date/time in UTC",
+          "type": "string"
+        },
+        "referenceNumbers": {
+          "description": "Reference numbers",
+          "uniqueItems": false,
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "stopNotes": {
+          "description": "Stop notes - special instructions relevant to stop (2500 characters limit)",
+          "type": "string"
+        }
+      }
+    },
+    "Coyote.Systems.ExternalApi.Contracts.Models.LoadBuilding.LoadCommodity": {
+      "description": "Commodity",
+      "required": [
+        "description",
+        "packagingType",
+        "quantity",
+        "weight",
+        "cargoValue"
+      ],
+      "type": "object",
+      "properties": {
+        "description": { "description": "Item Description", "type": "string" },
+        "poNumber": { "description": "PO Number", "type": "string" },
+        "packagingType": {
+          "description": "Packaging type of the commodity",
+          "enum": [
+            "NotApplicable",
+            "Case",
+            "Roll",
+            "Box",
+            "Sack",
+            "Bale",
+            "Carton",
+            "Coil",
+            "Drum",
+            "ToteBin",
+            "Bag",
+            "Bundle",
+            "Bulk",
+            "DryBulk",
+            "LiquidBulk",
+            "Barge",
+            "Barrel",
+            "BasketOrHamper",
+            "Beam",
+            "Bin",
+            "Bobbin",
+            "Bottle",
+            "BoxWithInnerContainer",
+            "Bucket",
+            "BulkBag",
+            "Cabinet",
+            "Cage",
+            "Can",
+            "CanCase",
+            "CarloadRail",
+            "Carboy",
+            "Cask",
+            "Chest",
+            "Container",
+            "ContainersOfBulkCargo",
+            "Core",
+            "Cradle",
+            "Crate",
+            "Cube",
+            "Cylinder",
+            "DoubleLengthRack",
+            "DoubleLengthSkid",
+            "DoubleLengthToteBin",
+            "DuffleBag",
+            "EngineContainer",
+            "Envelope",
+            "Firkin",
+            "Flask",
+            "FloBin",
+            "ForwardReel",
+            "Frame",
+            "GarmentsOnHangers",
+            "HalfStandardRack",
+            "HalfStandardToteBin",
+            "Hamper",
+            "Jar",
+            "Jug",
+            "Keg",
+            "Kit",
+            "KnockdownRack",
+            "KnockdownToteBin",
+            "Lifts",
+            "LinerBagDry",
+            "LinerBagLiquid",
+            "Loose",
+            "Lug",
+            "MilitaryVan",
+            "MixedTypePack",
+            "MultirollPack",
+            "MultiwallContainerSecuredToPallet",
+            "Noil",
+            "OnHangerOrRackInboxes",
+            "Overwrap",
+            "Package",
+            "Pail",
+            "Pallet",
+            "Pieces",
+            "Pims",
+            "PipeRack",
+            "Platform",
+            "PrivateVehicle",
+            "Rack",
+            "Reel",
+            "Skid",
+            "Sleeve",
+            "SlipSheet",
+            "Spool",
+            "Tank",
+            "ToteCan",
+            "Tray",
+            "TriwallBox",
+            "Truck",
+            "Tub",
+            "Tube",
+            "Unit",
+            "VanPack",
+            "IntermediateBulkContainers"
+          ],
+          "type": "string"
+        },
+        "quantity": {
+          "format": "int32",
+          "description": "Number of units",
+          "type": "integer"
+        },
+        "palletCount": {
+          "format": "int32",
+          "description": "Number of pallets relevant to commodity item\r\n\r\n**Required for LTL**",
+          "type": "integer"
+        },
+        "weightUnit": {
+          "description": "Unit of weight",
+          "enum": ["Pounds"],
+          "type": "string"
+        },
+        "weight": {
+          "format": "double",
+          "description": "Pallet weight in lbs(default) if not specified\r\n\r\n**Required for LTL**",
+          "type": "number"
+        },
+        "lengthUnit": {
+          "description": "Unit of Length",
+          "enum": ["Inches", "Meters", "Centimeters", "Millimeters", "Feet"],
+          "type": "string"
+        },
+        "length": {
+          "format": "double",
+          "description": "Pallet length in inches\r\n\r\n**Required for LTL**",
+          "type": "number"
+        },
+        "height": {
+          "format": "double",
+          "description": "Pallet height in inches\r\n\r\n**Required for LTL**",
+          "type": "number"
+        },
+        "width": {
+          "format": "double",
+          "description": "Pallet width in inches\r\n\r\n**Required for LTL**",
+          "type": "number"
+        },
+        "freightClass": {
+          "description": "Freight Class\r\n\r\n**Required for LTL**",
+          "enum": [
+            "Undefined",
+            "N50",
+            "N55",
+            "N60",
+            "N65",
+            "N70",
+            "N77PT5",
+            "N85",
+            "N92PT5",
+            "N100",
+            "N110",
+            "N125",
+            "N150",
+            "N175",
+            "N200",
+            "N250",
+            "N300",
+            "N400",
+            "N500"
+          ],
+          "type": "string"
+        },
+        "nmfcNumber": {
+          "format": "int32",
+          "description": "NMFC Number",
+          "type": "integer"
+        },
+        "nmfcSubNumber": {
+          "format": "int32",
+          "description": "NMFC Sub number",
+          "type": "integer"
+        },
+        "cargoValue": {
+          "format": "double",
+          "description": "Cargo value",
+          "type": "number"
+        },
+        "stackable": { "description": "Stackable", "type": "boolean" },
+        "temperatureUnit": {
+          "description": "Units for temparature",
+          "enum": ["Fahrenheit", "Celsius"],
+          "type": "string"
+        },
+        "temperatureSetting": {
+          "description": "Temperature setting for refrigerated loads",
+          "enum": ["Continuous", "Cycle"],
+          "type": "string"
+        },
+        "preCoolTemperature": {
+          "format": "int32",
+          "description": "PreCool temperature if required",
+          "type": "integer"
+        },
+        "minimumTemperature": {
+          "format": "int32",
+          "description": "Minimum temperature setting",
+          "type": "integer"
+        },
+        "maximumTemperature": {
+          "format": "int32",
+          "description": "Maximum temperature setting",
+          "type": "integer"
+        },
+        "pickUpStopNumber": {
+          "format": "int32",
+          "description": "Pick up stop number for commodity",
+          "type": "integer"
+        },
+        "deliveryStopNumber": {
+          "format": "int32",
+          "description": "Delivery stop number for commodity",
+          "type": "integer"
+        }
+      }
+    },
+    "Coyote.Systems.ExternalApi.Contracts.Models.Tracking.Facility": {
+      "description": "Facility",
+      "type": "object",
+      "properties": {
+        "name": { "description": "Name", "type": "string" },
+        "address": {
+          "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.Tracking.TrackingAddress",
+          "description": "Address"
+        },
+        "geoCoordinates": {
+          "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.Tracking.GeoCoordinates",
+          "description": "GeoCoordinates"
+        }
+      }
+    },
+    "Coyote.Systems.ExternalApi.Contracts.Models.LoadBuilding.LoadStopRequirement": {
+      "description": "Load stop requirement",
+      "type": "object",
+      "properties": {
+        "requirementType": {
+          "description": "Stop requirement type",
+          "enum": [
+            "DropTrailerRequired",
+            "DropAndHook",
+            "DropTrailerAllowXHoursToUnload",
+            "PreloadDropTrailerXHoursInAdvance",
+            "DriverAssist",
+            "Blind",
+            "Government",
+            "TWICRequiredNoEscorts",
+            "TWIC",
+            "EscortOrTWICRequired",
+            "UIIA",
+            "LiquorPermit",
+            "StrictAppt",
+            "NoWorkIns",
+            "NoEarlyDeliveries",
+            "NoSameDayReschedules",
+            "XRescheduleFee",
+            "XLateFee",
+            "ScaleEmpty",
+            "ScaleHeavy",
+            "XTankOfFuelAtShipper",
+            "LoadedToLegalWeight",
+            "NotAllowedOnDock",
+            "MustCheckinAsCoyote",
+            "NoLoadLocksOrStraps",
+            "MustSecureLoad",
+            "MustProvideAndApplySeal",
+            "ExitPass",
+            "EnglishSpeaking",
+            "SpanishSpeaking",
+            "USCitizen",
+            "ValidUSCommercialDriversLicenseHardcopy",
+            "OnsiteParkingAvailable",
+            "OvernightParkingAvailable",
+            "LegalScaleOnSite",
+            "SecureYard",
+            "PetsAllowed",
+            "HardHat",
+            "SafetyGlasses",
+            "EarPlugs",
+            "LongPants",
+            "LongSleeves",
+            "ClosedToeShoes",
+            "SteelToeShoes",
+            "SafetyVest",
+            "NoTankTops",
+            "NoAnimalsAllowed",
+            "PayLumperWCashTCheck",
+            "LumperReceiptRequired",
+            "NeedCoyoteApprovalToUseLumperService",
+            "PrepaidLumperService",
+            "LumperReceiptRequiredWithinXHours",
+            "DetentionAfterXHours",
+            "NotifyXMinPriorToEnteringDetention",
+            "PaperworkSubmittedWithInXTime",
+            "TrailerDetentionAfterXDays",
+            "NoDetention",
+            "InOutTimesWSignature",
+            "NoTrailerDetentionOrLayover",
+            "DetentionAuthFormRequired",
+            "TrailerInspectionFormRequired",
+            "Liftgate",
+            "Residential",
+            "LimitedAccess",
+            "SortAndSegregate",
+            "Inside",
+            "Tradeshow"
+          ],
+          "type": "string"
+        },
+        "requirementValue": {
+          "description": "Stop requirement value",
+          "type": "string"
+        }
+      }
+    },
+    "Coyote.Systems.ExternalApi.Contracts.Models.Tracking.TrackingAddress": {
+      "description": "Address",
+      "type": "object",
+      "properties": {
+        "line1": { "description": "Line 1", "type": "string" },
+        "line2": { "description": "Line 2", "type": "string" },
+        "line3": { "description": "Line 3", "type": "string" },
+        "postalCode": { "description": "Postal Code", "type": "string" },
+        "cityName": { "description": "City Name", "type": "string" },
+        "stateProvinceCode": {
+          "description": "State or Province Code",
+          "type": "string"
+        },
+        "countryCode": { "description": "Country Code", "type": "string" }
+      }
+    },
+    "Coyote.Systems.ExternalApi.Contracts.Models.Tracking.GeoCoordinates": {
+      "description": "GeoCoordinates",
+      "type": "object",
+      "properties": {
+        "latitude": {
+          "format": "double",
+          "description": "Latitude",
+          "type": "number"
+        },
+        "longitude": {
+          "format": "double",
+          "description": "Longitude",
+          "type": "number"
+        }
+      }
+    },
+    "Coyote.Systems.ExternalApi.Contracts.Models.LoadBuilding.LoadRequestStatus": {
+      "description": "Load status response",
+      "type": "object",
+      "properties": {
+        "loadId": {
+          "format": "int32",
+          "description": "Coyote Load Id",
+          "type": "integer"
+        },
+        "status": {
+          "description": "Build status",
+          "enum": ["InProgress", "Completed", "Failed"],
+          "type": "string"
+        },
+        "message": {
+          "description": "Success/Failure message",
+          "type": "string"
+        }
+      }
+    },
+    "Coyote.Systems.ExternalApi.Contracts.Models.Tracking.LocationStatus": {
+      "description": "Location Status",
+      "type": "object",
+      "properties": {
+        "loadId": {
+          "format": "int32",
+          "description": "Load",
+          "type": "integer"
+        },
+        "address": {
+          "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.Tracking.Address",
+          "description": "Address"
+        },
+        "geoCoordinates": {
+          "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.Tracking.GeoCoordinates",
+          "description": "GeoCoordinates"
+        },
+        "timestamp": {
+          "format": "date-time",
+          "description": "Timestamp",
+          "type": "string"
+        }
+      }
+    },
+    "Coyote.Systems.ExternalApi.Contracts.Models.Tracking.Address": {
+      "description": "Address",
+      "type": "object",
+      "properties": {
+        "line1": { "description": "Line1", "type": "string" },
+        "line2": { "description": "Line2", "type": "string" },
+        "city": { "description": "City", "type": "string" },
+        "postalCode": { "description": "Postal Code", "type": "string" },
+        "state": { "description": "State", "type": "string" },
+        "countryCode": { "description": "Country Code", "type": "string" }
+      }
+    },
+    "Coyote.Systems.ExternalApi.Contracts.Models.Spot.SpotQuoteRequest": {
+      "description": "Spot Quote Request",
+      "required": [
+        "equipmentTypeId",
+        "origin",
+        "destination",
+        "pickUpDateUTC",
+        "customerShipmentId"
+      ],
+      "type": "object",
+      "properties": {
+        "equipmentTypeId": {
+          "description": "Equipment Type (V = Dry Van, R = Reefer)",
+          "enum": [
+            "V",
+            "R",
+            "F",
+            "VR",
+            "C",
+            "SD",
+            "DF",
+            "DD",
+            "SS",
+            "FT",
+            "E",
+            "T",
+            "B",
+            "Z",
+            "M",
+            "Q",
+            "P",
+            "CNRU",
+            "CPPU",
+            "CSXU",
+            "EMHU",
+            "EMPU",
+            "EMWU",
+            "EPTY",
+            "PACU",
+            "W",
+            "G",
+            "K",
+            "DR",
+            "H",
+            "FWS",
+            "BT",
+            "ZS",
+            "XM",
+            "MV",
+            "MF",
+            "FM",
+            "DV",
+            "LALL",
+            "SDL",
+            "A",
+            "BL",
+            "RC",
+            "HS",
+            "GM",
+            "GS",
+            "FS",
+            "SDS",
+            "RTC",
+            "RTB",
+            "WFB",
+            "PO",
+            "DDT",
+            "DDB",
+            "DDF",
+            "SFB",
+            "SFC",
+            "RBC",
+            "FB",
+            "FBT",
+            "FBX",
+            "SKC",
+            "LL",
+            "LLS",
+            "LLX",
+            "TKC",
+            "TKF",
+            "IM",
+            "IMF"
+          ],
+          "type": "string"
+        },
+        "origin": {
+          "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.Spot.LocationData",
+          "description": "Origin"
+        },
+        "destination": {
+          "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.Spot.LocationData",
+          "description": "Destination"
+        },
+        "pickUpDateUTC": {
+          "format": "date-time",
+          "description": "Load Pickup Date UTC",
+          "type": "string"
+        },
+        "minTemperature": {
+          "format": "double",
+          "description": "Minimum Temperature (required if Equipment Type = R)",
+          "type": "number"
+        },
+        "maxTemperature": {
+          "format": "double",
+          "description": "Maximum Temperature (required if Equipment Type = R)",
+          "type": "number"
+        },
+        "weight": {
+          "format": "double",
+          "description": "Weight",
+          "type": "number"
+        },
+        "commodity": { "description": "Commodity", "type": "string" },
+        "equipmentLength": {
+          "format": "double",
+          "description": "Equipment Length",
+          "type": "number"
+        },
+        "isHazmat": {
+          "description": "Load is Hazmat __(currently unsupported)__",
+          "type": "boolean"
+        },
+        "isDropTrailer": {
+          "description": "Load Requires Drop Trailer __(currently unsupported)__",
+          "type": "boolean"
+        },
+        "customerShipmentId": { "description": "Shipment ID", "type": "string" }
+      },
+      "example": {
+        "equipmentTypeId": "V",
+        "origin": {
+          "cityName": "Chicago",
+          "stateCode": "IL",
+          "countryCode": "US",
+          "postalCode": "60647"
+        },
+        "destination": {
+          "cityName": "Madison",
+          "stateCode": "WI",
+          "countryCode": "US",
+          "postalCode": "53703"
+        },
+        "pickUpDateUTC": "2020-06-08T19:07:01.5116791Z",
+        "minTemperature": null,
+        "maxTemperature": null,
+        "weight": 100.0,
+        "commodity": "Sample Commodity",
+        "equipmentLength": 53.0,
+        "isHazmat": false,
+        "isDropTrailer": false,
+        "customerShipmentId": "CUST1234"
+      }
+    },
+    "Coyote.Systems.ExternalApi.Contracts.Models.Spot.LocationData": {
+      "description": "City, State and Postal Code required",
+      "type": "object",
+      "properties": {
+        "cityName": { "description": "City __(required)__", "type": "string" },
+        "stateCode": {
+          "description": "State __(required)__",
+          "type": "string"
+        },
+        "countryCode": {
+          "description": "Country (optional)",
+          "type": "string"
+        },
+        "postalCode": {
+          "description": "Postal Code __(required)__",
+          "type": "string"
+        }
+      }
+    },
+    "Coyote.Systems.ExternalApi.Contracts.Models.Spot.SpotQuote": {
+      "description": "SpotQuote",
+      "type": "object",
+      "properties": {
+        "spotQuoteId": {
+          "format": "int32",
+          "description": "SpotQuoteId",
+          "type": "integer"
+        },
+        "customerShipmentId": {
+          "description": "CustomerShipmentId",
+          "type": "string"
+        },
+        "origin": {
+          "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.Spot.LocationData",
+          "description": "Origin"
+        },
+        "destination": {
+          "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.Spot.LocationData",
+          "description": "Destination"
+        },
+        "equipmentTypeId": {
+          "description": "EquipmentTypeId",
+          "enum": [
+            "V",
+            "R",
+            "F",
+            "VR",
+            "C",
+            "SD",
+            "DF",
+            "DD",
+            "SS",
+            "FT",
+            "E",
+            "T",
+            "B",
+            "Z",
+            "M",
+            "Q",
+            "P",
+            "CNRU",
+            "CPPU",
+            "CSXU",
+            "EMHU",
+            "EMPU",
+            "EMWU",
+            "EPTY",
+            "PACU",
+            "W",
+            "G",
+            "K",
+            "DR",
+            "H",
+            "FWS",
+            "BT",
+            "ZS",
+            "XM",
+            "MV",
+            "MF",
+            "FM",
+            "DV",
+            "LALL",
+            "SDL",
+            "A",
+            "BL",
+            "RC",
+            "HS",
+            "GM",
+            "GS",
+            "FS",
+            "SDS",
+            "RTC",
+            "RTB",
+            "WFB",
+            "PO",
+            "DDT",
+            "DDB",
+            "DDF",
+            "SFB",
+            "SFC",
+            "RBC",
+            "FB",
+            "FBT",
+            "FBX",
+            "SKC",
+            "LL",
+            "LLS",
+            "LLX",
+            "TKC",
+            "TKF",
+            "IM",
+            "IMF"
+          ],
+          "type": "string"
+        },
+        "pickUpDateUTC": {
+          "format": "date-time",
+          "description": "PickupDateUTC",
+          "type": "string"
+        },
+        "validUntilUtc": {
+          "format": "date-time",
+          "description": "ValidUntilUtc",
+          "type": "string"
+        },
+        "totalRate": {
+          "format": "double",
+          "description": "TotalRate\r\n__Total rate includes fuel__",
+          "type": "number"
+        },
+        "rateLineItems": {
+          "description": "List of rate items that make up the total rate for this quote",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.Spot.RateItem"
+          }
+        }
+      }
+    },
+    "Coyote.Systems.ExternalApi.Contracts.Models.Spot.RateItem": {
+      "description": "Rate line item that make up the quote",
+      "type": "object",
+      "properties": {
+        "rateCode": {
+          "description": "Rate code used by Coyote\r\n\r\n`FR` - **Flat Rate or Line Haul** \r\n`405` - **Fuel Surcharge**",
+          "enum": ["FR", "405", "PM"],
+          "type": "string"
+        },
+        "description": {
+          "description": "Rate code description",
+          "type": "string"
+        },
+        "unitRate": {
+          "format": "double",
+          "description": "Unit amount of the rate line item.",
+          "type": "number"
+        },
+        "units": {
+          "format": "double",
+          "description": "Number of Units",
+          "type": "number"
+        },
+        "totalRate": {
+          "format": "double",
+          "description": "Total amount of the rate line item.",
+          "type": "number"
+        },
+        "currency": {
+          "description": "Currency type",
+          "enum": ["USD", "CAD"],
+          "type": "string"
+        }
+      }
+    },
+    "Coyote.Systems.ExternalApi.Contracts.Models.Spot.LTLSpotQuoteRequest": {
+      "description": "LTL Rate Request",
+      "required": [
+        "origin",
+        "pickupDate",
+        "destination",
+        "equipmentType",
+        "commodities"
+      ],
+      "type": "object",
+      "properties": {
+        "origin": {
+          "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.Spot.LocationData",
+          "description": "Origin"
+        },
+        "pickupDate": {
+          "format": "date-time",
+          "description": "Shipment Pickup Date",
+          "type": "string"
+        },
+        "originRequirements": {
+          "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.Spot.OriginRequirements",
+          "description": "Origin Requirements"
+        },
+        "destination": {
+          "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.Spot.LocationData",
+          "description": "Destination"
+        },
+        "destinationRequirements": {
+          "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.Spot.DestinationRequirements",
+          "description": "Destination Requirements"
+        },
+        "equipmentType": {
+          "description": "Equipment Type (V=Dry Van)\r\nValid value: \"V\"",
+          "enum": [
+            "V",
+            "R",
+            "F",
+            "VR",
+            "C",
+            "SD",
+            "DF",
+            "DD",
+            "SS",
+            "FT",
+            "E",
+            "T",
+            "B",
+            "Z",
+            "M",
+            "Q",
+            "P",
+            "CNRU",
+            "CPPU",
+            "CSXU",
+            "EMHU",
+            "EMPU",
+            "EMWU",
+            "EPTY",
+            "PACU",
+            "W",
+            "G",
+            "K",
+            "DR",
+            "H",
+            "FWS",
+            "BT",
+            "ZS",
+            "XM",
+            "MV",
+            "MF",
+            "FM",
+            "DV",
+            "LALL",
+            "SDL",
+            "A",
+            "BL",
+            "RC",
+            "HS",
+            "GM",
+            "GS",
+            "FS",
+            "SDS",
+            "RTC",
+            "RTB",
+            "WFB",
+            "PO",
+            "DDT",
+            "DDB",
+            "DDF",
+            "SFB",
+            "SFC",
+            "RBC",
+            "FB",
+            "FBT",
+            "FBX",
+            "SKC",
+            "LL",
+            "LLS",
+            "LLX",
+            "TKC",
+            "TKF",
+            "IM",
+            "IMF"
+          ],
+          "type": "string"
+        },
+        "commodities": {
+          "description": "Commodities",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.Spot.Commodity"
+          }
+        },
+        "guaranteedShipment": {
+          "description": "Guaranteed Shipment",
+          "type": "boolean"
+        }
+      },
+      "example": {
+        "origin": {
+          "cityName": "Chicago",
+          "stateCode": "IL",
+          "countryCode": "US",
+          "postalCode": "60647"
+        },
+        "pickupDate": "2020-06-04T14:07:01.5210886-05:00",
+        "originRequirements": {
+          "insideStop": false,
+          "residentialStop": false,
+          "tradeshowStop": false,
+          "liftGateStop": false,
+          "sortSegregate": false,
+          "limitedAccessType": 0
+        },
+        "destination": {
+          "cityName": "Madison",
+          "stateCode": "WI",
+          "countryCode": "US",
+          "postalCode": "50515"
+        },
+        "destinationRequirements": {
+          "insideStop": false,
+          "residentialStop": false,
+          "tradeshowStop": false,
+          "liftGateStop": false,
+          "sortSegregate": false,
+          "limitedAccessType": 0,
+          "appointmentRequired": false
+        },
+        "equipmentType": "V",
+        "commodities": [
+          {
+            "description": "Sample Commodity",
+            "palletCount": 5,
+            "freightClass": 9,
+            "weight": 100.0,
+            "length": 75.0,
+            "height": 50.0,
+            "width": 50.0,
+            "isHazmat": false,
+            "nmfcNumber": null,
+            "nmfcSubNumber": null
+          }
+        ],
+        "guaranteedShipment": false
+      }
+    },
+    "Coyote.Systems.ExternalApi.Contracts.Models.Spot.OriginRequirements": {
+      "description": "Origin stop requirements",
+      "type": "object",
+      "properties": {
+        "insideStop": {
+          "description": "Stop requires Inside Pickup or Delivery",
+          "type": "boolean"
+        },
+        "residentialStop": {
+          "description": "Residential Stop",
+          "type": "boolean"
+        },
+        "tradeshowStop": {
+          "description": "Trade show Stop",
+          "type": "boolean"
+        },
+        "liftGateStop": {
+          "description": "Stop requires Lift Gate",
+          "type": "boolean"
+        },
+        "sortSegregate": {
+          "description": "Stop requires Sort and Segregate",
+          "type": "boolean"
+        },
+        "limitedAccessType": {
+          "description": "Stop is Limited Access Type",
+          "enum": [
+            "Undefined",
+            "Church",
+            "ConstructionSite",
+            "MilitaryBase",
+            "MineSite",
+            "MiniStorage",
+            "RemoteGovtDelivery",
+            "School",
+            "Other"
+          ],
+          "type": "string"
+        }
+      }
+    },
+    "Coyote.Systems.ExternalApi.Contracts.Models.Spot.DestinationRequirements": {
+      "description": "Destination stop requirements",
+      "type": "object",
+      "properties": {
+        "insideStop": {
+          "description": "Stop requires Inside Pickup or Delivery",
+          "type": "boolean"
+        },
+        "residentialStop": {
+          "description": "Residential Stop",
+          "type": "boolean"
+        },
+        "tradeshowStop": {
+          "description": "Trade show Stop",
+          "type": "boolean"
+        },
+        "liftGateStop": {
+          "description": "Stop requires Lift Gate",
+          "type": "boolean"
+        },
+        "sortSegregate": {
+          "description": "Stop requires Sort and Segregate",
+          "type": "boolean"
+        },
+        "limitedAccessType": {
+          "description": "Stop is Limited Access Type",
+          "enum": [
+            "Undefined",
+            "Church",
+            "ConstructionSite",
+            "MilitaryBase",
+            "MineSite",
+            "MiniStorage",
+            "RemoteGovtDelivery",
+            "School",
+            "Other"
+          ],
+          "type": "string"
+        },
+        "appointmentRequired": {
+          "description": "Appointment Required",
+          "type": "boolean"
+        }
+      }
+    },
+    "Coyote.Systems.ExternalApi.Contracts.Models.Spot.Commodity": {
+      "description": "Commodity",
+      "required": [
+        "palletCount",
+        "freightClass",
+        "weight",
+        "length",
+        "height",
+        "width"
+      ],
+      "type": "object",
+      "properties": {
+        "description": { "description": "Item Description", "type": "string" },
+        "palletCount": {
+          "format": "int32",
+          "description": "Number of pallets relevant to commodity item",
+          "type": "integer"
+        },
+        "freightClass": {
+          "description": "Freight Class",
+          "enum": [
+            "Undefined",
+            "N50",
+            "N55",
+            "N60",
+            "N65",
+            "N70",
+            "N77PT5",
+            "N85",
+            "N92PT5",
+            "N100",
+            "N110",
+            "N125",
+            "N150",
+            "N175",
+            "N200",
+            "N250",
+            "N300",
+            "N400",
+            "N500"
+          ],
+          "type": "string"
+        },
+        "weight": {
+          "format": "double",
+          "description": "Pallet weight in lbs",
+          "type": "number"
+        },
+        "length": {
+          "format": "double",
+          "description": "Pallet length in inches",
+          "type": "number"
+        },
+        "height": {
+          "format": "double",
+          "description": "Pallet height in inches",
+          "type": "number"
+        },
+        "width": {
+          "format": "double",
+          "description": "Pallet width in inches",
+          "type": "number"
+        },
+        "isHazmat": { "description": "Is Hazmat Commodity", "type": "boolean" },
+        "nmfcNumber": {
+          "format": "int32",
+          "description": "NMFC Number",
+          "type": "integer"
+        },
+        "nmfcSubNumber": {
+          "format": "int32",
+          "description": "NMFC Sub",
+          "type": "integer"
+        }
+      }
+    },
+    "Coyote.Systems.ExternalApi.Contracts.Models.Spot.LTLSpotQuote": {
+      "description": "LTL Rate Response",
+      "type": "object",
+      "properties": {
+        "ltlSpotQuoteId": {
+          "description": "LTL Spot Quote request Id",
+          "type": "string"
+        },
+        "carrierQuotes": {
+          "description": "Carrier Quotes",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.Spot.CarrierQuote"
+          }
+        }
+      }
+    },
+    "Coyote.Systems.ExternalApi.Contracts.Models.Spot.CarrierQuote": {
+      "description": "Carrier Quote",
+      "type": "object",
+      "properties": {
+        "quoteID": {
+          "description": "Unique identifier to the quote based on carrier",
+          "type": "string"
+        },
+        "carrierName": {
+          "description": "Name of the carrier",
+          "type": "string"
+        },
+        "totalRate": {
+          "format": "double",
+          "description": "Total rate includes fuel and accessorial services",
+          "type": "number"
+        },
+        "currencyType": {
+          "description": "Currency of provided rate",
+          "enum": [
+            "Undefined",
+            "USD",
+            "CAD",
+            "MXN",
+            "ARS",
+            "BRL",
+            "CLP",
+            "COP",
+            "VEF",
+            "EUR",
+            "GBP",
+            "HUF",
+            "PLN"
+          ],
+          "type": "string"
+        },
+        "transitTime": {
+          "format": "int32",
+          "description": "Expected days of transit according to specific carrier",
+          "type": "integer"
+        },
+        "interline": {
+          "description": "If lane serviced by carrier is Direct or Indirect",
+          "type": "string"
+        },
+        "deliveryDate": {
+          "format": "date-time",
+          "description": "Expected delivery date for shipment\r\nWeekends and holidays are excluded",
+          "type": "string"
+        }
+      }
+    },
+    "Coyote.Systems.ExternalApi.Contracts.Models.Tracking.StopDetail": {
+      "description": "Stop Detail",
+      "type": "object",
+      "properties": {
+        "loadStops": {
+          "description": "Load Stops",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.Tracking.LoadStopProgress"
+          }
+        }
+      }
+    },
+    "Coyote.Systems.ExternalApi.Contracts.Models.Tracking.LoadStopProgress": {
+      "description": "Load Stop",
+      "type": "object",
+      "properties": {
+        "sequence": {
+          "format": "int32",
+          "description": "Sequence",
+          "type": "integer"
+        },
+        "stopType": {
+          "description": "Stop Type",
+          "enum": [
+            "None",
+            "Pickup",
+            "Delivery",
+            "ContainerDepotOrigin",
+            "ContainerDepotTermination",
+            "OriginRamp",
+            "DestinationRamp",
+            "OriginPort",
+            "DestinationPort",
+            "OriginAirport",
+            "DestinationAirport",
+            "CrossDock"
+          ],
+          "type": "string"
+        },
+        "facility": {
+          "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.Tracking.Facility",
+          "description": "Facility"
+        },
+        "appointment": {
+          "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.Tracking.Appointment",
+          "description": "Appointment"
+        },
+        "milestone": {
+          "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.Tracking.Milestone",
+          "description": "Milestone"
+        }
+      }
+    },
+    "Coyote.Systems.ExternalApi.Contracts.Models.Tracking.Appointment": {
+      "description": "Appointment",
+      "type": "object",
+      "properties": {
+        "facilityOpenDateTimeUtc": {
+          "format": "date-time",
+          "description": "Facility Open DateTime in Utc",
+          "type": "string"
+        },
+        "facilityCloseDateTimeUtc": {
+          "format": "date-time",
+          "description": "Facility Close DateTime in Utc",
+          "type": "string"
+        },
+        "appointmentStartDateTimeUtc": {
+          "format": "date-time",
+          "description": "Appointment Start DateTime in Utc",
+          "type": "string"
+        },
+        "appointmentEndDateTimeUtc": {
+          "format": "date-time",
+          "description": "Appointment End DateTime in Utc",
+          "type": "string"
+        }
+      }
+    },
+    "Coyote.Systems.ExternalApi.Contracts.Models.Tracking.Milestone": {
+      "description": "Milestone",
+      "type": "object",
+      "properties": {
+        "driverArrivalDateTimeUtc": {
+          "format": "date-time",
+          "description": "Driver Arrival DateTime in Utc",
+          "type": "string"
+        },
+        "trailerArriveDateTimeUtc": {
+          "format": "date-time",
+          "description": "Trailer Arrive DateTime in Utc",
+          "type": "string"
+        },
+        "trailerLoadedDateTimeUtc": {
+          "format": "date-time",
+          "description": "Trailer Loaded DateTime in Utc",
+          "type": "string"
+        },
+        "trailerEmptyDateTimeUtc": {
+          "format": "date-time",
+          "description": "Trailer Empty DateTime in Utc",
+          "type": "string"
+        },
+        "driverDepartureDateTimeUtc": {
+          "format": "date-time",
+          "description": "Driver Departure DateTime in Utc",
+          "type": "string"
+        }
+      }
+    },
+    "Coyote.Systems.ExternalApi.Contracts.Models.Tracking.Summary": {
+      "description": "Summary",
+      "type": "object",
+      "properties": {
+        "latestLocationStatus": {
+          "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.Tracking.Location",
+          "description": "Latest Location Status"
+        },
+        "nextStop": {
+          "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.Tracking.LoadStop",
+          "description": "Next Stop"
+        },
+        "estimatedArrivalDateTimeUtc": {
+          "format": "date-time",
+          "description": "ETA DateTime in Utc __(currently unsupported)__",
+          "type": "string"
+        },
+        "nextStopDistance": {
+          "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.Tracking.Distance",
+          "description": "Distance to Next Stop __(currently unsupported)__"
+        }
+      }
+    },
+    "Coyote.Systems.ExternalApi.Contracts.Models.Tracking.Location": {
+      "description": "Location",
+      "type": "object",
+      "properties": {
+        "address": {
+          "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.Tracking.TrackingAddress",
+          "description": "Address"
+        },
+        "timestampUtc": {
+          "format": "date-time",
+          "description": "Timestamp in Utc",
+          "type": "string"
+        },
+        "geoCoordinates": {
+          "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.Tracking.GeoCoordinates",
+          "description": "GeoCoordinates"
+        }
+      }
+    },
+    "Coyote.Systems.ExternalApi.Contracts.Models.Tracking.LoadStop": {
+      "description": "Load Stop",
+      "type": "object",
+      "properties": {
+        "sequence": {
+          "format": "int32",
+          "description": "Sequence",
+          "type": "integer"
+        },
+        "stopType": {
+          "description": "Stop Type",
+          "enum": [
+            "None",
+            "Pickup",
+            "Delivery",
+            "ContainerDepotOrigin",
+            "ContainerDepotTermination",
+            "OriginRamp",
+            "DestinationRamp",
+            "OriginPort",
+            "DestinationPort",
+            "OriginAirport",
+            "DestinationAirport",
+            "CrossDock"
+          ],
+          "type": "string"
+        },
+        "facility": {
+          "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.Tracking.Facility",
+          "description": "Facility"
+        },
+        "appointment": {
+          "$ref": "#/definitions/Coyote.Systems.ExternalApi.Contracts.Models.Tracking.Appointment",
+          "description": "Appointment"
+        }
+      }
+    },
+    "Coyote.Systems.ExternalApi.Contracts.Models.Tracking.Distance": {
+      "description": "Distance to Next Stop __(currently unsupported)__",
+      "type": "object",
+      "properties": {
+        "value": {
+          "format": "double",
+          "description": "Value",
+          "type": "number"
+        },
+        "unit": {
+          "description": "Unit",
+          "enum": ["Miles", "Kilometers"],
+          "type": "string"
+        }
+      }
+    }
+  },
+  "x-servers": [
+    { "url": "https://api.coyote.com", "description": "Production" },
+    { "url": "https://api-sandbox.coyote.com", "description": "Sandbox" }
+  ]
+}
