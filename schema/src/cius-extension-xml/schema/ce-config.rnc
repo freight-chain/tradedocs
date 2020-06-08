@@ -1,0 +1,172 @@
+default namespace = "http://www.w3.org/1999/xhtml"
+namespace c = "urn:cen.eu:en16931:cius-extension:2018"
+namespace html = "http://www.w3.org/1999/xhtml"
+
+# This schema defines a machine readable XML format for describing Core Invoice Usage Specifications (CIUS) 
+# fully compliant to the methodology and rules of EU electronic invoicing (EN 16931-1:2017)
+# Any issues found in the schema should be reported at https://github.com/CenPC434/cius-extension-xml/issues
+
+start =
+  ## CIUS definition
+  element c:cius {
+    
+    ## Metadata
+    element c:meta {
+      ## Short identifier
+      element c:shortName { text },
+      ## Name of CUIS
+      element c:name { text },
+      ## Identifier as defined in 7.6 Identification of core invoice usage specifications
+      element c:id { text },
+      ## Identifier of specification that is being extended
+      element c:extends { text }?,
+      ## Underlying specification
+      element c:specification { text }?,
+      ## Version number
+      element c:version { text },
+      ## Status of CUIS
+      element c:status { "planned" | "development" | "active" | "revoked" },
+      ## Date of publication
+      element c:date { xsd:date },
+      ## Publisher
+      element c:publisher { html-rtf },
+      ## Governor
+      element c:governor { html-rtf },
+      ## Country to which CIUS applies
+      element c:country { text }?,
+      ## Sector to which CIUS applies
+      element c:sector { text }?,
+      ## Contact email for any questions and bug reports against CUIS
+      element c:contact { text },
+      ## Short description of CIUS
+      element c:abstract { attribute xml:lang { xsd:language }?, html-rtf },
+      ## Link for more information
+      element c:link { xsd:anyURI }?,
+      ## Information about a review process
+      element c:review { attribute startDate { xsd:date }?, attribute endDate { xsd:date }?, html-rtf }?
+    },
+    ## Text description
+    description*,
+    ## Business rules imposed by CIUS
+    element c:rules {
+      ## Business rule
+      element c:rule {
+        ## Unique ID for business rule (BR-{country}-{id} pattern is recommended)
+        attribute id { text },
+        description+,
+        restrictions?,        
+        implementation*
+      }+
+    }
+  }
+
+description =
+  ## Human readable description can contain mix of text and HTML markup if formatting is needed
+  element c:description { attribute xml:lang { xsd:language }?, html-rtf }
+
+restrictions =
+  ## Restrictions that are further applied
+  element c:restrictions { (cardinality | technical | codelist | value | other | synonyms)+ }
+
+cardinality = 
+  ## Constraint on cardinality
+  element c:cardinality {
+    attribute maxOccurs { xsd:integer | "unbounded" }?,
+    attribute minOccurs { xsd:integer }?,
+    term+
+  }
+
+technical =
+  ## Technical constraint
+  element c:technical { empty }
+
+codelist =
+  ## Codelist
+  element c:codelist {
+    name?,
+    link?, 
+    version?,
+    genericode?,
+    term+,
+    codelist-value+
+  }
+
+value =
+  ## Restricted value domain
+  ## Restriction can be made using attributes similar to W3C XML Schema facets
+  element c:value {
+    ## Regular expression describing allowed values
+    attribute pattern { text }?,
+    ## Required length of value
+    attribute length { xsd:nonNegativeInteger }?,
+    ## Maximum length of value
+    attribute maxLength { xsd:nonNegativeInteger }?,
+    ## Maximal number of fraction digits
+    attribute fractionDigits { xsd:nonNegativeInteger }?,
+    ## Maximal number of fraction digits
+    attribute totalDigits { xsd:nonNegativeInteger }?,
+    ## Minimum allowed value
+    attribute minInclusive { xsd:decimal }?,
+    ## Maximum allowed value
+    attribute maxInclusive { xsd:decimal }?,
+    term+
+  }
+  
+other =
+  ## Restriction that can not be formally expressed
+  ## However for purposes of better analysis affected terms should be listed
+  element c:other {
+    term+
+  }  
+  
+name = 
+  ## Name 
+  element c:name { text }
+
+codelist-value =
+  ## Allowed value
+  element c:value { text }
+
+term =
+  ## Reference to business term (i.e. BT-NN)
+  element c:term { text }
+
+  
+link = 
+  ## Reference to original codelist
+  element c:link { xsd:anyURI }
+  
+version =
+  ## Version of codelist
+  element c:version { text }
+  
+genericode =
+  ## Link to Genericode version of codelist
+  element c:genericode {
+    ## Reference to column that contains values for the codelist
+    attribute column { text }?,
+    xsd:anyURI 
+  }
+
+synonyms =
+  ## Synonyms of term
+  element c:synonyms { term+, synonym+ }
+  
+synonym =
+  ## Synonym of term
+  element c:synonym { attribute xml:lang { xsd:language }?, text }
+
+html-rtf = text & any-html*
+
+any-html = element html:* { any-attribute*, (any-html* & text) }
+any-attribute = attribute * { text }
+
+implementation =
+  ## Technical implementation of constraint in any schema language, usually in Schematron
+  element c:implementation {
+    ## To which syntax implementation applies?
+    attribute syntax { "UBL-2.1" | "CII-D16B" }, 
+    any 
+  }
+
+any = element * { any-attribute*, (any* & text) }

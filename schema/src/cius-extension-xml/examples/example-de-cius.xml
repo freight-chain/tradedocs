@@ -1,0 +1,344 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+  This is a proposal for machine readable format
+  for describing CIUS and/or Extensions to core EU invoice
+
+  In this example German National CIUS (XRechnung) is shown using proposed syntax
+
+  This is just example and working draft with no official standing
+
+  This example uses prevoius work of AT National CIUS provided by Philip Helger
+ 
+  --> 
+<?xml-model href="../schema/ce-config.rnc"?>
+<c:cius xmlns:c="urn:cen.eu:en16931:cius-extension:2018"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:html="http://www.w3.org/1999/xhtml"
+  >
+
+  <!-- meta element contains basic metainformation about CIUS/Extension -->
+  <c:meta>
+    <!-- Common abbreviation used when referred to the CIUS/Extension -->
+    <c:shortName>CIUS-DE-NAT</c:shortName>
+
+    <!-- Human readable name of CIUS/Extension -->
+    <c:name>Standard XRechnung</c:name>
+
+    <!-- Identifier as described in "7.6 Identification of core invoice usage specifications" -->
+    <c:id>urn:ce.eu:en16931:2017:xoev-de:kosit:standard:xrechnung_1.1</c:id>
+
+    <!-- Underlying Specification -->
+    <c:specification>urn:ce.eu:en16931:2017</c:specification>
+
+    <!-- Version of CIUS/Extension -->
+    <c:version>1.1</c:version>
+
+    <!-- The status of the specification (PLANNED, DEVELOPMENT, ACTIVE, REVOKED) -->
+    <c:status>active</c:status>
+
+    <!-- Date of publication of CIUS/Extension -->
+    <c:date>2017-11-30</c:date>
+
+    <!-- Author of extension, any HTML markup can be used inside element -->
+    <c:publisher>Koordinierungsstelle für IT-Standards, <html:a
+        href="mailto:kosit@finanzen.bremen.de">kosit@finanzen.bremen.de</html:a>
+    </c:publisher>
+
+    <!-- Governor of extension -->
+    <c:governor>IT-Planungsrat</c:governor>
+
+    <!-- Country where CIUS/Extension is used -->
+    <c:country>DE</c:country>
+
+    <!-- Sector where CIUS/Extension is used -->
+    <c:sector>Public Administration</c:sector>
+
+    <!-- Contact email for sending inquiries -->
+    <c:contact>kosit@finanzen.bremen.de</c:contact>
+
+    <!-- Short description/purpose of spec -->
+    <c:abstract xml:lang="en">This CIUS-DE-NAT builds on top of the European
+      Norm EN 16931-1:2017. All rules of the underlying specification apply with
+      the addition of the rules stated in this document.</c:abstract>
+
+    <!-- A hyperlink to more detailed information about the specification. Preferably that should include contact information. -->
+    <c:link>https://www.xoev.de/de/xrechnung</c:link>
+  </c:meta>
+
+  <!-- desc can contain arbitrary HTML with human prose describing CIUS/Extension -->
+  <c:description xml:lang="en">Text with<html:b>HTML</html:b> content
+    <!-- Empty in this example. -->
+  </c:description>
+
+  <!-- The following set of rules are a technical representation of the set of rules given by the German CIUS XRechnung-->
+  <c:rules>
+    <c:rule id="BR-DE-1" >
+      <c:description xml:lang="de">Eine Rechnung (INVOICE) muss Angaben zu
+        „PAYMENT INSTRUCTIONS“ (BG-16) enthalten.</c:description>
+      <c:description xml:lang="en">The INVOICE shall contain information on
+        PAYMENT INSTRUCTIONS (BG-16).</c:description>
+      <c:restrictions>
+        <c:cardinality minOccurs="1">
+          <c:term>BG-16</c:term>
+        </c:cardinality>
+
+      </c:restrictions>
+    </c:rule>
+
+    <c:rule id="BR-DE-2" >
+      <c:description xml:lang="en">Die Gruppe „SELLER CONTACT“ (BG-6) muss
+        übermittelt werden.</c:description>
+      <c:description xml:lang="en">The group SELLER CONTACT1 (BG-6) shall be
+        transmitted.</c:description>
+      <c:restrictions>
+        <c:cardinality minOccurs="1">
+          <c:term>BG-6</c:term>
+        </c:cardinality>
+      </c:restrictions>
+    </c:rule>
+
+    <c:rule id="BR-DE-3" >
+      <c:description xml:lang="de">Das Element „Seller city“ (BT-37) muss
+        übermittelt werden.</c:description>
+      <c:description xml:lang="en">The element “Seller city” (BT-37) shall be
+        transmitted.</c:description>
+      <c:restrictions>
+        <c:cardinality minOccurs="1">
+          <c:term>BT-37</c:term>
+        </c:cardinality>
+      </c:restrictions>
+
+    </c:rule>
+
+    <c:rule id="BR-DE-4" >
+      <c:description xml:lang="de">Das Element „Seller post code“ (BT-38) muss
+        übermittelt werden.</c:description>
+      <c:description xml:lang="en">The element “Seller post code” (BT-38) shall
+        be transmitted.</c:description>
+      <c:restrictions>
+        <c:cardinality minOccurs="1">
+          <c:term>BT-38</c:term>
+        </c:cardinality>
+      </c:restrictions>
+    </c:rule>
+
+    <c:rule id="BR-DE-5" >
+      <c:description xml:lang="de">Das Element „Seller contact point“ (BT-41)
+        muss übermittelt werden.</c:description>
+      <c:description xml:lang="en">The element “Seller contact point” (BT-41)
+        shall be transmitted.</c:description>
+      <c:restrictions>
+        <c:cardinality minOccurs="1">
+          <c:term>BT-41</c:term>
+        </c:cardinality>
+      </c:restrictions>
+    </c:rule>
+
+    <c:rule id="BR-DE-6" >
+      <c:description xml:lang="de">Das Element „Seller contact telephone number“
+        (BT-42) muss übermittelt werden.</c:description>
+      <c:description xml:lang="en">The element „Seller contact telephone
+        number“(BT-BT) shall be transmitted.</c:description>
+      <c:restrictions>
+        <c:cardinality minOccurs="1">
+          <c:term>BT-42</c:term>
+        </c:cardinality>
+      </c:restrictions>
+    </c:rule>
+
+    <c:rule id="BR-DE-7" >
+      <c:description xml:lang="de">Das Element „Seller contact email address“
+        (BT-43) muss übermittelt werden.</c:description>
+      <c:description xml:lang="en">The element “Seller contact email address”
+        (BT-43) shall be transmitted.</c:description>
+      <c:restrictions>
+        <c:cardinality minOccurs="1">
+          <c:term>BT-43</c:term>
+        </c:cardinality>
+      </c:restrictions>
+    </c:rule>
+
+    <c:rule id="BR-DE-8" >
+      <c:description xml:lang="de">Das Element „Buyer city“ (BT-52) muss
+        übermittelt werden.</c:description>
+      <c:description xml:lang="en">The element “Buyer city” (BT-52) shall be
+        transmitted.</c:description>
+      <c:restrictions>
+        <c:cardinality minOccurs="1">
+          <c:term>BT-52</c:term>
+        </c:cardinality>
+      </c:restrictions>
+    </c:rule>
+
+    <c:rule id="BR-DE-9" >
+      <c:description xml:lang="de">Das Element „Buyer post code“ (BT-53) muss
+        übermittelt werden.</c:description>
+      <c:description xml:lang="en">The element “Buyer post code” (BT-53) shall
+        be transmitted.</c:description>
+      <c:restrictions>
+        <c:cardinality minOccurs="1">
+          <c:term>BT-53</c:term>
+        </c:cardinality>
+      </c:restrictions>
+    </c:rule>
+
+    <c:rule id="BR-DE-10" >
+      <c:description xml:lang="de">Das Element „Deliver to city“ (BT-77) muss
+        übermittelt werden.</c:description>
+      <c:description xml:lang="en">The element “Deliver to city“” (BT-77) shall
+        be transmitted.</c:description>
+      <c:restrictions>
+        <c:cardinality minOccurs="1">
+          <c:term>BT-77</c:term>
+        </c:cardinality>
+      </c:restrictions>
+    </c:rule>
+
+    <c:rule id="BR-DE-11" >
+      <c:description xml:lang="de">Das Element „Deliver to post code“ (BT-78)
+        muss übermittelt werden.</c:description>
+      <c:description xml:lang="en">The element “Deliver to post code” (BT-78)
+        shall be transmitted.</c:description>
+
+      <c:restrictions>
+        <c:cardinality minOccurs="1">
+          <c:term>BT-78</c:term>
+        </c:cardinality>
+      </c:restrictions>
+    </c:rule>
+
+    <c:rule id="BR-DE-12" >
+      <c:description xml:lang="de">Mit dem Element „Deliver to post code“
+        (BT-78) muss eine Postleitzahl übermittelt werden.</c:description>
+      <c:description xml:lang="en">A post code shall be transmitted together
+        with the element “Deliver to post code” (BT-78).</c:description>
+      <c:restrictions>
+        <c:cardinality minOccurs="1">
+          <c:term>BT-78</c:term>
+        </c:cardinality>
+      </c:restrictions>
+    </c:rule>
+
+    <c:rule id="BR-DE-13" >
+      <c:description xml:lang="de">In der Rechnung müssen Angaben zu einer der
+        drei Gruppen „CREDIT TRANSFER“ (BG-17), „PAYMENT CARD INFORMATION“
+        (BG-18) oder „DIRECT DEBIT“ (BG-19) übermittelt werden.</c:description>
+      <c:description xml:lang="en">The invoice shall contain information on one
+        of the three groups: “CREDIT TRANSFER” (BG-17), “PAYMENT CARD
+        INFORMATION” (BG-18) or “DIRECT DEBIT” (BG-19).</c:description>
+      <c:restrictions>
+        <c:other>
+          <c:term>BG-17</c:term>
+          <c:term>BG-18</c:term>
+          <c:term>BG-19</c:term>
+        </c:other>
+      </c:restrictions>
+
+    </c:rule>
+
+    <c:rule id="BR-DE-14" >
+      <c:description xml:lang="de">Das Element „VAT category rate“ (BT-119) muss
+        übermittelt werden.</c:description>
+      <c:description xml:lang="en">The element “VAT category rate” (BT-119)
+        shall be transmitted.</c:description>
+      <c:restrictions>
+        <c:cardinality minOccurs="1">
+          <c:term>BT-119</c:term>
+        </c:cardinality>
+      </c:restrictions>
+    </c:rule>
+
+    <c:rule id="BR-DE-15" >
+      <c:description xml:lang="de">Das Element „Buyer reference“ (BT-10) muss
+        übermittelt werden.</c:description>
+      <c:description xml:lang="en">The element „Buyer reference“ (BT-10) shall
+        be transmitted.</c:description>
+      <c:restrictions>
+        <c:cardinality minOccurs="1">
+          <c:term>BT-10</c:term>
+        </c:cardinality>
+      </c:restrictions>
+    </c:rule>
+
+    <c:rule id="BR-DE-16" >
+      <c:description xml:lang="de">Das Element „Seller VAT identifier“ (BT-31)
+        muss übermittelt werden, wenn nicht das Element „Seller tax registration
+        identifier“ (BT-32) oder eine Gruppe „SELLER TAX REPRESENTATIVE PARTY“
+        (BG-11) übermittelt wurden.</c:description>
+      <c:description xml:lang="en">The element “Seller VAT identifier” (BT-31)
+        shall be transmitted, if the element “Seller tax registration
+        identifier” (BT-32) or a group „SELLER TAX REPRESENTATIVE PARTY“ (BG-11)
+        is not transmitted.</c:description>
+      <c:restrictions>
+        <c:other>
+          <c:term>BT-31</c:term>
+          <c:term>BT-32</c:term>
+          <c:term>BG-11</c:term>
+        </c:other>
+      </c:restrictions>
+    </c:rule>
+
+    <c:rule id="BR-DE-17"  >
+      <c:description xml:lang="de">Mit dem Element „Invoice type code“ (BT-3)
+        sollen ausschließlich folgende Codes aus der Codeliste UNTDID 1001
+        übermittelt werden: 326 (Partial invoice), 380 (Commercial invoice), 384
+        (Corrected invoice), 381 (Credit note)</c:description>
+      <c:description xml:lang="en">With the element “Invoice type code” (BT-3)
+        only the following codes from the code list UNTDID 1001 shall be
+        transmitted: 326 (Partial invoice), 380 (Commercial invoice),
+        384(Corrected invoice), 381 (Credit note) </c:description>
+      <c:restrictions>
+        <c:codelist>
+          <c:term>BT-3</c:term>
+          <c:value>326</c:value>
+          <c:value>380</c:value>
+          <c:value>384</c:value>
+          <c:value>381</c:value>
+        </c:codelist>
+      </c:restrictions>
+    </c:rule>
+
+    <c:rule id="BR-DE-18" >
+      <c:description xml:lang="de">Informationen zur Gewährung von Skonto oder
+        zur Berechnung von Verzugszinsen müssen wie folgt im Element „Payment
+        terms“ (BT-20) jeweils in einer eigenen Zeile übermittelt werden:
+        Anzugeben ist im ersten Segment „SKONTO“ oder „VERZUG“, im zweiten
+        „TAGE=n“, im dritten „PROZENT=n“, wobei die Segmente jeweils von einer
+        „#“ umfasst sind. Prozentzahlen sind mit Punkt getrennt von zwei
+        Nachkommastellen anzugeben. Liegt dem zu berechnenden Betrag nicht
+        BT-115, „fälliger Betrag“ zugrunde, sondern nur ein Teil des fälligen
+        Betrags der Rechnung, ist der Grundwert zur Berechnung von Skonto oder
+        Verzugszins als viertes Segment „BASISBETRAG=n“ mit dem semantischen
+        Datentyp Amount anzugeben.</c:description>
+      <c:description xml:lang="en">Information on any discount or interest on
+        late payments shall be given in the element “Payment terms” (BT-20) in a
+        separate line as follows: In the first segment, state “DISCOUNT” or
+        “LATE PAYMENTS”, in the second segment state “DAYS=n”, in the third
+        segment state “PERCENT=n”; each segment must be enclosed in hashes (#).
+        Percentages shall be given as a decimal number with two places after the
+        point. If the calculated amount is not based on BT-115 “amount payable”,
+        but is only part of the payable amount given in the invoice, the basic
+        amount shall be stated in a fourth segment “BASIC AMOUNT=n” with the
+        semantic data type AMOUNT for the calculation of discount or interest on
+        late payment. </c:description>
+      <c:restrictions>
+        <c:other>
+          <c:term>BT-20</c:term>
+          <c:term>BT-115</c:term>
+        </c:other>
+      </c:restrictions>
+    </c:rule>
+
+    <!-- Example of a general rule not specific to BT or BG -->
+    <c:rule id="BR-DE-19" >
+      <c:description xml:lang="en">The size of all attached documents together
+        may not exceed 15MB</c:description>
+      <c:restrictions>
+        <c:technical/>
+      </c:restrictions>
+    </c:rule>
+
+  </c:rules>
+
+</c:cius>
