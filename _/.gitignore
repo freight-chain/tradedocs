@@ -1,0 +1,10 @@
+dev/
+node_modules/
+*.zip
+
+logs/
+.DS_Store
+package-lock.json
+yarn.lock
+yarn-
+package-log.json
